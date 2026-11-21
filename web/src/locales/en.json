@@ -6,7 +6,9 @@
   "nav": {
     "skip": "Skip to content",
     "home": "North, home page",
-    "language": "Language"
+    "language": "Language",
+    "main": "Main",
+    "programs": "Programs"
   },
   "theme": {
     "light": "Light",
@@ -18,7 +20,9 @@
   "home": {
     "eyebrow": "Pre-alpha",
     "tagline": "A map of US master's programs for international students",
-    "description": "North maps, verifies and compares on-campus master's programs in the US from the point of view of someone who needs an F-1 visa and brings dependents. Every data point carries its source, date and verification status, so unknown data is never confused with negative data."
+    "description": "North maps, verifies and compares on-campus master's programs in the US from the point of view of someone who needs an F-1 visa and brings dependents. Every data point carries its source, date and verification status, so unknown data is never confused with negative data.",
+    "browse": "Browse programs",
+    "browseHint": "Texas pilot: computing, data science, analytics and information systems, from official files."
   },
   "status": {
     "label": "API status",
@@ -28,5 +32,234 @@
   },
   "footer": {
     "license": "Code AGPL-3.0 · Data CC BY 4.0"
+  },
+  "badge": {
+    "aria": "Verification status: {status}",
+    "short": {
+      "confirmed_official": "Official",
+      "reported_by_program": "Program site",
+      "extracted_unverified": "Unverified",
+      "unknown": "Unknown",
+      "confirmed_negative": "No"
+    },
+    "long": {
+      "confirmed_official": "confirmed by an official source",
+      "reported_by_program": "reported by the program",
+      "extracted_unverified": "extracted, not yet verified",
+      "unknown": "unknown",
+      "confirmed_negative": "officially confirmed as no"
+    },
+    "description": {
+      "confirmed_official": "Confirmed by an official source: a government file or list, or the school's international office.",
+      "reported_by_program": "Stated on the program's own website, not confirmed by a government source.",
+      "extracted_unverified": "Read automatically from a page and not yet checked by a person. Treat with care.",
+      "unknown": "Nobody has found this yet. Unknown does not mean no.",
+      "confirmed_negative": "An official source says no. This is the only status that means no."
+    }
+  },
+  "legend": {
+    "title": "What the status labels mean"
+  },
+  "program": {
+    "cip": "CIP code",
+    "stem": "STEM OPT",
+    "stemEligible": "Eligible",
+    "stemNotEligible": "Not eligible",
+    "stemUnknown": "Eligibility unknown",
+    "sevp": "SEVP (F-1 students)",
+    "accreditation": "Accreditation",
+    "completions": "Graduates",
+    "completionsValue": "{total} total / {nonresident} nonresident ({year})",
+    "completionsTotalOnly": "{total} total ({year})",
+    "nonresidentLabel": "nonresident:",
+    "completionsNone": "No completions data",
+    "tuition": "Graduate tuition (nonresident)",
+    "titleFromCip": "This name is the official CIP field title; the program's own name has not been collected yet.",
+    "flags": {
+      "no_stem_opt_extension": {
+        "title": "No STEM OPT extension.",
+        "body": "This field (CIP 52.12, information systems under business) is not on the DHS STEM list, so graduates get the standard 12-month OPT only, without the 24-month STEM extension."
+      }
+    },
+    "control": {
+      "public": "public",
+      "private_nonprofit": "private nonprofit",
+      "private_for_profit": "private for-profit"
+    }
+  },
+  "price": {
+    "perYear": "{amount} / year",
+    "qualifier": {
+      "institution_wide_average": "institution average"
+    }
+  },
+  "programs": {
+    "pageTitle": "Programs · North",
+    "pageDescription": "US master's programs in computing and data for international students, with the source and status of every value.",
+    "eyebrow": "Texas pilot",
+    "title": "Programs",
+    "intro": "Master's programs found in official US files: IPEDS, the DHS STEM list, SEVP and the accreditation database. Each status label says how sure we are.",
+    "filters": {
+      "heading": "Filter programs",
+      "search": "Search",
+      "searchPlaceholder": "Institution, city or field",
+      "cipFamily": "Field (CIP family)",
+      "stem": "STEM OPT",
+      "any": "Any",
+      "toggle": "Filters ({n})",
+      "control": "Institution type",
+      "sevp": "SEVP (F-1 students)",
+      "accreditation": "Accreditation",
+      "graduates": "Graduates in the latest year",
+      "graduatesIn": "Graduates in {year}",
+      "tuition": "Graduate tuition (nonresident), USD per year",
+      "tuitionMin": "Minimum",
+      "tuitionMax": "Maximum",
+      "tuitionHint": "Institution-wide averages. Programs with unknown tuition are left out when a limit is set.",
+      "tuitionUnknown": "No program has unknown tuition. | 1 program has unknown tuition. | {n} programs have unknown tuition.",
+      "tuitionInvalid": "Enter an amount of zero or more.",
+      "tuitionOrder": "The maximum must be at least the minimum.",
+      "city": "City",
+      "citySearch": "Find a city",
+      "cityNone": "No city matches.",
+      "clear": "Clear filters"
+    },
+    "cipFamilies": {
+      "f11": "Computing",
+      "f30_70": "Data Science",
+      "f30_71": "Data and Business Analytics",
+      "f52_12": "Information Systems"
+    },
+    "stemFilter": {
+      "eligible": "Eligible",
+      "not_eligible": "Not eligible",
+      "unknown": "Unknown"
+    },
+    "controlFilter": {
+      "public": "Public",
+      "private_nonprofit": "Private nonprofit",
+      "private_for_profit": "Private for-profit"
+    },
+    "checkFilter": {
+      "confirmed": "Confirmed",
+      "unknown": "Unknown"
+    },
+    "graduatesFilter": {
+      "true": "With graduates",
+      "false": "No graduates"
+    },
+    "sort": {
+      "label": "Sort by",
+      "asc": "Ascending",
+      "desc": "Descending",
+      "orderAria": "Sort order: {order}. Activate to switch to {other}.",
+      "keys": {
+        "title": "Title",
+        "institution": "Institution",
+        "city": "City",
+        "tuition": "Tuition",
+        "graduates": "Graduates",
+        "nonresident_graduates": "International graduates",
+        "nonresident_share": "Share of international graduates"
+      }
+    },
+    "view": {
+      "label": "View",
+      "cards": "Cards",
+      "table": "Table"
+    },
+    "table": {
+      "caption": "Programs, one per row. Column headers sort the list.",
+      "tuition": "Tuition (nonresident)",
+      "graduates": "Graduates",
+      "share": "Intl. share",
+      "checks": "Checks",
+      "stem": "STEM OPT",
+      "sevp": "SEVP",
+      "accreditation": "Accred.",
+      "noShare": "No graduates, so no share"
+    },
+    "count": "No programs | 1 program | {n} programs",
+    "loading": "Loading programs…",
+    "empty": "No program matches these filters.",
+    "error": "The program data could not be loaded right now. The service may be down; please try again in a few minutes.",
+    "retry": "Try again",
+    "pagination": {
+      "label": "Pages",
+      "prev": "Previous",
+      "next": "Next",
+      "page": "Page {page} of {pages}"
+    }
+  },
+  "detail": {
+    "pageTitle": "{title}, {institution} · North",
+    "pageDescription": "{title} at {institution} ({city}): official data with the source and verification status of every value.",
+    "back": "All programs",
+    "loading": "Loading program…",
+    "error": "This program could not be loaded right now. The service may be down; please try again in a few minutes.",
+    "notFound": {
+      "title": "Program not found",
+      "body": "There is no program at this address. It may have been removed from the official files."
+    },
+    "sections": {
+      "verified": "Verified values",
+      "notCollected": "Not yet collected",
+      "facts": "Program and institution",
+      "sources": "Source files"
+    },
+    "fields": {
+      "sevp": "SEVP authorization (can enroll F-1 students)",
+      "accreditation": "Institutional accreditation",
+      "tuition": "Graduate tuition, nonresident",
+      "carnegie": "Carnegie classification",
+      "cip": "CIP field",
+      "isced": "ISCED-F field",
+      "degree": "Degree",
+      "institution": "Institution",
+      "campus": "Campus",
+      "website": "Institution website",
+      "identifiers": "Identifiers"
+    },
+    "values": {
+      "unknown": "Unknown",
+      "sevpAuthorized": "Authorized",
+      "sevpNotAuthorized": "Not authorized",
+      "institutional": "institutional",
+      "programmatic": "programmatic",
+      "notAccredited": "Not accredited",
+      "stemRule": "DHS STEM list of {version}",
+      "claimMismatch": "The program's website says something different from the official list."
+    },
+    "meta": {
+      "source": "Source",
+      "newTab": "opens in a new tab",
+      "noSource": "No source link",
+      "checked": "Checked {date}",
+      "evidence": "Evidence"
+    },
+    "notCollectedIntro": "These facts are only on the program's own website and have not been collected yet. They are unknown, not negative.",
+    "notCollectedFields": {
+      "admissions_english": "Minimum English test score",
+      "admissions_deadlines": "Application deadlines",
+      "admissions_other_field_accepted": "Whether applicants from another undergraduate field are accepted",
+      "funding": "Funding (assistantships, scholarships, tuition waivers)",
+      "cost_program_tuition": "Tuition for this program",
+      "immigration_i20_issued_for_program": "Whether the school issues an I-20 (the F-1 visa document) for this program"
+    },
+    "sourcesIntro": "The official files this page was built from.",
+    "sourceFile": "{version}, uploaded {date}, {rows} rows",
+    "sourceNames": {
+      "ipeds_hd": "IPEDS institutional characteristics",
+      "ipeds_c_a": "IPEDS completions by field",
+      "ipeds_ic_ay": "IPEDS tuition and fees",
+      "dhs_stem_list": "DHS STEM designated degree program list",
+      "sevp_csl": "SEVP certified school list",
+      "dapip": "DAPIP accreditation database",
+      "scorecard_fos": "College Scorecard, field of study",
+      "hud_fmr": "HUD Fair Market Rents"
+    },
+    "notes": {
+      "institution_wide_average": "Institution-wide average for graduate students, not this program's price."
+    }
   }
 }

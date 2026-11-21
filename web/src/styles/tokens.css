@@ -33,6 +33,9 @@
   --text-muted: var(--forge-gray);
   --accent: var(--ember);
   --accent-dim: var(--ember-dim);
+  /* Accent as TEXT (links, eyebrows). WCAG AA (NFR-06): ember on charcoal 5.63:1, on soot 5.22:1.
+     Ember stays for focus rings, chips, borders and the sigil in both themes. */
+  --accent-text: var(--ember);
   color-scheme: dark;
 }
 
@@ -44,6 +47,7 @@
   --border: var(--sand);
   --text: var(--charcoal);
   --text-muted: var(--graphite);
+  --accent-text: var(--ember-dim); /* ember text fails on light (2.76:1); ember-dim 4.68:1 / 5.11:1 */
   color-scheme: light;
 }
 
@@ -54,6 +58,7 @@
     --border: var(--sand);
     --text: var(--charcoal);
     --text-muted: var(--graphite);
+    --accent-text: var(--ember-dim);
     color-scheme: light;
   }
 }

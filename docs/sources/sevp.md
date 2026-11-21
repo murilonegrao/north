@@ -23,7 +23,7 @@ The list of schools certified by the Student and Exchange Visitor Program to enr
 |---|---|---|
 | SCHOOL NAME | `school_name` | matching only |
 | CAMPUS NAME | `campus_name` | matching only |
-| F | `f_1` (Y/N) | `intl_authorization.authorized` (F-1 is what matters for a master's) |
+| F | `f_1` (Y/N) | `intl_authorization.authorized` (F-1 is what matters for a master's). Only an explicit `N` is `confirmed_negative`; any other value leaves the campus unknown and opens a `sevp_flag` reconciliation task |
 | M | `m_1` (Y/N) | not used |
 | CITY | `city` | matching only |
 | ST | `state` | `subdivisions` (US-XX) |
@@ -92,3 +92,7 @@ Unknown. The file name carries the date (`certified-school-list-MM-DD-YY.pdf`), 
 - studyinthestates.dhs.gov and ice.gov return 403 (Akamai) to `curl` with user-agent `north-research-spike`, so automated download is not reliable.
 - Plan for manual upload of the PDF by the admin, with the hash recorded in `ingestion_runs.file_version`.
 - Suggested cadence: monthly, and before marking a state "done".
+
+## Local sample
+
+Open https://studyinthestates.dhs.gov/school-search in a browser, click "Download Certified School List" and save the PDF unchanged as `spikes/_raw/sevp/certified-school-list-MM-DD-YY.pdf` (the date in the name becomes the file version unless the page header says otherwise). `scripts/load_local_sample.sh` takes the newest one. The production parser is `backend/north/ingest/us/sevp_pdf.py` (a port of the spike parser, with the same checks); the CLI also accepts the CSV derived by the spike (`sevp --file <csv>`). Matching: `backend/north/ingest/us/sevp.py` (source id `sevp_csl`): known campus code first, then an exact normalized name + city match (a match on the SEVP campus name beats one on the school name shared by all campuses), anything else becomes a reconciliation task.

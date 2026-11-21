@@ -1,5 +1,7 @@
 {
-  "_meta": { "machine_translated": true },
+  "_meta": {
+    "machine_translated": true
+  },
   "meta": {
     "title": "North: mestrados nos EUA para estudantes internacionais",
     "description": "Um mapa dos programas de mestrado dos EUA para estudantes internacionais, com uma fonte para cada dado."
@@ -7,7 +9,9 @@
   "nav": {
     "skip": "Pular para o conteúdo",
     "home": "North, página inicial",
-    "language": "Idioma"
+    "language": "Idioma",
+    "main": "Principal",
+    "programs": "Programas"
   },
   "theme": {
     "light": "Claro",
@@ -19,7 +23,9 @@
   "home": {
     "eyebrow": "Pré-alfa",
     "tagline": "Um mapa dos programas de mestrado dos EUA para estudantes internacionais",
-    "description": "O North mapeia, verifica e compara programas de mestrado presenciais nos EUA do ponto de vista de quem precisa de visto F-1 e leva dependentes. Cada dado traz fonte, data e status de verificação, para que um dado desconhecido nunca seja confundido com um dado negativo."
+    "description": "O North mapeia, verifica e compara programas de mestrado presenciais nos EUA do ponto de vista de quem precisa de visto F-1 e leva dependentes. Cada dado traz fonte, data e status de verificação, para que um dado desconhecido nunca seja confundido com um dado negativo.",
+    "browse": "Ver programas",
+    "browseHint": "Piloto no Texas: computação, ciência de dados, analytics e sistemas de informação, a partir de arquivos oficiais."
   },
   "status": {
     "label": "Status da API",
@@ -29,5 +35,234 @@
   },
   "footer": {
     "license": "Código AGPL-3.0 · Dados CC BY 4.0"
+  },
+  "badge": {
+    "aria": "Status de verificação: {status}",
+    "short": {
+      "confirmed_official": "Oficial",
+      "reported_by_program": "Site do programa",
+      "extracted_unverified": "Não verificado",
+      "unknown": "Desconhecido",
+      "confirmed_negative": "Não"
+    },
+    "long": {
+      "confirmed_official": "confirmado por fonte oficial",
+      "reported_by_program": "informado pelo programa",
+      "extracted_unverified": "extraído, ainda não verificado",
+      "unknown": "desconhecido",
+      "confirmed_negative": "confirmado oficialmente como não"
+    },
+    "description": {
+      "confirmed_official": "Confirmado por fonte oficial: um arquivo ou lista do governo, ou o escritório internacional da universidade.",
+      "reported_by_program": "Informado no site do próprio programa, sem confirmação de fonte governamental.",
+      "extracted_unverified": "Lido automaticamente de uma página e ainda não conferido por uma pessoa. Use com cuidado.",
+      "unknown": "Ninguém encontrou esse dado ainda. Desconhecido não quer dizer não.",
+      "confirmed_negative": "Uma fonte oficial diz que não. É o único status que significa não."
+    }
+  },
+  "legend": {
+    "title": "O que significam os rótulos de status"
+  },
+  "program": {
+    "cip": "Código CIP",
+    "stem": "STEM OPT",
+    "stemEligible": "Elegível",
+    "stemNotEligible": "Não elegível",
+    "stemUnknown": "Elegibilidade desconhecida",
+    "sevp": "SEVP (estudantes F-1)",
+    "accreditation": "Acreditação",
+    "completions": "Formados",
+    "completionsValue": "{total} no total / {nonresident} não residentes ({year})",
+    "completionsTotalOnly": "{total} no total ({year})",
+    "nonresidentLabel": "não residentes:",
+    "completionsNone": "Sem dados de formados",
+    "tuition": "Anuidade de pós-graduação (não residentes)",
+    "titleFromCip": "Este nome é o título oficial da área CIP; o nome próprio do programa ainda não foi coletado.",
+    "flags": {
+      "no_stem_opt_extension": {
+        "title": "Sem extensão do STEM OPT.",
+        "body": "Esta área (CIP 52.12, sistemas de informação dentro de administração) não está na lista STEM do DHS, então os formados têm apenas o OPT padrão de 12 meses, sem a extensão STEM de 24 meses."
+      }
+    },
+    "control": {
+      "public": "pública",
+      "private_nonprofit": "privada sem fins lucrativos",
+      "private_for_profit": "privada com fins lucrativos"
+    }
+  },
+  "price": {
+    "perYear": "{amount} / ano",
+    "qualifier": {
+      "institution_wide_average": "média da instituição"
+    }
+  },
+  "programs": {
+    "pageTitle": "Programas · North",
+    "pageDescription": "Mestrados nos EUA em computação e dados para estudantes internacionais, com a fonte e o status de cada dado.",
+    "eyebrow": "Piloto no Texas",
+    "title": "Programas",
+    "intro": "Programas de mestrado encontrados em arquivos oficiais dos EUA: IPEDS, a lista STEM do DHS, o SEVP e a base de acreditação. Cada rótulo de status diz o quanto temos certeza.",
+    "filters": {
+      "heading": "Filtrar programas",
+      "search": "Buscar",
+      "searchPlaceholder": "Instituição, cidade ou área",
+      "cipFamily": "Área (família CIP)",
+      "stem": "STEM OPT",
+      "any": "Qualquer",
+      "toggle": "Filtros ({n})",
+      "control": "Tipo de instituição",
+      "sevp": "SEVP (estudantes F-1)",
+      "accreditation": "Acreditação",
+      "graduates": "Formados no último ano",
+      "graduatesIn": "Formados em {year}",
+      "tuition": "Anuidade de pós-graduação (não residentes), USD por ano",
+      "tuitionMin": "Mínimo",
+      "tuitionMax": "Máximo",
+      "tuitionHint": "Médias de toda a instituição. Programas com anuidade desconhecida ficam de fora quando um limite é definido.",
+      "tuitionUnknown": "Nenhum programa tem anuidade desconhecida. | 1 programa tem anuidade desconhecida. | {n} programas têm anuidade desconhecida.",
+      "tuitionInvalid": "Informe um valor igual ou maior que zero.",
+      "tuitionOrder": "O máximo deve ser pelo menos igual ao mínimo.",
+      "city": "Cidade",
+      "citySearch": "Buscar uma cidade",
+      "cityNone": "Nenhuma cidade corresponde.",
+      "clear": "Limpar filtros"
+    },
+    "cipFamilies": {
+      "f11": "Computação",
+      "f30_70": "Ciência de dados",
+      "f30_71": "Analytics de dados e de negócios",
+      "f52_12": "Sistemas de informação"
+    },
+    "stemFilter": {
+      "eligible": "Elegível",
+      "not_eligible": "Não elegível",
+      "unknown": "Desconhecido"
+    },
+    "controlFilter": {
+      "public": "Pública",
+      "private_nonprofit": "Privada sem fins lucrativos",
+      "private_for_profit": "Privada com fins lucrativos"
+    },
+    "checkFilter": {
+      "confirmed": "Confirmado",
+      "unknown": "Desconhecido"
+    },
+    "graduatesFilter": {
+      "true": "Com formados",
+      "false": "Sem formados"
+    },
+    "sort": {
+      "label": "Ordenar por",
+      "asc": "Crescente",
+      "desc": "Decrescente",
+      "orderAria": "Ordem: {order}. Ative para mudar para {other}.",
+      "keys": {
+        "title": "Título",
+        "institution": "Instituição",
+        "city": "Cidade",
+        "tuition": "Anuidade",
+        "graduates": "Formados",
+        "nonresident_graduates": "Formados internacionais",
+        "nonresident_share": "Proporção de formados internacionais"
+      }
+    },
+    "view": {
+      "label": "Visualização",
+      "cards": "Cartões",
+      "table": "Tabela"
+    },
+    "table": {
+      "caption": "Programas, um por linha. Os cabeçalhos das colunas ordenam a lista.",
+      "tuition": "Anuidade (não residentes)",
+      "graduates": "Formados",
+      "share": "% internac.",
+      "checks": "Verificações",
+      "stem": "STEM OPT",
+      "sevp": "SEVP",
+      "accreditation": "Acred.",
+      "noShare": "Sem formados, sem proporção"
+    },
+    "count": "Nenhum programa | 1 programa | {n} programas",
+    "loading": "Carregando programas…",
+    "empty": "Nenhum programa corresponde a estes filtros.",
+    "error": "Não foi possível carregar os dados dos programas agora. O serviço pode estar fora do ar; tente de novo em alguns minutos.",
+    "retry": "Tentar de novo",
+    "pagination": {
+      "label": "Páginas",
+      "prev": "Anterior",
+      "next": "Próxima",
+      "page": "Página {page} de {pages}"
+    }
+  },
+  "detail": {
+    "pageTitle": "{title}, {institution} · North",
+    "pageDescription": "{title} em {institution} ({city}): dados oficiais com a fonte e o status de verificação de cada valor.",
+    "back": "Todos os programas",
+    "loading": "Carregando programa…",
+    "error": "Não foi possível carregar este programa agora. O serviço pode estar fora do ar; tente de novo em alguns minutos.",
+    "notFound": {
+      "title": "Programa não encontrado",
+      "body": "Não há nenhum programa neste endereço. Ele pode ter saído dos arquivos oficiais."
+    },
+    "sections": {
+      "verified": "Valores verificados",
+      "notCollected": "Ainda não coletado",
+      "facts": "Programa e instituição",
+      "sources": "Arquivos de origem"
+    },
+    "fields": {
+      "sevp": "Autorização SEVP (pode matricular estudantes F-1)",
+      "accreditation": "Acreditação institucional",
+      "tuition": "Anuidade de pós-graduação, não residentes",
+      "carnegie": "Classificação Carnegie",
+      "cip": "Área CIP",
+      "isced": "Área CINE-F",
+      "degree": "Grau",
+      "institution": "Instituição",
+      "campus": "Campus",
+      "website": "Site da instituição",
+      "identifiers": "Identificadores"
+    },
+    "values": {
+      "unknown": "Desconhecido",
+      "sevpAuthorized": "Autorizada",
+      "sevpNotAuthorized": "Não autorizada",
+      "institutional": "institucional",
+      "programmatic": "do programa",
+      "notAccredited": "Não acreditada",
+      "stemRule": "Lista STEM do DHS de {version}",
+      "claimMismatch": "O site do programa diz algo diferente da lista oficial."
+    },
+    "meta": {
+      "source": "Fonte",
+      "newTab": "abre em nova aba",
+      "noSource": "Sem link para a fonte",
+      "checked": "Conferido em {date}",
+      "evidence": "Evidência"
+    },
+    "notCollectedIntro": "Estes dados só estão no site do próprio programa e ainda não foram coletados. São desconhecidos, não negativos.",
+    "notCollectedFields": {
+      "admissions_english": "Nota mínima no exame de inglês",
+      "admissions_deadlines": "Prazos de inscrição",
+      "admissions_other_field_accepted": "Se aceitam candidatos com graduação em outra área",
+      "funding": "Financiamento (assistantships, bolsas, isenção de anuidade)",
+      "cost_program_tuition": "Anuidade deste programa",
+      "immigration_i20_issued_for_program": "Se a universidade emite o I-20 (o documento do visto F-1) para este programa"
+    },
+    "sourcesIntro": "Os arquivos oficiais usados para montar esta página.",
+    "sourceFile": "{version}, carregado em {date}, {rows} linhas",
+    "sourceNames": {
+      "ipeds_hd": "IPEDS: características institucionais",
+      "ipeds_c_a": "IPEDS: diplomas por área",
+      "ipeds_ic_ay": "IPEDS: anuidades e taxas",
+      "dhs_stem_list": "Lista de programas STEM designados do DHS",
+      "sevp_csl": "Lista de escolas certificadas pelo SEVP",
+      "dapip": "Base de acreditação DAPIP",
+      "scorecard_fos": "College Scorecard, por área de estudo",
+      "hud_fmr": "Aluguéis de mercado do HUD (FMR)"
+    },
+    "notes": {
+      "institution_wide_average": "Média da instituição inteira para estudantes de pós-graduação, não o preço deste programa."
+    }
   }
 }

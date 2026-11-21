@@ -11,8 +11,12 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(env_prefix="NORTH_", extra="ignore")
 
-    # PostgreSQL URL (SQLAlchemy format). Optional until the database arrives in Phase 5.
+    # PostgreSQL URL (SQLAlchemy format) used by the API and the loaders: a DML-only role
+    # (north_app in compose.yaml).
     database_url: str | None = None
+    # URL of the role that owns the schema (north_owner), used only by Alembic migrations.
+    # When unset, migrations fall back to database_url (a single-role setup, e.g. tests).
+    migration_database_url: str | None = None
     # Directory of the Vue build. When unset, the usual locations are tried (see web_dist_dir).
     web_dist: Path | None = None
 

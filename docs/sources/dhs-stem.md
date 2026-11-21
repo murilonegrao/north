@@ -94,3 +94,7 @@ Ignore the heading rows (level 2 and 4) when filling `eligibility_rule_codes`.
 - **Access:** ice.gov and studyinthestates.dhs.gov return HTTP 403 (Akamai "Access Denied") to `curl` with user-agent `north-research-spike`. The PDF was obtained with a web fetch tool that uses a different client. For automation, either a human downloads the PDF when a new FR notice comes out, or we watch the Federal Register API (which works with curl) and alert. Updates are rare (about once a year), so manual is fine.
 - **Terms:** a U.S. federal government work, public domain (17 U.S.C. 105).
 - **Update frequency:** irregular, by Federal Register notice (2022, 2023, 2024; none in 2025–2026 so far). Monitor `federalregister.gov/api/v1/documents.json?conditions[term]="STEM Designated Degree Program List"`.
+
+## Local sample
+
+The loader reads the versioned CSV and meta JSON in `data/reference/` (in the repository), so no download is needed. To rebuild them from a new PDF, download it in a browser from https://www.ice.gov/doclib/sevis/pdf/stemList2024.pdf into `spikes/_raw/dhs_stem/` and run the parser command above. Ingestion: `backend/north/ingest/us/dhs_stem.py` (source id `dhs_stem_list`).

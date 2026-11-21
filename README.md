@@ -8,7 +8,7 @@ North maps, verifies and compares on-campus master's programs in the US from the
 
 > **Not immigration advice; check the official source.**
 
-**Status: pre-alpha.** Only the code skeleton exists (Phase 3 of the [execution plan](docs/execution-plan.md)): a FastAPI backend with `/api/health`, a Vue 3 web shell with four UI languages, Docker and CI. No program data is served yet. The first pilot state is Texas.
+**Status: pre-alpha.** The first data slice works locally: 132 master's programs in Texas (computing, data science, data and business analytics, information systems) loaded from official files (IPEDS, the DHS STEM list, SEVP, DAPIP), served by `/api/programs` and shown in a list and detail view in four UI languages. Fields that only exist on each program's site (English minimums, funding, deadlines, program tuition) show as "not yet collected" until the manual pilot and LLM-assisted extraction. See the [execution plan](docs/execution-plan.md).
 
 ## Run it
 
@@ -20,7 +20,19 @@ docker compose up --build
 
 Then open <http://localhost:8000/>. The API health check is at <http://localhost:8000/api/health> and the OpenAPI docs at <http://localhost:8000/api/docs>.
 
-Compose also starts PostgreSQL 17 (published on `127.0.0.1:5436`, data in the named volume `north_north-db`). The app does not use it yet; it arrives in Phase 5. Override the host ports with `NORTH_HOST_PORT` and `NORTH_DB_HOST_PORT` if they are taken. `docker compose down` keeps the volume; `docker compose down -v` deletes it.
+Compose also starts PostgreSQL 17 (published on `127.0.0.1:5436`, data in the named volume `north_north-db`). The app applies the migrations (`alembic upgrade head`, as the schema owner `north_owner`) and then serves as `north_app`, a role that may only read and write rows; both roles are created by `deploy/postgres/init/10-roles.sql` when the volume is first initialized (passwords: `NORTH_OWNER_DB_PASSWORD`, `NORTH_APP_DB_PASSWORD`, local defaults otherwise). A volume created before that script existed has no such roles: run `deploy/postgres/adopt-existing.sql` once (commands at the top of the file), or re-initialize it with `docker compose down -v` (deletes the local data) and load the sample again. Override the host ports with `NORTH_HOST_PORT` and `NORTH_DB_HOST_PORT` if they are taken. `docker compose down` keeps the volume; `docker compose down -v` deletes it.
+
+### Load the sample data
+
+The programs API (`/api/programs`, `/api/programs/{id}`, `/api/sources`; contract in [docs/api/programs-v0.md](docs/api/programs-v0.md)) serves what was ingested from the official files: IPEDS HD/C_A/IC_AY, the DHS STEM list, the SEVP certified school list and the DAPIP export. Download them once into `spikes/_raw/` (git-ignored; each `docs/sources/<source>.md` has a "Local sample" section with the URLs and paths), then:
+
+```sh
+docker compose up -d --build
+scripts/load_local_sample.sh        # STATE=TX by default; about 2 minutes (the SEVP PDF is parsed)
+curl 'http://localhost:8000/api/programs?cip_family=11&limit=3'
+```
+
+The loader runs inside the app image with the files mounted read-only. Re-running it is safe: a file already ingested for the same state is skipped (idempotent on source + sha256; for the DHS list the digest covers the CSV and its `.meta.json`). If the official DHS PDF is in `spikes/_raw/dhs_stem/` (or `DHS_PDF` points at it), its sha256 is checked against the meta's `file_sha256` and a mismatch is refused. Per-source commands: `uv run python -m north.ingest.us.cli --help`.
 
 ## Development
 
@@ -29,8 +41,18 @@ Backend (Python 3.12, [uv](https://docs.astral.sh/uv/)):
 ```sh
 cd backend
 uv sync
+export NORTH_DATABASE_URL=postgresql+psycopg://north:<password>@127.0.0.1:5436/north
+uv run alembic upgrade head
 uv run uvicorn north.api.app:app --reload --port 8000
 uv run ruff check . && uv run pytest
+```
+
+Database tests (ingestion of the synthetic files in `backend/tests/fixtures/`, and the API) need `NORTH_TEST_DATABASE_URL`, a database they may wipe; without it they are skipped with a message. One way, on the compose database:
+
+```sh
+docker compose exec -T db psql -U north -d north \
+  -c "CREATE ROLE north_test LOGIN PASSWORD 'north-test'" -c "CREATE DATABASE north_test OWNER north_test"
+NORTH_TEST_DATABASE_URL=postgresql+psycopg://north_test:north-test@127.0.0.1:5436/north_test uv run pytest
 ```
 
 Web (Node 22.18 or later):

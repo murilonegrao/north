@@ -1,5 +1,7 @@
 {
-  "_meta": { "machine_translated": true },
+  "_meta": {
+    "machine_translated": true
+  },
   "meta": {
     "title": "North: maestrías en EE. UU. para estudiantes internacionales",
     "description": "Un mapa de los programas de maestría de EE. UU. para estudiantes internacionales, con una fuente para cada dato."
@@ -7,7 +9,9 @@
   "nav": {
     "skip": "Saltar al contenido",
     "home": "North, página de inicio",
-    "language": "Idioma"
+    "language": "Idioma",
+    "main": "Principal",
+    "programs": "Programas"
   },
   "theme": {
     "light": "Claro",
@@ -19,7 +23,9 @@
   "home": {
     "eyebrow": "Pre-alfa",
     "tagline": "Un mapa de los programas de maestría de EE. UU. para estudiantes internacionales",
-    "description": "North mapea, verifica y compara programas de maestría presenciales en EE. UU. desde el punto de vista de quien necesita una visa F-1 y viaja con dependientes. Cada dato lleva su fuente, su fecha y su estado de verificación, para que un dato desconocido nunca se confunda con un dato negativo."
+    "description": "North mapea, verifica y compara programas de maestría presenciales en EE. UU. desde el punto de vista de quien necesita una visa F-1 y viaja con dependientes. Cada dato lleva su fuente, su fecha y su estado de verificación, para que un dato desconocido nunca se confunda con un dato negativo.",
+    "browse": "Ver programas",
+    "browseHint": "Piloto en Texas: computación, ciencia de datos, analítica y sistemas de información, a partir de archivos oficiales."
   },
   "status": {
     "label": "Estado de la API",
@@ -29,5 +35,234 @@
   },
   "footer": {
     "license": "Código AGPL-3.0 · Datos CC BY 4.0"
+  },
+  "badge": {
+    "aria": "Estado de verificación: {status}",
+    "short": {
+      "confirmed_official": "Oficial",
+      "reported_by_program": "Sitio del programa",
+      "extracted_unverified": "Sin verificar",
+      "unknown": "Desconocido",
+      "confirmed_negative": "No"
+    },
+    "long": {
+      "confirmed_official": "confirmado por una fuente oficial",
+      "reported_by_program": "informado por el programa",
+      "extracted_unverified": "extraído, aún sin verificar",
+      "unknown": "desconocido",
+      "confirmed_negative": "confirmado oficialmente como no"
+    },
+    "description": {
+      "confirmed_official": "Confirmado por una fuente oficial: un archivo o lista del gobierno, o la oficina internacional de la universidad.",
+      "reported_by_program": "Indicado en el sitio web del propio programa, sin confirmación de una fuente gubernamental.",
+      "extracted_unverified": "Leído automáticamente de una página y aún no revisado por una persona. Úselo con cautela.",
+      "unknown": "Nadie lo ha encontrado todavía. Desconocido no significa no.",
+      "confirmed_negative": "Una fuente oficial dice que no. Es el único estado que significa no."
+    }
+  },
+  "legend": {
+    "title": "Qué significan las etiquetas de estado"
+  },
+  "program": {
+    "cip": "Código CIP",
+    "stem": "STEM OPT",
+    "stemEligible": "Elegible",
+    "stemNotEligible": "No elegible",
+    "stemUnknown": "Elegibilidad desconocida",
+    "sevp": "SEVP (estudiantes F-1)",
+    "accreditation": "Acreditación",
+    "completions": "Graduados",
+    "completionsValue": "{total} en total / {nonresident} no residentes ({year})",
+    "completionsTotalOnly": "{total} en total ({year})",
+    "nonresidentLabel": "no residentes:",
+    "completionsNone": "Sin datos de graduados",
+    "tuition": "Matrícula de posgrado (no residentes)",
+    "titleFromCip": "Este nombre es el título oficial del campo CIP; el nombre propio del programa aún no se ha recopilado.",
+    "flags": {
+      "no_stem_opt_extension": {
+        "title": "Sin extensión STEM OPT.",
+        "body": "Este campo (CIP 52.12, sistemas de información dentro de negocios) no está en la lista STEM del DHS, por lo que los graduados solo tienen el OPT estándar de 12 meses, sin la extensión STEM de 24 meses."
+      }
+    },
+    "control": {
+      "public": "pública",
+      "private_nonprofit": "privada sin fines de lucro",
+      "private_for_profit": "privada con fines de lucro"
+    }
+  },
+  "price": {
+    "perYear": "{amount} / año",
+    "qualifier": {
+      "institution_wide_average": "promedio de la institución"
+    }
+  },
+  "programs": {
+    "pageTitle": "Programas · North",
+    "pageDescription": "Maestrías en EE. UU. en computación y datos para estudiantes internacionales, con la fuente y el estado de cada dato.",
+    "eyebrow": "Piloto en Texas",
+    "title": "Programas",
+    "intro": "Programas de maestría encontrados en archivos oficiales de EE. UU.: IPEDS, la lista STEM del DHS, SEVP y la base de acreditación. Cada etiqueta de estado indica cuán seguros estamos.",
+    "filters": {
+      "heading": "Filtrar programas",
+      "search": "Buscar",
+      "searchPlaceholder": "Institución, ciudad o campo",
+      "cipFamily": "Campo (familia CIP)",
+      "stem": "STEM OPT",
+      "any": "Cualquiera",
+      "toggle": "Filtros ({n})",
+      "control": "Tipo de institución",
+      "sevp": "SEVP (estudiantes F-1)",
+      "accreditation": "Acreditación",
+      "graduates": "Graduados en el último año",
+      "graduatesIn": "Graduados en {year}",
+      "tuition": "Matrícula de posgrado (no residentes), USD por año",
+      "tuitionMin": "Mínimo",
+      "tuitionMax": "Máximo",
+      "tuitionHint": "Promedios de toda la institución. Los programas con matrícula desconocida quedan fuera cuando se fija un límite.",
+      "tuitionUnknown": "Ningún programa tiene matrícula desconocida. | 1 programa tiene matrícula desconocida. | {n} programas tienen matrícula desconocida.",
+      "tuitionInvalid": "Introduce un importe igual o mayor que cero.",
+      "tuitionOrder": "El máximo debe ser al menos igual al mínimo.",
+      "city": "Ciudad",
+      "citySearch": "Buscar una ciudad",
+      "cityNone": "Ninguna ciudad coincide.",
+      "clear": "Quitar filtros"
+    },
+    "cipFamilies": {
+      "f11": "Computación",
+      "f30_70": "Ciencia de datos",
+      "f30_71": "Analítica de datos y de negocios",
+      "f52_12": "Sistemas de información"
+    },
+    "stemFilter": {
+      "eligible": "Elegible",
+      "not_eligible": "No elegible",
+      "unknown": "Desconocido"
+    },
+    "controlFilter": {
+      "public": "Pública",
+      "private_nonprofit": "Privada sin fines de lucro",
+      "private_for_profit": "Privada con fines de lucro"
+    },
+    "checkFilter": {
+      "confirmed": "Confirmado",
+      "unknown": "Desconocido"
+    },
+    "graduatesFilter": {
+      "true": "Con graduados",
+      "false": "Sin graduados"
+    },
+    "sort": {
+      "label": "Ordenar por",
+      "asc": "Ascendente",
+      "desc": "Descendente",
+      "orderAria": "Orden: {order}. Activa para cambiar a {other}.",
+      "keys": {
+        "title": "Título",
+        "institution": "Institución",
+        "city": "Ciudad",
+        "tuition": "Matrícula",
+        "graduates": "Graduados",
+        "nonresident_graduates": "Graduados internacionales",
+        "nonresident_share": "Proporción de graduados internacionales"
+      }
+    },
+    "view": {
+      "label": "Vista",
+      "cards": "Tarjetas",
+      "table": "Tabla"
+    },
+    "table": {
+      "caption": "Programas, uno por fila. Los encabezados de columna ordenan la lista.",
+      "tuition": "Matrícula (no residentes)",
+      "graduates": "Graduados",
+      "share": "% internac.",
+      "checks": "Verificaciones",
+      "stem": "STEM OPT",
+      "sevp": "SEVP",
+      "accreditation": "Acred.",
+      "noShare": "Sin graduados, sin proporción"
+    },
+    "count": "Ningún programa | 1 programa | {n} programas",
+    "loading": "Cargando programas…",
+    "empty": "Ningún programa coincide con estos filtros.",
+    "error": "No se pudieron cargar los datos de los programas en este momento. Puede que el servicio no esté disponible; inténtelo de nuevo en unos minutos.",
+    "retry": "Intentar de nuevo",
+    "pagination": {
+      "label": "Páginas",
+      "prev": "Anterior",
+      "next": "Siguiente",
+      "page": "Página {page} de {pages}"
+    }
+  },
+  "detail": {
+    "pageTitle": "{title}, {institution} · North",
+    "pageDescription": "{title} en {institution} ({city}): datos oficiales con la fuente y el estado de verificación de cada valor.",
+    "back": "Todos los programas",
+    "loading": "Cargando programa…",
+    "error": "No se pudo cargar este programa en este momento. Puede que el servicio no esté disponible; inténtelo de nuevo en unos minutos.",
+    "notFound": {
+      "title": "Programa no encontrado",
+      "body": "No hay ningún programa en esta dirección. Puede que se haya retirado de los archivos oficiales."
+    },
+    "sections": {
+      "verified": "Valores verificados",
+      "notCollected": "Aún no recopilado",
+      "facts": "Programa e institución",
+      "sources": "Archivos de origen"
+    },
+    "fields": {
+      "sevp": "Autorización SEVP (puede matricular estudiantes F-1)",
+      "accreditation": "Acreditación institucional",
+      "tuition": "Matrícula de posgrado, no residentes",
+      "carnegie": "Clasificación Carnegie",
+      "cip": "Campo CIP",
+      "isced": "Campo CINE-F",
+      "degree": "Título",
+      "institution": "Institución",
+      "campus": "Campus",
+      "website": "Sitio web de la institución",
+      "identifiers": "Identificadores"
+    },
+    "values": {
+      "unknown": "Desconocido",
+      "sevpAuthorized": "Autorizada",
+      "sevpNotAuthorized": "No autorizada",
+      "institutional": "institucional",
+      "programmatic": "del programa",
+      "notAccredited": "No acreditada",
+      "stemRule": "Lista STEM del DHS de {version}",
+      "claimMismatch": "El sitio web del programa dice algo distinto de la lista oficial."
+    },
+    "meta": {
+      "source": "Fuente",
+      "newTab": "se abre en una pestaña nueva",
+      "noSource": "Sin enlace a la fuente",
+      "checked": "Revisado el {date}",
+      "evidence": "Evidencia"
+    },
+    "notCollectedIntro": "Estos datos solo están en el sitio web del propio programa y aún no se han recopilado. Son desconocidos, no negativos.",
+    "notCollectedFields": {
+      "admissions_english": "Puntuación mínima en el examen de inglés",
+      "admissions_deadlines": "Plazos de solicitud",
+      "admissions_other_field_accepted": "Si se aceptan candidatos de otra carrera de grado",
+      "funding": "Financiación (asistentías, becas, exención de matrícula)",
+      "cost_program_tuition": "Matrícula de este programa",
+      "immigration_i20_issued_for_program": "Si la universidad emite el I-20 (el documento para la visa F-1) para este programa"
+    },
+    "sourcesIntro": "Los archivos oficiales con los que se construyó esta página.",
+    "sourceFile": "{version}, cargado el {date}, {rows} filas",
+    "sourceNames": {
+      "ipeds_hd": "IPEDS: características institucionales",
+      "ipeds_c_a": "IPEDS: titulaciones por campo",
+      "ipeds_ic_ay": "IPEDS: matrícula y tasas",
+      "dhs_stem_list": "Lista de programas STEM designados del DHS",
+      "sevp_csl": "Lista de escuelas certificadas por SEVP",
+      "dapip": "Base de acreditación DAPIP",
+      "scorecard_fos": "College Scorecard, por campo de estudio",
+      "hud_fmr": "Alquileres justos de mercado de HUD"
+    },
+    "notes": {
+      "institution_wide_average": "Promedio de toda la institución para estudiantes de posgrado, no el precio de este programa."
+    }
   }
 }

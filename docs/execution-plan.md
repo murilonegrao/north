@@ -35,6 +35,8 @@ This plan turns SRS 1.3 into deliverables that fit **one part-time developer** (
 
 ---
 
+> **Order changed (record 0004, 2026-11-21).** The official-data slice of Phase 5 comes first (database, ingestion of the official files, programs API, list and detail screens). Then the manual pilot, reduced to site-only fields; then LLM-assisted extraction (Phase 8 moves up); then the rest of the backend and frontend MVP and release v0.1. The phases below keep their numbers for reference.
+
 ## Phase 0 — Decisions ✅ (2026-11-20)
 
 Questionnaire answered; SRS at baseline 1.0. Q09 and Q10 were answered by the Phase 2 spikes, and the decisions they opened (R1–R18) are in `docs/decisions/0002-after-data-spikes.md` (SRS 1.3).
@@ -154,6 +156,18 @@ One week more than in the previous plan, because of curation with login (A1).
 - Dump of curated data published with the release (FR-23, CC BY 4.0).
 - Issue templates: "wrong data", "new program", "new state".
 - Announce it in communities of Brazilians planning to study abroad.
+
+### Security before production
+
+Not needed for local runs; all of them block the first public deployment.
+
+- **Security headers:** CSP (`default-src 'self'`, no inline scripts), `X-Content-Type-Options`, `Referrer-Policy`, `Permissions-Policy`, HSTS and `frame-ancestors 'none'`, set in a Traefik middleware (or in the app if the ingress cannot).
+- **Rate limiting** at the ingress (Traefik `RateLimit` middleware) for `/api`, stricter on login and upload routes.
+- **Image scan** in CI: Trivy on the built image, failing on fixable HIGH/CRITICAL, before the push to GHCR.
+- **Branch protection on `main`:** pull requests only, the `testes` check required, no force push.
+- **GHCR package visibility** decided and set explicitly (public image, or private with an image pull secret in the cluster).
+- **FR-26 uploads in a worker**, not in the request: size limit at the ingress, time and memory limits per run, the parsers' existing caps (zip size and ratio, xlsx rows and columns, PDF pages) kept as a second line.
+- Database roles as in `compose.yaml`: migrations as the schema owner (initContainer), the API as a DML-only role; no superuser credentials in the app.
 
 **Up to here: ~15 weeks part time.**
 

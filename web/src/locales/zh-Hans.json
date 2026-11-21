@@ -1,5 +1,7 @@
 {
-  "_meta": { "machine_translated": true },
+  "_meta": {
+    "machine_translated": true
+  },
   "meta": {
     "title": "North：面向国际学生的美国硕士项目",
     "description": "面向国际学生的美国硕士项目地图，每一条数据都注明来源。"
@@ -7,7 +9,9 @@
   "nav": {
     "skip": "跳到主要内容",
     "home": "North 首页",
-    "language": "语言"
+    "language": "语言",
+    "main": "主导航",
+    "programs": "项目"
   },
   "theme": {
     "light": "浅色",
@@ -19,7 +23,9 @@
   "home": {
     "eyebrow": "早期预览版",
     "tagline": "面向国际学生的美国硕士项目地图",
-    "description": "North 从需要 F-1 签证并携带家属的申请者的角度，梳理、核实并比较美国的线下硕士项目。每一条数据都注明来源、日期和核实状态，因此“未知”永远不会被误当作“否”。"
+    "description": "North 从需要 F-1 签证并携带家属的申请者的角度，梳理、核实并比较美国的线下硕士项目。每一条数据都注明来源、日期和核实状态，因此“未知”永远不会被误当作“否”。",
+    "browse": "浏览项目",
+    "browseHint": "得克萨斯州试点：计算机、数据科学、数据分析和信息系统，数据来自官方文件。"
   },
   "status": {
     "label": "API 状态",
@@ -29,5 +35,234 @@
   },
   "footer": {
     "license": "代码 AGPL-3.0 · 数据 CC BY 4.0"
+  },
+  "badge": {
+    "aria": "核实状态：{status}",
+    "short": {
+      "confirmed_official": "官方",
+      "reported_by_program": "项目网站",
+      "extracted_unverified": "未核实",
+      "unknown": "未知",
+      "confirmed_negative": "否"
+    },
+    "long": {
+      "confirmed_official": "已由官方来源确认",
+      "reported_by_program": "由项目自行公布",
+      "extracted_unverified": "已提取，尚未核实",
+      "unknown": "未知",
+      "confirmed_negative": "官方确认为否"
+    },
+    "description": {
+      "confirmed_official": "已由官方来源确认：政府文件或名单，或学校的国际学生办公室。",
+      "reported_by_program": "见于项目自己的网站，未经政府来源确认。",
+      "extracted_unverified": "从网页自动读取，尚未经人工核对。请谨慎参考。",
+      "unknown": "目前还没有人找到这项信息。未知不等于否。",
+      "confirmed_negative": "官方来源表示否。这是唯一表示“否”的状态。"
+    }
+  },
+  "legend": {
+    "title": "状态标签的含义"
+  },
+  "program": {
+    "cip": "CIP 代码",
+    "stem": "STEM OPT",
+    "stemEligible": "符合资格",
+    "stemNotEligible": "不符合资格",
+    "stemUnknown": "资格未知",
+    "sevp": "SEVP（F-1 学生）",
+    "accreditation": "认证",
+    "completions": "毕业生",
+    "completionsValue": "共 {total} 人 / 非居民 {nonresident} 人（{year}）",
+    "completionsTotalOnly": "共 {total} 人（{year}）",
+    "nonresidentLabel": "非本州居民：",
+    "completionsNone": "暂无毕业生数据",
+    "tuition": "研究生学费（非本州居民）",
+    "titleFromCip": "此名称为官方 CIP 学科名称；项目本身的名称尚未收集。",
+    "flags": {
+      "no_stem_opt_extension": {
+        "title": "无 STEM OPT 延期。",
+        "body": "该学科（CIP 52.12，商科下的信息系统）不在 DHS STEM 名单上，因此毕业生只有标准的 12 个月 OPT，没有 24 个月的 STEM 延期。"
+      }
+    },
+    "control": {
+      "public": "公立",
+      "private_nonprofit": "私立非营利",
+      "private_for_profit": "私立营利"
+    }
+  },
+  "price": {
+    "perYear": "{amount} / 年",
+    "qualifier": {
+      "institution_wide_average": "全校平均"
+    }
+  },
+  "programs": {
+    "pageTitle": "项目 · North",
+    "pageDescription": "面向国际学生的美国计算机与数据类硕士项目，每项数据都标明来源和状态。",
+    "eyebrow": "得克萨斯州试点",
+    "title": "项目",
+    "intro": "在美国官方文件中找到的硕士项目：IPEDS、DHS STEM 名单、SEVP 和认证数据库。每个状态标签都说明我们有多确定。",
+    "filters": {
+      "heading": "筛选项目",
+      "search": "搜索",
+      "searchPlaceholder": "院校、城市或学科",
+      "cipFamily": "学科（CIP 大类）",
+      "stem": "STEM OPT",
+      "any": "不限",
+      "toggle": "筛选（{n}）",
+      "control": "院校类型",
+      "sevp": "SEVP（F-1 学生）",
+      "accreditation": "认证",
+      "graduates": "最近一年的毕业生",
+      "graduatesIn": "{year} 年度毕业生",
+      "tuition": "研究生学费（非本州居民），美元/年",
+      "tuitionMin": "最低",
+      "tuitionMax": "最高",
+      "tuitionHint": "全校平均值。设定上下限时，学费未知的项目不会显示。",
+      "tuitionUnknown": "没有学费未知的项目。 | 1 个项目学费未知。 | {n} 个项目学费未知。",
+      "tuitionInvalid": "请输入大于或等于零的金额。",
+      "tuitionOrder": "最高值不能低于最低值。",
+      "city": "城市",
+      "citySearch": "查找城市",
+      "cityNone": "没有匹配的城市。",
+      "clear": "清除筛选"
+    },
+    "cipFamilies": {
+      "f11": "计算机",
+      "f30_70": "数据科学",
+      "f30_71": "数据与商业分析",
+      "f52_12": "信息系统"
+    },
+    "stemFilter": {
+      "eligible": "符合资格",
+      "not_eligible": "不符合资格",
+      "unknown": "未知"
+    },
+    "controlFilter": {
+      "public": "公立",
+      "private_nonprofit": "私立非营利",
+      "private_for_profit": "私立营利"
+    },
+    "checkFilter": {
+      "confirmed": "已确认",
+      "unknown": "未知"
+    },
+    "graduatesFilter": {
+      "true": "有毕业生",
+      "false": "无毕业生"
+    },
+    "sort": {
+      "label": "排序方式",
+      "asc": "升序",
+      "desc": "降序",
+      "orderAria": "排序：{order}。点击切换为{other}。",
+      "keys": {
+        "title": "名称",
+        "institution": "院校",
+        "city": "城市",
+        "tuition": "学费",
+        "graduates": "毕业生",
+        "nonresident_graduates": "国际毕业生",
+        "nonresident_share": "国际毕业生比例"
+      }
+    },
+    "view": {
+      "label": "视图",
+      "cards": "卡片",
+      "table": "表格"
+    },
+    "table": {
+      "caption": "项目列表，每行一个。点击列标题可排序。",
+      "tuition": "学费（非本州居民）",
+      "graduates": "毕业生",
+      "share": "国际比例",
+      "checks": "核验",
+      "stem": "STEM OPT",
+      "sevp": "SEVP",
+      "accreditation": "认证",
+      "noShare": "无毕业生，无比例"
+    },
+    "count": "没有项目 | 1 个项目 | {n} 个项目",
+    "loading": "正在加载项目…",
+    "empty": "没有符合这些筛选条件的项目。",
+    "error": "目前无法加载项目数据。服务可能暂时不可用，请几分钟后再试。",
+    "retry": "重试",
+    "pagination": {
+      "label": "分页",
+      "prev": "上一页",
+      "next": "下一页",
+      "page": "第 {page} 页，共 {pages} 页"
+    }
+  },
+  "detail": {
+    "pageTitle": "{title}，{institution} · North",
+    "pageDescription": "{institution}（{city}）的 {title}：官方数据，每个数值都标明来源和核实状态。",
+    "back": "全部项目",
+    "loading": "正在加载项目…",
+    "error": "目前无法加载此项目。服务可能暂时不可用，请几分钟后再试。",
+    "notFound": {
+      "title": "未找到项目",
+      "body": "此地址没有对应的项目。它可能已从官方文件中移除。"
+    },
+    "sections": {
+      "verified": "已核实的数值",
+      "notCollected": "尚未收集",
+      "facts": "项目与院校",
+      "sources": "来源文件"
+    },
+    "fields": {
+      "sevp": "SEVP 授权（可招收 F-1 学生）",
+      "accreditation": "院校认证",
+      "tuition": "研究生学费（非居民）",
+      "carnegie": "卡内基分类",
+      "cip": "CIP 学科",
+      "isced": "ISCED-F 学科",
+      "degree": "学位",
+      "institution": "院校",
+      "campus": "校区",
+      "website": "院校网站",
+      "identifiers": "标识码"
+    },
+    "values": {
+      "unknown": "未知",
+      "sevpAuthorized": "已授权",
+      "sevpNotAuthorized": "未授权",
+      "institutional": "院校级",
+      "programmatic": "项目级",
+      "notAccredited": "未获认证",
+      "stemRule": "DHS STEM 名单（{version} 版）",
+      "claimMismatch": "项目网站的说法与官方名单不一致。"
+    },
+    "meta": {
+      "source": "来源",
+      "newTab": "在新标签页中打开",
+      "noSource": "无来源链接",
+      "checked": "核对于 {date}",
+      "evidence": "依据"
+    },
+    "notCollectedIntro": "以下信息只在项目自己的网站上，尚未收集。它们是未知，而不是否定。",
+    "notCollectedFields": {
+      "admissions_english": "英语考试最低分数",
+      "admissions_deadlines": "申请截止日期",
+      "admissions_other_field_accepted": "是否接受其他本科专业的申请人",
+      "funding": "资助（助教/助研职位、奖学金、学费减免）",
+      "cost_program_tuition": "本项目的学费",
+      "immigration_i20_issued_for_program": "学校是否为本项目签发 I-20（F-1 签证文件）"
+    },
+    "sourcesIntro": "构建本页面所用的官方文件。",
+    "sourceFile": "{version}，上传于 {date}，共 {rows} 行",
+    "sourceNames": {
+      "ipeds_hd": "IPEDS 院校特征",
+      "ipeds_c_a": "IPEDS 按学科授予学位",
+      "ipeds_ic_ay": "IPEDS 学费与杂费",
+      "dhs_stem_list": "DHS STEM 指定学位项目名单",
+      "sevp_csl": "SEVP 认证学校名单",
+      "dapip": "DAPIP 认证数据库",
+      "scorecard_fos": "College Scorecard 学科数据",
+      "hud_fmr": "HUD 公平市场租金"
+    },
+    "notes": {
+      "institution_wide_average": "全校研究生平均学费，并非本项目的价格。"
+    }
   }
 }

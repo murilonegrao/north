@@ -1,0 +1,6 @@
+DapipId,AgencyId,AgencyName,ProgramId,ProgramName,SequentialId,InitialDateFlag,AccreditationDate,AccreditationStatus,ReviewDate,DepartmentDescription,AccreditationEndDate,EndingActionId
+100001,1,Southern Association of Colleges and Schools Commission on Colleges d.b.a. Commission on Colleges and Universities,1,Institutional Accreditation,1,Actual,01/01/1950,Accredited,12/01/2030,,,
+100001,2,Test Nursing Accreditor,2,Nursing,2,Actual,01/01/1990,Accredited,,,,
+100001,3,Old Test Accreditor,1,Institutional Accreditation,3,Actual,01/01/1900,Accredited,,,01/01/1949,9
+100002,4,Test Faith Accreditor,1,Institutional Accreditation,4,Actual,01/01/2020,Preaccredited,,,,
+100003,5,Higher Learning Commission,1,Institutional Accreditation,5,Actual,01/01/1980,Accredited,,,,

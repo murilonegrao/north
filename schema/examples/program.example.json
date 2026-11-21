@@ -517,6 +517,14 @@
       "evidence": "GRE scores are not required.",
       "verified_at": "2026-11-21"
     },
+    "gmat": {
+      "value": null,
+      "status": "unknown",
+      "source_kind": null,
+      "source_url": null,
+      "evidence": null,
+      "verified_at": null
+    },
     "min_gpa_4scale": {
       "value": 3.0,
       "status": "reported_by_program",
@@ -534,6 +542,14 @@
       "source_kind": "page",
       "source_url": "https://example.edu/graduate-school/apply",
       "evidence": null,
+      "verified_at": "2026-11-21"
+    },
+    "application_fee_waiver": {
+      "value": true,
+      "status": "reported_by_program",
+      "source_kind": "page",
+      "source_url": "https://example.edu/graduate-school/apply",
+      "evidence": "Fee waivers are available for applicants from eligible countries.",
       "verified_at": "2026-11-21"
     },
     "deadlines": [

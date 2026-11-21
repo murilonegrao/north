@@ -1,13 +1,18 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
+import { useRoute } from 'vue-router'
 import LanguageSwitcher from './components/LanguageSwitcher.vue'
 import SigilMark from './components/SigilMark.vue'
 import { byCode } from './locales'
 import { theme, toggleTheme } from './theme'
 
 const { t, locale } = useI18n()
-const homePath = computed(() => `/${byCode(locale.value)?.prefix ?? 'en'}/`)
+const prefix = computed(() => byCode(locale.value)?.prefix ?? 'en')
+const homePath = computed(() => `/${prefix.value}/`)
+const programsPath = computed(() => `/${prefix.value}/programs`)
+const route = useRoute()
+const inPrograms = computed(() => route.path.startsWith(programsPath.value))
 const themeLabel = computed(() => (theme.value === 'dark' ? t('theme.toLight') : t('theme.toDark')))
 </script>
 
@@ -19,6 +24,9 @@ const themeLabel = computed(() => (theme.value === 'dark' ? t('theme.toLight') :
         <SigilMark :size="24" />
         <span>North</span>
       </RouterLink>
+      <nav class="site-nav" :aria-label="t('nav.main')">
+        <RouterLink :to="programsPath" :class="['nav-link', { active: inPrograms }]" :aria-current="inPrograms ? 'page' : undefined">{{ t('nav.programs') }}</RouterLink>
+      </nav>
       <div class="header-tools">
         <LanguageSwitcher />
         <button type="button" class="theme-toggle" :aria-label="themeLabel" :title="themeLabel" @click="toggleTheme">
@@ -79,6 +87,26 @@ const themeLabel = computed(() => (theme.value === 'dark' ? t('theme.toLight') :
   font-weight: 500;
   color: var(--text);
   text-decoration: none;
+}
+.site-nav {
+  flex: 1;
+  display: flex;
+  gap: 1rem;
+}
+.nav-link {
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  text-decoration: none;
+  padding-block: 0.25rem;
+  border-block-end: 2px solid transparent;
+}
+.nav-link:hover {
+  color: var(--text);
+}
+.nav-link.active {
+  color: var(--text);
+  border-block-end-color: var(--accent);
 }
 .header-tools {
   display: flex;

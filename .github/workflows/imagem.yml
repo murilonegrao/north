@@ -10,6 +10,10 @@ on:
   pull_request:
   workflow_dispatch:
 
+# Least privilege: read-only token by default; only the image job may write packages.
+permissions:
+  contents: read
+
 concurrency:
   group: imagem-${{ github.ref }}
   cancel-in-progress: true
@@ -17,21 +21,39 @@ concurrency:
 jobs:
   testes:
     runs-on: ubuntu-latest
+    # PostgreSQL for the ingestion and API tests (same image as compose.yaml).
+    services:
+      postgres:
+        image: postgres:17.12
+        env:
+          POSTGRES_DB: north_test
+          POSTGRES_USER: north_test
+          POSTGRES_PASSWORD: north-test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U north_test -d north_test"
+          --health-interval 5s --health-timeout 5s --health-retries 20
     steps:
-      - uses: actions/checkout@v4
-      - uses: astral-sh/setup-uv@v5
+      # Actions are pinned to a full commit SHA (the tag in the comment); update both together.
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          persist-credentials: false
+      - uses: astral-sh/setup-uv@d4b2f3b6ecc6e67c4457f6d3e41ec42d3d0fcb86 # v5.4.2
         with:
           enable-cache: true
           cache-dependency-glob: backend/uv.lock
       - name: Backend lint and tests
         working-directory: backend
+        env:
+          NORTH_TEST_DATABASE_URL: postgresql+psycopg://north_test:north-test@localhost:5432/north_test
         run: |
           uv sync --frozen
           uv run ruff check .
           uv run pytest
       - name: Schema validation
-        run: uv run --with jsonschema python -I schema/validate.py
-      - uses: actions/setup-node@v4
+        run: uv run --with jsonschema==4.26.0 python -I schema/validate.py
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
           node-version: 22
           cache: npm
@@ -45,24 +67,27 @@ jobs:
 
   imagem:
     needs: testes
-    if: github.event_name != 'pull_request'
+    # Only main publishes :main (a workflow_dispatch on another branch must not).
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
     runs-on: ubuntu-latest
     permissions:
       contents: read
       packages: write
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          persist-credentials: false
       - id: nome
         run: |
           echo "repo=ghcr.io/${GITHUB_REPOSITORY,,}" >> "$GITHUB_OUTPUT"
           echo "tag=sha-${GITHUB_SHA::7}" >> "$GITHUB_OUTPUT"
-      - uses: docker/setup-buildx-action@v3
-      - uses: docker/login-action@v3
+      - uses: docker/setup-buildx-action@8d2750c68a42422c14e847fe6c8ac0403b4cbd6f # v3.12.0
+      - uses: docker/login-action@c94ce9fb468520275223c153574b00df6fe4bcc9 # v3.7.0
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      - uses: docker/build-push-action@v6
+      - uses: docker/build-push-action@10e90e3645eae34f1e60eeb005ba3a3d33f178e8 # v6.19.2
         with:
           context: .
           platforms: linux/amd64

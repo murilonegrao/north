@@ -95,3 +95,7 @@ U.S. federal government data, public domain. No specific terms page was found.
 
 - Continuous: accreditors report actions to ED, and the zip seemed to be generated on 2026-11-20.
 - Suggested cadence: monthly. The ingestion is idempotent on the zip's sha256.
+
+## Local sample
+
+Download the zip with the `curl` command above (or the "Download Accreditation Data Files" button, CSV) into `spikes/_raw/dapip/DAPIPData-<date>.zip` and extract it to `spikes/_raw/dapip/extracted/` (`InstitutionCampus.csv`, `AccreditationRecords.csv`). `scripts/load_local_sample.sh` reads the extracted directory; the CLI also accepts the zip (`dapip --path <zip>`). Ingestion: `backend/north/ingest/us/dapip.py`. It reads only `DapipId, OpeId, IpedsUnitIds, LocationType` and the accreditation columns; the contact columns (AdminName, AdminPhone, AdminEmail, and also Address, GeneralPhone, Fax) are never read.

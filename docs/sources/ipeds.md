@@ -92,8 +92,9 @@ Graduate tuition (`TUITION7`, IC2023_AY): has a value for **47 of the 48** targe
 1. Completions show what was **awarded** in a past year (two years behind), not what is open for admission now. A program with 0 completions may be new or closed.
 2. A UNITID Ã— CIP6 pair is not a named program: an institution can have two master's programs under the same CIP6. The program name, concentration and delivery mode come from the website (curation/extraction).
 3. Graduate tuition is an institution-wide average. It does not cover differential tuition by program (common in engineering/business).
-4. `CNRALT` counts temporary-visa graduates. It is a good signal of an international pipeline, but it does not say whether the program issues an I-20 (SEVP, RF-04) or whether it is online.
-5. The site was unstable. The ingestor needs retries and must save the original zip.
+4. A missing column, an empty cell or `.` is "not reported", never 0 (BR-02): if any `CTOTALT` of a program is missing its completions are `unknown`; if only `CNRALT` is missing the value keeps the total with `nonresident: null` and the evidence says so. A changed `WEBADDR` host opens a `website_changed` reconciliation task (the new value is still applied and logged).
+5. `CNRALT` counts temporary-visa graduates. It is a good signal of an international pipeline, but it does not say whether the program issues an I-20 (SEVP, RF-04) or whether it is online.
+6. The site was unstable. The ingestor needs retries and must save the original zip.
 
 ## License and terms
 
@@ -102,3 +103,16 @@ U.S. federal government data (NCES). Generally in the public domain (17 U.S.C. Â
 ## Update frequency
 
 Annual. Each component comes out as a provisional version and is later revised (some zips bring an `_rv` file; the script prefers it). Files seen: C2024_A, dated 2025-09-21 inside the zip; IC2023_AY, dated 2024-07-05. For `ingestion_runs.file_version`, use the file name plus the zip hash.
+
+## Local sample
+
+`scripts/load_local_sample.sh` reads `spikes/_raw/ipeds/` (git-ignored). Download in a browser (or with `bash spikes/s2_ipeds/download_ipeds.sh spikes/_raw/ipeds`, which retries) and keep the zips as they are:
+
+| File | Saved as |
+|---|---|
+| https://nces.ed.gov/ipeds/datacenter/data/HD2024.zip | `spikes/_raw/ipeds/HD2024.zip` |
+| https://nces.ed.gov/ipeds/datacenter/data/C2024_A.zip | `spikes/_raw/ipeds/C2024_A.zip` |
+| https://nces.ed.gov/ipeds/datacenter/data/C2024_A_Dict.zip | `spikes/_raw/ipeds/C2024_A_Dict.zip` (CIP titles; the loader checks that `AWLEVEL` 7 is "Master's degree") |
+| https://nces.ed.gov/ipeds/datacenter/data/IC2023_AY.zip | `spikes/_raw/ipeds/IC2023_AY.zip` |
+
+The loader (`backend/north/ingest/us/ipeds.py`) picks the newest year of each file in the directory, so newer files can be dropped next to the old ones. It reads only the HD columns it needs; `CHFNM` (the chief administrator's name) is never read.

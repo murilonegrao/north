@@ -1,12 +1,20 @@
 # Local run (NFR-12): `docker compose up --build`, then open http://localhost:8000/
-# The app does not use the database yet; it comes in Phase 5 (UML section 8).
+# The app applies the database migrations (alembic upgrade head, as north_owner) and then
+# starts uvicorn as north_app (DML only); the superuser is used by nobody but psql.
+# Roles: deploy/postgres/init/10-roles.sql, run by postgres only on an empty volume. A volume
+# created before that script existed needs deploy/postgres/adopt-existing.sql once, or a clean
+# local re-init with `docker compose down -v` (deletes the local data).
+# Sample data: scripts/load_local_sample.sh (README, "Load the sample data").
 name: north
 
 services:
   app:
     build: .
+    # The migration URL is dropped from the environment before uvicorn starts.
+    command: ["sh", "-c", "alembic upgrade head && unset NORTH_MIGRATION_DATABASE_URL && exec uvicorn north.api.app:app --host 0.0.0.0 --port 8000 --no-access-log"]
     environment:
-      NORTH_DATABASE_URL: postgresql+psycopg://north:${NORTH_DB_PASSWORD:-north-local}@db:5432/north
+      NORTH_DATABASE_URL: postgresql+psycopg://north_app:${NORTH_APP_DB_PASSWORD:-north-app-local}@db:5432/north
+      NORTH_MIGRATION_DATABASE_URL: postgresql+psycopg://north_owner:${NORTH_OWNER_DB_PASSWORD:-north-owner-local}@db:5432/north
     ports:
       - "127.0.0.1:${NORTH_HOST_PORT:-8000}:8000"
     depends_on:
@@ -19,11 +27,15 @@ services:
       POSTGRES_DB: north
       POSTGRES_USER: north
       POSTGRES_PASSWORD: ${NORTH_DB_PASSWORD:-north-local}
+      # Read by deploy/postgres/init/10-roles.sql (\getenv) on first initialization.
+      NORTH_OWNER_DB_PASSWORD: ${NORTH_OWNER_DB_PASSWORD:-north-owner-local}
+      NORTH_APP_DB_PASSWORD: ${NORTH_APP_DB_PASSWORD:-north-app-local}
     # Published on localhost only, for psql and for running the backend outside Docker.
     ports:
       - "127.0.0.1:${NORTH_DB_HOST_PORT:-5436}:5432"
     volumes:
       - north-db:/var/lib/postgresql/data
+      - ./deploy/postgres/init:/docker-entrypoint-initdb.d:ro
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U north -d north"]
       interval: 5s

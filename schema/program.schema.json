@@ -632,7 +632,7 @@
     "Admissions": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["english", "accepts_other_undergrad_area", "prerequisites", "gre", "min_gpa_4scale", "application_fee", "deadlines"],
+      "required": ["english", "accepts_other_undergrad_area", "prerequisites", "gre", "gmat", "min_gpa_4scale", "application_fee", "application_fee_waiver", "deadlines"],
       "properties": {
         "english": { "$ref": "#/$defs/English" },
         "accepts_other_undergrad_area": { "$ref": "#/$defs/VV_bool", "description": "Accepts an undergraduate degree in another field (BR-04)." },
@@ -643,10 +643,18 @@
             { "properties": { "value": { "enum": ["required", "optional", "not_required", "waivable", null] } } }
           ]
         },
+        "gmat": {
+          "description": "Record 0005: GMAT requirement, same scale as gre (common in analytics and information systems programs).",
+          "allOf": [
+            { "$ref": "#/$defs/VerifiedValue" },
+            { "properties": { "value": { "enum": ["required", "optional", "not_required", "waivable", null] } } }
+          ]
+        },
         "min_gpa_4scale": {
           "allOf": [{ "$ref": "#/$defs/VerifiedValue" }, { "properties": { "value": { "type": ["number", "null"], "minimum": 0, "maximum": 4 } } }]
         },
         "application_fee": { "$ref": "#/$defs/VV_money" },
+        "application_fee_waiver": { "$ref": "#/$defs/VV_bool", "description": "Record 0005: the program or graduate school offers an application fee waiver to international applicants (yes/no; a confirmed 'no' is confirmed_negative, R12). Conditions go in evidence." },
         "deadlines": {
           "description": "R18: a list where each item is its own VerifiedValue (deadlines often come from different pages: graduate school vs department). An empty list means no deadline was recorded (it never means \"no deadlines\"). Items are never unknown: a deadline you did not find is simply not in the list.",
           "type": "array",

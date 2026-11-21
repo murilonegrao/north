@@ -4,11 +4,13 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from fastapi import FastAPI, HTTPException
-from fastapi.responses import FileResponse
+from fastapi import FastAPI, HTTPException, Request
+from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 
 from north import __version__
+from north.api.programs import router as programs_router
+from north.repository.db import DatabaseNotConfigured
 from north.settings import get_settings
 
 app = FastAPI(
@@ -19,6 +21,14 @@ app = FastAPI(
     redoc_url=None,
     openapi_url="/api/openapi.json",
 )
+
+
+app.include_router(programs_router)
+
+
+@app.exception_handler(DatabaseNotConfigured)
+def _no_database(_: Request, exc: DatabaseNotConfigured) -> JSONResponse:
+    return JSONResponse(status_code=503, content={"detail": str(exc)})
 
 
 @app.get("/api/health", tags=["meta"])
