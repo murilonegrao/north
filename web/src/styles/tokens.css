@@ -33,6 +33,10 @@
   --text-muted: var(--forge-gray);
   --accent: var(--ember);
   --accent-dim: var(--ember-dim);
+  /* Edge of form fields (inputs, selects): WCAG 1.4.11 wants 3:1 against the surface. Iron on soot
+     is 1.19:1 and the field fill barely differs from the panel, so fields take the muted text
+     tone instead: forge-gray on soot 4.88:1, graphite on linen 6.73:1. */
+  --field-border: var(--text-muted);
   /* Accent as TEXT (links, eyebrows). WCAG AA (NFR-06): ember on charcoal 5.63:1, on soot 5.22:1.
      Ember stays for focus rings, chips, borders and the sigil in both themes. */
   --accent-text: var(--ember);

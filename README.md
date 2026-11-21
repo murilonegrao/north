@@ -24,12 +24,14 @@ Compose also starts PostgreSQL 17 (published on `127.0.0.1:5436`, data in the na
 
 ### Load the sample data
 
-The programs API (`/api/programs`, `/api/programs/{id}`, `/api/sources`; contract in [docs/api/programs-v0.md](docs/api/programs-v0.md)) serves what was ingested from the official files: IPEDS HD/C_A/IC_AY, the DHS STEM list, the SEVP certified school list and the DAPIP export. Download them once into `spikes/_raw/` (git-ignored; each `docs/sources/<source>.md` has a "Local sample" section with the URLs and paths), then:
+The programs API (`/api/programs` with filters and `sort`/`order`, `/api/programs/{id}`, `/api/facets`, `/api/sources`; contract v0.2 in [docs/api/programs-v0.md](docs/api/programs-v0.md)) serves what was ingested from the official files: IPEDS HD/C_A/IC_AY, the DHS STEM list, the SEVP certified school list and the DAPIP export. Download them once into `spikes/_raw/` (git-ignored; each `docs/sources/<source>.md` has a "Local sample" section with the URLs and paths), then:
 
 ```sh
 docker compose up -d --build
 scripts/load_local_sample.sh        # STATE=TX by default; about 2 minutes (the SEVP PDF is parsed)
 curl 'http://localhost:8000/api/programs?cip_family=11&limit=3'
+curl 'http://localhost:8000/api/programs?sort=tuition&order=asc&limit=3'   # cheapest first, unknown tuition last
+curl 'http://localhost:8000/api/facets'                                  # counts for the filter panel
 ```
 
 The loader runs inside the app image with the files mounted read-only. Re-running it is safe: a file already ingested for the same state is skipped (idempotent on source + sha256; for the DHS list the digest covers the CSV and its `.meta.json`). If the official DHS PDF is in `spikes/_raw/dhs_stem/` (or `DHS_PDF` points at it), its sha256 is checked against the meta's `file_sha256` and a mismatch is refused. Per-source commands: `uv run python -m north.ingest.us.cli --help`.

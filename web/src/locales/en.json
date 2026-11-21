@@ -85,7 +85,8 @@
       "public": "public",
       "private_nonprofit": "private nonprofit",
       "private_for_profit": "private for-profit"
-    }
+    },
+    "controlUnknown": "public or private: unknown"
   },
   "price": {
     "perYear": "{amount} / year",
@@ -194,6 +195,7 @@
   "detail": {
     "pageTitle": "{title}, {institution} · North",
     "pageDescription": "{title} at {institution} ({city}): official data with the source and verification status of every value.",
+    "pageDescriptionNoCity": "{title} at {institution}: official data with the source and verification status of every value.",
     "back": "All programs",
     "loading": "Loading program…",
     "error": "This program could not be loaded right now. The service may be down; please try again in a few minutes.",
@@ -248,6 +250,7 @@
     },
     "sourcesIntro": "The official files this page was built from.",
     "sourceFile": "{version}, uploaded {date}, {rows} rows",
+    "sourceFileNoRows": "{version}, uploaded {date}, row count not recorded",
     "sourceNames": {
       "ipeds_hd": "IPEDS institutional characteristics",
       "ipeds_c_a": "IPEDS completions by field",

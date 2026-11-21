@@ -67,11 +67,13 @@ export type InstitutionControl = (typeof INSTITUTION_CONTROLS)[number]
 export interface InstitutionSummary {
   id: string
   name: string
-  control: InstitutionControl
+  /** null when the official file does not say (shown as unknown, never as a type). */
+  control: InstitutionControl | null
 }
 
 export interface CampusSummary {
-  city: string
+  /** null when unknown: the UI shows the state alone. */
+  city: string | null
   state: string
 }
 
@@ -154,7 +156,8 @@ export interface SourceFile {
   file_version: string
   sha256: string
   uploaded_at: string
-  rows: number
+  /** null when the ingestion run did not record a row count. */
+  rows: number | null
 }
 
 export interface ProgramDetail extends Omit<ProgramSummary, 'institution' | 'campus' | 'sevp_status' | 'accreditation_status'> {

@@ -9,7 +9,7 @@ from __future__ import annotations
 
 from typing import Annotated, Any, Literal
 
-from fastapi import APIRouter, Depends, HTTPException, Query
+from fastapi import APIRouter, Depends, HTTPException, Path, Query
 from fastapi.exceptions import RequestValidationError
 from pydantic import StringConstraints
 from sqlalchemy import Select, and_, case, func, or_, select
@@ -17,8 +17,12 @@ from sqlalchemy.orm import Session, aliased
 from sqlalchemy.sql.elements import ColumnElement
 
 from north.api import schemas as s
-from north.domain.countries.us.cip import FAMILIES, cip_family
-from north.domain.countries.us.stem import RULE_KEY
+from north.domain.countries import (
+    CountryRules,
+    country_of_subdivision,
+    country_of_subdivision_id,
+    rules_for,
+)
 from north.repository.db import session_scope
 from north.repository.models import (
     Campus,
@@ -41,16 +45,26 @@ NOT_YET_COLLECTED = [
     "admissions.english", "admissions.deadlines", "admissions.other_field_accepted",
     "funding", "cost.program_tuition", "immigration.i20_issued_for_program",
 ]
-# Source files behind a program's values (contract v0.1 §5 ids).
-PROGRAM_SOURCES = ("ipeds_hd", "ipeds_c_a", "ipeds_ic_ay", "dhs_stem_list", "sevp_csl", "dapip")
 UNKNOWN: dict[str, Any] = {"value": None, "status": "unknown"}
 NOTE_TUITION = "institution_wide_average"
 
 
-def _current_rule(db: Session, country: str = "US") -> EligibilityRule | None:
+# Free-text parameters never carry NUL (PostgreSQL rejects it in text: 422, never 500).
+NO_NUL = r"^[^\x00]*$"
+PROGRAM_ID = r"^\d{6}-\d{6}$"
+MAX_OFFSET = 100_000
+MAX_SOURCES = 500
+
+
+def _rules_for_state(state: str) -> CountryRules:
+    return rules_for(country_of_subdivision(state))
+
+
+def _current_rule(db: Session, rules: CountryRules) -> EligibilityRule | None:
     return db.scalar(
         select(EligibilityRule)
-        .where(EligibilityRule.country_code == country, EligibilityRule.key == RULE_KEY)
+        .where(EligibilityRule.country_code == rules.code,
+               EligibilityRule.key == rules.stem_rule_key)
         .order_by(EligibilityRule.published_on.desc().nulls_last(),
                   EligibilityRule.version.desc()).limit(1))
 
@@ -86,7 +100,7 @@ def _title_source(p: Program) -> str:
 
 
 def _state(inst: Institution) -> str:
-    return inst.subdivision_id.split("-", 1)[-1]
+    return CountryRules.local_subdivision(inst.subdivision_id)
 
 
 def _list_tuition(p: Program) -> dict[str, Any]:
@@ -95,11 +109,11 @@ def _list_tuition(p: Program) -> dict[str, Any]:
     return {k: v for k, v in t.items() if k != "evidence"}
 
 
-def _item(p: Program, c: Campus, i: Institution, cls: Classification,
+def _item(rules: CountryRules, p: Program, c: Campus, i: Institution, cls: Classification,
           pe: ProgramEligibility | None) -> dict[str, Any]:
     return {
         "id": p.id, "title": p.name, "title_source": _title_source(p), "degree": p.degree,
-        "cip": {"code": cls.code, "title": cls.title, "family": cip_family(cls.code)},
+        "cip": {"code": cls.code, "title": cls.title, "family": rules.cip_family(cls.code)},
         "institution": {"id": i.id, "name": i.name, "control": i.control},
         "campus": {"city": c.city, "state": _state(i)},
         "stem_opt": _stem(pe),
@@ -117,7 +131,7 @@ Control = Literal["public", "private_nonprofit", "private_for_profit"]
 CONTROLS: tuple[str, ...] = ("public", "private_nonprofit", "private_for_profit")
 SortKey = Literal["title", "institution", "city", "tuition", "graduates",
                   "nonresident_graduates", "nonresident_share"]
-City = Annotated[str, StringConstraints(min_length=1, max_length=120)]
+City = Annotated[str, StringConstraints(min_length=1, max_length=120, pattern=NO_NUL)]
 MAX_TUITION = 1_000_000
 
 
@@ -137,8 +151,17 @@ def _completions(field: str) -> ColumnElement[Any]:
                 else_=None)
 
 
-def _family_pred(family: str) -> ColumnElement[bool]:
-    return Classification.code.startswith(FAMILIES[family])
+def _family_pred(rules: CountryRules, family: str) -> ColumnElement[bool]:
+    prefix = rules.cip_families.get(family)
+    if prefix is None:  # a family the country does not define matches nothing
+        return Classification.id.is_(None)
+    return Classification.code.startswith(prefix)
+
+
+def _like_pattern(text: str) -> str:
+    """``%text%`` with LIKE wildcards in ``text`` escaped, so they match literally."""
+    escaped = text.replace("\\", "\\\\").replace("%", "\\%").replace("_", "\\_")
+    return f"%{escaped}%"
 
 
 def _stem_pred(pe: Any, value: str) -> ColumnElement[bool]:
@@ -200,7 +223,7 @@ def list_programs(
     cip_family_: Annotated[list[Literal["11", "30.70", "30.71", "52.12"]] | None,
                            Query(alias="cip_family")] = None,
     stem: Literal["eligible", "not_eligible", "unknown"] | None = None,
-    q: Annotated[str | None, Query(max_length=200)] = None,
+    q: Annotated[str | None, Query(max_length=200, pattern=NO_NUL)] = None,
     control: Annotated[list[Control] | None, Query()] = None,
     city: Annotated[list[City] | None, Query(max_length=50)] = None,
     min_tuition: Annotated[float | None, Query(ge=0, le=MAX_TUITION)] = None,
@@ -211,22 +234,23 @@ def list_programs(
     sort: SortKey = "title",
     order: Literal["asc", "desc"] = "asc",
     limit: Annotated[int, Query(ge=1, le=200)] = 50,
-    offset: Annotated[int, Query(ge=0)] = 0,
+    offset: Annotated[int, Query(ge=0, le=MAX_OFFSET)] = 0,
 ) -> dict[str, Any]:
     if min_tuition is not None and max_tuition is not None and max_tuition < min_tuition:
         raise _invalid("max_tuition", "max_tuition must be greater than or equal to min_tuition",
                        max_tuition)
-    rule = _current_rule(db)
+    rules = _rules_for_state(state)
+    rule = _current_rule(db, rules)
     stmt, pe = _base(rule.id if rule else None)
-    stmt = stmt.where(Institution.subdivision_id == f"US-{state.upper()}")
+    stmt = stmt.where(Institution.subdivision_id == rules.subdivision_id(state))
     if cip_family_:
-        stmt = stmt.where(or_(*[_family_pred(f) for f in cip_family_]))
+        stmt = stmt.where(or_(*[_family_pred(rules, f) for f in cip_family_]))
     if stem:
         stmt = stmt.where(_stem_pred(pe, stem))
     if q and q.strip():
-        like = f"%{q.strip()}%"
-        stmt = stmt.where(or_(Institution.name.ilike(like), Campus.city.ilike(like),
-                              Classification.title.ilike(like), Program.name.ilike(like)))
+        like = _like_pattern(q.strip())
+        stmt = stmt.where(or_(*[col.ilike(like, escape="\\") for col in (
+            Institution.name, Campus.city, Classification.title, Program.name)]))
     if control:
         stmt = stmt.where(Institution.control.in_(control))
     if city:
@@ -247,7 +271,7 @@ def list_programs(
     ties = [Program.id] if sort == "institution" else [Institution.name, Program.id]
     rows = db.execute(stmt.order_by(primary, *ties).limit(limit).offset(offset)).all()
     return {"total": total, "limit": limit, "offset": offset,
-            "items": [_item(*row) for row in rows]}
+            "items": [_item(rules, *row) for row in rows]}
 
 
 @router.get("/facets", response_model=s.Facets, tags=["programs"])
@@ -256,12 +280,14 @@ def facets(
     state: Annotated[str, Query(pattern=r"^[A-Za-z]{2}$")] = "TX",
 ) -> dict[str, Any]:
     """Counts for the filter UI over every program of ``state`` (other filters ignored)."""
-    rule = _current_rule(db)
+    rules = _rules_for_state(state)
+    rule = _current_rule(db, rules)
     stmt, pe = _base(rule.id if rule else None)
-    sub = stmt.where(Institution.subdivision_id == f"US-{state.upper()}")
+    sub = stmt.where(Institution.subdivision_id == rules.subdivision_id(state))
     count = func.count(Program.id)
     columns: dict[str, ColumnElement[Any]] = {"total": count}
-    columns |= {f"cip_family:{f}": count.filter(_family_pred(f)) for f in FAMILIES}
+    columns |= {f"cip_family:{f}": count.filter(_family_pred(rules, f))
+                for f in rules.cip_families}
     columns |= {f"control:{c}": count.filter(Institution.control == c) for c in CONTROLS}
     columns |= {f"stem:{v}": count.filter(_stem_pred(pe, v))
                 for v in ("eligible", "not_eligible", "unknown")}
@@ -284,7 +310,8 @@ def facets(
     out["cities"] = [{"city": c, "count": n} for c, n in cities]
     lo, hi = got["tuition:min"], got["tuition:max"]
     out["tuition"] = {"min": _num(lo), "max": _num(hi), "known": got["tuition:known"],
-                      "unknown": got["total"] - got["tuition:known"], "currency": "USD"}
+                      "unknown": got["total"] - got["tuition:known"],
+                      "currency": rules.currency}
     return out
 
 
@@ -292,7 +319,8 @@ def _num(v: float | None) -> float | int | None:
     return None if v is None else int(v) if float(v).is_integer() else v
 
 
-def _sources(db: Session, scopes: list[str], only: tuple[str, ...] | None) -> list[dict]:
+def _sources(db: Session, scopes: list[str], only: tuple[str, ...] | None,
+             limit: int | None = None) -> list[dict]:
     """Latest succeeded file per source (with its row count), or every file when only=None."""
     stmt = (select(SourceFile, IngestionRun)
             .outerjoin(IngestionRun, and_(IngestionRun.source_file_id == SourceFile.id,
@@ -313,18 +341,26 @@ def _sources(db: Session, scopes: list[str], only: tuple[str, ...] | None) -> li
     if only is not None:
         order = {k: n for n, k in enumerate(only)}
         return sorted(out.values(), key=lambda d: order.get(d["source"], 99))
-    return list(out.values())
+    return list(out.values())[:limit]
 
 
 @router.get("/programs/{program_id}", response_model=s.ProgramDetail)
-def get_program(program_id: str, db: DB) -> dict[str, Any]:
-    rule = _current_rule(db)
+def get_program(program_id: Annotated[str, Path(pattern=PROGRAM_ID)],
+                db: DB) -> dict[str, Any]:
+    subdivision = db.scalar(select(Institution.subdivision_id)
+                            .join(Campus, Campus.institution_id == Institution.id)
+                            .join(Program, Program.campus_id == Campus.id)
+                            .where(Program.id == program_id))
+    if subdivision is None:
+        raise HTTPException(status_code=404, detail="program not found")
+    rules = rules_for(country_of_subdivision_id(subdivision))
+    rule = _current_rule(db, rules)
     stmt, _ = _base(rule.id if rule else None)
     row = db.execute(stmt.where(Program.id == program_id)).first()
     if row is None:
         raise HTTPException(status_code=404, detail="program not found")
     p, c, i, cls, pe = row
-    item = _item(p, c, i, cls, pe)
+    item = _item(rules, p, c, i, cls, pe)
     isced = db.scalar(
         select(func.min(Classification.code))
         .join(ClassificationMap, ClassificationMap.to_id == Classification.id)
@@ -350,10 +386,13 @@ def get_program(program_id: str, db: DB) -> dict[str, Any]:
         },
         "graduate_tuition_nonresident": tuition,
         "not_yet_collected": NOT_YET_COLLECTED,
-        "sources": _sources(db, [i.subdivision_id, "US"], PROGRAM_SOURCES),
+        "sources": _sources(db, [i.subdivision_id, rules.code], rules.program_sources),
     }
 
 
 @router.get("/sources", response_model=list[s.SourceRef], tags=["sources"])
-def list_sources(db: DB) -> list[dict]:
-    return _sources(db, [], None)
+def list_sources(
+    db: DB, limit: Annotated[int, Query(ge=1, le=MAX_SOURCES)] = 100,
+) -> list[dict]:
+    """Every uploaded file (latest first within each source), at most ``limit`` of them."""
+    return _sources(db, [], None, limit)

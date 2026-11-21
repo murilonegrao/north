@@ -88,7 +88,8 @@
       "public": "公立",
       "private_nonprofit": "私立非营利",
       "private_for_profit": "私立营利"
-    }
+    },
+    "controlUnknown": "公立或私立：未知"
   },
   "price": {
     "perYear": "{amount} / 年",
@@ -197,6 +198,7 @@
   "detail": {
     "pageTitle": "{title}，{institution} · North",
     "pageDescription": "{institution}（{city}）的 {title}：官方数据，每个数值都标明来源和核实状态。",
+    "pageDescriptionNoCity": "{institution}的 {title}：官方数据，每个数值都标明来源和核实状态。",
     "back": "全部项目",
     "loading": "正在加载项目…",
     "error": "目前无法加载此项目。服务可能暂时不可用，请几分钟后再试。",
@@ -251,6 +253,7 @@
     },
     "sourcesIntro": "构建本页面所用的官方文件。",
     "sourceFile": "{version}，上传于 {date}，共 {rows} 行",
+    "sourceFileNoRows": "{version}，上传于 {date}，未记录行数",
     "sourceNames": {
       "ipeds_hd": "IPEDS 院校特征",
       "ipeds_c_a": "IPEDS 按学科授予学位",

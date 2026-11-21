@@ -10,7 +10,7 @@ import CompletionsText from '../components/CompletionsText.vue'
 import StatusBadge from '../components/StatusBadge.vue'
 import StatusLegend from '../components/StatusLegend.vue'
 import VerifiedField from '../components/VerifiedField.vue'
-import { formatDate, formatMoney, formatNumber, keyOf } from '../format'
+import { formatDate, formatMoney, formatNumber, keyOf, placeLabel, safeHttpUrl } from '../format'
 import { stemKey, useLocalePrefix } from '../programs'
 
 const { t, te, locale } = useI18n()
@@ -42,14 +42,20 @@ onBeforeUnmount(() => controller?.abort())
 
 const program = computed(() => (load.value.state === 'ok' ? load.value.data : null))
 
-// NFR-15: each program page has its own title and description.
-watch([program, locale], ([p]) => {
+// NFR-15: each program page has its own title and description. The router's afterEach sets the
+// generic title on every navigation (a language switch included), so this runs after it: the
+// route watcher with flush 'post' fires once the navigation has finished.
+function setPageMeta() {
+  const p = program.value
   if (!p) return
-  document.title = t('detail.pageTitle', { title: p.title, institution: p.institution.name })
-  document
-    .querySelector('meta[name="description"]')
-    ?.setAttribute('content', t('detail.pageDescription', { title: p.title, institution: p.institution.name, city: p.campus.city }))
-})
+  const names = { title: p.title, institution: p.institution.name }
+  document.title = t('detail.pageTitle', names)
+  const description = p.campus.city
+    ? t('detail.pageDescription', { ...names, city: p.campus.city })
+    : t('detail.pageDescriptionNoCity', names)
+  document.querySelector('meta[name="description"]')?.setAttribute('content', description)
+}
+watch([program, locale, () => route.fullPath], setPageMeta, { flush: 'post' })
 
 const num = (n: number) => formatNumber(n, locale.value)
 const date = (value: string) => formatDate(value, locale.value)
@@ -66,10 +72,16 @@ function noteText(code: string): string {
   const key = `detail.notes.${keyOf(code)}`
   return te(key) ? t(key) : code
 }
-function controlLabel(control: string): string {
+function controlLabel(control: string | null): string {
+  if (!control) return t('program.controlUnknown')
   const key = `program.control.${control}`
   return te(key) ? t(key) : control
 }
+function sourceFileText(source: { file_version: string; uploaded_at: string; rows: number | null }): string {
+  const params = { version: source.file_version, date: date(source.uploaded_at) }
+  return source.rows === null ? t('detail.sourceFileNoRows', params) : t('detail.sourceFile', { ...params, rows: num(source.rows) })
+}
+const website = computed(() => safeHttpUrl(program.value?.institution.website))
 </script>
 
 <template>
@@ -93,7 +105,7 @@ function controlLabel(control: string): string {
     <header class="program-header">
       <p class="eyebrow">{{ program.degree }} · <code>CIP {{ program.cip.code }}</code></p>
       <h1 id="program-title">{{ program.title }}</h1>
-      <p class="where">{{ program.institution.name }} · {{ program.campus.city }}, {{ program.campus.state }}</p>
+      <p class="where">{{ program.institution.name }} · {{ placeLabel(program.campus.city, program.campus.state) }}</p>
       <p v-if="program.title_source === 'cip_title'" class="hint">{{ t('program.titleFromCip') }}</p>
       <p v-if="program.flags.includes('no_stem_opt_extension')" class="flag">
         <strong>{{ t('program.flags.no_stem_opt_extension.title') }}</strong>
@@ -242,16 +254,17 @@ function controlLabel(control: string): string {
         <div>
           <dt>{{ t('detail.fields.campus') }}</dt>
           <dd>
-            {{ program.campus.city }}, {{ program.campus.state }}
+            {{ placeLabel(program.campus.city, program.campus.state) }}
             <span v-if="program.campus.locality" class="muted">· {{ program.campus.locality.name }}</span>
           </dd>
         </div>
         <div v-if="program.institution.website">
           <dt>{{ t('detail.fields.website') }}</dt>
           <dd>
-            <a :href="program.institution.website" target="_blank" rel="noopener noreferrer">
+            <a v-if="website" :href="website" target="_blank" rel="noopener noreferrer">
               {{ program.institution.website }}<span class="visually-hidden"> ({{ t('detail.meta.newTab') }})</span>
             </a>
+            <span v-else data-test="website-text">{{ program.institution.website }}</span>
           </dd>
         </div>
         <div>
@@ -272,7 +285,7 @@ function controlLabel(control: string): string {
         <li v-for="source in program.sources" :key="`${source.source}-${source.file_version}`">
           <span class="source-name">{{ sourceName(source.source) }}</span>
           <span class="muted">
-            {{ t('detail.sourceFile', { version: source.file_version, date: date(source.uploaded_at), rows: num(source.rows) }) }}
+            {{ sourceFileText(source) }}
           </span>
           <code class="sha" :title="source.sha256">SHA-256 {{ source.sha256.slice(0, 12) }}…</code>
         </li>

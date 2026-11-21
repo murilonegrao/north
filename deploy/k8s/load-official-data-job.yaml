@@ -1,0 +1,52 @@
+# One-off Job that loads the official files into the production database (record 0004, FR-26).
+# Template only: it belongs in k3s-gitops/manifests/north/ when the deployment is set up (docs/deploy.md).
+#
+# Before running it, copy the files into the PVC `north-source-files` with the layout below
+# (kubectl cp into a temporary pod that mounts the PVC):
+#   /data/raw/ipeds/            HD<year>.zip, C<year>_A.zip, IC<year>_AY.zip and their *_Dict.zip
+#   /data/raw/sevp/             certified-school-list-MM-DD-YY.pdf
+#   /data/raw/dapip/extracted/  InstitutionCampus.csv, AccreditationRecords.csv
+#   /data/raw/dhs/              stemList2024.pdf (optional; checked against the meta sha256)
+#   /data/reference/            the files of the repository's data/reference/
+#
+# The loader is idempotent on (source, sha256): running the Job again skips files it already has.
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: north-load-official-data
+spec:
+  backoffLimit: 0
+  ttlSecondsAfterFinished: 86400
+  template:
+    spec:
+      restartPolicy: Never
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 10001
+      containers:
+        - name: load
+          image: ghcr.io/murilonegrao/north   # tag set by kustomize, like the Deployment
+          command:
+            - python
+            - -m
+            - north.ingest.us.cli
+            - load-all
+            - --state=TX
+            - --ipeds-dir=/data/raw/ipeds
+            - --dhs-csv=/data/reference/dhs-stem-list-2024-07-22.csv
+            - --sevp-pdf=/data/raw/sevp/certified-school-list-11-18-26.pdf
+            - --dapip-dir=/data/raw/dapip/extracted
+            - --isced-csv=/data/reference/cip-isced-f.csv
+          env:
+            # The loader writes data, so it uses the DML role, never the schema owner.
+            - name: NORTH_DATABASE_URL
+              valueFrom:
+                secretKeyRef: {name: north-env, key: NORTH_DATABASE_URL}
+          resources:
+            requests: {cpu: 200m, memory: 512Mi}
+            limits: {memory: 2Gi}
+          volumeMounts:
+            - {name: source-files, mountPath: /data, readOnly: true}
+      volumes:
+        - name: source-files
+          persistentVolumeClaim: {claimName: north-source-files}

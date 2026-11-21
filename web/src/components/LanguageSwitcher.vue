@@ -16,7 +16,8 @@ function change(event: Event) {
   if (!target) return
   rememberLocale(target)
   const rest = route.path.replace(/^\/[^/]+/, '') || '/'
-  router.push(`/${target.prefix}${rest}`)
+  // Same page in the other language: filters (query) and anchor (hash) stay.
+  router.push({ path: `/${target.prefix}${rest}`, query: route.query, hash: route.hash })
 }
 </script>
 
@@ -47,12 +48,12 @@ select {
   font-size: 0.875rem;
   color: var(--text);
   background: var(--surface);
-  border: 1px solid var(--border);
+  border: 1px solid var(--field-border);
   border-radius: var(--radius);
   padding-block: 0.25rem;
   padding-inline: 0.5rem;
 }
 select:hover {
-  border-color: var(--accent-dim);
+  border-color: var(--accent);
 }
 </style>

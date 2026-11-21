@@ -12,7 +12,7 @@ import ProgramTable from '../components/ProgramTable.vue'
 import StatusBadge from '../components/StatusBadge.vue'
 import StatusLegend from '../components/StatusLegend.vue'
 import TuitionPrice from '../components/TuitionPrice.vue'
-import { formatNumber } from '../format'
+import { formatNumber, placeLabel } from '../format'
 import {
   activeFilterCount,
   clearedFilters,
@@ -219,7 +219,7 @@ const num = (n: number) => formatNumber(n, locale.value)
                 <RouterLink :to="`/${prefix}/programs/${item.id}`">{{ item.title }}</RouterLink>
               </h2>
               <p class="program-where">
-                {{ item.institution.name }} · {{ item.campus.city }}, {{ item.campus.state }}
+                {{ item.institution.name }} · {{ placeLabel(item.campus.city, item.campus.state) }}
               </p>
             </div>
 
@@ -341,14 +341,14 @@ select {
   font-size: 0.875rem;
   color: var(--text);
   background: var(--bg);
-  border: 1px solid var(--border);
+  border: 1px solid var(--field-border);
   border-radius: var(--radius);
   padding-block: 0.3125rem;
   padding-inline: 0.5rem;
   max-inline-size: 100%;
 }
 select:hover {
-  border-color: var(--accent-dim);
+  border-color: var(--accent);
 }
 .order-toggle {
   white-space: nowrap;

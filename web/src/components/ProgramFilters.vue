@@ -301,14 +301,14 @@ input[type='number'] {
   font: inherit;
   color: var(--text);
   background: var(--bg);
-  border: 1px solid var(--border);
+  border: 1px solid var(--field-border);
   border-radius: var(--radius);
   padding-block: 0.4375rem;
   padding-inline: 0.75rem;
 }
 input[type='search']:hover,
 input[type='number']:hover {
-  border-color: var(--accent-dim);
+  border-color: var(--accent);
 }
 input[aria-invalid='true'] {
   border-color: var(--text);

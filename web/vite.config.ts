@@ -13,6 +13,10 @@ export default defineConfig(({ mode }) => ({
     __VUE_I18N_LEGACY_API__: false,
     __INTLIFY_PROD_DEVTOOLS__: false,
   },
+  build: {
+    // Fonts are never inlined as data: URIs, so the CSP keeps font-src 'self' (no data:).
+    assetsInlineLimit: (file: string) => (/\.(woff2?|ttf|otf)$/.test(file) ? false : undefined),
+  },
   server: {
     port: 5173,
     proxy: mode === 'mock' ? undefined : { '/api': apiTarget },

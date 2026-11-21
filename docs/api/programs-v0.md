@@ -155,3 +155,11 @@ Fixes found while building the UI. They override the examples above where they d
 ```
 
 (Numbers above are illustrative.) Cities are sorted by count desc, then name.
+
+### v0.2 clarifications
+
+- `has_graduates=true` means a known total > 0; `false` means a known total of 0. Programs with unknown completions match neither (BR-02), so the two facet counts may not add up to `total`.
+- `sevp=confirmed` means `confirmed_official` and authorized; `accredited=true` means `confirmed_official` with `institutional: true`. A `confirmed_negative` matches neither value; a filter for it can be added when such data exists.
+- Text sorts use the database collation (case-insensitive), not byte order.
+- With `sort=institution` the tie-break is the program id.
+- Facet counts use the same predicates as the list filters, so a facet count always equals the list total for that single filter.

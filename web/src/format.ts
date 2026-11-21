@@ -21,3 +21,20 @@ export function formatDate(value: string, locale: string): string {
 export function keyOf(id: string): string {
   return id.replace(/\./g, '_')
 }
+
+/** The URL itself when it is a web address (http: or https:), else null: data never becomes a
+ * `javascript:` or `data:` link. */
+export function safeHttpUrl(value: string | null | undefined): string | null {
+  if (!value) return null
+  try {
+    const { protocol } = new URL(value)
+    return protocol === 'http:' || protocol === 'https:' ? value : null
+  } catch {
+    return null
+  }
+}
+
+/** "Austin, TX", or just "TX" when the city is unknown (never ", TX"). */
+export function placeLabel(city: string | null | undefined, state: string): string {
+  return city ? `${city}, ${state}` : state
+}

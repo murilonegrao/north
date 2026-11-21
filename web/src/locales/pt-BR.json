@@ -88,7 +88,8 @@
       "public": "pública",
       "private_nonprofit": "privada sem fins lucrativos",
       "private_for_profit": "privada com fins lucrativos"
-    }
+    },
+    "controlUnknown": "pública ou privada: desconhecido"
   },
   "price": {
     "perYear": "{amount} / ano",
@@ -197,6 +198,7 @@
   "detail": {
     "pageTitle": "{title}, {institution} · North",
     "pageDescription": "{title} em {institution} ({city}): dados oficiais com a fonte e o status de verificação de cada valor.",
+    "pageDescriptionNoCity": "{title} em {institution}: dados oficiais com a fonte e o status de verificação de cada valor.",
     "back": "Todos os programas",
     "loading": "Carregando programa…",
     "error": "Não foi possível carregar este programa agora. O serviço pode estar fora do ar; tente de novo em alguns minutos.",
@@ -251,6 +253,7 @@
     },
     "sourcesIntro": "Os arquivos oficiais usados para montar esta página.",
     "sourceFile": "{version}, carregado em {date}, {rows} linhas",
+    "sourceFileNoRows": "{version}, carregado em {date}, número de linhas não registrado",
     "sourceNames": {
       "ipeds_hd": "IPEDS: características institucionais",
       "ipeds_c_a": "IPEDS: diplomas por área",

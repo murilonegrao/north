@@ -180,11 +180,11 @@ export function handleMockRequest(rawUrl: string): MockResponse | null {
       // v0.1 §8: unknown = status unknown, whatever else is true; otherwise value.eligible decides.
       if (stem && stemOf(item) !== stem) return false
       if (q) {
-        const haystack = `${item.institution.name} ${item.campus.city} ${item.cip.title} ${item.title}`.toLowerCase()
+        const haystack = `${item.institution.name} ${item.campus.city ?? ''} ${item.cip.title} ${item.title}`.toLowerCase()
         if (!haystack.includes(q)) return false
       }
-      if (controls.length && !controls.includes(item.institution.control)) return false
-      if (cities.length && !cities.includes(item.campus.city)) return false
+      if (controls.length && (item.institution.control === null || !controls.includes(item.institution.control))) return false
+      if (cities.length && (item.campus.city === null || !cities.includes(item.campus.city))) return false
       if (minTuition !== undefined || maxTuition !== undefined) {
         const amount = tuitionOf(item)
         if (amount === null) return false // v0.2: unknown tuition is excluded when a bound is set
