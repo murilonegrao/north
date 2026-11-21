@@ -1,0 +1,41 @@
+[project]
+name = "north"
+version = "0.0.1"
+description = "A map of US master's programs for international students."
+license = "AGPL-3.0-only"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "fastapi>=0.115",
+    "pydantic-settings>=2.6",
+    "uvicorn[standard]>=0.32",
+]
+
+[dependency-groups]
+dev = [
+    "httpx>=0.28",
+    "pytest>=8.3",
+    "ruff>=0.8",
+]
+
+[build-system]
+requires = ["uv_build>=0.9,<0.14"]
+build-backend = "uv_build"
+
+[tool.uv.build-backend]
+module-name = "north"
+module-root = ""
+
+[tool.uv]
+# Only resolve releases that have been public for at least two weeks.
+exclude-newer = "2026-11-07T00:00:00Z"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "SIM", "RUF"]

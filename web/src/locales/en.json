@@ -1,0 +1,32 @@
+{
+  "meta": {
+    "title": "North: US master's programs for international students",
+    "description": "A map of US master's programs for international students, with a source for every data point."
+  },
+  "nav": {
+    "skip": "Skip to content",
+    "home": "North, home page",
+    "language": "Language"
+  },
+  "theme": {
+    "light": "Light",
+    "dark": "Dark",
+    "toLight": "Switch to the light theme",
+    "toDark": "Switch to the dark theme"
+  },
+  "disclaimer": "Not immigration advice; check the official source.",
+  "home": {
+    "eyebrow": "Pre-alpha",
+    "tagline": "A map of US master's programs for international students",
+    "description": "North maps, verifies and compares on-campus master's programs in the US from the point of view of someone who needs an F-1 visa and brings dependents. Every data point carries its source, date and verification status, so unknown data is never confused with negative data."
+  },
+  "status": {
+    "label": "API status",
+    "checking": "Checking…",
+    "ok": "Online · version {version}",
+    "down": "Unavailable"
+  },
+  "footer": {
+    "license": "Code AGPL-3.0 · Data CC BY 4.0"
+  }
+}

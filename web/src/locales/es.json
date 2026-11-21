@@ -1,0 +1,33 @@
+{
+  "_meta": { "machine_translated": true },
+  "meta": {
+    "title": "North: maestrías en EE. UU. para estudiantes internacionales",
+    "description": "Un mapa de los programas de maestría de EE. UU. para estudiantes internacionales, con una fuente para cada dato."
+  },
+  "nav": {
+    "skip": "Saltar al contenido",
+    "home": "North, página de inicio",
+    "language": "Idioma"
+  },
+  "theme": {
+    "light": "Claro",
+    "dark": "Oscuro",
+    "toLight": "Cambiar al tema claro",
+    "toDark": "Cambiar al tema oscuro"
+  },
+  "disclaimer": "No es asesoría migratoria; consulte la fuente oficial.",
+  "home": {
+    "eyebrow": "Pre-alfa",
+    "tagline": "Un mapa de los programas de maestría de EE. UU. para estudiantes internacionales",
+    "description": "North mapea, verifica y compara programas de maestría presenciales en EE. UU. desde el punto de vista de quien necesita una visa F-1 y viaja con dependientes. Cada dato lleva su fuente, su fecha y su estado de verificación, para que un dato desconocido nunca se confunda con un dato negativo."
+  },
+  "status": {
+    "label": "Estado de la API",
+    "checking": "Comprobando…",
+    "ok": "En línea · versión {version}",
+    "down": "No disponible"
+  },
+  "footer": {
+    "license": "Código AGPL-3.0 · Datos CC BY 4.0"
+  }
+}

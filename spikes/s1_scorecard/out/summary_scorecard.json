@@ -1,0 +1,259 @@
+{
+  "fos_rows_total": 223587,
+  "credlev_values": {
+    "3": 70944,
+    "1": 42739,
+    "2": 40471,
+    "5": 38199,
+    "8": 14512,
+    "6": 12494,
+    "7": 2364,
+    "4": 1864
+  },
+  "cipcode_lengths": {
+    "4": 223587
+  },
+  "cipcode_examples": [
+    "0109",
+    "0110",
+    "0110",
+    "0110",
+    "0199"
+  ],
+  "fos_rows_without_institution_match": 7974,
+  "tx_masters_rows_all_cips": 2319,
+  "tx_masters_institutions_all_cips": 105,
+  "tx_masters_by_family": {
+    "11.xx computing": {
+      "programs": 83,
+      "institutions": 46,
+      "by_control": {
+        "Public": 59,
+        "Private, nonprofit": 20,
+        "Private, for-profit": 4
+      },
+      "cips": {
+        "1101": 25,
+        "1104": 24,
+        "1110": 17,
+        "1107": 12,
+        "1108": 2,
+        "1103": 1,
+        "1105": 1,
+        "1102": 1
+      },
+      "distance": {
+        "1": 51,
+        "3": 21,
+        "2": 8,
+        "0": 3
+      },
+      "EARN_MDN_1YR": {
+        "suppressed": 56,
+        "value": 25,
+        "null": 2
+      },
+      "EARN_MDN_4YR": {
+        "suppressed": 62,
+        "value": 19,
+        "null": 2
+      },
+      "EARN_MDN_5YR": {
+        "suppressed": 67,
+        "value": 14,
+        "null": 2
+      },
+      "EARN_MDN_HI_1YR": {
+        "suppressed": 54,
+        "value": 16,
+        "null": 13
+      },
+      "EARN_MDN_HI_2YR": {
+        "suppressed": 48,
+        "null": 18,
+        "value": 17
+      },
+      "DEBT_ALL_STGP_EVAL_MDN": {
+        "suppressed": 65,
+        "value": 18
+      },
+      "IPEDSCOUNT1": {
+        "value": 78,
+        "null": 5
+      },
+      "IPEDSCOUNT2": {
+        "value": 80,
+        "null": 3
+      }
+    },
+    "30.70 data science": {
+      "programs": 7,
+      "institutions": 7,
+      "by_control": {
+        "Public": 5,
+        "Private, nonprofit": 2
+      },
+      "cips": {
+        "3070": 7
+      },
+      "distance": {
+        "3": 4,
+        "1": 2,
+        "2": 1
+      },
+      "EARN_MDN_1YR": {
+        "suppressed": 7
+      },
+      "EARN_MDN_4YR": {
+        "suppressed": 7
+      },
+      "EARN_MDN_5YR": {
+        "suppressed": 7
+      },
+      "EARN_MDN_HI_1YR": {
+        "null": 7
+      },
+      "EARN_MDN_HI_2YR": {
+        "null": 7
+      },
+      "DEBT_ALL_STGP_EVAL_MDN": {
+        "suppressed": 5,
+        "value": 2
+      },
+      "IPEDSCOUNT1": {
+        "value": 6,
+        "null": 1
+      },
+      "IPEDSCOUNT2": {
+        "value": 7
+      }
+    },
+    "52.12 information systems": {
+      "programs": 9,
+      "institutions": 9,
+      "by_control": {
+        "Private, nonprofit": 4,
+        "Public": 4,
+        "Private, for-profit": 1
+      },
+      "cips": {
+        "5212": 9
+      },
+      "distance": {
+        "1": 5,
+        "2": 2,
+        "3": 1,
+        "0": 1
+      },
+      "EARN_MDN_1YR": {
+        "suppressed": 6,
+        "value": 3
+      },
+      "EARN_MDN_4YR": {
+        "suppressed": 6,
+        "value": 3
+      },
+      "EARN_MDN_5YR": {
+        "suppressed": 7,
+        "value": 2
+      },
+      "EARN_MDN_HI_1YR": {
+        "suppressed": 7,
+        "value": 2
+      },
+      "EARN_MDN_HI_2YR": {
+        "suppressed": 7,
+        "null": 1,
+        "value": 1
+      },
+      "DEBT_ALL_STGP_EVAL_MDN": {
+        "suppressed": 7,
+        "value": 2
+      },
+      "IPEDSCOUNT1": {
+        "value": 8,
+        "null": 1
+      },
+      "IPEDSCOUNT2": {
+        "value": 8,
+        "null": 1
+      }
+    },
+    "TOTAL": {
+      "programs": 99,
+      "institutions": 48,
+      "by_control": {
+        "Public": 68,
+        "Private, nonprofit": 26,
+        "Private, for-profit": 5
+      },
+      "cips": {
+        "1101": 25,
+        "1104": 24,
+        "1110": 17,
+        "1107": 12,
+        "5212": 9,
+        "3070": 7,
+        "1108": 2,
+        "1103": 1,
+        "1105": 1,
+        "1102": 1
+      },
+      "distance": {
+        "1": 58,
+        "3": 26,
+        "2": 11,
+        "0": 4
+      },
+      "EARN_MDN_1YR": {
+        "suppressed": 69,
+        "value": 28,
+        "null": 2
+      },
+      "EARN_MDN_4YR": {
+        "suppressed": 75,
+        "value": 22,
+        "null": 2
+      },
+      "EARN_MDN_5YR": {
+        "suppressed": 81,
+        "value": 16,
+        "null": 2
+      },
+      "EARN_MDN_HI_1YR": {
+        "suppressed": 61,
+        "null": 20,
+        "value": 18
+      },
+      "EARN_MDN_HI_2YR": {
+        "suppressed": 55,
+        "null": 26,
+        "value": 18
+      },
+      "DEBT_ALL_STGP_EVAL_MDN": {
+        "suppressed": 77,
+        "value": 22
+      },
+      "IPEDSCOUNT1": {
+        "value": 92,
+        "null": 7
+      },
+      "IPEDSCOUNT2": {
+        "value": 95,
+        "null": 4
+      }
+    }
+  },
+  "distinct_non_numeric_values": [
+    "NA",
+    "PS"
+  ],
+  "national_masters_target": {
+    "programs": 1729,
+    "EARN_MDN_1YR": {
+      "suppressed": 1230,
+      "value": 427,
+      "null": 72
+    }
+  }
+}

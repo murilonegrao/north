@@ -1,0 +1,419 @@
+school_code,school_name,campuses_in_state,tier,score,unitid,instnm,ipeds_hloffer
+CHI214F00492,DeVry University,2,exact,100.0,482635,DeVry University-Texas,7
+CHI214F01259,The Chicago School of Professional Psychology,1,exact,100.0,492607,The Chicago School at Dallas,9
+CLE214F00501,Case Western Reserve University,2,none,75.9,,,
+DAL214F00016,Southern Methodist University,1,exact,100.0,228246,Southern Methodist University,9
+DAL214F00019,Texas Woman's University,3,exact,100.0,229179,Texas Woman's University,9
+DAL214F00020,Texas Tech University,6,exact,100.0,229115,Texas Tech University,9
+DAL214F00021,Texas Wesleyan University,1,exact,100.0,229160,Texas Wesleyan University,9
+DAL214F00035,Navarro College,3,exact,100.0,227146,Navarro College,5
+DAL214F00040,Tyler Junior College,1,exact,100.0,229355,Tyler Junior College,5
+DAL214F00059,Lubbock Christian University,1,exact,100.0,226383,Lubbock Christian University,9
+DAL214F00069,University of Dallas,1,exact,100.0,224323,University of Dallas,9
+DAL214F00091,Dallas Christian College,1,exact,100.0,224244,Dallas Christian College,7
+DAL214F00099,Texas A&M University-Commerce,6,exact_name_only,100.0,224147,Texas A & M University-Corpus Christi,9
+DAL214F00100,Baptist Missionary Association Theological Seminary,1,exact,100.0,223117,Baptist Missionary Association Theological Seminary,7
+DAL214F00109,Trinity Valley Community College,5,exact,100.0,225308,Trinity Valley Community College,5
+DAL214F00118,South Plains College,1,exact,100.0,228158,South Plains College,3
+DAL214F00122,Frank Phillips College,3,exact,100.0,224891,Frank Phillips College,3
+DAL214F00125,Panola College,1,exact,100.0,227386,Panola College,3
+DAL214F00180,North Central Texas College,6,exact,100.0,224110,North Central Texas College,3
+DAL214F00190,Texas A&M University,1,exact,100.0,228723,Texas A&M University-College Station,9
+DAL214F00198,Hill College,3,exact,100.0,225371,Hill College,4
+DAL214F00209,Sunset International Bible Institute,1,none,63.3,,,
+DAL214F00282,Grayson College,2,exact,100.0,225070,Grayson College,5
+DAL214F00285,Catholic Diocese of Dallas,30,none,66.7,,,
+DAL214F00287,Lincoln College of Technology,1,exact,100.0,226277,Lincoln College of Technology-Grand Prairie,3
+DAL214F00297,Tarrant County College,6,exact,100.0,228547,Tarrant County College District,3
+DAL214F00300,Texarkana College,1,exact,100.0,228699,Texarkana College,3
+DAL214F00302,Holy Cross Catholic Academy,1,none,64.4,,,
+DAL214F00379,The University of Texas at Dallas,3,exact,100.0,228787,The University of Texas at Dallas,9
+DAL214F00402,Brown Trail School of Preaching,1,none,58.3,,,
+DAL214F00409,Scurry County Junior College District,1,exact,100.0,229832,Western Texas College,3
+DAL214F00420,"Delta Aeronautics, Inc DBA Miloud Aviation, LLC",1,none,54.0,,,
+DAL214F00470,East Texas Baptist University,2,exact,100.0,224527,East Texas Baptist University,7
+DAL214F00497,Texas Baptist Institute & Seminary,1,none,66.7,,,
+DAL214F00503,The University of Texas at Tyler,5,exact,100.0,228802,The University of Texas at Tyler,9
+DAL214F00509,Nelson University,1,exact,100.0,228325,Nelson University,9
+DAL214F00514,Criswell College,1,exact,100.0,475608,Criswell College,7
+DAL214F00528,Christ for the Nations Institute,1,none,63.9,,,
+DAL214F00543,The University of Texas Southwestern Medical Center,1,exact,100.0,228635,University of Texas Southwestern Medical Center,9
+DAL214F00546,Vernon College,2,exact,100.0,229504,Vernon College,3
+DAL214F00549,Ranger College,2,exact,100.0,227687,Ranger College,3
+DAL214F00562,Clarendon College,3,exact,100.0,223922,Clarendon College,3
+DAL214F00610,University of North Texas,11,exact,100.0,227216,University of North Texas,9
+DAL214F00611,Lakehill Preparatory School,1,none,58.6,,,
+DAL214F00621,Fort Worth Country Day School,1,none,83.6,,,
+DAL214F00651,Dallas Baptist University,2,exact,100.0,224226,Dallas Baptist University,9
+DAL214F00678,Dallas College,14,exact,100.0,224615,Dallas College,5
+DAL214F00704,Arlington Baptist University,1,exact,100.0,222877,Arlington Baptist University,7
+DAL214F00723,Amberton University,2,exact,100.0,222628,Amberton University,7
+DAL214F00731,West Texas A&M University,2,exact,100.0,229814,West Texas A & M University,9
+DAL214F00758,Howard County Junior College District,2,exact,100.0,225520,Howard College,3
+DAL214F00772,Weatherford College,1,exact,100.0,229799,Weatherford College,5
+DAL214F00774,Jacksonville College,1,exact,100.0,225876,Jacksonville College-Main Campus,4
+DAL214F00777,Texas Conference of Seventh-day Adventists,1,none,66.7,,,
+DAL214F00799,First Baptist Academy,1,none,66.7,,,
+DAL214F00806,The University of Texas at Arlington,2,exact,100.0,228769,The University of Texas at Arlington,9
+DAL214F00861,American Flyers,2,none,60.0,,,
+DAL214F00879,Southwestern Adventist University,1,exact,100.0,228468,Southwestern Adventist University,7
+DAL214F00898,PARKER UNIVERSITY,2,exact,100.0,243823,Parker University,9
+DAL214F00900,"Austin College, Sherman TX",1,exact,100.0,222983,Austin College,7
+DAL214F00906,The Hockaday School,1,none,69.0,,,
+DAL214F00907,Kilgore College,2,exact,100.0,226019,Kilgore College,3
+DAL214F00908,LeTourneau University,2,exact,100.0,226231,LeTourneau University,7
+DAL214F00910,Midwestern State University,1,exact,100.0,226833,Midwestern State University,9
+DAL214F00912,Paris Junior College,3,exact,100.0,227401,Paris Junior College,3
+DAL214F00915,Texas Christian University,1,exact,100.0,228875,Texas Christian University,9
+DAL214F00917,Wayland Baptist University,13,exact,100.0,229780,Wayland Baptist University,9
+DAL214F00918,Wiley University,1,exact,100.0,229887,Wiley University,7
+DAL214F00919,Southwestern Baptist Theological Seminary,1,exact,100.0,494603,The Southwestern Baptist Theological Seminary,9
+DAL214F00922,Dallas Theological Seminary,2,exact,100.0,224305,Dallas Theological Seminary,9
+DAL214F00923,Tarleton State University,7,exact,100.0,228529,Tarleton State University,9
+DAL214F00928,Abilene Christian Schools,1,none,71.7,,,
+DAL214F00931,Hardin-Simmons University,1,exact,100.0,225247,Hardin-Simmons University,9
+DAL214F00932,Abilene Christian University,1,exact,100.0,222178,Abilene Christian University,9
+DAL214F00933,McMurry University,2,exact,100.0,226587,McMurry University,7
+DAL214F00948,The Oakridge School,1,none,76.9,,,
+DAL214F00949,All Saints' Episcopal School of Fort Worth,1,none,65.6,,,
+DAL214F00955,Northeast Texas Community College,1,exact,100.0,227225,Northeast Texas Community College,3
+DAL214F00970,Collin County Community College District,9,exact,100.0,247834,Collin County Community College District,5
+DAL214F00991,Cisco College,2,exact,100.0,223898,Cisco College,3
+DAL214F01000,Texas Conference of Seventh-Day-Adventist School System,1,none,62.5,,,
+DAL214F01042,Monarch Air,1,none,52.2,,,
+DAL214F01061,Pro Aircraft Flight Training,1,none,59.6,,,
+DAL214F01075,Dallas Lutheran School,1,none,73.5,,,
+DAL214F01076,Lake Country Christian School,1,none,60.4,,,
+DAL214F01096,Paul Quinn College,1,exact,100.0,227429,Paul Quinn College,7
+DAL214F01112,Trinity School of Texas,1,none,63.8,,,
+DAL214F01123,Liberty Christian School,1,none,66.7,,,
+DAL214F01128,Prestonwood Christian Academy School System,2,none,59.7,,,
+DAL214F01129,The Brook Hill School,1,none,64.7,,,
+DAL214F01136,Covenant Christian Academy,1,none,62.7,,,
+DAL214F01141,Pantego Christian Academy,1,none,64.0,,,
+DAL214F01144,Spring Creek Academy,1,none,68.3,,,
+DAL214F01153,Texas A&M University-Texarkana,3,exact,100.0,224545,Texas A&M University-Texarkana,9
+DAL214F01155,Texas Conference of SDA,1,none,61.5,,,
+DAL214F01157,Harvest Christian Academy,1,none,68.2,,,
+DAL214F01158,Jefferson Christian Academy,1,none,64.7,,,
+DAL214F01160,Fort Worth Diocese Catholic School System,17,none,66.7,,,
+DAL214F01162,"ATP Jet Simulation, Inc. DBA ATP Jets DBA ATP Higher Powe",1,none,50.0,,,
+DAL214F01169,Trinity Valley School,1,none,67.9,,,
+DAL214F01173,U.S. Aviation Group LLC d/b/a U.S. Aviation Academy,1,none,70.8,,,
+DAL214F01175,Fort Worth Christian School,1,none,79.2,,,
+DAL214F01188,Texas College,1,exact,100.0,228884,Texas College,5
+DAL214F01191,Institute of Flight Operations and Dispatch (iFOD),2,none,58.1,,,
+DAL214F01194,Dallas International University,1,none,82.8,,,
+DAL214F01206,Southwestern Baptist Theological Seminary,1,exact,100.0,494603,The Southwestern Baptist Theological Seminary,9
+DAL214F01207,Skymates Inc.,1,none,57.1,,,
+DAL214F01209,Wichita Christian School,1,none,65.4,,,
+DAL214F01215,Wade College,1,exact,100.0,226879,Wade College,5
+DAL214F01218,McKinney Christian Academy,1,none,64.7,,,
+DAL214F01219,The Cambridge School of Dallas,1,none,77.3,,,
+DAL214F01225,Bell Textron Inc.,1,none,66.7,,,
+DAL214F01228,Aviation Institute of Maintenance,1,exact,100.0,441788,Aviation Institute of Maintenance-Dallas,4
+DAL214F01230,Prince of Peace Christian School,1,none,61.0,,,
+DAL214F01234,Grapevine Faith Christian School,1,none,65.1,,,
+DAL214F01235,Weatherford Christian School,1,none,73.3,,,
+DAL214F01256,Dallas International School,2,none,70.4,,,
+DAL214F01257,U.S. Flight Academy Int'l,1,none,74.7,,,
+DAL214F01266,The Westwood School Corp,2,none,57.1,,,
+DAL214F01278,North Central Texas Academy,1,none,72.7,,,
+DAL214F01279,Poetry Community Christian School,1,none,56.7,,,
+DAL214F01291,Diocese of Lubbock,1,none,64.4,,,
+DAL214F01292,Trinity Christian School,1,none,72.3,,,
+DAL214F01294,Alcuin School,1,none,66.7,,,
+DAL214F01297,Bethany Christian School,1,none,63.8,,,
+DAL214F13857,The Language Company,1,none,50.0,,,
+DAL214F13910,"Educational and Cultural Interactions, Inc. (ECI)",2,none,65.6,,,
+DAL214F50085,Dallas Christian School,1,none,81.8,,,
+DAL214F51124,"Southwest Christian School, Inc.",2,none,82.1,,,
+DAL214F51617,Christian Heritage School,1,none,61.5,,,
+DAL214F52297,Tint School Of Makeup & Cosmetology,2,exact,100.0,227058,Tint School of Makeup & Cosmetology,2
+DAL214F52360,Jarvis Christian University,1,exact,100.0,225885,Jarvis Christian University,7
+DAL214F52448,Texas Torah Institute,1,none,70.3,,,
+DAL214F52520,Parish Episcopal School,2,none,63.6,,,
+DAL214F52708,The Selwyn School,1,none,66.7,,,
+DAL214F53375,Temple Christian School,1,none,64.2,,,
+DAL214F53636,Messenger College,1,exact_name_only,100.0,417752,Messenger College,5
+DAL214F54012,Jesuit College Preparatory School of Dallas,1,none,60.4,,,
+DAL214F54265,International Leadership of Texas Private High School,5,none,64.6,,,
+DAL214F54325,The Highlands School,1,none,70.3,,,
+DAL214F54392,Ursuline Academy of Dallas,1,none,63.4,,,
+DAL214F54405,Thomas K. Gorman Regional Catholic School,1,none,56.5,,,
+DAL214F54418,Grace Community School,1,none,60.6,,,
+DAL214F54471,Bale Beauty Academy 6 Corp.,1,none,76.9,,,
+DAL214F54747,Shelton School,1,none,64.7,,,
+DAL214F54865,CAE Simuflite Inc.,2,none,56.6,,,
+DAL214F55374,"Cobra Kai Flight Academy, LLC DBA Aerospace N3XT",1,none,63.4,,,
+DAL214F55863,Montessori Institute of North Texas,2,none,65.6,,,
+DAL214F56015,Excel English Institute,2,none,65.2,,,
+DAL214F56411,Community Christian School,1,none,63.8,,,
+DAL214F56772,Lubbock Christian School,1,none,73.3,,,
+DAL214F57291,SimJet Center LLC,2,none,65.4,,,
+DAL214F57456,St. Mary's Catholic School,1,none,63.2,,,
+DAL214F57553,Discipleship Intern Training Program,1,none,61.8,,,
+DAL214F57855,Ascension Academy,1,none,66.7,,,
+DAL214F57954,"Hub City Aviation Academy, LLC",1,none,61.5,,,
+DAL214F58332,Healing Hands Massage Institute,1,none,66.7,,,
+DAL214F58340,RCCGNA SEMINARY,1,none,74.1,,,
+DAL214F59110,"KD Conservatory, College of Film and Dramatic Arts",1,exact,100.0,225991,KD Conservatory College of Film and Dramatic Arts,3
+DAL214F59754,Einstein School,1,none,66.7,,,
+DAL214F59816,Longhorn Helicopters d/b/a Helicopter Institute,1,none,59.1,,,
+DAL214F59975,Vandermont,1,none,65.1,,,
+DAL214F59978,MediaTech Institute,1,exact,100.0,455336,MediaTech Institute-Dallas,3
+DAL214F60024,Southwestern Christian College,1,exact,100.0,228486,Southwestern Christian College,5
+DAL214F60150,LTTS Charter School Inc,2,none,71.8,,,
+DAL214F60165,Medisend College of Biomedical Engineering Technology,1,none,78.8,,,
+DAL214F61169,Brite Divinity School,1,exact,100.0,450304,Brite Divinity School,9
+DAL214F61188,Texas Tech University Health Sciences Center,8,exact,100.0,229337,Texas Tech University Health Sciences Center,9
+ELP214F00016,Radford School,1,approximate,96.6,223472,Vet Tech Institute of Houston,3
+ELP214F00030,Sul Ross State University,1,exact,100.0,228501,Sul Ross State University,7
+ELP214F00058,Lydia Patterson Institute,1,none,73.2,,,
+ELP214F00094,Loretto Academy,1,none,68.8,,,
+ELP214F00095,El Paso Community College District,5,approximate,90.0,224642,El Paso Community College,3
+ELP214F00108,The Univ of Texas of the Permian Basin,2,exact,100.0,229018,The University of Texas Permian Basin,7
+ELP214F00112,Midland College,9,exact,100.0,226806,Midland College,5
+ELP214F00113,Odessa College,4,exact,100.0,227304,Odessa College,5
+ELP214F00136,St. Clement's Parish School,1,none,60.7,,,
+ELP214F00175,The University of Texas at El Paso,1,exact,100.0,228796,The University of Texas at El Paso,9
+ELP214F00201,St. Anthony's Seminary,1,none,62.5,,,
+ELP214F00279,Immanuel Baptist Christian School,1,none,60.6,,,
+ELP214F00285,El Paso Country DaySchool,1,none,63.8,,,
+ELP214F00302,Rose of Sharon Christian Academy,1,none,62.7,,,
+ELP214F00306,El Paso Catholic Diocese - Office of Education,10,none,72.3,,,
+ELP214F00309,Jesus Chapel School,1,none,66.7,,,
+ELP214F00310,Northeast Christian Academy,1,none,61.8,,,
+ELP214F00334,Western Technical College,2,exact,100.0,224660,Western Technical College,7
+ELP214F58820,Southwest University,1,approximate,90.0,451556,Southwest University at El Paso,7
+ELP214F58829,Texas Tech University System,1,approximate,92.3,492689,Texas Tech University Health Sciences Center-El Paso,9
+HLG214F00013,The University of Texas Rio Grande Valley,7,exact,100.0,227368,The University of Texas Rio Grande Valley,9
+HLG214F00015,Texas Southmost College,2,exact,100.0,227377,Texas Southmost College,3
+HLG214F00016,Presbyterian Pan American School,1,none,61.1,,,
+HLG214F00027,Rio Grande Bible Institute,1,none,64.0,,,
+HLG214F00031,Texas A&M University-Kingsville,4,exact,100.0,228705,Texas A&M University-Kingsville,9
+HLG214F00040,"Catholic School System, Diocese of Brownsville",10,none,72.7,,,
+HLG214F00043,Marine Military Academy,1,none,66.7,,,
+HLG214F00054,Kenmont School,1,none,64.0,,,
+HLG214F00086,First Baptist School,1,none,67.9,,,
+HLG214F00089,Episcopal Day School,1,none,63.8,,,
+HLG214F00090,St. John's Episcopal School,1,none,59.1,,,
+HLG214F00093,South Texas Christian Academy,1,none,65.6,,,
+HLG214F00100,South Texas College,1,exact,100.0,409315,South Texas College,5
+HLG214F00113,SANCTUARY CHRISTIAN ACADEMY,1,none,60.9,,,
+HLG214F00120,Valley Christian Heritage School,1,none,60.7,,,
+HLG214F00121,St. Paul Lutheran School,1,none,69.8,,,
+HLG214F09976,Texas A&M University,1,exact,100.0,228723,Texas A&M University-College Station,9
+HOU214F00061,Rice University,1,exact,100.0,227757,Rice University,9
+HOU214F00102,UNIVERSITY OF ST. THOMAS,2,exact,100.0,227863,University of St Thomas,9
+HOU214F00110,University of Houston-System,5,exact,100.0,225414,University of Houston-Clear Lake,9
+HOU214F00125,Prairie View A&M University,3,exact,100.0,227526,Prairie View A & M University,9
+HOU214F00126,Sam Houston State University,2,exact,100.0,227881,Sam Houston State University,9
+HOU214F00127,Lee College District,2,exact,100.0,226204,Lee College,3
+HOU214F00143,Lamar University,4,exact,100.0,226091,Lamar University,9
+HOU214F00164,Houston Christian University,1,exact,100.0,225399,Houston Christian University,9
+HOU214F00177,Alvin Community College,1,exact,100.0,222567,Alvin Community College,5
+HOU214F00204,Texas Bible College,1,none,87.2,,,
+HOU214F00213,Texas Chiropractic College,1,approximate,90.0,228866,Texas Chiropractic College Foundation Inc,9
+HOU214F00216,Blinn College District,1,exact,100.0,223427,Blinn College District,3
+HOU214F00220,Duchesne Academy of The Sacred Heart,1,none,70.4,,,
+HOU214F00221,Stephen F. Austin State University,1,exact,100.0,228431,Stephen F Austin State University,9
+HOU214F00222,Archdiocese of Galveston-Houston Catholic Schools,12,none,77.8,,,
+HOU214F00227,South Texas College of Law Houston,1,exact,100.0,228194,South Texas College of Law Houston,9
+HOU214F00231,Galveston College,1,exact,100.0,224961,Galveston College,5
+HOU214F00234,College of the Mainland,1,exact,100.0,226408,College of the Mainland,5
+HOU214F00239,Baylor College of Medicine,1,exact,100.0,223223,Baylor College of Medicine,9
+HOU214F00246,Brazosport College,1,exact,100.0,223506,Brazosport College,5
+HOU214F00247,"The University of Texas Medical Branch, Galveston",1,exact,100.0,228653,The University of Texas Medical Branch at Galveston,9
+HOU214F00280,Lone Star College System District,25,approximate,90.0,227182,Lone Star College System,5
+HOU214F00281,THE OCEAN CORPORATION,1,exact,100.0,227298,Ocean Corporation,1
+HOU214F00314,Houston Ballet Academy,1,none,77.4,,,
+HOU214F00318,The Awty International School,1,none,69.2,,,
+HOU214F00319,The University of Texas Health Science Center at Houston,3,exact,100.0,229300,The University of Texas Health Science Center at Houston,9
+HOU214F00344,Westbury Christian School,1,none,69.1,,,
+HOU214F00354,Houston Community College System,19,approximate,90.0,225423,Houston Community College,5
+HOU214F00357,Second Baptist School,1,none,68.3,,,
+HOU214F00362,Texas Southern University,1,exact,100.0,229063,Texas Southern University,9
+HOU214F00388,Faith Christian Academy,1,none,66.7,,,
+HOU214F00389,"Aetas, LLC. d/b/a Bilingual Education Institute",1,none,65.4,,,
+HOU214F00397,Northland Christian School,2,none,62.0,,,
+HOU214F00405,Lutheran South Academy,1,none,65.3,,,
+HOU214F00414,School of Automotive Machinists & Technology,1,exact,100.0,377218,School of Automotive Machinists & Technology,4
+HOU214F00423,Institute of Cosmetology Esthetics & Massage,1,none,73.0,,,
+HOU214F00427,The Village School,3,none,60.6,,,
+HOU214F00428,Baytown Christian Academy,1,none,64.7,,,
+HOU214F00429,The John Cooper School,1,none,62.1,,,
+HOU214F00439,Monsignor Kelly Catholic High School,1,none,60.6,,,
+HOU214F00446,American College of Acupuncture & Oriental Medicine,1,approximate,94.5,429085,American College of Acupuncture and Oriental Med,9
+HOU214F00451,The Banff School,1,none,74.1,,,
+HOU214F00467,The Covenant Preparatory School,1,none,68.0,,,
+HOU214F00481,The University of Texas M.D. Anderson Cancer Center,1,approximate,96.5,416801,The University of Texas MD Anderson Cancer Center,7
+HOU214F00484,Houston Christian High School,1,none,68.6,,,
+HOU214F00500,University of Houston-Clear Lake,3,exact,100.0,225414,University of Houston-Clear Lake,9
+HOU214F00502,San Jacinto College District,6,none,86.4,,,
+HOU214F00503,University of Houston-Downtown,1,exact,100.0,225432,University of Houston-Downtown,7
+HOU214F00505,Culinary Institute LeNotre,1,exact,100.0,444565,Culinary Institute Inc,3
+HOU214F00509,The Learning Institute of Texas,1,none,66.7,,,
+HOU214F00512,Grace Christian Academy,1,none,62.5,,,
+HOU214F00514,American InterContinental University System,1,exact,100.0,445133,American InterContinental University-Houston,7
+HOU214F00525,Interactive College of Technology,3,exact,100.0,440776,Interactive College of Technology,3
+HOU214F00529,Texas Christian School,1,none,73.2,,,
+HOU214F00530,Cypress Christian School,1,none,73.3,,,
+HOU214F00545,First Baptist Christian Academy,1,none,61.0,,,
+HOU214F00558,Christian Life Center Academy,1,none,63.0,,,
+HOU214F00561,River Oaks Tutor Lab DBA River Oaks Academy,2,none,64.9,,,
+HOU214F00562,Concordia Lutheran High School,1,none,56.6,,,
+HOU214F00566,American Flyers,1,none,60.4,,,
+HOU214F00567,St. Thomas High School,1,none,65.0,,,
+HOU214F00580,Gulf Language School,1,exact,100.0,461795,North American University,7
+HOU214F00582,Texas A&M Health Science Center,1,none,82.1,,,
+HOU214F00583,The Monarch School and Institute,1,none,72.0,,,
+HOU214F00590,Tenney School,1,none,60.6,,,
+HOU214F00591,Calvary Episcopal School and College Preparatory,1,none,61.5,,,
+HOU214F52064,Iman Academy,2,none,73.7,,,
+HOU214F52536,Saint Thomas' Episcopal School,1,none,62.5,,,
+HOU214F53336,The Monarch School and Institute,1,none,72.0,,,
+HOU214F53778,Aviation Institute of Maintenance,1,exact,100.0,227748,Aviation Institute of Maintenance-Houston,4
+HOU214F54624,Cunae International School LLC,1,none,71.7,,,
+HOU214F55440,British School of Houston,1,none,79.1,,,
+HOU214F55726,Abundant Life Christian School,1,none,60.4,,,
+HOU214F55909,"The Woodlands Preparatory School, LLC",1,none,57.7,,,
+HOU214F55938,EDivine Health Care Services,2,none,61.0,,,
+HOU214F56133,North American University,1,exact,100.0,461795,North American University,7
+HOU214F56394,Angelina College,1,exact,100.0,222822,Angelina College,3
+HOU214F56570,Meridian Academy,1,none,70.3,,,
+HOU214F57292,Esprit International School,1,none,63.0,,,
+HOU214F57422,Marian High School (NTI Career Institute),1,none,66.7,,,
+HOU214F57628,Southern Reformed College and Seminary,1,none,67.8,,,
+HOU214F57644,Stars Rising LLC dba Lycee International de Houston,1,none,73.5,,,
+HOU214F58641,"Knowledge-First, Inc.",1,none,57.1,,,
+HOU214F59045,College of Biblical Studies- Houston,1,exact,100.0,388520,College of Biblical Studies-Houston,5
+HOU214F59402,Van Houston Academy,1,none,77.8,,,
+HOU214F59682,Xavier Academy,2,none,66.7,,,
+LOS214F00841,Fuller Theological Seminary,1,none,85.2,,,
+LOS214F01848,The King's University,1,exact,100.0,439701,The King's University,9
+MIA214F00646,ELS Language Centers/St. Petersburg,1,none,59.6,,,
+MIA214F00859,American Flyers,1,none,60.0,,,
+MIA214F01269,University of St. Augustine for Health Sciences,2,none,87.0,,,
+MIA214F01420,Embry-Riddle Aeronautical University - Worldwide,2,none,62.0,,,
+MIA214F01856,Divine Savior Lutheran Academy,1,none,65.3,,,
+NEW214F02110,American Flyers,1,none,60.0,,,
+NYC214F01220,The Culinary Institute of America,1,none,81.8,,,
+NYC214F01437,Cornell University,1,none,80.0,,,
+PHO214F00290,Universal Technical Institute,1,approximate,90.6,229416,Universal Technical Institute of Texas Inc.,4
+PHO214F00456,"Bird Acquisition LLC dba Transpac Aviation Academy, AeroG",1,none,55.9,,,
+PHO214F00535,UHI Inc. dba UNIVERSAL HELICOPTERS,1,none,59.3,,,
+PHO214F00610,Shepherd School of Language,2,none,57.8,,,
+PHO214F00648,PIMA MEDICAL INSTITUTE,2,exact,100.0,486813,Pima Medical Institute-El Paso,3
+PHO214F55294,American Flyers,1,none,60.0,,,
+PHO214F58629,Advanced Training Institute (Mikhail Education Corp.),1,exact,100.0,456214,Lamson Institute,3
+SNA214F00001,Brentwood Christian School,1,none,63.8,,,
+SNA214F00004,Vanguard College Preparatory School,1,none,56.0,,,
+SNA214F00005,The Christian School at Castle Hills,1,none,60.0,,,
+SNA214F00008,Alamo Community College District,1,exact,100.0,246354,Palo Alto College,5
+SNA214F00012,Howard Payne University,1,exact,100.0,225548,Howard Payne University,7
+SNA214F00020,Baptist University of the Americas,1,exact,100.0,444398,Baptist University of the Americas,7
+SNA214F00033,Schreiner University,1,exact,100.0,228042,Schreiner University,8
+SNA214F00037,Our Lady of Refuge School,1,none,60.6,,,
+SNA214F00041,St. Stephen's Episcopal School,1,none,59.6,,,
+SNA214F00042,Diocese of Laredo,1,none,71.4,,,
+SNA214F00046,Southwest Texas Junior College,6,none,86.8,,,
+SNA214F00064,Southwest School of Bible Studies,1,none,67.7,,,
+SNA214F00082,Central Texas College,1,exact,100.0,223816,Central Texas College,3
+SNA214F00090,Huston-Tillotson University,1,exact,100.0,225575,Huston-Tillotson University,7
+SNA214F00105,Texas Lutheran University,1,exact,100.0,228981,Texas Lutheran University,9
+SNA214F00122,Temple College,3,exact,100.0,228608,Temple College,3
+SNA214F00126,Concordia University Texas,1,exact,100.0,224004,Concordia University Texas,9
+SNA214F00127,Texas A&M Health Science Center,4,none,82.1,,,
+SNA214F00152,"Central Texas Summit Christian School System, Inc",1,none,61.5,,,
+SNA214F00200,University of Texas Health Science Center at San Antonio,2,exact,100.0,228644,The University of Texas Health Science Center at San Antonio,9
+SNA214F00329,University of Mary Hardin-Baylor,1,exact,100.0,226471,University of Mary Hardin-Baylor,9
+SNA214F00330,Austin Presbyterian Theological Seminary,1,exact,100.0,223001,Austin Presbyterian Theological Seminary,9
+SNA214F00331,Texas State University,3,exact,100.0,228459,Texas State University,9
+SNA214F00332,University of Texas at Austin,2,exact,100.0,228778,The University of Texas at Austin,9
+SNA214F00333,Oblate School of Theology,1,exact,100.0,227289,Oblate School of Theology,9
+SNA214F00334,Texas A&M University,5,exact,100.0,228723,Texas A&M University-College Station,9
+SNA214F00336,St. Philip's College,2,exact,100.0,227854,St Philip's College,5
+SNA214F00337,St. Edward's University,1,exact,100.0,227845,Saint Edward's University,9
+SNA214F00338,Baylor University,4,exact,100.0,223232,Baylor University,9
+SNA214F00339,San Antonio College,1,exact,100.0,227924,San Antonio College,5
+SNA214F00340,"St. Mary's Univ. of San Antonio, TX",1,exact,100.0,228149,St. Mary's University,9
+SNA214F00435,Our Lady of the Lake University,3,exact,100.0,227331,Our Lady of the Lake University,9
+SNA214F00437,University of the Incarnate Word,7,exact,100.0,225627,University of the Incarnate Word,9
+SNA214F00438,San Marcos Baptist Academy,1,none,66.7,,,
+SNA214F00440,Southwestern University,1,exact,100.0,228343,Southwestern University,5
+SNA214F00441,Trinity University,1,exact,100.0,229267,Trinity University,7
+SNA214F00452,Allen Academy,1,none,73.3,,,
+SNA214F00455,TMI Episcopal School,1,none,61.5,,,
+SNA214F00500,Bible Way Christian Academy,1,none,62.7,,,
+SNA214F00501,St. James Episcopal Church School,1,none,60.9,,,
+SNA214F00502,Redeemer Episcopal School,1,none,60.9,,,
+SNA214F00506,HOFT Institute,1,none,80.0,,,
+SNA214F00518,US Aviation Group LLC d/b/a US Aviation Academy-North T,1,none,60.0,,,
+SNA214F00520,"Aston International Academy, Inc.",1,none,77.8,,,
+SNA214F00536,United Day School,1,none,64.9,,,
+SNA214F00540,Texas Engineering Extension Service,1,none,55.1,,,
+SNA214F00548,Cornerstone Christian Schools,1,none,64.2,,,
+SNA214F00558,Texas Health and Science University,2,exact,100.0,430704,Texas Health and Science University,7
+SNA214F01500,University of Texas at San Antonio,3,exact,100.0,229027,The University of Texas at San Antonio,9
+SNA214F01600,Austin Community College,14,approximate,90.0,222992,Austin Community College District,5
+SNA214F01840,VICTORIA COLLEGE,4,exact,100.0,229540,Victoria College,3
+SNA214F02180,Texas A&M International University (Texas A&M System),1,exact,100.0,226152,Texas A & M International University,9
+SNA214F02190,Del Mar College,1,exact,100.0,224350,Del Mar College,5
+SNA214F02220,Torchbearers - His Hill,1,none,63.2,,,
+SNA214F02310,Blinn College District,2,exact_name_only,100.0,223427,Blinn College District,3
+SNA214F02410,St. George Episcopal School,1,none,60.4,,,
+SNA214F02640,Diocese of Austin Catholic Schools,20,none,68.8,,,
+SNA214F02870,University of Houston-Victoria,2,exact,100.0,225502,University of Houston-Victoria,7
+SNA214F02890,Christ Mission College,1,exact,100.0,494630,Christ Mission College,5
+SNA214F03900,St. Andrew's Episcopal School,2,none,65.1,,,
+SNA214F04510,Saint Mary's Hall,1,none,66.7,,,
+SNA214F05240,Texas A&M University - Corpus Christi,2,exact,100.0,224147,Texas A & M University-Corpus Christi,9
+SNA214F05900,Laredo College,2,exact,100.0,226134,Laredo College,5
+SNA214F07000,Angelo State University,1,exact,100.0,222831,Angelo State University,9
+SNA214F07800,McLennan Community College,3,exact,100.0,226578,McLennan Community College,3
+SNA214F08500,Coastal Bend College,4,exact,100.0,223320,Coastal Bend College,4
+SNA214F09911,Texas A&M University System,1,exact,100.0,459949,Texas A&M University-San Antonio,7
+SNA214F09912,Alamo Colleges District-Northwest Vista College,1,exact,100.0,420398,Northwest Vista College,5
+SNA214F09917,Griffin School,1,none,64.0,,,
+SNA214F09918,Regents School,1,none,72.0,,,
+SNA214F09922,DIOCESE OF LAREDO,2,none,71.4,,,
+SNA214F09923,Starmark Academy for Professional Dog Trainers INC,1,none,69.0,,,
+SNA214F09925,Diocese of Victoria in Texas,8,none,75.9,,,
+SNA214F09927,"Archdiocese of San Antonio in San Antonio, Texas",12,none,76.2,,,
+SNA214F09930,Diocese of Laredo,2,none,71.4,,,
+SNA214F09931,Central Catholic High School,1,none,62.1,,,
+SNA214F09932,Incarnate Word Academy,1,none,77.8,,,
+SNA214F09934,Sul Ross State University Rio Grande College,3,exact_name_only,100.0,228501,Sul Ross State University,7
+SNA214F09935,Howard College - San Angelo,1,exact_name_only,100.0,225520,Howard College,3
+SNA214F09938,Keystone School,1,none,69.2,,,
+SNA214F09948,Austin Waldorf School,1,none,62.9,,,
+SNA214F09949,"Pilot's Choice Aviation, Inc.",1,none,56.4,,,
+SNA214F09952,"Sky Safety, Incorporated",1,none,50.0,,,
+SNA214F09956,Brazos Christian School,1,none,63.6,,,
+SNA214F09957,Lutheran High School of San Antonio,1,none,75.0,,,
+SNA214F09959,Headwaters School,1,none,63.2,,,
+SNA214F09963,Concordia Academy,1,none,70.6,,,
+SNA214F09978,"Veracity Aviation, LLC",1,none,61.1,,,
+SNA214F09980,Mexican American Catholic College,1,none,62.1,,,
+SNA214F09982,St. John Paul II High School,1,none,59.6,,,
+SNA214F52753,Round Rock Christian Academy,1,none,64.7,,,
+SNA214F52780,Central Texas Christian School,1,none,69.4,,,
+SNA214F53013,Hill Country Christian School of Austin,1,none,63.5,,,
+SNA214F53112,FlightSafety International,3,none,72.0,,,
+SNA214F53564,AESA Prep Academy,3,none,68.3,,,
+SNA214F53707,"South University, Austin",1,exact,100.0,480073,South University-Austin,7
+SNA214F53762,Texas A&M University-Central Texas,1,exact,100.0,483036,Texas A&M University-Central Texas,8
+SNA214F54231,Colegio Biblico,1,none,66.7,,,
+SNA214F54286,UNAM USA DBA: UNAM- San Antonio,1,none,75.0,,,
+SNA214F54661,River City Believers Academy,1,none,62.2,,,
+SNA214F54793,Austin Peace Academy,1,none,70.0,,,
+SNA214F55113,Incarnate Word High School,1,none,70.0,,,
+SNA214F55114,St. Anthony Catholic High School,1,none,58.8,,,
+SNA214F55442,Auguste Escoffier School of Culinary Arts,1,exact,100.0,444556,Auguste Escoffier School of Culinary Arts-Austin,3
+SNA214F56383,"Hallmark University, Inc. DBA Hallmark University",1,exact,100.0,225201,Hallmark University,7
+SNA214F57136,Austin ESL School,1,none,76.2,,,
+SNA214F59214,Brazos Valley Cornerstone Christian Academy,1,none,58.1,,,
+SNA214F59811,New Braunfels Christian Academy,1,none,64.7,,,
+SND214F53815,Fusion Education Group,7,none,69.8,,,
+WAS214F00092,Strayer University,3,exact_name_only,100.0,458973,Strayer University-Texas,7

@@ -1,0 +1,33 @@
+{
+  "_meta": { "machine_translated": true },
+  "meta": {
+    "title": "North：面向国际学生的美国硕士项目",
+    "description": "面向国际学生的美国硕士项目地图，每一条数据都注明来源。"
+  },
+  "nav": {
+    "skip": "跳到主要内容",
+    "home": "North 首页",
+    "language": "语言"
+  },
+  "theme": {
+    "light": "浅色",
+    "dark": "深色",
+    "toLight": "切换到浅色主题",
+    "toDark": "切换到深色主题"
+  },
+  "disclaimer": "本网站不提供移民建议；请以官方来源为准。",
+  "home": {
+    "eyebrow": "早期预览版",
+    "tagline": "面向国际学生的美国硕士项目地图",
+    "description": "North 从需要 F-1 签证并携带家属的申请者的角度，梳理、核实并比较美国的线下硕士项目。每一条数据都注明来源、日期和核实状态，因此“未知”永远不会被误当作“否”。"
+  },
+  "status": {
+    "label": "API 状态",
+    "checking": "正在检查…",
+    "ok": "在线 · 版本 {version}",
+    "down": "不可用"
+  },
+  "footer": {
+    "license": "代码 AGPL-3.0 · 数据 CC BY 4.0"
+  }
+}

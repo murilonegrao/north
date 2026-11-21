@@ -1,0 +1,33 @@
+{
+  "source": "DHS STEM Designated Degree Program List",
+  "source_url": "https://www.ice.gov/doclib/sevis/pdf/stemList2024.pdf",
+  "pdf_title": "2024 DHS STEM Designated Degree Program List",
+  "published_on": "2024-07-22",
+  "version": "2024-07-22",
+  "cip_edition": "CIP 2020",
+  "file_sha256": "b8346f30cd6ab7702510f4837b339438323a96adfbd8133b6cb9d565e90b4336",
+  "file_bytes": 428790,
+  "pages": 16,
+  "total_rows": 540,
+  "rows_by_level": {
+    "series_2_digit": 4,
+    "group_4_digit": 70,
+    "code_6_digit": 466
+  },
+  "whole_series_included": [
+    "14",
+    "26",
+    "27",
+    "40"
+  ],
+  "whole_series_note": "These 2-digit series are designated in full; per the PDF text, any new CIP added to them is automatically on the list. Match them by prefix, not only by listed code.",
+  "duplicates_skipped": [],
+  "empty_titles": [],
+  "crosscheck": {
+    "pdftotext_codes": 540,
+    "only_in_pdfplumber": [],
+    "only_in_pdftotext": []
+  },
+  "generated_at": "2026-11-21T03:04:50+00:00",
+  "generator": "spikes/s3_dhs_stem/parse_stem_list.py"
+}

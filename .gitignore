@@ -1,0 +1,26 @@
+spikes/_raw/
+
+# secrets
+.env
+.env.*
+!.env.example
+
+# private research (Portuguese originals, personal data)
+pesquisa-mestrado/
+
+# python
+__pycache__/
+.venv/
+
+# node / web
+node_modules/
+web/dist/
+
+# tool caches
+.pytest_cache/
+.ruff_cache/
+
+# local editor / agent files
+.claude/settings.local.json
+.DS_Store
+*.log

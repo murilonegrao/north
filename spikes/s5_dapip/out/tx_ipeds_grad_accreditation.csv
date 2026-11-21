@@ -1,0 +1,111 @@
+unitid,opeid_ipeds,instnm,join,dapip_ids,dapip_opeid,regional_accreditor,other_institutional_accreditors,status,next_review
+222178,00353700,Abilene Christian University,unitid,144218,00353700,SACSCOC,,Accredited,06/01/2028
+222628,02259400,Amberton University,unitid,144290,02259400,SACSCOC,,Accredited,12/01/2027
+222831,00354100,Angelo State University,unitid,144360,00354100,SACSCOC,,Accredited,06/01/2029
+222877,02081400,Arlington Baptist University,unitid,144379,02081400,,"Association for Biblical Higher Education, Commission on Accreditation",Accredited,02/28/2033
+222983,00354300,Austin College,unitid,144403,00354300,SACSCOC,,Accredited,12/01/2029
+223001,00354400,Austin Presbyterian Theological Seminary,unitid,144421,00354400,SACSCOC,Commission on Accrediting of the Association of Theological Schools,Accredited,07/31/2029;12/31/2029
+223117,02331200,Baptist Missionary Association Theological Seminary,unitid,144467,01652500,SACSCOC,Commission on Accrediting of the Association of Theological Schools,Accredited,03/31/2031;06/01/2028
+223223,00494900,Baylor College of Medicine,unitid,236656,00494900,SACSCOC,,Accredited,12/01/2026
+223232,00354500,Baylor University,unitid,144494,00354500,SACSCOC,Accreditation Commission for Midwifery Education,Accredited,02/28/2026;12/01/2027
+224004,00355700,Concordia University Texas,unitid,144670,00355700,SACSCOC,,Accredited,12/01/2028
+224147,01116100,Texas A & M University-Corpus Christi,unitid,144704,01116100,SACSCOC,,Accredited,06/01/2026
+224226,00356000,Dallas Baptist University,unitid,144740,00356000,SACSCOC,"Association for Biblical Higher Education, Commission on Accreditation",Accredited;Preaccredited,02/28/2031;12/01/2028
+224244,00694100,Dallas Christian College,unitid,144759,00694100,,"Association for Biblical Higher Education, Commission on Accreditation",Accredited,02/28/2029
+224305,00356200,Dallas Theological Seminary,unitid,144786,00356200,SACSCOC,Commission on Accrediting of the Association of Theological Schools,Accredited,06/01/2030;07/31/2034
+224323,00365100,University of Dallas,unitid,144795,00365100,SACSCOC,,Accredited,06/01/2030
+224527,00356400,East Texas Baptist University,unitid,144838,00356400,SACSCOC,,Accredited,12/01/2029
+224545,03170300,Texas A&M University-Texarkana,unitid,144856,03170300,SACSCOC,,Accredited,12/01/2026
+224554,00356500,East Texas A&M University,unitid,144865,00356500,SACSCOC,,Accredited,12/01/2034
+224660,02098301,Western Technical College,unitid,144908,02098301,,Accrediting Commission of Career Schools and Colleges,Accredited,05/31/2026
+224712,00356600,Episcopal Theological Seminary of the Southwest,unitid,144926,00356600,SACSCOC,Commission on Accrediting of the Association of Theological Schools,Accredited,06/01/2030;07/31/2034
+225201,01050900,Hallmark University,unitid,145026,01050900,,Accrediting Commission of Career Schools and Colleges,Accredited,04/30/2030
+225247,00357100,Hardin-Simmons University,unitid,145035,00357100,SACSCOC,,Accredited,12/01/2027
+225399,00357600,Houston Christian University,unitid,145062,00357600,SACSCOC,,Accredited,06/01/2027
+225414,01171100,University of Houston-Clear Lake,unitid,145071,01171100,SACSCOC,,Accredited,12/01/2027
+225432,00361200,University of Houston-Downtown,unitid,145099,00361200,SACSCOC,,Accredited,12/01/2026
+225502,01323100,University of Houston-Victoria,unitid,145114,01323100,SACSCOC,,Accredited,06/01/2030
+225511,00365200,University of Houston,unitid,145123,00365200,SACSCOC,,Accredited,12/01/2028
+225548,00357500,Howard Payne University,unitid,145141,00357500,SACSCOC,,Accredited,06/01/2030
+225575,00357700,Huston-Tillotson University,unitid,145169,00357700,SACSCOC,,Accredited,06/01/2027
+225627,00357800,University of the Incarnate Word,unitid,145178,00357800,SACSCOC,,Accredited,06/01/2031
+225885,00363700,Jarvis Christian University,unitid,145275,00363700,SACSCOC,,Accredited,06/01/2030
+226091,00358100,Lamar University,unitid,145309,00358100,SACSCOC,,Accredited,12/01/2029
+226152,00965100,Texas A & M International University,unitid,145354,00965100,SACSCOC,,Accredited,06/01/2031
+226231,00358400,LeTourneau University,unitid,145372,00358400,SACSCOC,,Accredited,12/01/2026
+226383,00358600,Lubbock Christian University,unitid,145415,00358600,SACSCOC,,Accredited,12/01/2028
+226471,00358800,University of Mary Hardin-Baylor,unitid,145442,00358800,SACSCOC,,Accredited,06/01/2030
+226587,00359100,McMurry University,unitid,145460,00359100,SACSCOC,,Accredited,12/01/2029
+226833,00359200,Midwestern State University,unitid,145530,00359200,SACSCOC,,Accredited,06/01/2029
+227216,00359400,University of North Texas,unitid,145664,00359400,SACSCOC,,Accredited,12/01/2026
+227289,00359500,Oblate School of Theology,unitid,145691,00359500,,Commission on Accrediting of the Association of Theological Schools,Accredited,07/31/2029
+227331,00359800,Our Lady of the Lake University,unitid,145743,00359800,SACSCOC,,Accredited,06/01/2028
+227368,00359900,The University of Texas Rio Grande Valley,unitid,145752,00359900,SACSCOC,,Accredited,12/06/2027
+227429,00360200,Paul Quinn College,unitid,145798,00360200,,"Transnational Association of Christian Colleges and Schools, Accreditation Commission",Accredited,01/01/2036
+227526,00363000,Prairie View A & M University,unitid,145804,00363000,SACSCOC,,Accredited,06/01/2027
+227757,00360400,Rice University,unitid,145831,00360400,SACSCOC,,Accredited,12/01/2026
+227845,00362100,Saint Edward's University,unitid,145868,00362100,SACSCOC,,Accredited,12/01/2027
+227863,00365400,University of St Thomas,unitid,145886,00365400,SACSCOC,,Accredited,06/01/2031
+227881,00360600,Sam Houston State University,unitid,145901,00360600,SACSCOC,,Accredited,06/01/2029
+228042,00361000,Schreiner University,unitid,145965,00361000,SACSCOC,,Accredited,12/01/2029
+228149,00362300,St. Mary's University,unitid,145983,00362300,SACSCOC,,Accredited,06/01/2030
+228194,00497700,South Texas College of Law Houston,unitid,146001,00497700,MSCHE,"American Bar Association, Council of the Section of Legal Education and Admissions to the Bar",Accredited,01/01/2029;08/31/2036
+228246,00361300,Southern Methodist University,unitid,146047,00361300,SACSCOC,,Accredited,06/01/2027
+228325,00361600,Nelson University,unitid,146083,00361600,SACSCOC,,Accredited,06/01/2028
+228431,00362400,Stephen F Austin State University,unitid,146108,00362400,SACSCOC,,Accredited,06/01/2027
+228459,00361500,Texas State University,unitid,146117,00361500,SACSCOC,,Accredited,06/01/2027
+228468,00361900,Southwestern Adventist University,unitid,146126,00361900,SACSCOC,,Accredited,12/01/2026
+228501,00362500,Sul Ross State University,unitid,146153,00362500,SACSCOC,,Accredited,12/12/2028
+228529,00363100,Tarleton State University,unitid,146162,00363100,SACSCOC,,Accredited,06/01/2027
+228635,01001900,University of Texas Southwestern Medical Center,unitid,146199,01001900,SACSCOC,,Accredited,12/01/2029
+228644,00365900,The University of Texas Health Science Center at San Antonio,unitid,146205,00365900,SACSCOC,,Accredited,12/12/2028
+228653,00495200,The University of Texas Medical Branch at Galveston,unitid,146214,00495200,SACSCOC,,Accredited,12/01/2028
+228705,00363900,Texas A&M University-Kingsville,unitid,146250,00363900,SACSCOC,,Accredited,06/01/2031
+228723,00363200,Texas A&M University-College Station,unitid,146278,00363200,SACSCOC,,Accredited,06/01/2028
+228769,00365600,The University of Texas at Arlington,unitid,146296,00365600,SACSCOC,,Accredited,12/01/2027
+228778,00365800,The University of Texas at Austin,unitid,146302,00365800,SACSCOC,,Accredited,12/01/2028
+228787,00974100,The University of Texas at Dallas,unitid,146311,00974100,SACSCOC,,Accredited,12/01/2028
+228796,00366100,The University of Texas at El Paso,unitid,146320,00366100,SACSCOC,,Accredited,12/01/2026
+228802,01116300,The University of Texas at Tyler,unitid,146339,01116300,SACSCOC,,Accredited,06/01/2027
+228866,00363500,Texas Chiropractic College Foundation Inc,unitid,146366,00363500,SACSCOC,,Accredited,12/01/2025
+228875,00363600,Texas Christian University,unitid,146375,00363600,SACSCOC,,Accredited,06/01/2029
+228909,00976800,University of North Texas Health Science Center,unitid,146393,00976800,SACSCOC,,Accredited,06/01/2026
+228981,00364100,Texas Lutheran University,unitid,146409,00364100,SACSCOC,,Accredited,12/12/2028
+229018,00993000,The University of Texas Permian Basin,unitid,146418,00993000,SACSCOC,,Accredited,06/01/2026
+229027,01011500,The University of Texas at San Antonio,unitid,146427,01011500,SACSCOC,,Accredited,12/01/2030
+229063,00364200,Texas Southern University,unitid,146445,00364200,SACSCOC,,Accredited,12/09/2030
+229115,00364400,Texas Tech University,unitid,146472,00364400,SACSCOC,,Accredited,06/08/2031
+229160,00364500,Texas Wesleyan University,unitid,146490,00364500,SACSCOC,,Accredited,06/01/2029
+229179,00364600,Texas Woman's University,unitid,146506,00364600,SACSCOC,,Accredited,06/01/2029
+229267,00364700,Trinity University,unitid,146524,00364700,SACSCOC,,Accredited,12/01/2028
+229300,00495100,The University of Texas Health Science Center at Houston,unitid,146533,00495100,SACSCOC,,Accredited,06/01/2027
+229337,01067400,Texas Tech University Health Sciences Center,unitid,146560,01067400,SACSCOC,,Accredited,12/01/2029
+229780,00366300,Wayland Baptist University,unitid,146658,00366300,SACSCOC,,Accredited,12/01/2028
+229814,00366500,West Texas A & M University,unitid,146676,00366500,SACSCOC,,Accredited,12/01/2026
+229887,00366900,Wiley University,unitid,146700,00366900,SACSCOC,,Accredited,06/01/2029
+243823,02305300,Parker University,unitid,151689,02305300,SACSCOC,,Accredited,06/01/2028
+416801,02555400,The University of Texas MD Anderson Cancer Center,unitid,180869,02555400,SACSCOC,,Accredited,12/07/2021
+420705,03110800,Bakke Graduate University,unitid,163435,03110800,,"Transnational Association of Christian Colleges and Schools, Accreditation Commission",Accredited,04/21/2025
+429085,03153300,American College of Acupuncture and Oriental Med,unitid,164508,03153300,SACSCOC,,Accredited,12/01/2027
+429094,03156400,AOMA Graduate School of Integrative Medicine,unitid,164517,03156400,,,,
+430704,03179500,Texas Health and Science University,unitid,164863,03179500,,Accreditation Commission for Acupuncture and Herbal Medicine,Accredited,08/31/2029
+439701,03516300,The King's University,unitid,168449,03516300,,"Transnational Association of Christian Colleges and Schools, Accreditation Commission",Accredited,01/01/2036
+444398,03733300,Baptist University of the Americas,unitid,172404,03733300,,"Association for Biblical Higher Education, Commission on Accreditation",Accredited,02/28/2029
+445133,02113610,American InterContinental University-Houston,opeid6_parent,211097,02113600,HLC,,Accredited,08/31/2034
+450304,00363600,Brite Divinity School,unitid,175883,00363600,SACSCOC,,Accredited,12/01/2032
+451556,04131700,Southwest University at El Paso,unitid,191904,04131700,,Accrediting Bureau of Health Education Schools,Accredited,02/28/2029
+458973,10145901,Strayer University-Texas,none,,,,,,
+459949,04248500,Texas A&M University-San Antonio,unitid,246099,04248500,SACSCOC,,Accredited,06/01/2027
+461795,04179500,North American University,unitid,215099,04179500,,Accrediting Commission of Career Schools and Colleges,Accredited,02/28/2029
+475608,04121800,Criswell College,unitid,144731,04121800,SACSCOC,,Accredited,12/06/2030
+477039,03698304,West Coast University-Texas,opeid6_parent,171429,03698300,WSCUC,,Accredited,02/14/2025
+480073,01303915,South University-Austin,opeid6_parent,111188,01303900,SACSCOC,,Accredited,06/01/2030
+481401,04215400,Grace School of Theology,unitid,230995,04215400,,"Commission on Accrediting of the Association of Theological Schools;Transnational Association of Christian Colleges and Schools, Accreditation Commission",Accredited,03/31/2035;04/25/2027
+482635,01072724,DeVry University-Texas,none,,,,,,
+483036,04229500,Texas A&M University-Central Texas,unitid,232052,04229500,SACSCOC,,Accredited,12/01/2028
+484756,42098875,University of Phoenix-Texas,none,,,,,,
+484905,04242100,University of North Texas at Dallas,unitid,232061,00359412,SACSCOC,,Accredited,12/01/2028
+492607,02155311,The Chicago School at Dallas,opeid6_parent,239406,02155300,WSCUC,,Accredited,06/25/2027
+492689,04280800,Texas Tech University Health Sciences Center-El Paso,none,,,,,,
+494603,-2,The Southwestern Baptist Theological Seminary,none,,,,,,
+497462,04294300,Redeemers University North America,none,,,,,,

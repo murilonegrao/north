@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="dark light" />
+    <link rel="icon" type="image/svg+xml" href="/sigil-north.svg" />
+    <title>North</title>
+    <meta name="description" content="A map of US master's programs for international students." />
+    <script>
+      // Theme before first paint (no flash): stored choice, else the OS preference, else dark.
+      (function () {
+        var theme = null
+        try { theme = localStorage.getItem('north.theme') } catch (e) {}
+        if (theme !== 'light' && theme !== 'dark') {
+          theme = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'
+        }
+        document.documentElement.setAttribute('data-theme', theme)
+      })()
+    </script>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

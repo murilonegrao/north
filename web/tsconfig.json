@@ -1,0 +1,9 @@
+{
+  "extends": "@vue/tsconfig/tsconfig.dom.json",
+  "compilerOptions": {
+    "resolveJsonModule": true,
+    "types": ["node", "vite/client"],
+    "noUncheckedIndexedAccess": true
+  },
+  "include": ["src/**/*.ts", "src/**/*.vue", "src/**/*.json", "tests/**/*.ts", "vite.config.ts"]
+}

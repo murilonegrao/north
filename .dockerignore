@@ -1,0 +1,12 @@
+# Keep secrets, private material and local build output out of the build context.
+.env
+.env.*
+pesquisa-mestrado/
+spikes/
+.git/
+**/__pycache__/
+**/.pytest_cache/
+**/.ruff_cache/
+backend/.venv/
+web/node_modules/
+web/dist/

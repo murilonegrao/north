@@ -1,0 +1,59 @@
+/* A Forja design tokens (v1.0), English names with the Forja names in comments.
+   One accent only: ember. If anything else seems to need colour, fix the hierarchy.
+   Never pure black, never pure white. */
+:root {
+  --charcoal: #0e0e10;   /* Carvão: dark background */
+  --soot: #17171b;       /* Fuligem: dark surfaces */
+  --iron: #26262c;       /* Ferro: dark borders */
+  --forge-gray: #8a857e; /* Cinza-forja: secondary text on dark */
+  --parchment: #ede6db;  /* Pergaminho: text on dark, background on light */
+  --linen: #f5f0e7;      /* Linho: light surfaces */
+  --sand: #dbd3c4;       /* Areia: light borders */
+  --graphite: #57534c;   /* Grafite: secondary text on light */
+  --ember: #d96c2c;      /* Brasa: the single accent (links, focus, highlights) */
+  --ember-dim: #8c5a32;  /* Brasa-dim: hover, muted border */
+
+  --font-mono: 'JetBrains Mono Variable', 'JetBrains Mono', 'Fira Code', ui-monospace, monospace;
+  --font-sans: 'Inter Variable', 'Inter', system-ui, sans-serif;
+  --font-serif: 'Spectral', Georgia, serif;
+  /* zh-Hans: the Latin fonts have no CJK glyphs, so system CJK fonts take over. */
+  --font-cjk: 'PingFang SC', 'Hiragino Sans GB', 'Noto Sans CJK SC', 'Source Han Sans SC',
+    'Microsoft YaHei', sans-serif;
+
+  --text-base: 16px;
+  --leading: 1.65;
+  --measure: 64ch;
+  --radius: 6px;
+
+  /* Semantic roles. Dark is the default theme. */
+  --bg: var(--charcoal);
+  --surface: var(--soot);
+  --border: var(--iron);
+  --text: var(--parchment);
+  --text-muted: var(--forge-gray);
+  --accent: var(--ember);
+  --accent-dim: var(--ember-dim);
+  color-scheme: dark;
+}
+
+/* Light: chosen with the toggle, or preferred by the OS when nothing is stored.
+   (index.html resolves the preference into data-theme; the media query covers no-JS.) */
+:root[data-theme='light'] {
+  --bg: var(--parchment);
+  --surface: var(--linen);
+  --border: var(--sand);
+  --text: var(--charcoal);
+  --text-muted: var(--graphite);
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme]) {
+    --bg: var(--parchment);
+    --surface: var(--linen);
+    --border: var(--sand);
+    --text: var(--charcoal);
+    --text-muted: var(--graphite);
+    color-scheme: light;
+  }
+}

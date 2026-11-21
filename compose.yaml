@@ -1,0 +1,34 @@
+# Local run (NFR-12): `docker compose up --build`, then open http://localhost:8000/
+# The app does not use the database yet; it comes in Phase 5 (UML section 8).
+name: north
+
+services:
+  app:
+    build: .
+    environment:
+      NORTH_DATABASE_URL: postgresql+psycopg://north:${NORTH_DB_PASSWORD:-north-local}@db:5432/north
+    ports:
+      - "127.0.0.1:${NORTH_HOST_PORT:-8000}:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: postgres:17.12
+    environment:
+      POSTGRES_DB: north
+      POSTGRES_USER: north
+      POSTGRES_PASSWORD: ${NORTH_DB_PASSWORD:-north-local}
+    # Published on localhost only, for psql and for running the backend outside Docker.
+    ports:
+      - "127.0.0.1:${NORTH_DB_HOST_PORT:-5436}:5432"
+    volumes:
+      - north-db:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U north -d north"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+volumes:
+  north-db:

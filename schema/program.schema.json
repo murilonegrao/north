@@ -1,0 +1,743 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://north.harpia.info/schema/program/v0.json",
+  "title": "North — Program (schema v0, revised by decision record 0002)",
+  "description": "Document for one master's program (BR-01). Version 0: draft for the manual pilot (Phase 4), revised to match UML model 1.0 and decision record 0002 (docs/decisions/0002-after-data-spikes.md). Fields inside each dimension will be revised with pilot data (schema v1). Every verifiable field is a VerifiedValue (BR-02, NFR-01, 0002/A1).",
+  "$comment": "Mapping to the ER (UML §8): schema_version, id, name, degree and the dimensions (immigration, academic, cost, funding, admissions, career, family) become columns of `programs`; `campus` becomes `campuses` (+ `localities`) and `programs.campus_id`; `institution` becomes `institutions` + `institution_identifiers`; `classifications` becomes `program_classifications` (code = `verified` jsonb, 0002/A7); `eligibilities` is derived (`program_eligibilities`) and only appears in the document for export and for the pilot. `in_strategy` and `flags` are derived (0002/A11, R1) and are never filled by hand.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "id", "country", "subdivision", "institution", "campus", "name", "degree",
+    "classifications", "modality",
+    "immigration", "academic", "cost", "funding", "admissions", "career", "family"
+  ],
+  "properties": {
+    "schema_version": { "const": 0 },
+    "id": { "$ref": "#/$defs/Slug", "description": "Stable program slug (institution + degree + field + campus)." },
+    "is_fictitious": {
+      "type": "boolean",
+      "default": false,
+      "description": "true for examples and test fixtures. A record with true must never be published or imported into production."
+    },
+    "country": { "type": "string", "pattern": "^[A-Z]{2}$", "description": "ISO 3166-1 alpha-2 (C-09a). Selects which $defs.immigration_<country> applies." },
+    "subdivision": { "type": "string", "pattern": "^[A-Z]{2}-[A-Z0-9]{1,3}$", "description": "ISO 3166-2, e.g. US-TX." },
+    "institution": { "$ref": "#/$defs/InstitutionRef" },
+    "name": { "type": "string", "minLength": 1 },
+    "degree": { "type": "string", "minLength": 1, "examples": ["MS", "MEng", "MSc", "MRes"] },
+    "campus": { "$ref": "#/$defs/Campus", "description": "Each program belongs to exactly one campus (R17)." },
+    "official_url": { "anyOf": [{ "type": "null" }, { "$ref": "#/$defs/HttpUrl" }], "description": "Program home page." },
+    "classifications": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/ProgramClassification" },
+      "contains": { "properties": { "is_primary": { "const": true } }, "required": ["is_primary"] },
+      "minContains": 1,
+      "maxContains": 1,
+      "description": "Program classifications. Exactly one primary, in the country's scheme (US: cip2020). ISCED-F comes from ClassificationMap and need not be filled in here."
+    },
+    "eligibilities": {
+      "type": "array",
+      "readOnly": true,
+      "items": { "$ref": "#/$defs/ProgramEligibility" },
+      "description": "Derived (BR-03): classification checked against the current rule version. In the manual pilot the curator fills it in by looking up the official list."
+    },
+    "modality": {
+      "allOf": [
+        { "$ref": "#/$defs/VerifiedValue" },
+        { "properties": { "value": { "enum": ["in_person", "hybrid", "online", null] } } }
+      ]
+    },
+    "in_strategy": {
+      "type": "boolean",
+      "readOnly": true,
+      "description": "Derived (0002/A11): false when `modality` is online or `immigration.f1_compatible_modality` is confirmed_negative (BR-14). Computed by the system; not filled in by hand and not a column of the pilot spreadsheet."
+    },
+    "flags": {
+      "type": "array",
+      "readOnly": true,
+      "uniqueItems": true,
+      "items": { "enum": ["no_stem_opt_extension"] },
+      "description": "Derived flags. `no_stem_opt_extension` (R1): the primary CIP is 52.12xx, which is not on the DHS STEM list; the program stays in scope, the card says so and post_study_work uses the 12-month OPT only. Computed by the system."
+    },
+    "immigration": {
+      "type": "object",
+      "description": "Immigration fields from the country module. The concrete schema is selected by `country` (see the allOf at the end of this schema)."
+    },
+    "academic": { "$ref": "#/$defs/Academic" },
+    "cost": { "$ref": "#/$defs/Cost" },
+    "funding": { "$ref": "#/$defs/Funding" },
+    "admissions": { "$ref": "#/$defs/Admissions" },
+    "career": { "$ref": "#/$defs/Career" },
+    "family": { "$ref": "#/$defs/Family" },
+    "notes": { "type": ["string", "null"], "description": "Free-text curator notes (not verifiable)." },
+    "updated_at": { "anyOf": [{ "type": "null" }, { "$ref": "#/$defs/DateOrDateTime" }] }
+  },
+
+  "allOf": [
+    {
+      "$comment": "Per-country routing. To add a country (e.g. CA): 1) create $defs.immigration_ca; 2) add a block here {if country = CA, then immigration -> immigration_ca}; 3) add \"CA\" to the list in the generic block below. Nothing else in the schema changes.",
+      "if": { "properties": { "country": { "const": "US" } }, "required": ["country"] },
+      "then": { "properties": { "immigration": { "$ref": "#/$defs/immigration_us" } } }
+    },
+    {
+      "$comment": "Country without a module yet: accepts any snake_case key as long as each value is a VerifiedValue. Lets data be recorded before the module exists; the filter treats the program as undetermined.",
+      "if": { "properties": { "country": { "not": { "enum": ["US"] } } }, "required": ["country"] },
+      "then": { "properties": { "immigration": { "$ref": "#/$defs/immigration_generic" } } }
+    }
+  ],
+
+  "$defs": {
+    "Slug": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
+    "HttpUrl": { "type": "string", "pattern": "^https?://[^\\s]+$" },
+    "Date": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+    "DateOrDateTime": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}(T\\d{2}:\\d{2}(:\\d{2}(\\.\\d+)?)?(Z|[+-]\\d{2}:\\d{2})?)?$"
+    },
+    "CurrencyCode": { "type": "string", "pattern": "^[A-Z]{3}$", "description": "ISO 4217." },
+
+    "VerificationStatus": {
+      "enum": [
+        "confirmed_official",
+        "reported_by_program",
+        "extracted_unverified",
+        "unknown",
+        "confirmed_negative"
+      ],
+      "description": "BR-02 (0002/A3): only confirmed_negative fails the filter by itself; comparing a known value against the profile can also fail. R12: for yes/no fields a confirmed \"no\" is always confirmed_negative (value false), never confirmed_official/reported_by_program + false; numeric and text fields never use confirmed_negative."
+    },
+    "SourceKind": {
+      "enum": ["page", "official_list", "correspondence", "uploaded_file"],
+      "description": "R13. page = a web page (program, school, government); official_list = an official list or dataset (DHS STEM list, SEVP list, IPEDS, Scorecard, DAPIP, HUD); correspondence = a written reply (e.g. from the international office): source_url may be null, the message is stored privately and never in public fields; uploaded_file = an official file uploaded by the admin (FR-26, source_files)."
+    },
+
+    "VerifiedValue": {
+      "description": "Envelope for every verifiable field (UML: VerifiedValue<T>, 0002/A1). Each field narrows `value` with allOf. Rules: NFR-01 (source required when a value is asserted), 0002/A4 (confirmed_negative and extracted_unverified), R12 (polarity), R13 (source_kind), FR-13 (extraction carries a literal excerpt), BR-02 (unknown has no value).",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["value", "status"],
+      "properties": {
+        "value": {},
+        "status": { "$ref": "#/$defs/VerificationStatus" },
+        "source_kind": { "anyOf": [{ "type": "null" }, { "$ref": "#/$defs/SourceKind" }] },
+        "source_url": { "anyOf": [{ "type": "null" }, { "$ref": "#/$defs/HttpUrl" }] },
+        "evidence": {
+          "type": ["string", "null"],
+          "maxLength": 2000,
+          "not": { "type": "string", "pattern": "[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}" },
+          "description": "Literal excerpt from the source that supports the value. Public field: never a name or an email address (R13, NFR-10); an email address is rejected by the schema."
+        },
+        "verified_at": { "anyOf": [{ "type": "null" }, { "$ref": "#/$defs/DateOrDateTime" }] }
+      },
+      "allOf": [
+        {
+          "$comment": "NFR-01 / 0002/A4 / R13: every status that asserts something (or a confirmed no) needs a source_kind and a date.",
+          "if": {
+            "properties": { "status": { "enum": ["confirmed_official", "reported_by_program", "confirmed_negative"] } },
+            "required": ["status"]
+          },
+          "then": {
+            "required": ["source_kind", "verified_at"],
+            "properties": { "source_kind": { "$ref": "#/$defs/SourceKind" }, "verified_at": { "$ref": "#/$defs/DateOrDateTime" } }
+          }
+        },
+        {
+          "$comment": "NFR-01 / 0002/A4 / R13: ...and a source_url, except when the source is a written reply (correspondence), which may have no URL.",
+          "if": {
+            "properties": {
+              "status": { "enum": ["confirmed_official", "reported_by_program", "confirmed_negative"] },
+              "source_kind": { "not": { "const": "correspondence" } }
+            },
+            "required": ["status"]
+          },
+          "then": {
+            "required": ["source_url"],
+            "properties": { "source_url": { "$ref": "#/$defs/HttpUrl" } }
+          }
+        },
+        {
+          "$comment": "FR-13 / 0002/A4: an LLM-extracted value carries its source page and the literal excerpt.",
+          "if": { "properties": { "status": { "const": "extracted_unverified" } }, "required": ["status"] },
+          "then": {
+            "required": ["source_kind", "source_url", "evidence"],
+            "properties": {
+              "source_kind": { "enum": ["page", "uploaded_file"] },
+              "source_url": { "$ref": "#/$defs/HttpUrl" },
+              "evidence": { "type": "string", "minLength": 1 }
+            }
+          }
+        },
+        {
+          "$comment": "R12: confirmed_negative is only for yes/no fields, and its value is the \"no\": `false`, or an Authorization with authorized = false. Any numeric, text or enum field therefore cannot use it (its value type excludes false).",
+          "if": { "properties": { "status": { "const": "confirmed_negative" } }, "required": ["status"] },
+          "then": {
+            "properties": {
+              "value": {
+                "anyOf": [
+                  { "const": false },
+                  { "type": "object", "required": ["authorized"], "properties": { "authorized": { "const": false } } }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "$comment": "R12: a confirmed \"no\" is never confirmed_official / reported_by_program + false. extracted_unverified + false is allowed (not confirmed); when the curator accepts it, it becomes confirmed_negative.",
+          "if": {
+            "properties": { "status": { "enum": ["confirmed_official", "reported_by_program"] } },
+            "required": ["status"]
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "not": {
+                  "anyOf": [
+                    { "const": false },
+                    { "type": "object", "required": ["authorized"], "properties": { "authorized": { "const": false } } }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        {
+          "$comment": "BR-02 / FR-13: unknown never carries a value.",
+          "if": { "properties": { "status": { "const": "unknown" } }, "required": ["status"] },
+          "then": { "properties": { "value": { "type": "null" } } }
+        },
+        {
+          "$comment": "Statuses that assert a value need a value.",
+          "if": {
+            "properties": { "status": { "enum": ["confirmed_official", "reported_by_program", "extracted_unverified"] } },
+            "required": ["status"]
+          },
+          "then": { "properties": { "value": { "not": { "type": "null" } } } }
+        }
+      ]
+    },
+
+    "VV_bool": {
+      "allOf": [{ "$ref": "#/$defs/VerifiedValue" }, { "properties": { "value": { "type": ["boolean", "null"] } } }]
+    },
+    "VV_integer": {
+      "allOf": [{ "$ref": "#/$defs/VerifiedValue" }, { "properties": { "value": { "type": ["integer", "null"], "minimum": 0 } } }]
+    },
+    "VV_number": {
+      "allOf": [{ "$ref": "#/$defs/VerifiedValue" }, { "properties": { "value": { "type": ["number", "null"], "minimum": 0 } } }]
+    },
+    "VV_string": {
+      "allOf": [{ "$ref": "#/$defs/VerifiedValue" }, { "properties": { "value": { "type": ["string", "null"] } } }]
+    },
+    "VV_money": {
+      "allOf": [{ "$ref": "#/$defs/VerifiedValue" }, { "properties": { "value": { "anyOf": [{ "type": "null" }, { "$ref": "#/$defs/Money" }] } } }]
+    },
+    "VV_money_rate": {
+      "allOf": [{ "$ref": "#/$defs/VerifiedValue" }, { "properties": { "value": { "anyOf": [{ "type": "null" }, { "$ref": "#/$defs/MoneyRate" }] } } }]
+    },
+
+    "Money": {
+      "description": "Monetary amount with currency (C-09f). Conversion happens only at evaluation time, with a dated FxRate.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["amount", "currency"],
+      "properties": {
+        "amount": { "type": "number", "minimum": 0 },
+        "currency": { "$ref": "#/$defs/CurrencyCode" }
+      }
+    },
+    "MoneyRate": {
+      "description": "Money + billing basis. Without `per`, a tuition amount is ambiguous (per credit? per year?).",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["amount", "currency", "per"],
+      "properties": {
+        "amount": { "type": "number", "minimum": 0 },
+        "currency": { "$ref": "#/$defs/CurrencyCode" },
+        "per": { "enum": ["credit_hour", "term", "academic_year", "calendar_year", "month", "program_total", "one_time"] }
+      }
+    },
+
+    "Classification": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["scheme", "code"],
+      "properties": {
+        "scheme": { "type": "string", "pattern": "^[a-z0-9_]+$", "examples": ["cip2020", "isced_f_2013"] },
+        "code": { "type": "string", "minLength": 1, "examples": ["11.0701"] },
+        "title": { "type": ["string", "null"] }
+      }
+    },
+    "ProgramClassification": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["is_primary", "code"],
+      "properties": {
+        "is_primary": { "type": "boolean" },
+        "code": {
+          "description": "The code is verifiable (0002/A7): it comes from ingestion (confirmed_official, source_kind official_list or uploaded_file, US: IPEDS C<year>_A at 6-digit CIP) or from the program site (reported_by_program). BR-11 requires a verified CIP. In the database: program_classifications.verified.",
+          "allOf": [
+            { "$ref": "#/$defs/VerifiedValue" },
+            { "properties": { "value": { "anyOf": [{ "type": "null" }, { "$ref": "#/$defs/Classification" }] } } }
+          ]
+        }
+      }
+    },
+    "ProgramEligibility": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["rule_key", "result"],
+      "properties": {
+        "rule_key": { "type": "string", "pattern": "^[a-z]{2}\\.[a-z0-9_]+$", "examples": ["us.stem_opt", "ca.pgwp"] },
+        "rule_version": { "type": ["string", "null"], "description": "Version of the official list used (e.g. publication date of the DHS STEM list, 2024-07-22)." },
+        "result": {
+          "description": "0002/A8. true = eligible: confirmed_official only if the primary code is on the current rule version (BR-03, whole 2-digit series included through the rule params, 0002/A14). Primary code known and not on the list: false + confirmed_negative (R12). Code unknown but the program claims it: true + reported_by_program.",
+          "$ref": "#/$defs/VV_bool"
+        },
+        "claim_mismatch": {
+          "type": ["boolean", "null"],
+          "description": "0002/A8. true when the program claims eligibility (immigration.stem_opt_claimed_by_program = true) but the primary code disagrees with the rule. Derived; in the pilot the curator may fill it in."
+        }
+      }
+    },
+
+    "InstitutionIdentifier": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["scheme", "value"],
+      "properties": {
+        "scheme": {
+          "type": "string",
+          "pattern": "^[a-z0-9_]+$",
+          "not": { "enum": ["sevp", "sevp_campus", "sevp_school"] },
+          "examples": ["unitid", "opeid", "ror", "dapip"],
+          "description": "0002/A15: `dapip` is a valid scheme. SEVP codes are not institution identifiers: the campus code lives on the campus (campus.sevp_campus_code) and the school code is not unique (R5)."
+        },
+        "value": { "type": "string", "minLength": 1 }
+      }
+    },
+    "Authorization": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["scheme", "authorized"],
+      "properties": {
+        "scheme": { "type": "string", "pattern": "^[a-z0-9_]+$", "examples": ["sevp", "dli", "cricos", "uk_sponsor"] },
+        "authorized": { "type": "boolean" }
+      }
+    },
+    "InstitutionRef": {
+      "description": "Institution data embedded in the program document, for the pilot and the dump. In the database it becomes the institutions and institution_identifiers tables.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "name", "identifiers", "accreditation", "carnegie_classification"],
+      "properties": {
+        "id": { "$ref": "#/$defs/Slug" },
+        "name": { "type": "string", "minLength": 1 },
+        "city": { "type": ["string", "null"] },
+        "control": { "enum": ["public", "private_nonprofit", "private_for_profit", null] },
+        "identifiers": { "type": "array", "items": { "$ref": "#/$defs/InstitutionIdentifier" } },
+        "accreditation": {
+          "description": "R10 / BR-04: institutional accreditation by a recognized accreditor (US: an agency recognized by the U.S. Department of Education, checked in DAPIP). \"Regional\" is not used. Treated as a yes/no field with details (R12): a confirmed absence of recognized institutional accreditation is value false + confirmed_negative; a positive value is an Accreditation object.",
+          "allOf": [
+            { "$ref": "#/$defs/VerifiedValue" },
+            { "properties": { "value": { "anyOf": [{ "type": "null" }, { "const": false }, { "$ref": "#/$defs/Accreditation" }] } } }
+          ]
+        },
+        "carnegie_classification": {
+          "$ref": "#/$defs/VV_string",
+          "description": "0002/A12: Carnegie research classification of the institution (e.g. R1, R2). Used only in the quality criterion. Replaces academic.research_classification."
+        }
+      }
+    },
+    "Accreditation": {
+      "description": "R10: value of institution.accreditation.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["accreditor", "scheme", "institutional"],
+      "properties": {
+        "accreditor": { "type": "string", "minLength": 1, "examples": ["Southern Association of Colleges and Schools Commission on Colleges"] },
+        "scheme": { "type": "string", "pattern": "^[a-z0-9_]+$", "examples": ["us_ed_recognized"] },
+        "institutional": { "type": "boolean", "const": true, "description": "Only institutional accreditation counts for BR-04; programmatic accreditation (e.g. ABET) goes in academic.specialized_accreditation." }
+      }
+    },
+    "Locality": {
+      "description": "R17: the area that links a campus to the reference rent (US: HUD FMR by county, scheme us_county_fips). In the database: `localities`.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["country", "scheme", "code"],
+      "properties": {
+        "country": { "type": "string", "pattern": "^[A-Z]{2}$", "description": "ISO 3166-1 alpha-2 (localities.country_code)." },
+        "scheme": { "type": "string", "pattern": "^[a-z0-9_]+$", "examples": ["us_county_fips"] },
+        "code": { "type": "string", "minLength": 1, "examples": ["48453"] },
+        "name": { "type": ["string", "null"], "examples": ["Travis County"] }
+      }
+    },
+    "Campus": {
+      "description": "R17: the campus the program belongs to. In the database: `campuses` (institution_id, name, city, locality_id, sevp_campus_code, latitude, longitude, intl_authorization). SEVP certification lives here (R11).",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "city", "locality", "intl_authorization"],
+      "properties": {
+        "id": { "anyOf": [{ "type": "null" }, { "$ref": "#/$defs/Slug" }] },
+        "name": { "type": "string", "minLength": 1, "examples": ["Main Campus"] },
+        "city": { "type": "string", "minLength": 1 },
+        "locality": { "$ref": "#/$defs/Locality" },
+        "sevp_campus_code": {
+          "type": ["string", "null"],
+          "pattern": "^[A-Z0-9]{15}$",
+          "description": "R5: SEVP campus code (15 characters, e.g. DAL214F00932000), stored once a match is confirmed; later SEVP imports match by it. The 12-character school code is not unique and is not stored as an identifier."
+        },
+        "latitude": { "type": ["number", "null"], "minimum": -90, "maximum": 90 },
+        "longitude": { "type": ["number", "null"], "minimum": -180, "maximum": 180 },
+        "intl_authorization": {
+          "description": "Authorization to enroll foreign students (generic Authorization). US: scheme = sevp, authorized = F-1 flag of the SEVP list. A campus confirmed as not certified: confirmed_negative with authorized = false (R12).",
+          "allOf": [
+            { "$ref": "#/$defs/VerifiedValue" },
+            { "properties": { "value": { "anyOf": [{ "type": "null" }, { "$ref": "#/$defs/Authorization" }] } } }
+          ]
+        }
+      }
+    },
+
+    "immigration_us": {
+      "description": "Immigration fields of the `us` module (F-1). SEVP lives on the campus (campus.intl_authorization), the I-20 on the program (R11), and STEM in eligibilities (us.stem_opt).",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "i20_issued_for_program", "f1_compatible_modality", "stem_opt_claimed_by_program",
+        "cpt_available", "cpt_from_first_term", "internship"
+      ],
+      "properties": {
+        "i20_issued_for_program": { "$ref": "#/$defs/VV_bool", "description": "The school issues an I-20 for this specific program (BR-04). R11: the international office (DSO), through its official page or a written reply (source_kind = correspondence), counts as confirmed_official; the department page alone is reported_by_program." },
+        "f1_compatible_modality": { "$ref": "#/$defs/VV_bool", "description": "The delivery mode allows keeping F-1 status (distance-learning limits)." },
+        "stem_opt_claimed_by_program": { "$ref": "#/$defs/VV_bool", "description": "The program advertises itself as STEM. Confirms nothing by itself: used to flag a mismatch with the CIP (BR-03, eligibilities[].claim_mismatch, 0002/A8)." },
+        "cpt_available": { "$ref": "#/$defs/VV_bool", "description": "The curriculum allows CPT (work/internship during the program)." },
+        "cpt_from_first_term": { "$ref": "#/$defs/VV_bool", "description": "CPT allowed from the first term (\"Day-1 CPT\"). Feeds the immigration risk (BR-06)." },
+        "internship": {
+          "allOf": [
+            { "$ref": "#/$defs/VerifiedValue" },
+            { "properties": { "value": { "enum": ["required", "optional", "not_offered", null] } } }
+          ]
+        }
+      }
+    },
+    "immigration_generic": {
+      "description": "Placeholder for countries without a module: free keys, values always VerifiedValue.",
+      "type": "object",
+      "propertyNames": { "pattern": "^[a-z][a-z0-9_]*$" },
+      "additionalProperties": { "$ref": "#/$defs/VerifiedValue" }
+    },
+
+    "Academic": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["duration_months", "credits_required", "thesis_option", "start_terms", "specialized_accreditation"],
+      "properties": {
+        "duration_months": { "$ref": "#/$defs/VV_integer", "description": "Typical full-time duration. Basis of the cost period (BR-07)." },
+        "credits_required": {
+          "allOf": [
+            { "$ref": "#/$defs/VerifiedValue" },
+            {
+              "properties": {
+                "value": {
+                  "anyOf": [
+                    { "type": "null" },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": ["amount", "unit"],
+                      "properties": {
+                        "amount": { "type": "number", "minimum": 0 },
+                        "unit": { "enum": ["us_semester_credit_hour", "us_quarter_credit_hour", "ects"] }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        "thesis_option": {
+          "allOf": [
+            { "$ref": "#/$defs/VerifiedValue" },
+            { "properties": { "value": { "enum": ["thesis_only", "non_thesis_only", "both", null] } } }
+          ]
+        },
+        "start_terms": {
+          "allOf": [
+            { "$ref": "#/$defs/VerifiedValue" },
+            {
+              "properties": {
+                "value": {
+                  "anyOf": [
+                    { "type": "null" },
+                    { "type": "array", "uniqueItems": true, "minItems": 1, "items": { "enum": ["fall", "winter", "spring", "summer"] } }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        "specialized_accreditation": {
+          "description": "Program-level accreditations (e.g. ABET). Empty list with an asserting status = none.",
+          "allOf": [
+            { "$ref": "#/$defs/VerifiedValue" },
+            { "properties": { "value": { "anyOf": [{ "type": "null" }, { "type": "array", "items": { "type": "string" } }] } } }
+          ]
+        }
+      }
+    },
+
+    "RentReference": {
+      "description": "Reference rent by number of bedrooms in the campus locality (US: HUD Fair Market Rent, monthly). In the database it is stored once per locality in `rent_benchmarks` (R17, one row per bedrooms count); here it is a copy for the pilot and the export. Bedrooms used for a profile = ceil((1 + dependents) / 2), max 4 (R6).",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["currency", "year", "br0", "br1", "br2", "br3", "br4"],
+      "properties": {
+        "currency": { "$ref": "#/$defs/CurrencyCode" },
+        "year": { "type": "integer" },
+        "area": { "type": ["string", "null"], "description": "Name of the reference area (e.g. HUD metro area)." },
+        "br0": { "type": ["number", "null"], "minimum": 0 },
+        "br1": { "type": ["number", "null"], "minimum": 0 },
+        "br2": { "type": ["number", "null"], "minimum": 0 },
+        "br3": { "type": ["number", "null"], "minimum": 0 },
+        "br4": { "type": ["number", "null"], "minimum": 0 }
+      }
+    },
+    "Cost": {
+      "description": "Inputs to the four BR-07 numbers. (1) tuition + fees: tuition_international + fees (or tuition_fees_program_total, if published). (2) visa financial requirement: i20_requirement_student + n × i20_requirement_per_dependent. (3) living cost: living_cost_student, adjusted for the family using rent_reference_monthly and the family fields. (4) period total net of funding: NOT stored here, because it depends on the profile (dependents) and on funding; it is computed at evaluation time (CostEstimate.period_total_net subtracts guaranteed funding only; CostEstimate.period_total_with_competitive_funding also subtracts competitive funding, R15).",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "tuition_international", "fees", "student_health_insurance", "tuition_fees_program_total",
+        "i20_requirement_student", "i20_requirement_per_dependent", "living_cost_student", "rent_reference_monthly"
+      ],
+      "properties": {
+        "tuition_international": { "$ref": "#/$defs/VV_money_rate", "description": "Tuition for international students (in the US, the non-resident rate)." },
+        "fees": { "$ref": "#/$defs/VV_money_rate", "description": "Mandatory fees on top of tuition." },
+        "student_health_insurance": { "$ref": "#/$defs/VV_money_rate", "description": "Mandatory student health insurance, if billed separately." },
+        "tuition_fees_program_total": { "$ref": "#/$defs/VV_money", "description": "BR-07 number 1 when the program publishes the total. If only a per-credit rate exists, the calculation uses tuition_international × credits_required." },
+        "i20_requirement_student": { "$ref": "#/$defs/VV_money_rate", "description": "BR-07 number 2: amount the school requires the student alone to document." },
+        "i20_requirement_per_dependent": { "$ref": "#/$defs/VV_money_rate", "description": "Additional amount required per dependent on the I-20." },
+        "living_cost_student": { "$ref": "#/$defs/VV_money_rate", "description": "School's living-cost estimate for a single student." },
+        "rent_reference_monthly": {
+          "allOf": [
+            { "$ref": "#/$defs/VerifiedValue" },
+            { "properties": { "value": { "anyOf": [{ "type": "null" }, { "$ref": "#/$defs/RentReference" }] } } }
+          ]
+        }
+      }
+    },
+
+    "FundingOpportunity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "tuition_coverage", "stipend", "hours_per_week", "open_to_international", "open_to_masters", "availability"],
+      "properties": {
+        "type": { "enum": ["TA", "RA", "GA", "fellowship", "scholarship", "tuition_waiver", "other"] },
+        "name": { "type": ["string", "null"] },
+        "tuition_coverage": {
+          "allOf": [
+            { "$ref": "#/$defs/VerifiedValue" },
+            { "properties": { "value": { "enum": ["full", "partial", "none", null] } } }
+          ]
+        },
+        "stipend": { "$ref": "#/$defs/VV_money_rate" },
+        "hours_per_week": { "$ref": "#/$defs/VV_number" },
+        "open_to_international": { "$ref": "#/$defs/VV_bool" },
+        "open_to_masters": { "$ref": "#/$defs/VV_bool" },
+        "availability": {
+          "description": "guaranteed = guaranteed with admission; competitive = contested but common; rare = exists but rarely for master's students.",
+          "allOf": [
+            { "$ref": "#/$defs/VerifiedValue" },
+            { "properties": { "value": { "enum": ["guaranteed", "competitive", "rare", null] } } }
+          ]
+        }
+      }
+    },
+    "Funding": {
+      "description": "Object, not a list: an empty list could not tell \"no funding\" from \"nobody looked\" (BR-02). available_to_masters answers that; opportunities gives the details.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["available_to_masters", "opportunities"],
+      "properties": {
+        "available_to_masters": { "$ref": "#/$defs/VV_bool", "description": "The program or department funds master's students in some form." },
+        "opportunities": { "type": "array", "items": { "$ref": "#/$defs/FundingOpportunity" } }
+      }
+    },
+
+    "EnglishSectionMin": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "reading": { "type": ["integer", "null"], "minimum": 0, "maximum": 30 },
+        "listening": { "type": ["integer", "null"], "minimum": 0, "maximum": 30 },
+        "speaking": { "type": ["integer", "null"], "minimum": 0, "maximum": 30 },
+        "writing": { "type": ["integer", "null"], "minimum": 0, "maximum": 30 }
+      }
+    },
+    "English": {
+      "description": "English requirement. R12: whether a test is accepted is a yes/no field (`<test>_accepted`); \"test not accepted\" = `<test>_accepted` false + confirmed_negative, and the `<test>_min` fields stay unknown. Minimums are numbers and never use confirmed_negative.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "toefl_ibt_accepted", "toefl_ibt_min", "toefl_ibt_section_min",
+        "ielts_academic_accepted", "ielts_academic_min", "ielts_band_min",
+        "duolingo_accepted", "duolingo_min",
+        "pte_academic_accepted", "pte_academic_min",
+        "waiver_available", "waiver_criteria", "conditional_admission", "conditional_admission_details"
+      ],
+      "properties": {
+        "toefl_ibt_accepted": { "$ref": "#/$defs/VV_bool", "description": "The program accepts TOEFL iBT." },
+        "toefl_ibt_min": {
+          "allOf": [{ "$ref": "#/$defs/VerifiedValue" }, { "properties": { "value": { "type": ["integer", "null"], "minimum": 0, "maximum": 120 } } }]
+        },
+        "toefl_ibt_section_min": {
+          "allOf": [{ "$ref": "#/$defs/VerifiedValue" }, { "properties": { "value": { "anyOf": [{ "type": "null" }, { "$ref": "#/$defs/EnglishSectionMin" }] } } }]
+        },
+        "ielts_academic_accepted": { "$ref": "#/$defs/VV_bool", "description": "The program accepts IELTS Academic." },
+        "ielts_academic_min": {
+          "allOf": [{ "$ref": "#/$defs/VerifiedValue" }, { "properties": { "value": { "type": ["number", "null"], "minimum": 0, "maximum": 9 } } }]
+        },
+        "ielts_band_min": {
+          "description": "Minimum on each IELTS band.",
+          "allOf": [{ "$ref": "#/$defs/VerifiedValue" }, { "properties": { "value": { "type": ["number", "null"], "minimum": 0, "maximum": 9 } } }]
+        },
+        "duolingo_accepted": { "$ref": "#/$defs/VV_bool", "description": "The program accepts the Duolingo English Test." },
+        "duolingo_min": {
+          "allOf": [{ "$ref": "#/$defs/VerifiedValue" }, { "properties": { "value": { "type": ["integer", "null"], "minimum": 10, "maximum": 160 } } }]
+        },
+        "pte_academic_accepted": { "$ref": "#/$defs/VV_bool", "description": "The program accepts PTE Academic." },
+        "pte_academic_min": {
+          "allOf": [{ "$ref": "#/$defs/VerifiedValue" }, { "properties": { "value": { "type": ["integer", "null"], "minimum": 10, "maximum": 90 } } }]
+        },
+        "waiver_available": { "$ref": "#/$defs/VV_bool", "description": "A test waiver exists (e.g. degree taught in English)." },
+        "waiver_criteria": { "$ref": "#/$defs/VV_string" },
+        "conditional_admission": { "$ref": "#/$defs/VV_bool", "description": "Conditional admission accepted (English later, e.g. via the school's English program)." },
+        "conditional_admission_details": { "$ref": "#/$defs/VV_string" }
+      }
+    },
+    "Deadline": {
+      "description": "Value of one deadline item (R18: term, kind, date; term_year and applicant narrow it).",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["term", "term_year", "applicant", "kind", "date"],
+      "properties": {
+        "term": { "enum": ["fall", "winter", "spring", "summer"] },
+        "term_year": { "type": "integer", "minimum": 2000 },
+        "applicant": { "enum": ["international", "domestic", "all"] },
+        "kind": { "enum": ["priority", "final", "funding_consideration", "rolling"] },
+        "date": { "anyOf": [{ "type": "null" }, { "$ref": "#/$defs/Date" }], "description": "null only when kind = rolling." }
+      }
+    },
+    "Admissions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["english", "accepts_other_undergrad_area", "prerequisites", "gre", "min_gpa_4scale", "application_fee", "deadlines"],
+      "properties": {
+        "english": { "$ref": "#/$defs/English" },
+        "accepts_other_undergrad_area": { "$ref": "#/$defs/VV_bool", "description": "Accepts an undergraduate degree in another field (BR-04)." },
+        "prerequisites": { "$ref": "#/$defs/VV_string", "description": "Courses or knowledge required from applicants coming from another field." },
+        "gre": {
+          "allOf": [
+            { "$ref": "#/$defs/VerifiedValue" },
+            { "properties": { "value": { "enum": ["required", "optional", "not_required", "waivable", null] } } }
+          ]
+        },
+        "min_gpa_4scale": {
+          "allOf": [{ "$ref": "#/$defs/VerifiedValue" }, { "properties": { "value": { "type": ["number", "null"], "minimum": 0, "maximum": 4 } } }]
+        },
+        "application_fee": { "$ref": "#/$defs/VV_money" },
+        "deadlines": {
+          "description": "R18: a list where each item is its own VerifiedValue (deadlines often come from different pages: graduate school vs department). An empty list means no deadline was recorded (it never means \"no deadlines\"). Items are never unknown: a deadline you did not find is simply not in the list.",
+          "type": "array",
+          "items": {
+            "allOf": [
+              { "$ref": "#/$defs/VerifiedValue" },
+              {
+                "properties": {
+                  "status": { "not": { "const": "unknown" } },
+                  "value": { "anyOf": [{ "type": "null" }, { "$ref": "#/$defs/Deadline" }] }
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+
+    "Earnings": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["amount", "currency", "years_after_completion", "population"],
+      "properties": {
+        "amount": { "type": "number", "minimum": 0 },
+        "currency": { "$ref": "#/$defs/CurrencyCode" },
+        "years_after_completion": { "type": ["integer", "null"], "minimum": 0 },
+        "population": {
+          "enum": ["federal_aid_recipients", "all_graduates", "program_reported"],
+          "description": "Population covered by the measure. Scorecard = federal_aid_recipients, which excludes international students (BR-13)."
+        }
+      }
+    },
+    "Career": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["median_earnings", "placement_rate_pct"],
+      "properties": {
+        "median_earnings": {
+          "description": "Median earnings of program graduates (field + master's level).",
+          "allOf": [
+            { "$ref": "#/$defs/VerifiedValue" },
+            { "properties": { "value": { "anyOf": [{ "type": "null" }, { "$ref": "#/$defs/Earnings" }] } } }
+          ]
+        },
+        "placement_rate_pct": {
+          "description": "Placement rate published by the program. The window (e.g. 6 months) goes in evidence.",
+          "allOf": [{ "$ref": "#/$defs/VerifiedValue" }, { "properties": { "value": { "type": ["number", "null"], "minimum": 0, "maximum": 100 } } }]
+        }
+      }
+    },
+
+    "Family": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "family_housing_on_campus", "family_housing_rent", "childcare_on_campus",
+        "dependent_insurance_available", "dependent_insurance_cost", "spouse_support_programs", "k12_district"
+      ],
+      "properties": {
+        "family_housing_on_campus": { "$ref": "#/$defs/VV_bool" },
+        "family_housing_rent": { "$ref": "#/$defs/VV_money_rate", "description": "Rent of on-campus family housing." },
+        "childcare_on_campus": { "$ref": "#/$defs/VV_bool" },
+        "dependent_insurance_available": { "$ref": "#/$defs/VV_bool", "description": "The school health plan covers spouse and children." },
+        "dependent_insurance_cost": { "$ref": "#/$defs/VV_money_rate", "description": "Plan cost for spouse + children (the plan's \"family\" tier)." },
+        "spouse_support_programs": { "$ref": "#/$defs/VV_bool", "description": "Programs for spouses of international students (English classes, family groups)." },
+        "k12_district": {
+          "description": "Public school district for the campus.",
+          "allOf": [
+            { "$ref": "#/$defs/VerifiedValue" },
+            {
+              "properties": {
+                "value": {
+                  "anyOf": [
+                    { "type": "null" },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": ["name"],
+                      "properties": {
+                        "name": { "type": "string" },
+                        "id_scheme": { "type": ["string", "null"], "examples": ["nces_leaid"] },
+                        "id": { "type": ["string", "null"] }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}

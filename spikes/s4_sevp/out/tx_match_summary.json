@@ -1,0 +1,33 @@
+{
+  "state": "TX",
+  "sevp_file": "spikes/_raw/sevp/derived/sevp-certified-schools-2026-11-18.csv",
+  "ipeds_file": "spikes/_raw/ipeds/extracted/HD2024.csv",
+  "sevp_campuses_in_state": 842,
+  "sevp_school_codes_in_state": 418,
+  "ipeds_active_in_state": 401,
+  "ipeds_grad_in_state": 110,
+  "ipeds_grad_to_sevp": {
+    "exact": 95,
+    "none": 8,
+    "approximate": 6,
+    "exact_name_only": 1
+  },
+  "ipeds_grad_to_sevp_pct": {
+    "exact": 86.4,
+    "none": 7.3,
+    "approximate": 5.5,
+    "exact_name_only": 0.9
+  },
+  "sevp_schools_to_ipeds": {
+    "exact": 163,
+    "none": 238,
+    "exact_name_only": 6,
+    "approximate": 11
+  },
+  "sevp_schools_to_ipeds_pct": {
+    "exact": 39.0,
+    "none": 56.9,
+    "exact_name_only": 1.4,
+    "approximate": 2.6
+  }
+}

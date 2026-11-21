@@ -1,0 +1,673 @@
+{
+  "schema_version": 0,
+  "id": "example-state-university-ms-data-science-main",
+  "is_fictitious": true,
+  "notes": "FICTITIOUS EXAMPLE. Institution, program, values and URLs are made up (example.edu / example.org domains) and exist only to test the schema. Do not use as real data.",
+  "country": "US",
+  "subdivision": "US-TX",
+  "institution": {
+    "id": "example-state-university",
+    "name": "Example State University (FICTITIOUS)",
+    "city": "Exampleville",
+    "control": "public",
+    "identifiers": [
+      {
+        "scheme": "unitid",
+        "value": "000000"
+      },
+      {
+        "scheme": "opeid",
+        "value": "00000000"
+      },
+      {
+        "scheme": "dapip",
+        "value": "000000"
+      }
+    ],
+    "accreditation": {
+      "value": {
+        "accreditor": "Fictitious Recognized Accreditor",
+        "scheme": "us_ed_recognized",
+        "institutional": true
+      },
+      "status": "confirmed_official",
+      "source_kind": "uploaded_file",
+      "source_url": "https://example.org/fictitious-accreditation-database-export",
+      "evidence": "AccreditationStatus: Accredited (fictitious row)",
+      "verified_at": "2026-11-21"
+    },
+    "carnegie_classification": {
+      "value": "R2",
+      "status": "confirmed_official",
+      "source_kind": "official_list",
+      "source_url": "https://example.org/fictitious-research-classification",
+      "evidence": null,
+      "verified_at": "2026-11-21"
+    }
+  },
+  "name": "Master of Science in Data Science (FICTITIOUS)",
+  "degree": "MS",
+  "campus": {
+    "id": "example-state-university-main",
+    "name": "Main Campus",
+    "city": "Exampleville",
+    "locality": {
+      "country": "US",
+      "scheme": "us_county_fips",
+      "code": "00000",
+      "name": "Example County (fictitious)"
+    },
+    "sevp_campus_code": "EXA000F00000000",
+    "latitude": null,
+    "longitude": null,
+    "intl_authorization": {
+      "value": {
+        "scheme": "sevp",
+        "authorized": true
+      },
+      "status": "confirmed_official",
+      "source_kind": "uploaded_file",
+      "source_url": "https://example.org/fictitious-sevp-school-list.pdf",
+      "evidence": "Example State University — Exampleville, TX (fictitious row)",
+      "verified_at": "2026-11-21"
+    }
+  },
+  "official_url": "https://example.edu/msds",
+  "classifications": [
+    {
+      "is_primary": true,
+      "code": {
+        "value": {
+          "scheme": "cip2020",
+          "code": "30.7001",
+          "title": "Data Science, General"
+        },
+        "status": "confirmed_official",
+        "source_kind": "official_list",
+        "source_url": "https://example.org/fictitious-completions-file",
+        "evidence": null,
+        "verified_at": "2026-11-21"
+      }
+    }
+  ],
+  "eligibilities": [
+    {
+      "rule_key": "us.stem_opt",
+      "rule_version": "2099-01-01 (fictitious)",
+      "result": {
+        "value": true,
+        "status": "confirmed_official",
+        "source_url": "https://example.org/fictitious-stem-list",
+        "evidence": "30.7001 Data Science, General",
+        "verified_at": "2026-11-21",
+        "source_kind": "uploaded_file"
+      },
+      "claim_mismatch": false
+    }
+  ],
+  "modality": {
+    "value": "in_person",
+    "status": "reported_by_program",
+    "source_kind": "page",
+    "source_url": "https://example.edu/msds",
+    "evidence": "The MS in Data Science is offered on campus.",
+    "verified_at": "2026-11-21"
+  },
+  "immigration": {
+    "i20_issued_for_program": {
+      "value": true,
+      "status": "confirmed_official",
+      "source_kind": "correspondence",
+      "source_url": null,
+      "evidence": "Written reply from the international office, 2026-11-20: the on-campus MS in Data Science is eligible for an I-20.",
+      "verified_at": "2026-11-20"
+    },
+    "f1_compatible_modality": {
+      "value": true,
+      "status": "reported_by_program",
+      "source_kind": "page",
+      "source_url": "https://example.edu/msds",
+      "evidence": "The MS in Data Science is offered on campus.",
+      "verified_at": "2026-11-21"
+    },
+    "stem_opt_claimed_by_program": {
+      "value": true,
+      "status": "reported_by_program",
+      "source_kind": "page",
+      "source_url": "https://example.edu/msds",
+      "evidence": "STEM-designated program",
+      "verified_at": "2026-11-21"
+    },
+    "cpt_available": {
+      "value": true,
+      "status": "extracted_unverified",
+      "source_kind": "page",
+      "source_url": "https://example.edu/msds/internships",
+      "evidence": "Students may complete an optional internship through CPT after their first year.",
+      "verified_at": "2026-11-21"
+    },
+    "cpt_from_first_term": {
+      "value": false,
+      "status": "extracted_unverified",
+      "source_kind": "page",
+      "source_url": "https://example.edu/msds/internships",
+      "evidence": "Students may complete an optional internship through CPT after their first year.",
+      "verified_at": "2026-11-21"
+    },
+    "internship": {
+      "value": "optional",
+      "status": "extracted_unverified",
+      "source_kind": "page",
+      "source_url": "https://example.edu/msds/internships",
+      "evidence": "Students may complete an optional internship",
+      "verified_at": "2026-11-21"
+    }
+  },
+  "academic": {
+    "duration_months": {
+      "value": 21,
+      "status": "reported_by_program",
+      "source_kind": "page",
+      "source_url": "https://example.edu/msds/curriculum",
+      "evidence": "Full-time students typically finish in four semesters.",
+      "verified_at": "2026-11-21"
+    },
+    "credits_required": {
+      "value": {
+        "amount": 36,
+        "unit": "us_semester_credit_hour"
+      },
+      "status": "reported_by_program",
+      "source_kind": "page",
+      "source_url": "https://example.edu/msds/curriculum",
+      "evidence": "36 credit hours",
+      "verified_at": "2026-11-21"
+    },
+    "thesis_option": {
+      "value": "both",
+      "status": "reported_by_program",
+      "source_kind": "page",
+      "source_url": "https://example.edu/msds/curriculum",
+      "evidence": "thesis and non-thesis tracks",
+      "verified_at": "2026-11-21"
+    },
+    "start_terms": {
+      "value": [
+        "fall",
+        "spring"
+      ],
+      "status": "reported_by_program",
+      "source_kind": "page",
+      "source_url": "https://example.edu/msds/admissions",
+      "evidence": null,
+      "verified_at": "2026-11-21"
+    },
+    "specialized_accreditation": {
+      "value": [],
+      "status": "reported_by_program",
+      "source_kind": "page",
+      "source_url": "https://example.edu/msds",
+      "evidence": "Empty list: the program declares no specialized accreditation.",
+      "verified_at": "2026-11-21"
+    }
+  },
+  "cost": {
+    "tuition_international": {
+      "value": {
+        "amount": 1000,
+        "currency": "USD",
+        "per": "credit_hour"
+      },
+      "status": "reported_by_program",
+      "source_kind": "page",
+      "source_url": "https://example.edu/bursar/graduate-tuition",
+      "evidence": "Non-resident graduate tuition: $1,000 per credit hour",
+      "verified_at": "2026-11-21"
+    },
+    "fees": {
+      "value": {
+        "amount": 1500,
+        "currency": "USD",
+        "per": "term"
+      },
+      "status": "reported_by_program",
+      "source_kind": "page",
+      "source_url": "https://example.edu/bursar/graduate-tuition",
+      "evidence": null,
+      "verified_at": "2026-11-21"
+    },
+    "student_health_insurance": {
+      "value": {
+        "amount": 3000,
+        "currency": "USD",
+        "per": "academic_year"
+      },
+      "status": "reported_by_program",
+      "source_kind": "page",
+      "source_url": "https://example.edu/health/insurance",
+      "evidence": null,
+      "verified_at": "2026-11-21"
+    },
+    "tuition_fees_program_total": {
+      "value": null,
+      "status": "unknown",
+      "source_kind": null,
+      "source_url": null,
+      "evidence": null,
+      "verified_at": null
+    },
+    "i20_requirement_student": {
+      "value": {
+        "amount": 40000,
+        "currency": "USD",
+        "per": "academic_year"
+      },
+      "status": "reported_by_program",
+      "source_kind": "page",
+      "source_url": "https://example.edu/international/cost-of-attendance",
+      "evidence": null,
+      "verified_at": "2026-11-21"
+    },
+    "i20_requirement_per_dependent": {
+      "value": {
+        "amount": 6000,
+        "currency": "USD",
+        "per": "academic_year"
+      },
+      "status": "reported_by_program",
+      "source_kind": "page",
+      "source_url": "https://example.edu/international/cost-of-attendance",
+      "evidence": "Add $6,000 for each dependent.",
+      "verified_at": "2026-11-21"
+    },
+    "living_cost_student": {
+      "value": {
+        "amount": 15000,
+        "currency": "USD",
+        "per": "academic_year"
+      },
+      "status": "reported_by_program",
+      "source_kind": "page",
+      "source_url": "https://example.edu/international/cost-of-attendance",
+      "evidence": null,
+      "verified_at": "2026-11-21"
+    },
+    "rent_reference_monthly": {
+      "value": {
+        "currency": "USD",
+        "year": 2099,
+        "area": "Exampleville metro (fictitious)",
+        "br0": 900,
+        "br1": 1000,
+        "br2": 1200,
+        "br3": 1600,
+        "br4": 1900
+      },
+      "status": "confirmed_official",
+      "source_kind": "official_list",
+      "source_url": "https://example.org/fictitious-fair-market-rents",
+      "evidence": null,
+      "verified_at": "2026-11-21"
+    }
+  },
+  "funding": {
+    "available_to_masters": {
+      "value": true,
+      "status": "reported_by_program",
+      "source_kind": "page",
+      "source_url": "https://example.edu/msds/funding",
+      "evidence": "A limited number of assistantships are available to master's students.",
+      "verified_at": "2026-11-21"
+    },
+    "opportunities": [
+      {
+        "type": "TA",
+        "name": "Graduate Teaching Assistant",
+        "tuition_coverage": {
+          "value": "full",
+          "status": "reported_by_program",
+          "source_kind": "page",
+          "source_url": "https://example.edu/graduate-school/assistantships",
+          "evidence": "Assistants working 20 hours/week receive a full tuition waiver.",
+          "verified_at": "2026-11-21"
+        },
+        "stipend": {
+          "value": {
+            "amount": 1800,
+            "currency": "USD",
+            "per": "month"
+          },
+          "status": "reported_by_program",
+          "source_kind": "page",
+          "source_url": "https://example.edu/graduate-school/assistantships",
+          "evidence": null,
+          "verified_at": "2026-11-21"
+        },
+        "hours_per_week": {
+          "value": 20,
+          "status": "reported_by_program",
+          "source_kind": "page",
+          "source_url": "https://example.edu/graduate-school/assistantships",
+          "evidence": "20 hours/week",
+          "verified_at": "2026-11-21"
+        },
+        "open_to_international": {
+          "value": true,
+          "status": "reported_by_program",
+          "source_kind": "page",
+          "source_url": "https://example.edu/graduate-school/assistantships",
+          "evidence": null,
+          "verified_at": "2026-11-21"
+        },
+        "open_to_masters": {
+          "value": true,
+          "status": "reported_by_program",
+          "source_kind": "page",
+          "source_url": "https://example.edu/msds/funding",
+          "evidence": "available to master's students",
+          "verified_at": "2026-11-21"
+        },
+        "availability": {
+          "value": "competitive",
+          "status": "reported_by_program",
+          "source_kind": "page",
+          "source_url": "https://example.edu/msds/funding",
+          "evidence": "A limited number of assistantships",
+          "verified_at": "2026-11-21"
+        }
+      }
+    ]
+  },
+  "admissions": {
+    "english": {
+      "toefl_ibt_accepted": {
+        "value": true,
+        "status": "reported_by_program",
+        "source_kind": "page",
+        "source_url": "https://example.edu/msds/admissions",
+        "evidence": null,
+        "verified_at": "2026-11-21"
+      },
+      "toefl_ibt_min": {
+        "value": 80,
+        "status": "reported_by_program",
+        "source_kind": "page",
+        "source_url": "https://example.edu/msds/admissions",
+        "evidence": "minimum TOEFL iBT score of 80",
+        "verified_at": "2026-11-21"
+      },
+      "toefl_ibt_section_min": {
+        "value": null,
+        "status": "unknown",
+        "source_kind": null,
+        "source_url": null,
+        "evidence": null,
+        "verified_at": null
+      },
+      "ielts_academic_accepted": {
+        "value": true,
+        "status": "reported_by_program",
+        "source_kind": "page",
+        "source_url": "https://example.edu/msds/admissions",
+        "evidence": null,
+        "verified_at": "2026-11-21"
+      },
+      "ielts_academic_min": {
+        "value": 6.5,
+        "status": "reported_by_program",
+        "source_kind": "page",
+        "source_url": "https://example.edu/msds/admissions",
+        "evidence": "IELTS Academic 6.5",
+        "verified_at": "2026-11-21"
+      },
+      "ielts_band_min": {
+        "value": null,
+        "status": "unknown",
+        "source_kind": null,
+        "source_url": null,
+        "evidence": null,
+        "verified_at": null
+      },
+      "duolingo_accepted": {
+        "value": true,
+        "status": "extracted_unverified",
+        "source_kind": "page",
+        "source_url": "https://example.edu/graduate-school/english-requirements",
+        "evidence": "Duolingo English Test: 110",
+        "verified_at": "2026-11-21"
+      },
+      "duolingo_min": {
+        "value": 110,
+        "status": "extracted_unverified",
+        "source_kind": "page",
+        "source_url": "https://example.edu/graduate-school/english-requirements",
+        "evidence": "Duolingo English Test: 110",
+        "verified_at": "2026-11-21"
+      },
+      "pte_academic_accepted": {
+        "value": false,
+        "status": "confirmed_negative",
+        "source_kind": "page",
+        "source_url": "https://example.edu/graduate-school/english-requirements",
+        "evidence": "PTE Academic is not accepted.",
+        "verified_at": "2026-11-21"
+      },
+      "pte_academic_min": {
+        "value": null,
+        "status": "unknown",
+        "source_kind": null,
+        "source_url": null,
+        "evidence": null,
+        "verified_at": null
+      },
+      "waiver_available": {
+        "value": true,
+        "status": "reported_by_program",
+        "source_kind": "page",
+        "source_url": "https://example.edu/graduate-school/english-requirements",
+        "evidence": null,
+        "verified_at": "2026-11-21"
+      },
+      "waiver_criteria": {
+        "value": "Bachelor's degree from an institution where English is the language of instruction.",
+        "status": "reported_by_program",
+        "source_kind": "page",
+        "source_url": "https://example.edu/graduate-school/english-requirements",
+        "evidence": null,
+        "verified_at": "2026-11-21"
+      },
+      "conditional_admission": {
+        "value": null,
+        "status": "unknown",
+        "source_kind": null,
+        "source_url": null,
+        "evidence": null,
+        "verified_at": null
+      },
+      "conditional_admission_details": {
+        "value": null,
+        "status": "unknown",
+        "source_kind": null,
+        "source_url": null,
+        "evidence": null,
+        "verified_at": null
+      }
+    },
+    "accepts_other_undergrad_area": {
+      "value": true,
+      "status": "reported_by_program",
+      "source_kind": "page",
+      "source_url": "https://example.edu/msds/admissions",
+      "evidence": "Applicants from any undergraduate major are welcome; leveling courses may be required.",
+      "verified_at": "2026-11-21"
+    },
+    "prerequisites": {
+      "value": "Calculus I, introductory statistics and one programming course.",
+      "status": "reported_by_program",
+      "source_kind": "page",
+      "source_url": "https://example.edu/msds/admissions",
+      "evidence": null,
+      "verified_at": "2026-11-21"
+    },
+    "gre": {
+      "value": "not_required",
+      "status": "reported_by_program",
+      "source_kind": "page",
+      "source_url": "https://example.edu/msds/admissions",
+      "evidence": "GRE scores are not required.",
+      "verified_at": "2026-11-21"
+    },
+    "min_gpa_4scale": {
+      "value": 3.0,
+      "status": "reported_by_program",
+      "source_kind": "page",
+      "source_url": "https://example.edu/msds/admissions",
+      "evidence": null,
+      "verified_at": "2026-11-21"
+    },
+    "application_fee": {
+      "value": {
+        "amount": 75,
+        "currency": "USD"
+      },
+      "status": "reported_by_program",
+      "source_kind": "page",
+      "source_url": "https://example.edu/graduate-school/apply",
+      "evidence": null,
+      "verified_at": "2026-11-21"
+    },
+    "deadlines": [
+      {
+        "value": {
+          "term": "fall",
+          "term_year": 2027,
+          "applicant": "international",
+          "kind": "final",
+          "date": "2027-03-01"
+        },
+        "status": "reported_by_program",
+        "source_kind": "page",
+        "source_url": "https://example.edu/msds/deadlines",
+        "evidence": null,
+        "verified_at": "2026-11-21"
+      },
+      {
+        "value": {
+          "term": "fall",
+          "term_year": 2027,
+          "applicant": "all",
+          "kind": "funding_consideration",
+          "date": "2027-01-15"
+        },
+        "status": "reported_by_program",
+        "source_kind": "page",
+        "source_url": "https://example.edu/graduate-school/funding-deadlines",
+        "evidence": null,
+        "verified_at": "2026-11-21"
+      },
+      {
+        "value": {
+          "term": "spring",
+          "term_year": 2028,
+          "applicant": "international",
+          "kind": "final",
+          "date": "2027-08-01"
+        },
+        "status": "reported_by_program",
+        "source_kind": "page",
+        "source_url": "https://example.edu/msds/deadlines",
+        "evidence": null,
+        "verified_at": "2026-11-21"
+      }
+    ]
+  },
+  "career": {
+    "median_earnings": {
+      "value": {
+        "amount": 85000,
+        "currency": "USD",
+        "years_after_completion": 1,
+        "population": "federal_aid_recipients"
+      },
+      "status": "confirmed_official",
+      "source_kind": "official_list",
+      "source_url": "https://example.org/fictitious-field-of-study-earnings",
+      "evidence": null,
+      "verified_at": "2026-11-21"
+    },
+    "placement_rate_pct": {
+      "value": null,
+      "status": "unknown",
+      "source_kind": null,
+      "source_url": null,
+      "evidence": null,
+      "verified_at": null
+    }
+  },
+  "family": {
+    "family_housing_on_campus": {
+      "value": true,
+      "status": "reported_by_program",
+      "source_kind": "page",
+      "source_url": "https://example.edu/housing/family",
+      "evidence": null,
+      "verified_at": "2026-11-21"
+    },
+    "family_housing_rent": {
+      "value": {
+        "amount": 1300,
+        "currency": "USD",
+        "per": "month"
+      },
+      "status": "reported_by_program",
+      "source_kind": "page",
+      "source_url": "https://example.edu/housing/family",
+      "evidence": "Three-bedroom apartments from $1,300/month",
+      "verified_at": "2026-11-21"
+    },
+    "childcare_on_campus": {
+      "value": false,
+      "status": "confirmed_negative",
+      "source_kind": "page",
+      "source_url": "https://example.edu/family-resources",
+      "evidence": "The university does not operate a child care center.",
+      "verified_at": "2026-11-21"
+    },
+    "dependent_insurance_available": {
+      "value": true,
+      "status": "reported_by_program",
+      "source_kind": "page",
+      "source_url": "https://example.edu/health/insurance",
+      "evidence": null,
+      "verified_at": "2026-11-21"
+    },
+    "dependent_insurance_cost": {
+      "value": null,
+      "status": "unknown",
+      "source_kind": null,
+      "source_url": null,
+      "evidence": null,
+      "verified_at": null
+    },
+    "spouse_support_programs": {
+      "value": null,
+      "status": "unknown",
+      "source_kind": null,
+      "source_url": null,
+      "evidence": null,
+      "verified_at": null
+    },
+    "k12_district": {
+      "value": {
+        "name": "Exampleville Independent School District (fictitious)",
+        "id_scheme": "nces_leaid",
+        "id": "0000000"
+      },
+      "status": "confirmed_official",
+      "source_kind": "official_list",
+      "source_url": "https://example.org/fictitious-school-district-search",
+      "evidence": null,
+      "verified_at": "2026-11-21"
+    }
+  }
+}

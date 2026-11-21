@@ -1,0 +1,165 @@
+{
+  "files": {
+    "completions": "C2024_a.csv",
+    "directory": "HD2024.csv",
+    "ic_ay": "ic2023_ay.csv"
+  },
+  "completions_rows_total": 307707,
+  "tx_masters_all_cips": {
+    "unitid_cip6_rows": 2690,
+    "institutions": 106
+  },
+  "tx_masters_by_family": {
+    "11.xx computing": {
+      "programs_unitid_cip6": 90,
+      "programs_unitid_cip6_with_completions": 82,
+      "programs_unitid_cip4": 80,
+      "institutions": 46,
+      "institutions_by_control": {
+        "Public": 32,
+        "Private nonprofit": 11,
+        "Private for-profit": 3
+      },
+      "cip6": {
+        "11.0401": 22,
+        "11.0101": 20,
+        "11.1003": 17,
+        "11.0701": 12,
+        "11.0103": 5,
+        "11.0102": 5,
+        "11.1005": 2,
+        "11.1099": 2,
+        "11.0501": 1,
+        "11.0899": 1,
+        "11.0803": 1,
+        "11.0204": 1,
+        "11.0104": 1
+      },
+      "completions_total": 7814,
+      "completions_nonresident": 6311,
+      "grad_tuition_out_of_state_TUITION7": {
+        "value": 45,
+        "missing": 1
+      }
+    },
+    "30.70 data science": {
+      "programs_unitid_cip6": 7,
+      "programs_unitid_cip6_with_completions": 6,
+      "programs_unitid_cip4": 7,
+      "institutions": 7,
+      "institutions_by_control": {
+        "Public": 5,
+        "Private nonprofit": 2
+      },
+      "cip6": {
+        "30.7001": 7
+      },
+      "completions_total": 774,
+      "completions_nonresident": 460,
+      "grad_tuition_out_of_state_TUITION7": {
+        "value": 7
+      }
+    },
+    "52.12 information systems": {
+      "programs_unitid_cip6": 10,
+      "programs_unitid_cip6_with_completions": 3,
+      "programs_unitid_cip4": 8,
+      "institutions": 8,
+      "institutions_by_control": {
+        "Private nonprofit": 4,
+        "Public": 3,
+        "Private for-profit": 1
+      },
+      "cip6": {
+        "52.1201": 8,
+        "52.1206": 1,
+        "52.1207": 1
+      },
+      "completions_total": 48,
+      "completions_nonresident": 7,
+      "grad_tuition_out_of_state_TUITION7": {
+        "value": 8
+      }
+    },
+    "TOTAL": {
+      "programs_unitid_cip6": 107,
+      "programs_unitid_cip6_with_completions": 91,
+      "programs_unitid_cip4": 95,
+      "institutions": 48,
+      "institutions_by_control": {
+        "Public": 32,
+        "Private nonprofit": 12,
+        "Private for-profit": 4
+      },
+      "cip6": {
+        "11.0401": 22,
+        "11.0101": 20,
+        "11.1003": 17,
+        "11.0701": 12,
+        "52.1201": 8,
+        "30.7001": 7,
+        "11.0103": 5,
+        "11.0102": 5,
+        "11.1005": 2,
+        "11.1099": 2,
+        "52.1206": 1,
+        "11.0501": 1,
+        "11.0899": 1,
+        "11.0803": 1,
+        "11.0204": 1,
+        "52.1207": 1,
+        "11.0104": 1
+      },
+      "completions_total": 8636,
+      "completions_nonresident": 6778,
+      "grad_tuition_out_of_state_TUITION7": {
+        "value": 47,
+        "missing": 1
+      }
+    }
+  },
+  "compare_scorecard_vs_ipeds_unitid_cip4": {
+    "scorecard_rows": 99,
+    "ipeds_rows": 95,
+    "ipeds_rows_with_completions": 84,
+    "in_both": 95,
+    "only_scorecard": [
+      [
+        "225502",
+        "1103",
+        "Texas A&M University-Victoria"
+      ],
+      [
+        "228723",
+        "5212",
+        "Texas A&M University-College Station"
+      ],
+      [
+        "229027",
+        "1104",
+        "The University of Texas at San Antonio"
+      ],
+      [
+        "229115",
+        "1104",
+        "Texas Tech University"
+      ]
+    ],
+    "only_ipeds": [],
+    "scorecard_institutions": 48,
+    "ipeds_institutions": 48,
+    "cip6_per_unitid_cip4_max": 3,
+    "unitid_cip4_with_more_than_one_cip6": 10
+  },
+  "compare_ipedscount2_vs_c2024": {
+    "pairs_compared": 95,
+    "equal": 95
+  },
+  "urban_crosscheck": {
+    "pairs_urban": 107,
+    "pairs_nces": 107,
+    "pairs_matching_exactly": 107,
+    "sum_urban": 8636,
+    "sum_nces": 8636
+  }
+}

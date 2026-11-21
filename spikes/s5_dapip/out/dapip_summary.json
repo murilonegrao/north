@@ -1,0 +1,147 @@
+{
+  "files": {
+    "InstitutionCampus.csv": {
+      "rows": 45826,
+      "columns": [
+        "DapipId",
+        "OpeId",
+        "IpedsUnitIds",
+        "LocationName",
+        "ParentName",
+        "ParentDapipId",
+        "LocationType",
+        "Address",
+        "GeneralPhone",
+        "AdminName",
+        "AdminPhone",
+        "AdminEmail",
+        "Fax",
+        "UpdateDate"
+      ]
+    },
+    "AccreditationRecords.csv": {
+      "rows": 65682,
+      "columns": [
+        "DapipId",
+        "AgencyId",
+        "AgencyName",
+        "ProgramId",
+        "ProgramName",
+        "SequentialId",
+        "InitialDateFlag",
+        "AccreditationDate",
+        "AccreditationStatus",
+        "ReviewDate",
+        "DepartmentDescription",
+        "AccreditationEndDate",
+        "EndingActionId"
+      ]
+    },
+    "AccreditationActions.csv": {
+      "columns": [
+        "DapipId",
+        "AgencyId",
+        "AgencyName",
+        "ProgramId",
+        "ProgramName",
+        "SequentialId",
+        "ActionDescription",
+        "ActionDate",
+        "JustificationDescription",
+        "JustificationOther",
+        "EndDate"
+      ]
+    }
+  },
+  "location_types": {
+    "Institution": 10376,
+    "Additional Location": 33786,
+    "Site": 1664
+  },
+  "institutions": 10376,
+  "institutions_with_unitid": 7441,
+  "institutions_with_opeid": 7127,
+  "institutions_with_multiple_unitids": 15,
+  "latest_update_date": "2026-11-06",
+  "accreditation_status_values": {
+    "Accredited": 62581,
+    "Preaccredited": 3041,
+    "Denied Accreditation": 60
+  },
+  "records_institutional_current": 24693,
+  "institutions_with_current_institutional": 6425,
+  "current_institutional_by_agency_top15": [
+    [
+      "Higher Learning Commission",
+      7865
+    ],
+    [
+      "Southern Association of Colleges and Schools Commission on Colleges d.b.a. Commission on Colleges and Universities",
+      6527
+    ],
+    [
+      "Middle States Commission on Higher Education",
+      2473
+    ],
+    [
+      "Council on Occupational Education",
+      1330
+    ],
+    [
+      "National Accrediting Commission of Career Arts and Sciences, Inc.",
+      1194
+    ],
+    [
+      "Accrediting Council for Continuing Education and Training",
+      901
+    ],
+    [
+      "New England Commission of Higher Education",
+      779
+    ],
+    [
+      "WASC Senior College and University Commission",
+      633
+    ],
+    [
+      "Accrediting Commission of Career Schools and Colleges",
+      594
+    ],
+    [
+      "Accrediting Bureau of Health Education Schools",
+      357
+    ],
+    [
+      "Accrediting Commission for Community and Junior Colleges",
+      347
+    ],
+    [
+      "Northwest Commission on Colleges and Universities",
+      193
+    ],
+    [
+      "Commission on English Language Program Accreditation",
+      188
+    ],
+    [
+      "Commission on Accrediting of the Association of Theological Schools",
+      182
+    ],
+    [
+      "Montessori Accreditation Council for Teacher Education",
+      179
+    ]
+  ],
+  "TX_ipeds_grad": 110,
+  "TX_coverage": {
+    "join_unitid": 100,
+    "joined_by_opeid": 99,
+    "has_current_institutional": 103,
+    "has_regional": 90,
+    "no_regional": 20,
+    "not_joined_by_opeid": 11,
+    "no_current_institutional": 7,
+    "join_opeid6_parent": 4,
+    "join_none": 6
+  }
+}

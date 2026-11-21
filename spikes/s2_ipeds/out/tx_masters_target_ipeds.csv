@@ -1,0 +1,108 @@
+UNITID,CIPCODE,completions_total,completions_first_major,completions_nonresident,INSTNM,CITY,STABBR,CONTROL,OPEID,WEBADDR,INSTSIZE,CYACTIVE,LATITUDE,LONGITUD,family,cip4,control_label,size_label,TUITION6,FEE6,TUITION7,FEE7,HRCHG7
+222178,11.0103,8,8,0,Abilene Christian University,Abilene,TX,2,00353700,www.acu.edu/,3,1,32.468943,-99.709797,11.xx computing,1101,Private nonprofit,"5,000-9,999",24174,0,24174,0,1343
+445133,11.0103,20,20,0,American InterContinental University-Houston,Houston,TX,3,02113610,www.aiuniv.edu/online-campus/campus-locations/houston,1,1,29.728216,-95.548302,11.xx computing,1101,Private for-profit,"Under 1,000",14688,660,14688,660,510
+222831,11.0101,13,13,2,Angelo State University,San Angelo,TX,1,00354100,www.angelo.edu/,4,1,31.440914,-100.465051,11.xx computing,1101,Public,"10,000-19,999",4181,3213,11741,3213,652
+223232,11.0401,22,22,14,Baylor University,Waco,TX,2,00354500,www.baylor.edu/,5,1,31.546872,-97.121041,11.xx computing,1104,Private nonprofit,"20,000 and above",41130,0,41130,0,2285
+223232,11.0701,25,25,16,Baylor University,Waco,TX,2,00354500,www.baylor.edu/,5,1,31.546872,-97.121041,11.xx computing,1107,Private nonprofit,"20,000 and above",41130,0,41130,0,2285
+224226,11.0401,68,68,65,Dallas Baptist University,Dallas,TX,2,00356000,https://www.dbu.edu/,2,1,32.710017,-96.947006,11.xx computing,1104,Private nonprofit,"1,000-4,999",22878,1630,22878,1630,1271
+224226,11.1003,1,1,0,Dallas Baptist University,Dallas,TX,2,00356000,https://www.dbu.edu/,2,1,32.710017,-96.947006,11.xx computing,1110,Private nonprofit,"1,000-4,999",22878,1630,22878,1630,1271
+224226,11.1005,1,1,0,Dallas Baptist University,Dallas,TX,2,00356000,https://www.dbu.edu/,2,1,32.710017,-96.947006,11.xx computing,1110,Private nonprofit,"1,000-4,999",22878,1630,22878,1630,1271
+224554,11.0101,209,209,155,East Texas A&M University,Commerce,TX,1,00356500,www.tamuc.edu/,4,1,33.242112,-95.904579,11.xx computing,1101,Public,"10,000-19,999",3630,3708,11196,3708,622
+224554,11.0102,0,0,0,East Texas A&M University,Commerce,TX,1,00356500,www.tamuc.edu/,4,1,33.242112,-95.904579,11.xx computing,1101,Public,"10,000-19,999",3630,3708,11196,3708,622
+225201,11.1003,32,32,0,Hallmark University,San Antonio,TX,2,01050900,https://www.hallmarkuniversity.edu/,1,1,29.466862,-98.685754,11.xx computing,1110,Private nonprofit,"Under 1,000",,,,,
+226091,11.0401,271,271,165,Lamar University,Beaumont,TX,1,00358100,www.lamar.edu/,4,1,30.042738,-94.072244,11.xx computing,1104,Public,"10,000-19,999",6471,2171,13815,2171,768
+226091,11.0701,206,206,205,Lamar University,Beaumont,TX,1,00358100,www.lamar.edu/,4,1,30.042738,-94.072244,11.xx computing,1107,Public,"10,000-19,999",6471,2171,13815,2171,768
+226833,11.0101,26,26,19,Midwestern State University,Wichita Falls,TX,1,00359200,www.msutexas.edu/,3,1,33.874809,-98.519386,11.xx computing,1101,Public,"5,000-9,999",4246,2823,5416,2823,301
+461795,11.0701,91,91,49,North American University,Stafford,TX,2,04179500,www.na.edu/,1,1,29.646303,-95.588338,11.xx computing,1107,Private nonprofit,"Under 1,000",10763,400,10763,400,359
+227331,11.1003,3,3,0,Our Lady of the Lake University,San Antonio,TX,2,00359800,https://www.ollusa.edu/,2,1,29.426194,-98.543650,11.xx computing,1110,Private nonprofit,"1,000-4,999",17658,840,17658,840,981
+227526,11.0101,7,7,6,Prairie View A & M University,Prairie View,TX,1,00363000,www.pvamu.edu/,3,1,30.092425,-95.989475,11.xx computing,1101,Public,"5,000-9,999",5191,2802,14353,3025,797
+227526,11.0401,24,24,20,Prairie View A & M University,Prairie View,TX,1,00363000,www.pvamu.edu/,3,1,30.092425,-95.989475,11.xx computing,1104,Public,"5,000-9,999",5191,2802,14353,3025,797
+227757,11.0101,158,158,126,Rice University,Houston,TX,2,00360400,www.rice.edu/,3,1,29.717897,-95.402035,11.xx computing,1101,Private nonprofit,"5,000-9,999",53712,750,53712,750,1939
+227881,11.0101,15,15,15,Sam Houston State University,Huntsville,TX,1,00360600,www.shsu.edu/,5,1,30.714738,-95.546205,11.xx computing,1101,Public,"20,000 and above",5765,3189,13109,3189,728
+227881,11.1003,13,13,1,Sam Houston State University,Huntsville,TX,1,00360600,www.shsu.edu/,5,1,30.714738,-95.546205,11.xx computing,1110,Public,"20,000 and above",5765,3189,13109,3189,728
+480073,11.0401,4,4,2,South University-Austin,Round Rock,TX,3,01303915,"www.southuniversity.edu/austin#location=Austin, TX",1,1,30.479474,-97.689972,11.xx computing,1104,Private for-profit,"Under 1,000",16056,480,16056,480,669
+228246,11.0401,0,0,0,Southern Methodist University,Dallas,TX,2,00361300,https://www.smu.edu/,4,1,32.843612,-96.783365,11.xx computing,1104,Private nonprofit,"10,000-19,999",31590,5472,31590,5472,1755
+228246,11.0501,0,0,0,Southern Methodist University,Dallas,TX,2,00361300,https://www.smu.edu/,4,1,32.843612,-96.783365,11.xx computing,1105,Private nonprofit,"10,000-19,999",31590,5472,31590,5472,1755
+228246,11.0701,53,53,17,Southern Methodist University,Dallas,TX,2,00361300,https://www.smu.edu/,4,1,32.843612,-96.783365,11.xx computing,1107,Private nonprofit,"10,000-19,999",31590,5472,31590,5472,1755
+228246,11.0899,0,0,0,Southern Methodist University,Dallas,TX,2,00361300,https://www.smu.edu/,4,1,32.843612,-96.783365,11.xx computing,1108,Private nonprofit,"10,000-19,999",31590,5472,31590,5472,1755
+228246,11.1003,12,12,3,Southern Methodist University,Dallas,TX,2,00361300,https://www.smu.edu/,4,1,32.843612,-96.783365,11.xx computing,1110,Private nonprofit,"10,000-19,999",31590,5472,31590,5472,1755
+228246,11.1099,0,0,0,Southern Methodist University,Dallas,TX,2,00361300,https://www.smu.edu/,4,1,32.843612,-96.783365,11.xx computing,1110,Private nonprofit,"10,000-19,999",31590,5472,31590,5472,1755
+228149,11.0101,1,1,0,St. Mary's University,San Antonio,TX,2,00362300,www.stmarytx.edu/,2,1,29.453244,-98.562778,11.xx computing,1101,Private nonprofit,"1,000-4,999",19782,1224,19782,1224,1099
+228149,11.0701,7,7,5,St. Mary's University,San Antonio,TX,2,00362300,www.stmarytx.edu/,2,1,29.453244,-98.562778,11.xx computing,1107,Private nonprofit,"1,000-4,999",19782,1224,19782,1224,1099
+228149,11.1003,5,5,1,St. Mary's University,San Antonio,TX,2,00362300,www.stmarytx.edu/,2,1,29.453244,-98.562778,11.xx computing,1110,Private nonprofit,"1,000-4,999",19782,1224,19782,1224,1099
+228431,11.1003,14,14,9,Stephen F Austin State University,Nacogdoches,TX,1,00362400,https://www.sfasu.edu/,4,1,31.621056,-94.649080,11.xx computing,1110,Public,"10,000-19,999",5262,2171,12822,2171,779
+458973,11.0401,1,1,0,Strayer University-Texas,Farmers Branch,TX,3,10145901,www.strayer.edu/campus-locations,2,1,32.910744,-96.887509,11.xx computing,1104,Private for-profit,"1,000-4,999",14940,195,14940,195,533
+458973,11.1003,1,1,0,Strayer University-Texas,Farmers Branch,TX,3,10145901,www.strayer.edu/campus-locations,2,1,32.910744,-96.887509,11.xx computing,1110,Private for-profit,"1,000-4,999",14940,195,14940,195,533
+228529,11.0401,17,17,0,Tarleton State University,Stephenville,TX,1,00363100,www.tarleton.edu/,4,1,32.217805,-98.219039,11.xx computing,1104,Public,"10,000-19,999",4356,3141,11916,3141,662
+226152,11.0401,19,19,1,Texas A & M International University,Laredo,TX,1,00965100,www.tamiu.edu/,3,1,27.571172,-99.436043,11.xx computing,1104,Public,"5,000-9,999",3350,3245,10712,4711,918
+224147,11.0101,153,153,150,Texas A & M University-Corpus Christi,Corpus Christi,TX,1,01116100,https://www.tamucc.edu/,4,1,27.713723,-97.323950,11.xx computing,1101,Public,"10,000-19,999",3610,3569,11715,4280,651
+483036,11.0401,25,25,1,Texas A&M University-Central Texas,Killeen,TX,1,04229500,tamuct.edu/,2,1,31.053407,-97.775182,11.xx computing,1104,Public,"1,000-4,999",5558,684,12902,684,717
+228723,11.0401,182,182,98,Texas A&M University-College Station,College Station,TX,1,00363200,https://www.tamu.edu/,5,1,30.618726,-96.336475,11.xx computing,1104,Public,"20,000 and above",6885,4208,19882,4208,828
+228723,11.0701,143,143,108,Texas A&M University-College Station,College Station,TX,1,00363200,https://www.tamu.edu/,5,1,30.618726,-96.336475,11.xx computing,1107,Public,"20,000 and above",6885,4208,19882,4208,828
+228723,11.0803,25,25,6,Texas A&M University-College Station,College Station,TX,1,00363200,https://www.tamu.edu/,5,1,30.618726,-96.336475,11.xx computing,1108,Public,"20,000 and above",6885,4208,19882,4208,828
+228705,11.0101,105,105,100,Texas A&M University-Kingsville,Kingsville,TX,1,00363900,https://www.tamuk.edu/,3,1,27.525168,-97.882387,11.xx computing,1101,Public,"5,000-9,999",3409,2748,10968,3592,1183
+459949,11.0701,12,12,6,Texas A&M University-San Antonio,San Antonio,TX,1,04248500,www.tamusa.edu/,3,1,29.304762,-98.524170,11.xx computing,1107,Public,"5,000-9,999",3978,2460,12237,2950,680
+229063,11.0701,5,5,2,Texas Southern University,Houston,TX,1,00364200,www.tsu.edu/,3,1,29.721046,-95.361113,11.xx computing,1107,Public,"5,000-9,999",6858,1470,14258,1470,470
+228459,11.0401,3,3,2,Texas State University,San Marcos,TX,1,00361500,https://www.txst.edu/,5,1,29.888885,-97.943029,11.xx computing,1104,Public,"20,000 and above",7147,2754,15547,2754,777
+228459,11.0701,88,88,82,Texas State University,San Marcos,TX,1,00361500,https://www.txst.edu/,5,1,29.888885,-97.943029,11.xx computing,1107,Public,"20,000 and above",7147,2754,15547,2754,777
+229115,11.0101,286,286,283,Texas Tech University,Lubbock,TX,1,00364400,www.ttu.edu/,5,1,33.583448,-101.874783,11.xx computing,1101,Public,"20,000 and above",6956,2562,15356,2562,768
+229179,11.0104,13,13,0,Texas Woman's University,Denton,TX,1,00364600,www.twu.edu/,4,1,33.226211,-97.127842,11.xx computing,1101,Public,"10,000-19,999",5184,2706,12744,2706,708
+229018,11.0101,15,15,13,The University of Texas Permian Basin,Odessa,TX,1,00993000,https://www.utpb.edu/,3,1,31.889509,-102.329634,11.xx computing,1101,Public,"5,000-9,999",4948,1958,12292,1958,683
+227368,11.0103,9,9,1,The University of Texas Rio Grande Valley,Edinburg,TX,1,00359900,www.utrgv.edu/,5,1,26.306759,-98.173567,11.xx computing,1101,Public,"20,000 and above",6948,1495,14499,1495,814
+227368,11.0401,0,0,0,The University of Texas Rio Grande Valley,Edinburg,TX,1,00359900,www.utrgv.edu/,5,1,26.306759,-98.173567,11.xx computing,1104,Public,"20,000 and above",6948,1495,14499,1495,814
+227368,11.0701,23,23,11,The University of Texas Rio Grande Valley,Edinburg,TX,1,00359900,www.utrgv.edu/,5,1,26.306759,-98.173567,11.xx computing,1107,Public,"20,000 and above",6948,1495,14499,1495,814
+228769,11.0101,1007,1007,997,The University of Texas at Arlington,Arlington,TX,1,00365600,https://www.uta.edu/,5,1,32.729718,-97.112960,11.xx computing,1101,Public,"20,000 and above",9015,1838,23507,1838,1326
+228769,11.0401,131,131,125,The University of Texas at Arlington,Arlington,TX,1,00365600,https://www.uta.edu/,5,1,32.729718,-97.112960,11.xx computing,1104,Public,"20,000 and above",9015,1838,23507,1838,1326
+228778,11.0101,267,267,102,The University of Texas at Austin,Austin,TX,1,00365800,https://www.utexas.edu/,5,1,30.282825,-97.738273,11.xx computing,1101,Public,"20,000 and above",12012,0,22954,0,1237
+228778,11.0102,0,0,0,The University of Texas at Austin,Austin,TX,1,00365800,https://www.utexas.edu/,5,1,30.282825,-97.738273,11.xx computing,1101,Public,"20,000 and above",12012,0,22954,0,1237
+228778,11.0401,191,191,117,The University of Texas at Austin,Austin,TX,1,00365800,https://www.utexas.edu/,5,1,30.282825,-97.738273,11.xx computing,1104,Public,"20,000 and above",12012,0,22954,0,1237
+228778,11.1003,28,28,2,The University of Texas at Austin,Austin,TX,1,00365800,https://www.utexas.edu/,5,1,30.282825,-97.738273,11.xx computing,1110,Public,"20,000 and above",12012,0,22954,0,1237
+228787,11.0101,515,515,431,The University of Texas at Dallas,Richardson,TX,1,00974100,www.utdallas.edu/,5,1,32.984673,-96.749702,11.xx computing,1101,Public,"20,000 and above",15088,0,29468,0,1637
+228787,11.0204,0,0,0,The University of Texas at Dallas,Richardson,TX,1,00974100,www.utdallas.edu/,5,1,32.984673,-96.749702,11.xx computing,1102,Public,"20,000 and above",15088,0,29468,0,1637
+228787,11.0401,800,800,709,The University of Texas at Dallas,Richardson,TX,1,00974100,www.utdallas.edu/,5,1,32.984673,-96.749702,11.xx computing,1104,Public,"20,000 and above",15088,0,29468,0,1637
+228787,11.1003,49,49,33,The University of Texas at Dallas,Richardson,TX,1,00974100,www.utdallas.edu/,5,1,32.984673,-96.749702,11.xx computing,1110,Public,"20,000 and above",15088,0,29468,0,1637
+228796,11.0101,14,14,6,The University of Texas at El Paso,El Paso,TX,1,00366100,https://www.utep.edu/,5,1,31.770150,-106.504098,11.xx computing,1101,Public,"20,000 and above",5865,1301,15320,1301,853
+228796,11.0401,4,4,1,The University of Texas at El Paso,El Paso,TX,1,00366100,https://www.utep.edu/,5,1,31.770150,-106.504098,11.xx computing,1104,Public,"20,000 and above",5865,1301,15320,1301,853
+229027,11.0101,70,70,52,The University of Texas at San Antonio,San Antonio,TX,1,01011500,www.utsa.edu/,5,1,29.583709,-98.620657,11.xx computing,1101,Public,"20,000 and above",7403,2459,26294,2459,1461
+229027,11.0102,9,9,4,The University of Texas at San Antonio,San Antonio,TX,1,01011500,www.utsa.edu/,5,1,29.583709,-98.620657,11.xx computing,1101,Public,"20,000 and above",7403,2459,26294,2459,1461
+229027,11.0103,82,82,13,The University of Texas at San Antonio,San Antonio,TX,1,01011500,www.utsa.edu/,5,1,29.583709,-98.620657,11.xx computing,1101,Public,"20,000 and above",7403,2459,26294,2459,1461
+229027,11.1003,14,14,4,The University of Texas at San Antonio,San Antonio,TX,1,01011500,www.utsa.edu/,5,1,29.583709,-98.620657,11.xx computing,1110,Public,"20,000 and above",7403,2459,26294,2459,1461
+228802,11.0101,14,14,14,The University of Texas at Tyler,Tyler,TX,1,01116300,https://www.uttyler.edu/,4,1,32.315772,-95.254337,11.xx computing,1101,Public,"10,000-19,999",6534,1910,15498,1910,995
+228802,11.1003,4,4,1,The University of Texas at Tyler,Tyler,TX,1,01116300,https://www.uttyler.edu/,4,1,32.315772,-95.254337,11.xx computing,1110,Public,"10,000-19,999",6534,1910,15498,1910,995
+224323,11.1003,40,40,6,University of Dallas,Irving,TX,2,00365100,https://udallas.edu/,2,1,32.846221,-96.919512,11.xx computing,1110,Private nonprofit,"1,000-4,999",34425,0,34425,0,1275
+224323,11.1099,4,4,1,University of Dallas,Irving,TX,2,00365100,https://udallas.edu/,2,1,32.846221,-96.919512,11.xx computing,1110,Private nonprofit,"1,000-4,999",34425,0,34425,0,1275
+225511,11.0101,64,64,58,University of Houston,Houston,TX,1,00365200,www.uh.edu/,5,1,29.720393,-95.343537,11.xx computing,1101,Public,"20,000 and above",8723,1026,18083,1026,1005
+225511,11.0401,49,49,31,University of Houston,Houston,TX,1,00365200,www.uh.edu/,5,1,29.720393,-95.343537,11.xx computing,1104,Public,"20,000 and above",8723,1026,18083,1026,1005
+225511,11.1003,53,53,27,University of Houston,Houston,TX,1,00365200,www.uh.edu/,5,1,29.720393,-95.343537,11.xx computing,1110,Public,"20,000 and above",8723,1026,18083,1026,1005
+225511,11.1005,30,30,16,University of Houston,Houston,TX,1,00365200,www.uh.edu/,5,1,29.720393,-95.343537,11.xx computing,1110,Public,"20,000 and above",8723,1026,18083,1026,1005
+225414,11.0101,17,17,16,University of Houston-Clear Lake,Houston,TX,1,01171100,www.uhcl.edu/,3,1,29.582523,-95.098129,11.xx computing,1101,Public,"5,000-9,999",7920,1548,17532,1548,974
+225414,11.0401,47,47,43,University of Houston-Clear Lake,Houston,TX,1,01171100,www.uhcl.edu/,3,1,29.582523,-95.098129,11.xx computing,1104,Public,"5,000-9,999",7920,1548,17532,1548,974
+225414,11.0701,43,43,39,University of Houston-Clear Lake,Houston,TX,1,01171100,www.uhcl.edu/,3,1,29.582523,-95.098129,11.xx computing,1107,Public,"5,000-9,999",7920,1548,17532,1548,974
+225432,11.0102,2,2,1,University of Houston-Downtown,Houston,TX,1,00361200,www.uhd.edu/,4,1,29.766100,-95.359338,11.xx computing,1101,Public,"10,000-19,999",8073,1456,14733,1456,819
+225502,11.0401,23,23,4,University of Houston-Victoria,Victoria,TX,1,01323100,uhv.edu/,2,1,28.816248,-96.976334,11.xx computing,1104,Public,"1,000-4,999",6618,1697,13838,1697,776
+225502,11.0701,13,13,12,University of Houston-Victoria,Victoria,TX,1,01323100,uhv.edu/,2,1,28.816248,-96.976334,11.xx computing,1107,Public,"1,000-4,999",6618,1697,13838,1697,776
+226471,11.0401,20,20,17,University of Mary Hardin-Baylor,Belton,TX,2,00358800,https://go.umhb.edu/,2,1,31.066793,-97.463471,11.xx computing,1104,Private nonprofit,"1,000-4,999",19215,1630,19215,1630,1068
+226471,11.1003,1,0,0,University of Mary Hardin-Baylor,Belton,TX,2,00358800,https://go.umhb.edu/,2,1,31.066793,-97.463471,11.xx computing,1110,Private nonprofit,"1,000-4,999",19215,1630,19215,1630,1068
+227216,11.0101,850,850,833,University of North Texas,Denton,TX,1,00359400,www.unt.edu/,5,1,33.211178,-97.148422,11.xx computing,1101,Public,"20,000 and above",7160,1902,14720,1902,923
+227216,11.0102,69,69,55,University of North Texas,Denton,TX,1,00359400,www.unt.edu/,5,1,33.211178,-97.148422,11.xx computing,1101,Public,"20,000 and above",7160,1902,14720,1902,923
+227216,11.0103,457,457,450,University of North Texas,Denton,TX,1,00359400,www.unt.edu/,5,1,33.211178,-97.148422,11.xx computing,1101,Public,"20,000 and above",7160,1902,14720,1902,923
+227216,11.0401,348,348,302,University of North Texas,Denton,TX,1,00359400,www.unt.edu/,5,1,33.211178,-97.148422,11.xx computing,1104,Public,"20,000 and above",7160,1902,14720,1902,923
+227216,11.1003,25,25,23,University of North Texas,Denton,TX,1,00359400,www.unt.edu/,5,1,33.211178,-97.148422,11.xx computing,1110,Public,"20,000 and above",7160,1902,14720,1902,923
+229814,11.1003,26,26,7,West Texas A & M University,Canyon,TX,1,00366500,https://www.wtamu.edu/,3,1,34.982789,-101.914736,11.xx computing,1110,Public,"5,000-9,999",5088,2196,6378,2196,489
+227757,30.7001,52,52,27,Rice University,Houston,TX,2,00360400,www.rice.edu/,3,1,29.717897,-95.402035,30.70 data science,3070,Private nonprofit,"5,000-9,999",53712,750,53712,750,1939
+228246,30.7001,69,69,5,Southern Methodist University,Dallas,TX,2,00361300,https://www.smu.edu/,4,1,32.843612,-96.783365,30.70 data science,3070,Private nonprofit,"10,000-19,999",31590,5472,31590,5472,1755
+228723,30.7001,28,28,23,Texas A&M University-College Station,College Station,TX,1,00363200,https://www.tamu.edu/,5,1,30.618726,-96.336475,30.70 data science,3070,Public,"20,000 and above",6885,4208,19882,4208,828
+229115,30.7001,107,107,16,Texas Tech University,Lubbock,TX,1,00364400,www.ttu.edu/,5,1,33.583448,-101.874783,30.70 data science,3070,Public,"20,000 and above",6956,2562,15356,2562,768
+228778,30.7001,174,174,53,The University of Texas at Austin,Austin,TX,1,00365800,https://www.utexas.edu/,5,1,30.282825,-97.738273,30.70 data science,3070,Public,"20,000 and above",12012,0,22954,0,1237
+225502,30.7001,0,0,0,University of Houston-Victoria,Victoria,TX,1,01323100,uhv.edu/,2,1,28.816248,-96.976334,30.70 data science,3070,Public,"1,000-4,999",6618,1697,13838,1697,776
+227216,30.7001,344,344,336,University of North Texas,Denton,TX,1,00359400,www.unt.edu/,5,1,33.211178,-97.148422,30.70 data science,3070,Public,"20,000 and above",7160,1902,14720,1902,923
+224226,52.1201,0,0,0,Dallas Baptist University,Dallas,TX,2,00356000,https://www.dbu.edu/,2,1,32.710017,-96.947006,52.12 information systems,5212,Private nonprofit,"1,000-4,999",22878,1630,22878,1630,1271
+482635,52.1201,0,0,0,DeVry University-Texas,Irving,TX,3,01072724,https://www.devry.edu/,1,1,32.934524,-97.012494,52.12 information systems,5212,Private for-profit,"Under 1,000",17072,480,17072,480,776
+226231,52.1201,0,0,0,LeTourneau University,Longview,TX,2,00358400,www.letu.edu/,2,1,32.466320,-94.726394,52.12 information systems,5212,Private nonprofit,"1,000-4,999",16875,0,16875,0,625
+228246,52.1201,0,0,0,Southern Methodist University,Dallas,TX,2,00361300,https://www.smu.edu/,4,1,32.843612,-96.783365,52.12 information systems,5212,Private nonprofit,"10,000-19,999",31590,5472,31590,5472,1755
+229063,52.1201,13,13,5,Texas Southern University,Houston,TX,1,00364200,www.tsu.edu/,3,1,29.721046,-95.361113,52.12 information systems,5212,Public,"5,000-9,999",6858,1470,14258,1470,470
+229027,52.1201,0,0,0,The University of Texas at San Antonio,San Antonio,TX,1,01011500,www.utsa.edu/,5,1,29.583709,-98.620657,52.12 information systems,5212,Public,"20,000 and above",7403,2459,26294,2459,1461
+229027,52.1207,12,12,1,The University of Texas at San Antonio,San Antonio,TX,1,01011500,www.utsa.edu/,5,1,29.583709,-98.620657,52.12 information systems,5212,Public,"20,000 and above",7403,2459,26294,2459,1461
+224323,52.1201,0,0,0,University of Dallas,Irving,TX,2,00365100,https://udallas.edu/,2,1,32.846221,-96.919512,52.12 information systems,5212,Private nonprofit,"1,000-4,999",34425,0,34425,0,1275
+224323,52.1206,0,0,0,University of Dallas,Irving,TX,2,00365100,https://udallas.edu/,2,1,32.846221,-96.919512,52.12 information systems,5212,Private nonprofit,"1,000-4,999",34425,0,34425,0,1275
+229814,52.1201,23,23,1,West Texas A & M University,Canyon,TX,1,00366500,https://www.wtamu.edu/,3,1,34.982789,-101.914736,52.12 information systems,5212,Public,"5,000-9,999",5088,2196,6378,2196,489

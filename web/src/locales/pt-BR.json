@@ -1,0 +1,33 @@
+{
+  "_meta": { "machine_translated": true },
+  "meta": {
+    "title": "North: mestrados nos EUA para estudantes internacionais",
+    "description": "Um mapa dos programas de mestrado dos EUA para estudantes internacionais, com uma fonte para cada dado."
+  },
+  "nav": {
+    "skip": "Pular para o conteúdo",
+    "home": "North, página inicial",
+    "language": "Idioma"
+  },
+  "theme": {
+    "light": "Claro",
+    "dark": "Escuro",
+    "toLight": "Mudar para o tema claro",
+    "toDark": "Mudar para o tema escuro"
+  },
+  "disclaimer": "Isto não é assessoria imigratória; confira a fonte oficial.",
+  "home": {
+    "eyebrow": "Pré-alfa",
+    "tagline": "Um mapa dos programas de mestrado dos EUA para estudantes internacionais",
+    "description": "O North mapeia, verifica e compara programas de mestrado presenciais nos EUA do ponto de vista de quem precisa de visto F-1 e leva dependentes. Cada dado traz fonte, data e status de verificação, para que um dado desconhecido nunca seja confundido com um dado negativo."
+  },
+  "status": {
+    "label": "Status da API",
+    "checking": "Verificando…",
+    "ok": "No ar · versão {version}",
+    "down": "Indisponível"
+  },
+  "footer": {
+    "license": "Código AGPL-3.0 · Dados CC BY 4.0"
+  }
+}

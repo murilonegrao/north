@@ -1,0 +1,77 @@
+# On every push to main: tests and, if they pass, the image goes to GHCR with the tags
+# sha-<7 chars> and main. Deployment does not happen here: ArgoCD Image Updater, in the
+# cluster, sees the new tag on GHCR and rolls it out (k3s-gitops docs/image-updater.md).
+# The file name and the job names `testes` and `imagem` are expected by k3s-gitops (C-08).
+name: imagem
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: imagem-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  testes:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+          cache-dependency-glob: backend/uv.lock
+      - name: Backend lint and tests
+        working-directory: backend
+        run: |
+          uv sync --frozen
+          uv run ruff check .
+          uv run pytest
+      - name: Schema validation
+        run: uv run --with jsonschema python -I schema/validate.py
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+      - name: Web tests and build
+        working-directory: web
+        run: |
+          npm ci
+          npm run test -- --run
+          npm run build
+
+  imagem:
+    needs: testes
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v4
+      - id: nome
+        run: |
+          echo "repo=ghcr.io/${GITHUB_REPOSITORY,,}" >> "$GITHUB_OUTPUT"
+          echo "tag=sha-${GITHUB_SHA::7}" >> "$GITHUB_OUTPUT"
+      - uses: docker/setup-buildx-action@v3
+      - uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - uses: docker/build-push-action@v6
+        with:
+          context: .
+          platforms: linux/amd64
+          push: true
+          tags: |
+            ${{ steps.nome.outputs.repo }}:${{ steps.nome.outputs.tag }}
+            ${{ steps.nome.outputs.repo }}:main
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+    outputs:
+      repo: ${{ steps.nome.outputs.repo }}
+      tag: ${{ steps.nome.outputs.tag }}

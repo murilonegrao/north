@@ -1,0 +1,541 @@
+cip_code,title,version,level
+01.0308,Agroecology and Sustainable Agriculture.,2024-07-22,6
+01.0901,"Animal Sciences, General.",2024-07-22,6
+01.0902,Agricultural Animal Breeding.,2024-07-22,6
+01.0903,Animal Health.,2024-07-22,6
+01.0904,Animal Nutrition.,2024-07-22,6
+01.0905,Dairy Science.,2024-07-22,6
+01.0906,Livestock Management.,2024-07-22,6
+01.0907,Poultry Science.,2024-07-22,6
+01.0999,"Animal Sciences, Other.",2024-07-22,6
+01.1001,Food Science.,2024-07-22,6
+01.1002,Food Technology and Processing.,2024-07-22,6
+01.1099,"Food Science and Technology, Other.",2024-07-22,6
+01.1101,"Plant Sciences, General.",2024-07-22,6
+01.1102,Agronomy and Crop Science.,2024-07-22,6
+01.1103,Horticultural Science.,2024-07-22,6
+01.1104,Agricultural and Horticultural Plant Breeding.,2024-07-22,6
+01.1105,Plant Protection and Integrated Pest Management.,2024-07-22,6
+01.1106,Range Science and Management.,2024-07-22,6
+01.1199,"Plant Sciences, Other.",2024-07-22,6
+01.1201,"Soil Science and Agronomy, General.",2024-07-22,6
+01.1202,Soil Chemistry and Physics.,2024-07-22,6
+01.1203,Soil Microbiology.,2024-07-22,6
+01.1299,"Soil Sciences, Other.",2024-07-22,6
+01.8105,Veterinary Anatomy.,2024-07-22,6
+01.8106,Veterinary Infectious Diseases.,2024-07-22,6
+01.8107,Veterinary Microbiology and Immunobiology.,2024-07-22,6
+01.8108,Veterinary Pathology and Pathobiology.,2024-07-22,6
+01.8109,Veterinary Physiology.,2024-07-22,6
+01.8110,"Veterinary Preventive Medicine, Epidemiology, and Public Health.",2024-07-22,6
+01.8111,Veterinary Toxicology and Pharmacology.,2024-07-22,6
+03.0101,"Natural Resources/Conservation, General.",2024-07-22,6
+03.0103,Environmental Studies.,2024-07-22,6
+03.0104,Environmental Science.,2024-07-22,6
+03.0199,"Natural Resources Conservation and Research, Other.",2024-07-22,6
+03.0204,Environmental/Natural Resource Economics.,2024-07-22,6
+03.0205,"Water, Wetlands, and Marine Resources Management.",2024-07-22,6
+03.0210,Bioenergy.,2024-07-22,6
+03.0501,"Forestry, General.",2024-07-22,6
+03.0502,Forest Sciences and Biology.,2024-07-22,6
+03.0508,Urban Forestry.,2024-07-22,6
+03.0509,Wood Science and Wood Products/Pulp and Paper Technology/Technician.,2024-07-22,6
+03.0510,Forest Resources Production and Management.,2024-07-22,6
+03.0601,"Wildlife, Fish and Wildlands Science and Management.",2024-07-22,6
+04.0601,Landscape Architecture.,2024-07-22,6
+04.0902,Architectural and Building Sciences/Technology.,2024-07-22,6
+09.0702,Digital Communication and Media/Multimedia.,2024-07-22,6
+10.0304,"Animation, Interactive Technology, Video Graphics, and Special Effects.",2024-07-22,6
+11.0101,"Computer and Information Sciences, General.",2024-07-22,6
+11.0102,Artificial Intelligence.,2024-07-22,6
+11.0103,Information Technology.,2024-07-22,6
+11.0104,Informatics.,2024-07-22,6
+11.0105,Human-Centered Technology Design.,2024-07-22,6
+11.0199,"Computer and Information Sciences, Other.",2024-07-22,6
+11.0201,"Computer Programming/Programmer, General.",2024-07-22,6
+11.0202,"Computer Programming, Specific Applications.",2024-07-22,6
+11.0203,"Computer Programming, Vendor/Product Certification.",2024-07-22,6
+11.0299,"Computer Programming, Other.",2024-07-22,6
+11.0301,Data Processing and Data Processing Technology/ Technician.,2024-07-22,6
+11.0401,Information Science/Studies.,2024-07-22,6
+11.0501,Computer Systems Analysis/Analyst.,2024-07-22,6
+11.0701,Computer Science.,2024-07-22,6
+11.0801,"Web Page, Digital/Multimedia and Information Resources Design.",2024-07-22,6
+11.0802,Data Modeling/Warehousing and Database Administration.,2024-07-22,6
+11.0803,Computer Graphics.,2024-07-22,6
+11.0804,"Modeling, Virtual Environments and Simulation.",2024-07-22,6
+11.0899,"Computer Software and Media Applications, Other.",2024-07-22,6
+11.0901,Computer Systems Networking and Telecommunications.,2024-07-22,6
+11.0902,Cloud Computing.,2024-07-22,6
+11.1001,Network and System Administration/Administrator.,2024-07-22,6
+11.1002,"System, Networking, and LAN/WAN Management/Manager.",2024-07-22,6
+11.1003,Computer and Information Systems Security/Auditing/Information Assurance.,2024-07-22,6
+11.1004,Web/Multimedia Management and Webmaster.,2024-07-22,6
+11.1005,Information Technology Project Management.,2024-07-22,6
+11.1006,Computer Support Specialist.,2024-07-22,6
+11.1099,"Computer/Information Technology Services Administration and Management, Other.",2024-07-22,6
+13.0501,Educational/Instructional Technology.,2024-07-22,6
+13.0601,Educational Evaluation and Research.,2024-07-22,6
+13.0603,Educational Statistics and Research Methods.,2024-07-22,6
+13.0608,Institutional Research.,2024-07-22,6
+14.0000,ENGINEERING.,2024-07-22,2
+14.0100,"Engineering, General.",2024-07-22,4
+14.0101,"Engineering, General.",2024-07-22,6
+14.0102,Pre-Engineering.,2024-07-22,6
+14.0103,Applied Engineering.,2024-07-22,6
+14.0200,"Aerospace, Aeronautical, and Astronautical/Space Engineering.",2024-07-22,4
+14.0201,"Aerospace, Aeronautical, and Astronautical/Space Engineering, General.",2024-07-22,6
+14.0202,Astronautical Engineering.,2024-07-22,6
+14.0299,"Aerospace, Aeronautical, and Astronautical/Space Engineering, Other.",2024-07-22,6
+14.0300,Agricultural Engineering.,2024-07-22,4
+14.0301,Agricultural Engineering.,2024-07-22,6
+14.0400,Architectural Engineering.,2024-07-22,4
+14.0401,Architectural Engineering.,2024-07-22,6
+14.0500,Biomedical/Medical Engineering.,2024-07-22,4
+14.0501,Bioengineering and Biomedical Engineering.,2024-07-22,6
+14.0600,Ceramic Sciences and Engineering.,2024-07-22,4
+14.0601,Ceramic Sciences and Engineering.,2024-07-22,6
+14.0700,Chemical Engineering.,2024-07-22,4
+14.0701,Chemical Engineering.,2024-07-22,6
+14.0702,Chemical and Biomolecular Engineering.,2024-07-22,6
+14.0799,"Chemical Engineering, Other.",2024-07-22,6
+14.0800,Civil Engineering.,2024-07-22,4
+14.0801,"Civil Engineering, General.",2024-07-22,6
+14.0802,Geotechnical and Geoenvironmental Engineering.,2024-07-22,6
+14.0803,Structural Engineering.,2024-07-22,6
+14.0804,Transportation and Highway Engineering.,2024-07-22,6
+14.0805,Water Resources Engineering.,2024-07-22,6
+14.0899,"Civil Engineering, Other.",2024-07-22,6
+14.0900,Computer Engineering.,2024-07-22,4
+14.0901,"Computer Engineering, General.",2024-07-22,6
+14.0902,Computer Hardware Engineering.,2024-07-22,6
+14.0903,Computer Software Engineering.,2024-07-22,6
+14.0999,"Computer Engineering, Other.",2024-07-22,6
+14.1000,"Electrical, Electronics, and Communications Engineering.",2024-07-22,4
+14.1001,Electrical and Electronics Engineering.,2024-07-22,6
+14.1003,Laser and Optical Engineering.,2024-07-22,6
+14.1004,Telecommunications Engineering.,2024-07-22,6
+14.1099,"Electrical, Electronics, and Communications Engineering, Other.",2024-07-22,6
+14.1100,Engineering Mechanics.,2024-07-22,4
+14.1101,Engineering Mechanics.,2024-07-22,6
+14.1200,Engineering Physics.,2024-07-22,4
+14.1201,Engineering Physics/Applied Physics.,2024-07-22,6
+14.1300,Engineering Science.,2024-07-22,4
+14.1301,Engineering Science.,2024-07-22,6
+14.1400,Environmental/Environmental Health Engineering.,2024-07-22,4
+14.1401,Environmental/Environmental Health Engineering.,2024-07-22,6
+14.1800,Materials Engineering.,2024-07-22,4
+14.1801,Materials Engineering.,2024-07-22,6
+14.1900,Mechanical Engineering.,2024-07-22,4
+14.1901,Mechanical Engineering.,2024-07-22,6
+14.2000,Metallurgical Engineering.,2024-07-22,4
+14.2001,Metallurgical Engineering.,2024-07-22,6
+14.2100,Mining and Mineral Engineering.,2024-07-22,4
+14.2101,Mining and Mineral Engineering.,2024-07-22,6
+14.2200,Naval Architecture and Marine Engineering.,2024-07-22,4
+14.2201,Naval Architecture and Marine Engineering.,2024-07-22,6
+14.2300,Nuclear Engineering.,2024-07-22,4
+14.2301,Nuclear Engineering.,2024-07-22,6
+14.2400,Ocean Engineering.,2024-07-22,4
+14.2401,Ocean Engineering.,2024-07-22,6
+14.2500,Petroleum Engineering.,2024-07-22,4
+14.2501,Petroleum Engineering.,2024-07-22,6
+14.2700,Systems Engineering.,2024-07-22,4
+14.2701,Systems Engineering.,2024-07-22,6
+14.2800,Textile Sciences and Engineering.,2024-07-22,4
+14.2801,Textile Sciences and Engineering.,2024-07-22,6
+14.3200,Polymer/Plastics Engineering.,2024-07-22,4
+14.3201,Polymer/Plastics Engineering.,2024-07-22,6
+14.3300,Construction Engineering.,2024-07-22,4
+14.3301,Construction Engineering.,2024-07-22,6
+14.3400,Forest Engineering.,2024-07-22,4
+14.3401,Forest Engineering.,2024-07-22,6
+14.3500,Industrial Engineering.,2024-07-22,4
+14.3501,Industrial Engineering.,2024-07-22,6
+14.3600,Manufacturing Engineering.,2024-07-22,4
+14.3601,Manufacturing Engineering.,2024-07-22,6
+14.3700,Operations Research.,2024-07-22,4
+14.3701,Operations Research.,2024-07-22,6
+14.3800,Surveying Engineering.,2024-07-22,4
+14.3801,Surveying Engineering.,2024-07-22,6
+14.3900,Geological/Geophysical Engineering.,2024-07-22,4
+14.3901,Geological/Geophysical Engineering.,2024-07-22,6
+14.4000,Paper Science and Engineering.,2024-07-22,4
+14.4001,Paper Science and Engineering.,2024-07-22,6
+14.4100,Electromechanical Engineering.,2024-07-22,4
+14.4101,Electromechanical Engineering.,2024-07-22,6
+14.4200,"Mechatronics, Robotics, and Automation Engineering.",2024-07-22,4
+14.4201,"Mechatronics, Robotics, and Automation Engineering.",2024-07-22,6
+14.4300,Biochemical Engineering.,2024-07-22,4
+14.4301,Biochemical Engineering.,2024-07-22,6
+14.4400,Engineering Chemistry.,2024-07-22,4
+14.4401,Engineering Chemistry.,2024-07-22,6
+14.4500,Biological/Biosystems Engineering.,2024-07-22,4
+14.4501,Biological/Biosystems Engineering.,2024-07-22,6
+14.4700,Electrical and Computer Engineering.,2024-07-22,4
+14.4701,Electrical and Computer Engineering.,2024-07-22,6
+14.4800,Energy Systems Engineering.,2024-07-22,4
+14.4801,"Energy Systems Engineering, General.",2024-07-22,6
+14.4802,Power Plant Engineering.,2024-07-22,6
+14.4899,"Energy Systems Engineering, Other.",2024-07-22,6
+14.9900,"Engineering, Other.",2024-07-22,4
+14.9999,"Engineering, Other.",2024-07-22,6
+15.0000,"Engineering Technologies/Technicians, General.",2024-07-22,6
+15.0101,Architectural Engineering Technologies/Technicians.,2024-07-22,6
+15.0201,Civil Engineering Technologies/Technicians.,2024-07-22,6
+15.0303,"Electrical, Electronic, and Communications Engineering Technology/Technician.",2024-07-22,6
+15.0304,Laser and Optical Technology/Technician.,2024-07-22,6
+15.0305,Telecommunications Technology/Technician.,2024-07-22,6
+15.0306,Integrated Circuit Design Technology/Technician.,2024-07-22,6
+15.0399,"Electrical/Electronic Engineering Technologies/Technicians, Other.",2024-07-22,6
+15.0401,Biomedical Technology/Technician.,2024-07-22,6
+15.0403,Electromechanical/Electromechanical Engineering Technology/Technician.,2024-07-22,6
+15.0404,Instrumentation Technology/Technician.,2024-07-22,6
+15.0405,Robotics Technology/Technician.,2024-07-22,6
+15.0406,Automation Engineer Technology/Technician.,2024-07-22,6
+15.0407,"Mechatronics, Robotics, and Automation Engineering Technology/Technician.",2024-07-22,6
+15.0499,"Electromechanical Technologies/Technicians, Other.",2024-07-22,6
+15.0501,"Heating, Ventilation, Air Conditioning and Refrigeration Engineering Technology/Technician.",2024-07-22,6
+15.0506,Water Quality and Wastewater Treatment Management and Recycling Technology/Technician.,2024-07-22,6
+15.0507,Environmental/Environmental Engineering Technology/Technician.,2024-07-22,6
+15.0508,Hazardous Materials Management and Waste Technology/Technician.,2024-07-22,6
+15.0599,"Environmental Control Technologies/Technicians, Other.",2024-07-22,6
+15.0607,Plastics and Polymer Engineering Technology/Technician.,2024-07-22,6
+15.0611,Metallurgical Technology/Technician.,2024-07-22,6
+15.0612,Industrial Technology/Technician.,2024-07-22,6
+15.0613,Manufacturing Engineering Technology/Technician.,2024-07-22,6
+15.0614,Welding Engineering Technology/Technician.,2024-07-22,6
+15.0615,Chemical Engineering Technology/Technician.,2024-07-22,6
+15.0616,Semiconductor Manufacturing Technology/Technician.,2024-07-22,6
+15.0617,Composite Materials Technology/Technician.,2024-07-22,6
+15.0699,"Industrial Production Technologies/Technicians, Other.",2024-07-22,6
+15.0701,Occupational Safety and Health Technology/Technician.,2024-07-22,6
+15.0702,Quality Control Technology/Technician.,2024-07-22,6
+15.0703,Industrial Safety Technology/Technician.,2024-07-22,6
+15.0704,Hazardous Materials Information Systems Technology/Technician.,2024-07-22,6
+15.0799,"Quality Control and Safety Technologies/Technicians, Other.",2024-07-22,6
+15.0801,Aeronautical/Aerospace Engineering Technology/Technician.,2024-07-22,6
+15.0803,Automotive Engineering Technology/Technician.,2024-07-22,6
+15.0805,Mechanical/Mechanical Engineering Technology/Technician.,2024-07-22,6
+15.0899,"Mechanical Engineering Related Technologies/Technicians, Other.",2024-07-22,6
+15.0901,Mining Technology/Technician.,2024-07-22,6
+15.0903,Petroleum Technology/Technician.,2024-07-22,6
+15.0999,"Mining and Petroleum Technologies/Technicians, Other.",2024-07-22,6
+15.1001,Construction Engineering Technology/Technician.,2024-07-22,6
+15.1102,Surveying Technology/Surveying.,2024-07-22,6
+15.1103,Hydraulics and Fluid Power Technology/Technician.,2024-07-22,6
+15.1199,"Engineering-Related Technologies/Technicians, Other.",2024-07-22,6
+15.1201,Computer Engineering Technology/Technician.,2024-07-22,6
+15.1202,Computer/Computer Systems Technology/Technician.,2024-07-22,6
+15.1203,Computer Hardware Technology/Technician.,2024-07-22,6
+15.1204,Computer Software Technology/Technician.,2024-07-22,6
+15.1299,"Computer Engineering Technologies/Technicians, Other.",2024-07-22,6
+15.1301,"Drafting and Design Technology/Technician, General.",2024-07-22,6
+15.1302,CAD/CADD Drafting and/or Design Technology/Technician.,2024-07-22,6
+15.1303,Architectural Drafting and Architectural CAD/CADD.,2024-07-22,6
+15.1304,Civil Drafting and Civil Engineering CAD/CADD.,2024-07-22,6
+15.1305,Electrical/Electronics Drafting and Electrical/Electronics CAD/CADD.,2024-07-22,6
+15.1306,Mechanical Drafting and Mechanical Drafting CAD/CADD.,2024-07-22,6
+15.1399,"Drafting/Design Engineering Technologies/Technicians, Other.",2024-07-22,6
+15.1401,Nuclear Engineering Technology/Technician.,2024-07-22,6
+15.1501,Engineering/Industrial Management.,2024-07-22,6
+15.1502,Engineering Design.,2024-07-22,6
+15.1503,Packaging Science.,2024-07-22,6
+15.1599,"Engineering-Related Fields, Other.",2024-07-22,6
+15.1601,Nanotechnology.,2024-07-22,6
+15.1701,Energy Systems Technology/Technician.,2024-07-22,6
+15.1703,Solar Energy Technology/Technician.,2024-07-22,6
+15.9999,"Engineering/Engineering-Related Technologies/Technicians, Other.",2024-07-22,6
+26.0000,BIOLOGICAL AND BIOMEDICAL SCIENCES.,2024-07-22,2
+26.0100,"Biology, General.",2024-07-22,4
+26.0101,"Biology/Biological Sciences, General.",2024-07-22,6
+26.0102,"Biomedical Sciences, General.",2024-07-22,6
+26.0200,"Biochemistry, Biophysics and Molecular Biology.",2024-07-22,4
+26.0202,Biochemistry.,2024-07-22,6
+26.0203,Biophysics.,2024-07-22,6
+26.0204,Molecular Biology.,2024-07-22,6
+26.0205,Molecular Biochemistry.,2024-07-22,6
+26.0206,Molecular Biophysics.,2024-07-22,6
+26.0207,Structural Biology.,2024-07-22,6
+26.0208,Photobiology.,2024-07-22,6
+26.0209,Radiation Biology/Radiobiology.,2024-07-22,6
+26.0210,Biochemistry and Molecular Biology.,2024-07-22,6
+26.0299,"Biochemistry, Biophysics and Molecular Biology, Other.",2024-07-22,6
+26.0300,Botany/Plant Biology.,2024-07-22,4
+26.0301,Botany/Plant Biology.,2024-07-22,6
+26.0305,Plant Pathology/Phytopathology.,2024-07-22,6
+26.0307,Plant Physiology.,2024-07-22,6
+26.0308,Plant Molecular Biology.,2024-07-22,6
+26.0399,"Botany/Plant Biology, Other.",2024-07-22,6
+26.0400,Cell/Cellular Biology and Anatomical Sciences.,2024-07-22,4
+26.0401,Cell/Cellular Biology and Histology.,2024-07-22,6
+26.0403,Anatomy.,2024-07-22,6
+26.0404,Developmental Biology and Embryology.,2024-07-22,6
+26.0406,Cell/Cellular and Molecular Biology.,2024-07-22,6
+26.0407,Cell Biology and Anatomy.,2024-07-22,6
+26.0499,"Cell/Cellular Biology and Anatomical Sciences, Other.",2024-07-22,6
+26.0500,Microbiological Sciences and Immunology.,2024-07-22,4
+26.0502,"Microbiology, General.",2024-07-22,6
+26.0503,Medical Microbiology and Bacteriology.,2024-07-22,6
+26.0504,Virology.,2024-07-22,6
+26.0505,Parasitology.,2024-07-22,6
+26.0506,Mycology.,2024-07-22,6
+26.0507,Immunology.,2024-07-22,6
+26.0508,Microbiology and Immunology.,2024-07-22,6
+26.0509,Infectious Disease and Global Health.,2024-07-22,6
+26.0599,"Microbiological Sciences and Immunology, Other.",2024-07-22,6
+26.0700,Zoology/Animal Biology.,2024-07-22,4
+26.0701,Zoology/Animal Biology.,2024-07-22,6
+26.0702,Entomology.,2024-07-22,6
+26.0707,Animal Physiology.,2024-07-22,6
+26.0708,Animal Behavior and Ethology.,2024-07-22,6
+26.0709,Wildlife Biology.,2024-07-22,6
+26.0799,"Zoology/Animal Biology, Other.",2024-07-22,6
+26.0800,Genetics.,2024-07-22,4
+26.0801,"Genetics, General.",2024-07-22,6
+26.0802,Molecular Genetics.,2024-07-22,6
+26.0803,Microbial and Eukaryotic Genetics.,2024-07-22,6
+26.0804,Animal Genetics.,2024-07-22,6
+26.0805,Plant Genetics.,2024-07-22,6
+26.0806,Human/Medical Genetics.,2024-07-22,6
+26.0807,Genome Sciences/Genomics.,2024-07-22,6
+26.0899,"Genetics, Other.",2024-07-22,6
+26.0900,"Physiology, Pathology and Related Sciences.",2024-07-22,4
+26.0901,"Physiology, General.",2024-07-22,6
+26.0902,Molecular Physiology.,2024-07-22,6
+26.0903,Cell Physiology.,2024-07-22,6
+26.0904,Endocrinology.,2024-07-22,6
+26.0905,Reproductive Biology.,2024-07-22,6
+26.0907,Cardiovascular Science.,2024-07-22,6
+26.0908,Exercise Physiology and Kinesiology.,2024-07-22,6
+26.0909,Vision Science/Physiological Optics.,2024-07-22,6
+26.0910,Pathology/Experimental Pathology.,2024-07-22,6
+26.0911,Oncology and Cancer Biology.,2024-07-22,6
+26.0912,Aerospace Physiology and Medicine.,2024-07-22,6
+26.0913,Biomechanics.,2024-07-22,6
+26.0999,"Physiology, Pathology, and Related Sciences, Other.",2024-07-22,6
+26.1000,Pharmacology and Toxicology.,2024-07-22,4
+26.1001,Pharmacology.,2024-07-22,6
+26.1002,Molecular Pharmacology.,2024-07-22,6
+26.1003,Neuropharmacology.,2024-07-22,6
+26.1004,Toxicology.,2024-07-22,6
+26.1005,Molecular Toxicology.,2024-07-22,6
+26.1006,Environmental Toxicology.,2024-07-22,6
+26.1007,Pharmacology and Toxicology.,2024-07-22,6
+26.1099,"Pharmacology and Toxicology, Other.",2024-07-22,6
+26.1100,"Biomathematics, Bioinformatics, and Computational Biology.",2024-07-22,4
+26.1101,Biometry/Biometrics.,2024-07-22,6
+26.1102,Biostatistics.,2024-07-22,6
+26.1103,Bioinformatics.,2024-07-22,6
+26.1104,Computational Biology.,2024-07-22,6
+26.1199,"Biomathematics, Bioinformatics, and Computational Biology, Other.",2024-07-22,6
+26.1200,Biotechnology.,2024-07-22,4
+26.1201,Biotechnology.,2024-07-22,6
+26.1300,"Ecology, Evolution, Systematics, and Population Biology.",2024-07-22,4
+26.1301,Ecology.,2024-07-22,6
+26.1302,Marine Biology and Biological Oceanography.,2024-07-22,6
+26.1303,Evolutionary Biology.,2024-07-22,6
+26.1304,Aquatic Biology/Limnology.,2024-07-22,6
+26.1305,Environmental Biology.,2024-07-22,6
+26.1306,Population Biology.,2024-07-22,6
+26.1307,Conservation Biology.,2024-07-22,6
+26.1308,Systematic Biology/Biological Systematics.,2024-07-22,6
+26.1309,Epidemiology.,2024-07-22,6
+26.1310,Ecology and Evolutionary Biology.,2024-07-22,6
+26.1311,Epidemiology and Biostatistics.,2024-07-22,6
+26.1399,"Ecology, Evolution, Systematics and Population Biology, Other.",2024-07-22,6
+26.1400,Molecular Medicine.,2024-07-22,4
+26.1401,Molecular Medicine.,2024-07-22,6
+26.1500,Neurobiology and Neurosciences.,2024-07-22,4
+26.1501,Neuroscience.,2024-07-22,6
+26.1502,Neuroanatomy.,2024-07-22,6
+26.1503,Neurobiology and Anatomy.,2024-07-22,6
+26.1504,Neurobiology and Behavior.,2024-07-22,6
+26.1599,"Neurobiology and Neurosciences, Other.",2024-07-22,6
+26.9900,"Biological and Biomedical Sciences, Other.",2024-07-22,4
+26.9999,"Biological and Biomedical Sciences, Other.",2024-07-22,6
+27.0000,MATHEMATICS AND STATISTICS.,2024-07-22,2
+27.0100,Mathematics.,2024-07-22,4
+27.0101,"Mathematics, General.",2024-07-22,6
+27.0102,Algebra and Number Theory.,2024-07-22,6
+27.0103,Analysis and Functional Analysis.,2024-07-22,6
+27.0104,Geometry/Geometric Analysis.,2024-07-22,6
+27.0105,Topology and Foundations.,2024-07-22,6
+27.0199,"Mathematics, Other.",2024-07-22,6
+27.0300,Applied Mathematics.,2024-07-22,4
+27.0301,"Applied Mathematics, General.",2024-07-22,6
+27.0303,Computational Mathematics.,2024-07-22,6
+27.0304,Computational and Applied Mathematics.,2024-07-22,6
+27.0305,Financial Mathematics.,2024-07-22,6
+27.0306,Mathematical Biology.,2024-07-22,6
+27.0399,"Applied Mathematics, Other.",2024-07-22,6
+27.0500,Statistics.,2024-07-22,4
+27.0501,"Statistics, General.",2024-07-22,6
+27.0502,Mathematical Statistics and Probability.,2024-07-22,6
+27.0503,Mathematics and Statistics.,2024-07-22,6
+27.0599,"Statistics, Other.",2024-07-22,6
+27.0600,Applied Statistics.,2024-07-22,4
+27.0601,"Applied Statistics, General.",2024-07-22,6
+27.9900,"Mathematics and Statistics, Other.",2024-07-22,4
+27.9999,"Mathematics and Statistics, Other.",2024-07-22,6
+28.0501,Air Science/Airpower Studies.,2024-07-22,6
+28.0502,Air and Space Operational Art and Science.,2024-07-22,6
+28.0505,Naval Science and Operational Studies.,2024-07-22,6
+29.0201,"Intelligence, General.",2024-07-22,6
+29.0202,Strategic Intelligence.,2024-07-22,6
+29.0203,Signal/Geospatial Intelligence.,2024-07-22,6
+29.0204,"Command & Control (C3, C4I) Systems and Operations.",2024-07-22,6
+29.0205,Information Operations/Joint Information Operations.,2024-07-22,6
+29.0206,Information/Psychological Warfare and Military Media Relations.,2024-07-22,6
+29.0207,Cyber/Electronic Operations and Warfare.,2024-07-22,6
+29.0299,"Intelligence, Command Control and Information Operations, Other.",2024-07-22,6
+29.0301,Combat Systems Engineering.,2024-07-22,6
+29.0302,Directed Energy Systems.,2024-07-22,6
+29.0303,Engineering Acoustics.,2024-07-22,6
+29.0304,Low-Observables and Stealth Technology.,2024-07-22,6
+29.0305,Space Systems Operations.,2024-07-22,6
+29.0306,Operational Oceanography.,2024-07-22,6
+29.0307,Undersea Warfare.,2024-07-22,6
+29.0399,"Military Applied Sciences, Other.",2024-07-22,6
+29.0401,Aerospace Ground Equipment Technology.,2024-07-22,6
+29.0402,Air and Space Operations Technology.,2024-07-22,6
+29.0403,Aircraft Armament Systems Technology.,2024-07-22,6
+29.0404,Explosive Ordinance/Bomb Disposal.,2024-07-22,6
+29.0405,"Joint Command/Task Force (C3, C4I) Systems.",2024-07-22,6
+29.0406,Military Information Systems Technology.,2024-07-22,6
+29.0407,Missile and Space Systems Technology.,2024-07-22,6
+29.0408,Munitions Systems/Ordinance Technology.,2024-07-22,6
+29.0409,Radar Communications and Systems Technology.,2024-07-22,6
+29.0499,"Military Systems and Maintenance Technology, Other.",2024-07-22,6
+29.9999,"Military Technologies and Applied Sciences, Other.",2024-07-22,6
+30.0101,Biological and Physical Sciences.,2024-07-22,6
+30.0601,Systems Science and Theory.,2024-07-22,6
+30.0801,Mathematics and Computer Science.,2024-07-22,6
+30.1001,Biopsychology.,2024-07-22,6
+30.1701,Behavioral Sciences.,2024-07-22,6
+30.1801,Natural Sciences.,2024-07-22,6
+30.1901,Nutrition Sciences.,2024-07-22,6
+30.2501,"Cognitive Science, General.",2024-07-22,6
+30.2701,Human Biology.,2024-07-22,6
+30.3001,Computational Science.,2024-07-22,6
+30.3101,Human Computer Interaction.,2024-07-22,6
+30.3201,Marine Sciences.,2024-07-22,6
+30.3301,Sustainability Studies.,2024-07-22,6
+30.3401,Anthrozoology.,2024-07-22,6
+30.3501,Climate Science.,2024-07-22,6
+30.3801,Earth Systems Science.,2024-07-22,6
+30.3901,Economics and Computer Science.,2024-07-22,6
+30.4101,Environmental Geosciences.,2024-07-22,6
+30.4301,Geobiology.,2024-07-22,6
+30.4401,Geography and Environmental Studies.,2024-07-22,6
+30.4801,Linguistics and Computer Science,2024-07-22,6
+30.4901,Mathematical Economics.,2024-07-22,6
+30.5001,Mathematics and Atmospheric/Oceanic Science.,2024-07-22,6
+30.7001,"Data Science, General.",2024-07-22,6
+30.7101,"Data Analytics, General.",2024-07-22,6
+30.7102,Business Analytics.,2024-07-22,6
+30.7103,Data Visualization.,2024-07-22,6
+30.7104,Financial Analytics.,2024-07-22,6
+30.7199,"Data Analytics, Other.",2024-07-22,6
+40.0000,PHYSICAL SCIENCES.,2024-07-22,2
+40.0100,"Physical Sciences, General.",2024-07-22,4
+40.0101,"Physical Sciences, General.",2024-07-22,6
+40.0200,Astronomy and Astrophysics.,2024-07-22,4
+40.0201,Astronomy.,2024-07-22,6
+40.0202,Astrophysics.,2024-07-22,6
+40.0203,Planetary Astronomy and Science.,2024-07-22,6
+40.0299,"Astronomy and Astrophysics, Other.",2024-07-22,6
+40.0400,Atmospheric Sciences and Meteorology.,2024-07-22,4
+40.0401,"Atmospheric Sciences and Meteorology, General.",2024-07-22,6
+40.0402,Atmospheric Chemistry and Climatology.,2024-07-22,6
+40.0403,Atmospheric Physics and Dynamics.,2024-07-22,6
+40.0404,Meteorology.,2024-07-22,6
+40.0499,"Atmospheric Sciences and Meteorology, Other.",2024-07-22,6
+40.0500,Chemistry.,2024-07-22,4
+40.0501,"Chemistry, General.",2024-07-22,6
+40.0502,Analytical Chemistry.,2024-07-22,6
+40.0503,Inorganic Chemistry.,2024-07-22,6
+40.0504,Organic Chemistry.,2024-07-22,6
+40.0506,Physical Chemistry.,2024-07-22,6
+40.0507,Polymer Chemistry.,2024-07-22,6
+40.0508,Chemical Physics.,2024-07-22,6
+40.0509,Environmental Chemistry.,2024-07-22,6
+40.0510,Forensic Chemistry.,2024-07-22,6
+40.0511,Theoretical Chemistry.,2024-07-22,6
+40.0512,Cheminformatics/Chemistry Informatics.,2024-07-22,6
+40.0599,"Chemistry, Other.",2024-07-22,6
+40.0600,Geological and Earth Sciences/Geosciences.,2024-07-22,4
+40.0601,"Geology/Earth Science, General.",2024-07-22,6
+40.0602,Geochemistry.,2024-07-22,6
+40.0603,Geophysics and Seismology.,2024-07-22,6
+40.0604,Paleontology.,2024-07-22,6
+40.0605,Hydrology and Water Resources Science.,2024-07-22,6
+40.0606,Geochemistry and Petrology.,2024-07-22,6
+40.0607,"Oceanography, Chemical and Physical.",2024-07-22,6
+40.0699,"Geological and Earth Sciences/Geosciences, Other.",2024-07-22,6
+40.0800,Physics.,2024-07-22,4
+40.0801,"Physics, General.",2024-07-22,6
+40.0802,Atomic/Molecular Physics.,2024-07-22,6
+40.0804,Elementary Particle Physics.,2024-07-22,6
+40.0805,Plasma and High-Temperature Physics.,2024-07-22,6
+40.0806,Nuclear Physics.,2024-07-22,6
+40.0807,Optics/Optical Sciences.,2024-07-22,6
+40.0808,Condensed Matter and Materials Physics.,2024-07-22,6
+40.0809,Acoustics.,2024-07-22,6
+40.0810,Theoretical and Mathematical Physics.,2024-07-22,6
+40.0899,"Physics, Other.",2024-07-22,6
+40.1000,Materials Sciences.,2024-07-22,4
+40.1001,Materials Science.,2024-07-22,6
+40.1002,Materials Chemistry.,2024-07-22,6
+40.1099,"Materials Sciences, Other.",2024-07-22,6
+40.1100,Physics and Astronomy.,2024-07-22,4
+40.1101,Physics and Astronomy.,2024-07-22,6
+40.9900,"Physical Sciences, Other.",2024-07-22,4
+40.9999,"Physical Sciences, Other.",2024-07-22,6
+41.0000,"Science Technologies/Technicians, General.",2024-07-22,6
+41.0101,Biology/Biotechnology Technology/Technician.,2024-07-22,6
+41.0204,Industrial Radiologic Technology/Technician.,2024-07-22,6
+41.0205,Nuclear/Nuclear Power Technology/Technician.,2024-07-22,6
+41.0299,"Nuclear and Industrial Radiologic Technologies/Technicians, Other.",2024-07-22,6
+41.0301,Chemical Technology/Technician.,2024-07-22,6
+41.0303,Chemical Process Technology.,2024-07-22,6
+41.0399,"Physical Science Technologies/Technicians, Other.",2024-07-22,6
+41.9999,"Science Technologies/Technicians, Other.",2024-07-22,6
+42.2701,Cognitive Psychology and Psycholinguistics.,2024-07-22,6
+42.2702,Comparative Psychology.,2024-07-22,6
+42.2703,Developmental and Child Psychology.,2024-07-22,6
+42.2704,Experimental Psychology.,2024-07-22,6
+42.2705,Personality Psychology.,2024-07-22,6
+42.2706,Behavioral Neuroscience.,2024-07-22,6
+42.2707,Social Psychology.,2024-07-22,6
+42.2708,Psychometrics and Quantitative Psychology.,2024-07-22,6
+42.2709,Psychopharmacology.,2024-07-22,6
+42.2710,Developmental and Adolescent Psychology.,2024-07-22,6
+42.2799,"Research and Experimental Psychology, Other.",2024-07-22,6
+42.2804,Industrial and Organizational Psychology.,2024-07-22,6
+43.0403,Cyber/Computer Forensics and Counterterrorism.,2024-07-22,6
+43.0406,Forensic Science and Technology.,2024-07-22,6
+43.0407,Geospatial Intelligence.,2024-07-22,6
+45.0102,"Social Sciences, Research Methodology and Quantitative Methods.",2024-07-22,6
+45.0301,Archeology.,2024-07-22,6
+45.0501,Demography and Population Studies.,2024-07-22,6
+45.0603,Econometrics and Quantitative Economics.,2024-07-22,6
+45.0702,Geographic Information Science and Cartography.,2024-07-22,6
+49.0101,"Aeronautics/Aviation/Aerospace Science and Technology, General.",2024-07-22,6
+51.1002,Cytotechnology/Cytotechnologist.,2024-07-22,6
+51.1005,Clinical Laboratory Science/Medical Technology/Technologist.,2024-07-22,6
+51.1401,Medical Science/Scientist.,2024-07-22,6
+51.2003,Pharmaceutics and Drug Design.,2024-07-22,6
+51.2004,Medicinal and Pharmaceutical Chemistry.,2024-07-22,6
+51.2005,Natural Products Chemistry and Pharmacognosy.,2024-07-22,6
+51.2006,Clinical and Industrial Drug Development.,2024-07-22,6
+51.2007,Pharmacoeconomics/Pharmaceutical Economics.,2024-07-22,6
+51.2009,Industrial and Physical Pharmacy and Cosmetic Sciences.,2024-07-22,6
+51.2010,Pharmaceutical Sciences.,2024-07-22,6
+51.2202,Environmental Health.,2024-07-22,6
+51.2205,Health/Medical Physics.,2024-07-22,6
+51.2706,Medical Informatics.,2024-07-22,6
+52.1301,Management Science.,2024-07-22,6
+52.1302,Business Statistics.,2024-07-22,6
+52.1304,Actuarial Science.,2024-07-22,6
+52.1399,"Management Sciences and Quantitative Methods, Other.",2024-07-22,6
