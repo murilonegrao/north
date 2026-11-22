@@ -7,10 +7,11 @@ import { useRoute, useRouter } from 'vue-router'
 import SigilMark from '../components/SigilMark.vue'
 import { theme, toggleTheme } from '../theme'
 import './admin.css'
-import { post } from './api'
+import { patch, post } from './api'
 import { installAdminExpiry, useAdminLocale } from './guard'
 import { ADMIN_LOCALES } from './i18n'
 import { session } from './session'
+import type { SessionState } from './types'
 
 const { t, locale } = useI18n()
 const route = useRoute()
@@ -40,7 +41,16 @@ async function logout() {
 }
 
 async function changeLocale(event: Event) {
-  await useAdminLocale((event.target as HTMLSelectElement).value)
+  const code = (event.target as HTMLSelectElement).value
+  await useAdminLocale(code)
+  // Emails follow the language chosen here.
+  if (session.stage === 'ok') {
+    try {
+      session.set(await patch<SessionState>('/auth/preferences', { locale: code }))
+    } catch {
+      // Not critical: the next change tries again.
+    }
+  }
 }
 </script>
 

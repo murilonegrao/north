@@ -16,6 +16,8 @@ spec:
             - {name: NORTH_INCOMING_DIR, value: /data/incoming}
             # Cloudflare sets this header; login throttling and the audit log use it.
             - {name: NORTH_CLIENT_IP_HEADER, value: cf-connecting-ip}
+            # Base of the links in emails (record 0007); never taken from the request.
+            - {name: NORTH_PUBLIC_URL, value: "https://north.harpia.info"}
           volumeMounts:
             - {name: incoming, mountPath: /data/incoming, subPath: incoming}
       volumes:

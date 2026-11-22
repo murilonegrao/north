@@ -1,0 +1,67 @@
+{
+  "_meta": {
+    "machine_translated": true,
+    "note": "Plain-text email templates (record 0007). Placeholders in {braces}."
+  },
+  "footer": {
+    "security": "Você recebe esta mensagem porque ela trata da segurança da sua conta no admin do North; não é possível desativá-la.",
+    "jobs": "Os emails de jobs podem ser desativados na página da conta: {account_url}",
+    "plain": ""
+  },
+  "signature": "North admin · {admin_url}",
+  "messages": {
+    "test": {
+      "subject": "North: email de teste",
+      "body": "Olá, {username},\n\nEsta é uma mensagem de teste do admin do North. Se você está lendo, o email funciona.\n\nEnviada em {at}."
+    },
+    "verify_email": {
+      "subject": "North: confirme seu endereço de email",
+      "body": "Olá, {username},\n\nAbra este link para confirmar que este endereço é da sua conta no admin do North:\n\n{url}\n\nO link funciona uma vez e expira em {hours} horas. Até a confirmação, a redefinição de senha e os avisos não usam este endereço.\n\nSe você não esperava esta mensagem, ignore-a."
+    },
+    "password_reset": {
+      "subject": "North: redefinir sua senha",
+      "body": "Olá, {username},\n\nAlguém (do endereço {ip}) pediu para redefinir a senha da sua conta no admin do North. Para escolher uma senha nova, abra:\n\n{url}\n\nO link funciona uma vez e expira em {minutes} minutos. O código do autenticador continua sendo pedido no login.\n\nSe não foi você, ignore esta mensagem: sua senha não mudou."
+    },
+    "password_changed": {
+      "subject": "North: sua senha foi alterada",
+      "body": "Olá, {username},\n\nA senha da sua conta no admin do North foi alterada em {at} (endereço {ip}). Todas as outras sessões foram encerradas.\n\nSe não foi você, redefina a senha em {admin_url}/forgot e avise os outros admins."
+    },
+    "totp_changed": {
+      "subject": "North: seu app autenticador foi trocado",
+      "body": "Olá, {username},\n\nUm novo app autenticador foi configurado na sua conta do admin do North em {at} (endereço {ip}). Os códigos do app anterior não funcionam mais.\n\nSe não foi você, avise os outros admins imediatamente."
+    },
+    "email_changed": {
+      "subject": "North: o email da sua conta foi alterado",
+      "body": "Olá, {username},\n\nO endereço de email da sua conta no admin do North foi alterado em {at} para {new_email}. Este endereço não vai mais receber links de redefinição de senha.\n\nSe não foi você, avise os outros admins imediatamente."
+    },
+    "new_sign_in": {
+      "subject": "North: novo login na sua conta",
+      "body": "Olá, {username},\n\nSua conta no admin do North entrou em {at} a partir de um endereço não visto nos últimos 90 dias:\n\n  endereço: {ip}\n  navegador: {agent}\n\nSe foi você, não precisa fazer nada. Se não foi, troque a senha e avise os outros admins."
+    },
+    "login_locked": {
+      "subject": "North: login pausado após tentativas erradas",
+      "body": "Olá, {username},\n\nHouve {failures} tentativas de login erradas na sua conta do admin do North (a última do endereço {ip}). O login desta conta está pausado por {minutes} minutos.\n\nSe não foi você, sua senha continua segura enquanto ninguém a souber; considere trocá-la por uma mais longa."
+    },
+    "access_changed": {
+      "subject": "North: sua conta foi alterada por um admin",
+      "body": "Olá, {username},\n\nO admin {admin} alterou sua conta no admin do North em {at}:\n\n{changes}\n\nSuas sessões foram encerradas."
+    },
+    "job_failed": {
+      "subject": "North: job #{id} {status}",
+      "body": "O job #{id} ({title}) terminou como “{status}” em {at}.\n\n{error}\n\nLog: {url}"
+    }
+  },
+  "changes": {
+    "role": "papel: {old} → {new}",
+    "disabled_true": "conta desativada",
+    "disabled_false": "conta reativada",
+    "password_reset": "senha temporária definida (você escolhe uma nova no próximo login)",
+    "totp_reset": "app autenticador removido (você configura um novo no próximo login)",
+    "email": "endereço de email definido como {email}"
+  },
+  "status": {
+    "failed": "falhou",
+    "attention": "precisa de atenção",
+    "cancelled": "cancelado"
+  }
+}

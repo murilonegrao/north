@@ -23,6 +23,9 @@ from sqlalchemy.orm import Session, sessionmaker
 from north.auth.service import purge_old_attempts
 from north.jobs import queue, registry
 from north.jobs.context import JobCancelled, JobContext, JobLogHandler, result_status
+from north.mail import outbox
+from north.mail.sender import MailSender
+from north.repository.models import Job
 from north.settings import get_settings
 
 log = logging.getLogger("north.worker")
@@ -63,6 +66,7 @@ class Worker:
         with self.sessions() as db:
             queue.sync_schedules(db)
             queue.reap_stale(db)
+        MailSender(self.sessions, self.stop).start()
         log.info("worker %s ready; job kinds: %s", self.name, ", ".join(registry.kinds()))
         while not self.stop.is_set():
             if not self.tick():
@@ -128,8 +132,21 @@ class Worker:
             ctx.close()
         with self.sessions() as db:
             queue.finish(db, job_id, status, result=result, error=error)
+            if status in ("failed", "attention"):
+                self._notify(db, job_id, kind)
         log.info("job %s %s %s in %ss", job_id, kind, status, secs)
         return status
+
+    def _notify(self, db: Session, job_id: int, kind: str) -> None:
+        try:
+            job = db.get(Job, job_id)
+            spec = registry.kinds().get(kind)
+            if job is not None:
+                outbox.job_outcome(db, job, spec.title if spec else kind)
+                db.commit()
+        except Exception:  # a notice must never change the job's outcome
+            db.rollback()
+            log.exception("could not queue the email for job %s", job_id)
 
     def _beat(self, ctx: JobContext, stop: threading.Event) -> None:
         with self.sessions() as db:

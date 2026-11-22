@@ -9,7 +9,10 @@
     "audit": "Audit log",
     "account": "Account",
     "login": "Sign in",
-    "setup": "Secure your account"
+    "setup": "Secure your account",
+    "forgot": "Forgot password",
+    "reset": "New password",
+    "verifyEmail": "Confirm email"
   },
   "nav": {
     "main": "Admin",
@@ -45,7 +48,8 @@
     "invalid": "Wrong username or password.",
     "invalidCode": "Wrong or already used code.",
     "throttled": "Too many attempts. Wait 15 minutes and try again.",
-    "restart": "Start again"
+    "restart": "Start again",
+    "forgot": "Forgot your password?"
   },
   "setup": {
     "passwordHeading": "Choose a new password",
@@ -97,7 +101,12 @@
     "schedules": "Schedules",
     "recentJobs": "Recent jobs",
     "allJobs": "All jobs",
-    "tasks": "Open reconciliation tasks"
+    "tasks": "Open reconciliation tasks",
+    "mail": "Email",
+    "mailLast": "last sent {at}",
+    "mailNever": "nothing sent yet",
+    "mailCounts": "24 h: {sent} sent · {queued} queued · {failed} failed",
+    "mailError": "Email problem: {error}"
   },
   "schedule": {
     "every": "every {h} h",
@@ -173,7 +182,11 @@
       "curator": "curator",
       "viewer": "viewer"
     },
-    "roleHelp": "viewer reads; curator also uploads and runs jobs; admin also manages users, schedules and reads the audit log."
+    "roleHelp": "viewer reads; curator also uploads and runs jobs; admin also manages users, schedules and reads the audit log.",
+    "emailOptional": "Email (optional; gets a confirmation link)",
+    "setEmail": "Set email",
+    "setEmailPrompt": "Email for {name} (gets a confirmation link)",
+    "unverified": "unconfirmed"
   },
   "audit": {
     "heading": "Audit log",
@@ -189,7 +202,27 @@
     "signedInAs": "Signed in as {name} ({role})",
     "password": "Password",
     "totp": "Authenticator app",
-    "replaceTotp": "Replace authenticator app"
+    "replaceTotp": "Replace authenticator app",
+    "email": "Email",
+    "emailHelp": "Used for password reset and security notices (new sign-in, password or authenticator changed). Only once confirmed.",
+    "noEmail": "no email",
+    "verified": "confirmed",
+    "unverified": "waiting for confirmation",
+    "addEmail": "Add email",
+    "changeEmail": "Change email",
+    "newEmail": "New address",
+    "confirmPassword": "Your current password",
+    "saveEmail": "Save and send confirmation",
+    "cancel": "Cancel",
+    "emailSaved": "Confirmation link sent to {email}. Open it to finish.",
+    "resend": "Resend confirmation",
+    "test": "Send a test email",
+    "testSent": "Test email queued for {email}; it arrives within a minute.",
+    "wrongPassword": "The current password is wrong.",
+    "throttled": "Too many requests. Try again in an hour.",
+    "notifications": "Email notices",
+    "notificationsHelp": "Security notices are always sent.",
+    "notifyJobs": "Tell me when a job fails (mine, and scheduled ones if I am an admin)"
   },
   "kinds": {
     "us_fetch": {
@@ -212,5 +245,26 @@
   "params": {
     "states": "USPS codes, comma-separated, or ALL",
     "fetch": "download first"
+  },
+  "forgot": {
+    "heading": "Forgot password",
+    "help": "Type your username or email. If the account has a confirmed email address, we send it a link to choose a new password (valid for 30 minutes).",
+    "login": "Username or email",
+    "submit": "Send link",
+    "sent": "If the account has a confirmed email address, the link was sent. Check the inbox (and the spam folder).",
+    "back": "Back to sign in"
+  },
+  "reset": {
+    "heading": "Choose a new password",
+    "done": "Password changed. Every session was signed out; sign in with the new password and your authenticator code.",
+    "invalid": "This link is invalid, was already used, or has expired.",
+    "again": "Ask for a new link",
+    "toLogin": "Go to sign in"
+  },
+  "verify": {
+    "heading": "Confirm email",
+    "done": "{email} is confirmed. It now receives password reset links and notices.",
+    "invalid": "This link is invalid, was already used, or has expired. Ask for another on the account page.",
+    "toAccount": "Go to the account"
   }
 }

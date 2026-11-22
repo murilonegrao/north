@@ -40,6 +40,28 @@ class PasswordBody(BaseModel):
     new: str = Field(min_length=1, max_length=1024)
 
 
+class EmailBody(BaseModel):
+    email: str = Field(min_length=3, max_length=254)
+    password: str = Field(min_length=1, max_length=1024)
+
+
+class TokenBody(BaseModel):
+    token: str = Field(min_length=10, max_length=100)
+
+
+class ResetBody(TokenBody):
+    new: str = Field(min_length=1, max_length=1024)
+
+
+class ForgotBody(BaseModel):
+    login: str = Field(min_length=1, max_length=254)
+
+
+class PreferencesBody(BaseModel):
+    locale: str | None = None
+    notify_jobs: bool | None = None
+
+
 def _state(user: User, sess: AdminSession, stage: str) -> dict[str, object]:
     return {"user": user_view(user), "stage": stage, "csrf": sess.csrf_token}
 
@@ -125,3 +147,82 @@ def totp_confirm(body: CodeBody,
     except service.AuthError:
         raise HTTPException(400, "invalid code") from None
     return _state(auth.user, auth.session, service.stage(auth.session, auth.user))
+
+
+# ------------------------------------------------------------------- email (record 0007)
+
+FORGOT_REPLY = {"ok": True, "detail": "if the account has a confirmed email address, a link "
+                                      "was sent to it"}
+
+
+@router.post("/forgot")
+def forgot(body: ForgotBody, request: Request, db: Db) -> object:
+    """Same answer whether or not the account exists (no enumeration)."""
+    try:
+        service.request_password_reset(db, body.login, ip=client_ip(request))
+    except service.Throttled as e:
+        return _throttled(e)
+    return FORGOT_REPLY
+
+
+@router.post("/reset")
+def reset(body: ResetBody, request: Request, db: Db) -> object:
+    try:
+        service.reset_password(db, body.token, body.new, ip=client_ip(request))
+    except service.AuthError:
+        raise HTTPException(400, {"field": "token", "message": "invalid or expired link"}) \
+            from None
+    except (WeakPassword, ValueError) as e:
+        raise HTTPException(400, {"field": "new", "message": str(e)}) from None
+    return {"ok": True}
+
+
+@router.post("/email/verify")
+def verify_email(body: TokenBody, request: Request, db: Db) -> object:
+    try:
+        user = service.verify_email(db, body.token, ip=client_ip(request))
+    except service.AuthError:
+        raise HTTPException(400, "invalid or expired link") from None
+    return {"ok": True, "email": user.email}
+
+
+@router.post("/email")
+def change_email(body: EmailBody, auth: Annotated[Auth, Depends(require())]) -> object:
+    try:
+        service.change_email(auth.db, auth.user, body.email, body.password, ip=auth.ip)
+    except service.AuthError:
+        raise HTTPException(400, {"field": "password", "message": "password is wrong"}) \
+            from None
+    except ValueError as e:
+        raise HTTPException(400, {"field": "email", "message": str(e)}) from None
+    return _state(auth.user, auth.session, auth.stage)
+
+
+@router.post("/email/resend")
+def resend_verification(auth: Annotated[Auth, Depends(require())]) -> object:
+    try:
+        sent = service.resend_verification(auth.db, auth.user, ip=auth.ip)
+    except service.Throttled as e:
+        return _throttled(e)
+    return {"ok": sent}
+
+
+@router.post("/email/test")
+def test_email(auth: Annotated[Auth, Depends(require())]) -> object:
+    try:
+        to = service.send_test_email(auth.db, auth.user, ip=auth.ip)
+    except service.Throttled as e:
+        return _throttled(e)
+    except ValueError as e:
+        raise HTTPException(400, str(e)) from None
+    return {"ok": True, "to": to}
+
+
+@router.patch("/preferences")
+def preferences(body: PreferencesBody, auth: Annotated[Auth, Depends(require())]) -> object:
+    try:
+        service.set_preferences(auth.db, auth.user, locale=body.locale,
+                                notify_jobs=body.notify_jobs)
+    except ValueError as e:
+        raise HTTPException(400, str(e)) from None
+    return _state(auth.user, auth.session, auth.stage)

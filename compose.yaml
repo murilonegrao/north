@@ -19,6 +19,8 @@ services:
       NORTH_COOKIE_SECURE: "false"
       NORTH_ADMIN_REQUIRE_TOTP: ${NORTH_ADMIN_REQUIRE_TOTP:-false}
       NORTH_INCOMING_DIR: /data/incoming
+      # Links in emails (password reset, confirmation) point here.
+      NORTH_PUBLIC_URL: http://localhost:${NORTH_HOST_PORT:-8000}
     volumes:
       - north-data:/data
     ports:
@@ -36,11 +38,26 @@ services:
       NORTH_DATABASE_URL: postgresql+psycopg://north_app:${NORTH_APP_DB_PASSWORD:-north-app-local}@db:5432/north
       NORTH_RAW_DIR: /data/raw
       NORTH_INCOMING_DIR: /data/incoming
+      # Email goes to Mailpit locally (record 0007): read it at http://localhost:8025
+      NORTH_PUBLIC_URL: http://localhost:${NORTH_HOST_PORT:-8000}
+      NORTH_SMTP_HOST: mailpit
+      NORTH_SMTP_PORT: "1025"
+      NORTH_SMTP_SECURITY: none
+      NORTH_MAIL_FROM: North <north@localhost.test>
     volumes:
       - north-data:/data
     depends_on:
+      # Healthy: the migrations have run (the worker reads the new tables at start).
       app:
+        condition: service_healthy
+      mailpit:
         condition: service_started
+
+  # Local mail catcher: nothing leaves the machine. Inbox at http://localhost:8025
+  mailpit:
+    image: axllent/mailpit:v1.34
+    ports:
+      - "127.0.0.1:${NORTH_MAILPIT_PORT:-8025}:8025"
 
   db:
     image: postgres:17.12

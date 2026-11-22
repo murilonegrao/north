@@ -21,13 +21,13 @@ async function load() {
 }
 onMounted(load)
 
-const form = ref({ username: '', role: 'viewer' as Role, password: '' })
+const form = ref({ username: '', role: 'viewer' as Role, password: '', email: '' })
 async function create() {
   error.value = notice.value = ''
   try {
     const user = await post<AdminUser>('/users', form.value)
     notice.value = t('admin.users.created', { name: user.username })
-    form.value = { username: '', role: 'viewer', password: '' }
+    form.value = { username: '', role: 'viewer', password: '', email: '' }
     await load()
   } catch (e) {
     error.value = errorText(e)
@@ -48,6 +48,11 @@ async function change(user: AdminUser, body: Record<string, unknown>) {
 function resetPassword(user: AdminUser) {
   const pw = window.prompt(t('admin.users.newTemp', { name: user.username }))
   if (pw) void change(user, { reset_password: pw })
+}
+
+function setEmail(user: AdminUser) {
+  const email = window.prompt(t('admin.users.setEmailPrompt', { name: user.username }), user.email ?? '')
+  if (email) void change(user, { email })
 }
 
 function resetTotp(user: AdminUser) {
@@ -79,6 +84,9 @@ function resetTotp(user: AdminUser) {
                 <span v-if="u.disabled">{{ t('admin.users.disabled') }} · </span>
                 {{ t('admin.users.totp') }}: {{ u.has_totp ? t('admin.common.yes') : t('admin.common.no') }}
               </div>
+              <div v-if="u.email" class="muted">
+                {{ u.email }}<span v-if="!u.email_verified"> ({{ t('admin.users.unverified') }})</span>
+              </div>
             </td>
             <td>
               <select v-if="u.id !== session.user?.id" :value="u.role" :aria-label="t('admin.users.role')"
@@ -95,6 +103,7 @@ function resetTotp(user: AdminUser) {
                 </button>
                 <button class="btn btn-small" type="button" @click="resetPassword(u)">{{ t('admin.users.resetPassword') }}</button>
                 <button class="btn btn-small" type="button" :disabled="!u.has_totp" @click="resetTotp(u)">{{ t('admin.users.resetTotp') }}</button>
+                <button class="btn btn-small" type="button" @click="setEmail(u)">{{ t('admin.users.setEmail') }}</button>
               </div>
             </td>
           </tr>
@@ -118,6 +127,10 @@ function resetTotp(user: AdminUser) {
       <div>
         <label for="new-password">{{ t('admin.users.tempPassword') }}</label>
         <input id="new-password" v-model="form.password" type="password" autocomplete="new-password" minlength="12" maxlength="256" required />
+      </div>
+      <div>
+        <label for="new-email">{{ t('admin.users.emailOptional') }}</label>
+        <input id="new-email" v-model="form.email" type="email" autocomplete="off" maxlength="254" />
       </div>
       <button class="btn btn-primary" type="submit">{{ t('admin.users.createBtn') }}</button>
     </form>

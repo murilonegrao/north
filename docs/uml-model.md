@@ -80,7 +80,7 @@ flowchart LR
 ```
 
 - In the MVP, curator and administrator are **the same account** (Q02). The roles stay separate in the model so it does not need to change when more people join.
-- UC11 (login) is new in SRS 1.0, because of A1 (curation in the database). It covers FR-25. Record 0006 implements it as username + password + TOTP; the `accounts` entity below is the `users` table, with `admin_sessions`, `login_attempts`, `audit_log`, `jobs`, `job_logs` and `schedules` next to it.
+- UC11 (login) is new in SRS 1.0, because of A1 (curation in the database). It covers FR-25. Record 0006 implements it as username + password + TOTP; the `accounts` entity below is the `users` table, with `admin_sessions`, `login_attempts`, `audit_log`, `jobs`, `job_logs` and `schedules` next to it. Record 0007 adds `users.email`, `users.email_verified_at`, `users.locale`, `users.notify_jobs`, and the tables `user_tokens` (single-use email links) and `email_outbox` (messages the worker sends).
 - The scheduler triggers UC05 without login only because it runs inside the cluster, with its own credential (see §7). It runs only sources that allow automatic download (today: ECB rates) and re-processes the latest uploaded files when rules change (K4).
 - UC05 now starts with an upload: the administrator downloads each official file in a browser and uploads it in the curation screen (FR-26, R4). Every source except ECB rates enters this way.
 

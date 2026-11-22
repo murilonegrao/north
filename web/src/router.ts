@@ -38,6 +38,10 @@ export const router = createRouter({
         { path: '', name: 'admin-overview', component: () => import('./admin/views/OverviewView.vue'), meta: { titleKey: 'admin.title.overview' } },
         { path: 'login', name: 'admin-login', component: () => import('./admin/views/LoginView.vue'), meta: { titleKey: 'admin.title.login' } },
         { path: 'setup', name: 'admin-setup', component: () => import('./admin/views/SetupView.vue'), meta: { titleKey: 'admin.title.setup' } },
+        // Reached from email links, with or without a session (record 0007).
+        { path: 'forgot', name: 'admin-forgot', component: () => import('./admin/views/ForgotView.vue'), meta: { titleKey: 'admin.title.forgot', public: true } },
+        { path: 'reset', name: 'admin-reset', component: () => import('./admin/views/ResetView.vue'), meta: { titleKey: 'admin.title.reset', public: true } },
+        { path: 'verify-email', name: 'admin-verify-email', component: () => import('./admin/views/VerifyEmailView.vue'), meta: { titleKey: 'admin.title.verifyEmail', public: true } },
         { path: 'jobs', name: 'admin-jobs', component: () => import('./admin/views/JobsView.vue'), meta: { titleKey: 'admin.title.jobs' } },
         { path: 'jobs/:id(\\d+)', name: 'admin-job', component: () => import('./admin/views/JobView.vue'), meta: { titleKey: 'admin.title.job' } },
         { path: 'upload', name: 'admin-upload', component: () => import('./admin/views/UploadView.vue'), meta: { titleKey: 'admin.title.upload', minRole: 'curator' } },

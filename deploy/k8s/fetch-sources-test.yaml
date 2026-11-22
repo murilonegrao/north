@@ -242,5 +242,8 @@ spec:
           emptyDir: {sizeLimit: 2Gi}
         - name: tmp
           emptyDir: {}
+        # Applied with plain kubectl, outside the kustomization, so the generated ConfigMap keeps its
+        # hash suffix (ca-banco-<hash>). Optional: the fetch test (LOAD "0") never opens the database.
+        # For LOAD "1", put the real name here: kubectl -n north get configmap | grep ca-banco
         - name: ca-banco
-          configMap: {name: ca-banco}
+          configMap: {name: ca-banco, optional: true}

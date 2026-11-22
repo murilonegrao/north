@@ -35,6 +35,7 @@ export async function loadSession(): Promise<void> {
 export async function adminGuard(to: RouteLocationNormalized): Promise<true | RouteLocationRaw> {
   await useAdminLocale()
   if (!session.loaded) await loadSession()
+  if (to.meta.public) return true
   const stage = session.stage
   const home = homeForStage(stage)
   if (to.name === 'admin-login') return stage === null || stage === 'totp' ? true : home

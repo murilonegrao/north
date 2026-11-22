@@ -4,6 +4,7 @@ import { flushPromises, mount } from '@vue/test-utils'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { createMemoryHistory, createRouter, type RouteLocationNormalized } from 'vue-router'
 import { adminGuard } from '../src/admin/guard'
+import { tokenFromHash } from '../src/admin/links'
 import en from '../src/admin/locales/en.json'
 import ptBR from '../src/admin/locales/pt-BR.json'
 import { session } from '../src/admin/session'
@@ -22,7 +23,7 @@ function load(messages: Record<string, unknown>): Tree {
   return rest as Tree
 }
 
-const user = { id: 1, username: 'ana', role: 'viewer', has_totp: true, disabled: false, must_change_password: false, last_login_at: null, created_at: '2026-11-22T00:00:00Z' }
+const user = { id: 1, username: 'ana', role: 'viewer', has_totp: true, disabled: false, must_change_password: false, last_login_at: null, created_at: '2026-11-22T00:00:00Z', email: null, email_verified: false, locale: 'en', notify_jobs: true }
 const state = (stage: string, role = 'viewer', csrf = 'csrf-1'): SessionState =>
   ({ user: { ...user, role }, stage, csrf }) as SessionState
 
@@ -38,8 +39,8 @@ function stubApi(routes: Record<string, (init: RequestInit) => [number, unknown]
   return fetchMock
 }
 
-const route = (name: string, minRole?: string) =>
-  ({ name, meta: { admin: true, minRole }, path: '/admin' }) as unknown as RouteLocationNormalized
+const route = (name: string, minRole?: string, isPublic = false) =>
+  ({ name, meta: { admin: true, minRole, public: isPublic }, path: '/admin' }) as unknown as RouteLocationNormalized
 
 beforeEach(() => {
   session.loaded = false
@@ -119,5 +120,21 @@ describe('sign-in', () => {
     await wrapper.find('form').trigger('submit')
     await flushPromises()
     expect(wrapper.find('[role="alert"]').text()).toContain('Too many attempts')
+  })
+})
+
+describe('email links', () => {
+  it('reads the token from the fragment only when it looks like one', () => {
+    expect(tokenFromHash('#token=abcDEF_123-xyz')).toBe('abcDEF_123-xyz')
+    expect(tokenFromHash('#token=short')).toBe('')
+    expect(tokenFromHash('#token=<script>alert(1)</script>')).toBe('')
+    expect(tokenFromHash('')).toBe('')
+  })
+
+  it('opens the reset and verification pages without a session', async () => {
+    stubApi({ 'GET /auth/me': () => [401, { detail: 'login required' }] })
+    expect(await adminGuard(route('admin-reset', undefined, true))).toBe(true)
+    expect(await adminGuard(route('admin-verify-email', undefined, true))).toBe(true)
+    expect(await adminGuard(route('admin-overview'))).toBe('/admin/login')
   })
 })

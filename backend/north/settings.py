@@ -39,6 +39,23 @@ class Settings(BaseSettings):
     # Shown as the issuer in authenticator apps.
     totp_issuer: str = "North admin"
 
+    # ---- Email (record 0007). The web process only queues messages (table email_outbox);
+    # the worker sends them over SMTP. Without smtp_host the queue waits and the admin shows why.
+    # Links in emails start here; never taken from the request Host header (reset poisoning).
+    public_url: str = "http://localhost:8000"
+    smtp_host: str | None = None
+    smtp_port: int = 465
+    # ssl: TLS from the first byte (port 465); starttls: upgrade (port 587); none: local only.
+    smtp_security: str = "ssl"
+    smtp_username: str | None = None
+    smtp_password: str | None = None
+    # Sender, e.g. "North <north@harpia.info>"; the address must be the SMTP account's.
+    mail_from: str | None = None
+    mail_reply_to: str | None = None
+
+    def mail_configured(self) -> bool:
+        return bool(self.smtp_host and self.mail_from)
+
     def web_dist_dir(self) -> Path | None:
         """Return the first existing Vue build directory, or None if there is none."""
         if self.web_dist is not None:

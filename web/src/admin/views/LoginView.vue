@@ -80,6 +80,7 @@ function restart() {
         <p v-if="error" class="alert" role="alert">{{ error }}</p>
         <button class="btn btn-primary" type="submit" :disabled="busy">{{ t('admin.login.submit') }}</button>
       </form>
+      <p class="forgot"><RouterLink to="/admin/forgot">{{ t('admin.login.forgot') }}</RouterLink></p>
     </template>
     <template v-else>
       <h1>{{ t('admin.login.totpHeading') }}</h1>
@@ -105,5 +106,9 @@ function restart() {
   max-inline-size: 24rem;
   margin-inline: auto;
   margin-block-start: 2rem;
+}
+.forgot {
+  margin-block-start: 1rem;
+  font-size: 0.875rem;
 }
 </style>

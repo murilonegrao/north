@@ -14,7 +14,7 @@ updated: 2026-11-21
 
 *A map of US master's programs for international students*
 
-**Author:** Murilo · **Version:** 1.5 · **Date:** 2026-11-22 · **Rigor level:** M (own product, MVP)
+**Author:** Murilo · **Version:** 1.6 · **Date:** 2026-11-22 · **Rigor level:** M (own product, MVP)
 
 > [!note] Address and public repo
 > The planned address is `north.harpia.info`. The repository will be public, so this document contains no personal data: the family appears only as a **user profile** (number of dependents, whether the spouse can work), never with names. This SRS is written in English, like the rest of the repository.
@@ -30,6 +30,7 @@ updated: 2026-11-21
 | 1.3 | 2026-11-21 | Murilo | decisions after the data spikes (record 0002): Q09/Q10 answered; R1–R18 in §3.4; CIPs add 30.71 and flag 52.12; IPEDS first (FR-02 Must), Scorecard as enrichment (FR-01 Should); official file upload (new FR-26); SEVP matching by name + city with reconciliation; DAPIP institutional accreditation; HUD FMR by county (FR-06 Should); score with neutral 50, range and certainty; target English score; guaranteed vs competitive funding; ECB exchange rates; BR-15 to BR-17; NFR-01 field names follow the UML |
 | 1.4 | 2026-11-21 | Murilo | UML 1.0 and open items approved; visual identity "A Forja" as C-10 (record 0003) |
 | 1.5 | 2026-11-22 | Murilo | admin area, worker and job queue (record 0006): FR-25 becomes username + password + TOTP with roles; FR-26 uploads go through the admin and a worker |
+| 1.6 | 2026-11-22 | Murilo | email from the admin area (record 0007): new FR-27; FR-25 allows password reset by email with the second factor still required |
 
 ---
 
@@ -226,7 +227,8 @@ Interviews and surveys with other students are deferred until after the MVP. For
 | FR-09 | keep a per-field change history (previous value, new value, author, date, source) | Must | UC06 |
 | FR-10 | show a coverage dashboard for each state: how many programs, how many with each dimension verified, which items are pending | Must | UC09 |
 | FR-11 | mark a state as "complete" only when the BR-11 checklist is satisfied | Should | UC09 |
-| FR-25 | authenticate the curator/administrator before any edit, ingestion or review, with username, password (Argon2id) and a TOTP second factor; roles `viewer`, `curator`, `admin`; every admin action in an append-only audit log; search stays open without login (record 0006) | Must | UC05–UC09 |
+| FR-25 | authenticate the curator/administrator before any edit, ingestion or review, with username, password (Argon2id) and a TOTP second factor; roles `viewer`, `curator`, `admin`; every admin action in an append-only audit log; search stays open without login (record 0006). A forgotten password can be reset through a single-use link sent to the account's verified email; the TOTP code is still required (record 0007/E7) | Must | UC05–UC09 |
+| FR-27 | send email to admin accounts through an outbox the worker delivers over SMTP: address confirmation, password reset links, security notices (password, authenticator, address or access changed, sign-in from a new address, sign-in paused) and failed-job notices; plain text in the account's admin language; no email to the public (record 0007) | Should | UC11 |
 
 **Assisted extraction**
 | ID | The system shall… | Priority | UC |

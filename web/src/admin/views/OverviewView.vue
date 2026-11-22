@@ -55,6 +55,14 @@ const openTasks = (tasks: Record<string, number>) =>
         </RouterLink>
       </div>
       <p v-if="!data.worker.connected" class="note">{{ t('admin.overview.workerDownHelp') }}</p>
+      <div class="row status-line">
+        <span class="mono">
+          {{ t('admin.overview.mail') }}:
+          <strong>{{ data.mail.last_sent_at ? t('admin.overview.mailLast', { at: dateTime(data.mail.last_sent_at) }) : t('admin.overview.mailNever') }}</strong>
+        </span>
+        <span class="mono muted">{{ t('admin.overview.mailCounts', { sent: data.mail.sent_24h, queued: data.mail.queued, failed: data.mail.failed_24h }) }}</span>
+      </div>
+      <p v-if="data.mail.last_error" class="alert">{{ t('admin.overview.mailError', { error: data.mail.last_error }) }}</p>
 
       <template v-for="[country, c] in countries" :key="country">
         <h2>{{ t('admin.overview.country', { country }) }}</h2>

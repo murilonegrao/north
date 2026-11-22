@@ -98,4 +98,6 @@ def user_view(user: User) -> dict[str, object]:
     return {"id": user.id, "username": user.username, "role": user.role,
             "has_totp": user.totp_secret is not None, "disabled": user.disabled,
             "must_change_password": user.must_change_password,
-            "last_login_at": user.last_login_at, "created_at": user.created_at}
+            "last_login_at": user.last_login_at, "created_at": user.created_at,
+            "email": user.email, "email_verified": user.email_verified_at is not None,
+            "locale": user.locale, "notify_jobs": user.notify_jobs}

@@ -31,9 +31,10 @@ spec:
     - to:
         - ipBlock: {cidr: POSTGRES_CIDR}
       ports: [{port: 5432}]
-    # Official sources over https; host names are checked in code (NetworkPolicy has no FQDN).
+    # Official sources over https (host names are checked in code: NetworkPolicy has no FQDN),
+    # and SMTP over TLS to the mail provider (record 0007).
     - to:
         - ipBlock:
             cidr: 0.0.0.0/0
             except: [10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16, 169.254.0.0/16]
-      ports: [{port: 443}]
+      ports: [{port: 443}, {port: 465}]

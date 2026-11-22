@@ -290,6 +290,53 @@ class User(Base):
     created_at: Mapped[dt.datetime] = _now()
     password_changed_at: Mapped[dt.datetime] = _now()
     last_login_at: Mapped[dt.datetime | None] = mapped_column(DateTime(timezone=True))
+    # Email (record 0007): stored lower-case, unique when set. Used for password reset and
+    # notifications only once verified (a link sent to it was opened).
+    email: Mapped[str | None] = mapped_column(Text)
+    email_verified_at: Mapped[dt.datetime | None] = mapped_column(DateTime(timezone=True))
+    # Language of the emails: en or pt-BR (the admin languages).
+    locale: Mapped[str] = mapped_column(Text, server_default="en")
+    # Job failure emails; security notices cannot be turned off.
+    notify_jobs: Mapped[bool] = mapped_column(Boolean, server_default=text("true"))
+
+
+class UserToken(Base):
+    """Single-use links sent by email (password reset, email verification). Only the sha256
+    of the token is stored."""
+
+    __tablename__ = "user_tokens"
+    id: Mapped[int] = mapped_column(BigInteger, primary_key=True)
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"), index=True)
+    purpose: Mapped[str] = mapped_column(Text)  # reset_password, verify_email
+    token_hash: Mapped[str] = mapped_column(Text, unique=True)
+    # verify_email: the address the link was sent to (it must still be the account's).
+    email: Mapped[str | None] = mapped_column(Text)
+    created_at: Mapped[dt.datetime] = _now()
+    expires_at: Mapped[dt.datetime] = mapped_column(DateTime(timezone=True))
+    used_at: Mapped[dt.datetime | None] = mapped_column(DateTime(timezone=True))
+
+
+class EmailOutbox(Base):
+    """Messages queued in the same transaction as the event they describe; the worker sends
+    them. Bodies with a live link (sensitive) are blanked once sent."""
+
+    __tablename__ = "email_outbox"
+    __table_args__ = (Index("ix_email_outbox_status_next_attempt_at", "status", "next_attempt_at"),)
+    id: Mapped[int] = mapped_column(BigInteger, primary_key=True)
+    created_at: Mapped[dt.datetime] = _now()
+    user_id: Mapped[int | None] = mapped_column(ForeignKey("users.id", ondelete="SET NULL"),
+                                                index=True)
+    kind: Mapped[str] = mapped_column(Text)  # message name in north.mail.messages
+    to_addr: Mapped[str] = mapped_column(Text)
+    subject: Mapped[str] = mapped_column(Text)
+    body: Mapped[str] = mapped_column(Text)
+    sensitive: Mapped[bool] = mapped_column(Boolean, server_default=text("false"))
+    # queued, sent, failed (gave up), expired (queued too long, never sent)
+    status: Mapped[str] = mapped_column(Text, server_default="queued")
+    attempts: Mapped[int] = mapped_column(Integer, server_default="0")
+    next_attempt_at: Mapped[dt.datetime] = _now()
+    sent_at: Mapped[dt.datetime | None] = mapped_column(DateTime(timezone=True))
+    last_error: Mapped[str | None] = mapped_column(Text)
 
 
 class AdminSession(Base):

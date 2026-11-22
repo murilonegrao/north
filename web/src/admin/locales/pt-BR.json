@@ -12,7 +12,10 @@
     "audit": "Auditoria",
     "account": "Conta",
     "login": "Entrar",
-    "setup": "Proteja sua conta"
+    "setup": "Proteja sua conta",
+    "forgot": "Esqueci a senha",
+    "reset": "Nova senha",
+    "verifyEmail": "Confirmar email"
   },
   "nav": {
     "main": "Admin",
@@ -48,7 +51,8 @@
     "invalid": "Usuário ou senha incorretos.",
     "invalidCode": "Código errado ou já usado.",
     "throttled": "Tentativas demais. Espere 15 minutos e tente de novo.",
-    "restart": "Recomeçar"
+    "restart": "Recomeçar",
+    "forgot": "Esqueceu a senha?"
   },
   "setup": {
     "passwordHeading": "Escolha uma nova senha",
@@ -100,7 +104,12 @@
     "schedules": "Agendamentos",
     "recentJobs": "Jobs recentes",
     "allJobs": "Todos os jobs",
-    "tasks": "Tarefas de reconciliação abertas"
+    "tasks": "Tarefas de reconciliação abertas",
+    "mail": "Email",
+    "mailLast": "último envio {at}",
+    "mailNever": "nada enviado ainda",
+    "mailCounts": "24 h: {sent} enviados · {queued} na fila · {failed} falharam",
+    "mailError": "Problema no email: {error}"
   },
   "schedule": {
     "every": "a cada {h} h",
@@ -176,7 +185,11 @@
       "curator": "curador",
       "viewer": "leitor"
     },
-    "roleHelp": "leitor só lê; curador também envia arquivos e roda jobs; admin também gerencia usuários e agendamentos e lê a auditoria."
+    "roleHelp": "leitor só lê; curador também envia arquivos e roda jobs; admin também gerencia usuários e agendamentos e lê a auditoria.",
+    "emailOptional": "Email (opcional; recebe um link de confirmação)",
+    "setEmail": "Definir email",
+    "setEmailPrompt": "Email de {name} (recebe um link de confirmação)",
+    "unverified": "não confirmado"
   },
   "audit": {
     "heading": "Auditoria",
@@ -192,7 +205,27 @@
     "signedInAs": "Conectado como {name} ({role})",
     "password": "Senha",
     "totp": "App autenticador",
-    "replaceTotp": "Trocar o app autenticador"
+    "replaceTotp": "Trocar o app autenticador",
+    "email": "Email",
+    "emailHelp": "Usado para redefinir a senha e para avisos de segurança (novo login, senha ou autenticador trocados). Só depois de confirmado.",
+    "noEmail": "nenhum email",
+    "verified": "confirmado",
+    "unverified": "aguardando confirmação",
+    "addEmail": "Adicionar email",
+    "changeEmail": "Trocar email",
+    "newEmail": "Novo endereço",
+    "confirmPassword": "Sua senha atual",
+    "saveEmail": "Salvar e enviar confirmação",
+    "cancel": "Cancelar",
+    "emailSaved": "Link de confirmação enviado para {email}. Abra-o para concluir.",
+    "resend": "Reenviar confirmação",
+    "test": "Enviar email de teste",
+    "testSent": "Email de teste na fila para {email}; chega em até um minuto.",
+    "wrongPassword": "Senha atual errada.",
+    "throttled": "Muitos pedidos. Tente de novo em uma hora.",
+    "notifications": "Avisos por email",
+    "notificationsHelp": "Os avisos de segurança são sempre enviados.",
+    "notifyJobs": "Avisar quando um job falhar (os meus e os agendados, se eu for admin)"
   },
   "kinds": {
     "us_fetch": {
@@ -215,5 +248,26 @@
   "params": {
     "states": "Siglas USPS separadas por vírgula, ou ALL",
     "fetch": "baixar antes"
+  },
+  "forgot": {
+    "heading": "Esqueci a senha",
+    "help": "Digite seu usuário ou email. Se a conta tiver um email confirmado, enviamos um link para escolher uma senha nova (válido por 30 minutos).",
+    "login": "Usuário ou email",
+    "submit": "Enviar link",
+    "sent": "Se a conta tiver um email confirmado, o link foi enviado. Confira a caixa de entrada (e o spam).",
+    "back": "Voltar para o login"
+  },
+  "reset": {
+    "heading": "Escolha uma senha nova",
+    "done": "Senha alterada. Todas as sessões foram encerradas; entre com a senha nova e o código do autenticador.",
+    "invalid": "Este link é inválido, já foi usado ou expirou.",
+    "again": "Pedir um novo link",
+    "toLogin": "Ir para o login"
+  },
+  "verify": {
+    "heading": "Confirmar email",
+    "done": "{email} confirmado. Ele agora recebe links de redefinição de senha e avisos.",
+    "invalid": "Este link é inválido, já foi usado ou expirou. Peça outro na página da conta.",
+    "toAccount": "Ir para a conta"
   }
 }

@@ -20,6 +20,7 @@ class NewUser(BaseModel):
     username: str = Field(max_length=64)
     role: str
     password: str = Field(max_length=1024)
+    email: str | None = Field(default=None, max_length=254)
 
 
 class UserPatch(BaseModel):
@@ -27,6 +28,7 @@ class UserPatch(BaseModel):
     disabled: bool | None = None
     reset_password: str | None = Field(default=None, max_length=1024)
     reset_totp: bool = False
+    email: str | None = Field(default=None, max_length=254)
 
 
 @router.get("")
@@ -38,7 +40,7 @@ def list_users(auth: Admin) -> object:
 def create_user(body: NewUser, auth: Admin) -> object:
     try:
         user = service.create_user(auth.db, body.username, body.role, body.password,
-                                   actor=auth.user, ip=auth.ip)
+                                   actor=auth.user, ip=auth.ip, email=body.email or None)
     except (WeakPassword, ValueError) as e:
         raise HTTPException(400, str(e)) from None
     return JSONResponse(jsonable_encoder(user_view(user)), status_code=201)
@@ -52,7 +54,7 @@ def patch_user(user_id: int, body: UserPatch, auth: Admin) -> object:
     try:
         service.update_user(auth.db, user, actor=auth.user, ip=auth.ip, role=body.role,
                             disabled=body.disabled, reset_password=body.reset_password,
-                            reset_totp=body.reset_totp)
+                            reset_totp=body.reset_totp, email=body.email or None)
     except service.Forbidden as e:
         raise HTTPException(403, str(e)) from None
     except (WeakPassword, ValueError) as e:

@@ -298,6 +298,10 @@ Run with `deploy/k8s/fetch-sources-test.yaml`; to repeat from inside the cluster
 | HUD FMR xlsx | **blocked**: HTTP 202 with an empty body (a bot challenge). Use the HUD API with a token, or upload |
 | ECB rates, Census gazetteer | work |
 
+**Repeated from inside the cluster (2026-11-22, VPS IP):** same results, with one difference: the
+Scorecard data page answers 403 to the datacenter IP. North does not load from that page; Scorecard
+goes through the API with the key (section 4a). The SEVP list found was `certified-school-list-11-18-26.pdf`.
+
 ## 13. Implementation order
 
 Each step ships on its own and leaves the system working.

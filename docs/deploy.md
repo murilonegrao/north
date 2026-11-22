@@ -40,6 +40,15 @@ the `north-api-keys` Secret. The first admin account is created once with
 `python -m north.auth.cli create-user` inside the web pod; everything after that is done in the
 browser. With the worker in place, the one-off load Job below is no longer needed.
 
+## Email (record 0007)
+
+The web process queues messages in `email_outbox`; the worker sends them over SMTP (Hostinger,
+`smtp.hostinger.com:465`). The worker manifest sets the host, port and sender; the login goes in
+the sealed `north-smtp` Secret (shape in [`deploy/k8s/admin/smtp.secret.example.yaml`](../deploy/k8s/admin/smtp.secret.example.yaml)).
+The worker egress policy allows port 465. `NORTH_PUBLIC_URL` (web and worker) is the base of
+the links in emails. Deliverability needs SPF, DKIM and DMARC for the sending domain at the DNS
+provider. Locally, `docker compose` sends everything to Mailpit (http://localhost:8025).
+
 ## Alternative for the first load
 
 Restoring a `pg_dump` of a local database also works, but it ships the state of one machine instead of rebuilding from the sources; prefer the Job.

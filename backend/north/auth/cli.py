@@ -4,6 +4,8 @@
     python -m north.auth.cli reset-password --username ana
     python -m north.auth.cli reset-totp --username ana
     python -m north.auth.cli list-users
+    python -m north.auth.cli set-email --username ana --email ana@example.org
+    python -m north.auth.cli test-email --username ana
 
 Passwords are read from the terminal (never from arguments, which land in shell history), or
 generated with --generate and shown once. Every account starts with "must change password".
@@ -52,9 +54,15 @@ def main(argv: list[str] | None = None) -> int:
         p.add_argument("--username", required=True)
         if name == "create-user":
             p.add_argument("--role", choices=service.ROLES, default="admin")
+            p.add_argument("--email", help="sends a confirmation link (record 0007)")
         if name in ("create-user", "reset-password"):
             p.add_argument("--generate", action="store_true", help="generate and show a password")
     sub.add_parser("list-users")
+    p = sub.add_parser("set-email", help="set the address and send it a confirmation link")
+    p.add_argument("--username", required=True)
+    p.add_argument("--email", required=True)
+    p = sub.add_parser("test-email", help="queue a test message to the account's address")
+    p.add_argument("--username", required=True)
     a = ap.parse_args(argv)
 
     with get_sessionmaker()() as db:
@@ -62,12 +70,15 @@ def main(argv: list[str] | None = None) -> int:
             for u in db.scalars(select(User).order_by(User.username)):
                 state = "disabled" if u.disabled else "active"
                 mfa = "totp" if u.totp_secret else "no-totp"
-                print(f"{u.username:<24} {u.role:<8} {state:<8} {mfa:<8} "
+                mail = "email-ok" if u.email_verified_at else ("email-unconfirmed" if u.email
+                                                                else "no-email")
+                print(f"{u.username:<24} {u.role:<8} {state:<8} {mfa:<8} {mail:<17} "
                       f"last login {u.last_login_at}")
             return 0
         name = service.check_username(a.username)
         if a.cmd == "create-user":
-            service.create_user(db, name, a.role, _password(name, a.generate), actor=ACTOR)
+            service.create_user(db, name, a.role, _password(name, a.generate), actor=ACTOR,
+                                email=a.email)
             print(f"created {name} ({a.role}); first login asks for a new password"
                   " and an authenticator app", flush=True)
             return 0
@@ -75,6 +86,15 @@ def main(argv: list[str] | None = None) -> int:
         if user is None:
             print(f"no user {name}", file=sys.stderr)
             return 1
+        if a.cmd == "set-email":
+            service.set_email(db, user, a.email, actor=ACTOR, ip=None)
+            db.commit()
+            print(f"{name}: confirmation link queued for {user.email}", flush=True)
+            return 0
+        if a.cmd == "test-email":
+            print(f"test message queued for {service.send_test_email(db, user, ip=None)}; "
+                  "the worker sends it within seconds", flush=True)
+            return 0
         if a.cmd == "reset-password":
             user.password_hash = hash_password(_password(name, a.generate))
             user.must_change_password = True

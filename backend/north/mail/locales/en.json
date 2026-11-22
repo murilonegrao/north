@@ -1,0 +1,66 @@
+{
+  "_meta": {
+    "note": "Plain-text email templates (record 0007). Placeholders in {braces}."
+  },
+  "footer": {
+    "security": "You get this message because it concerns the security of your North admin account; it cannot be turned off.",
+    "jobs": "Job emails can be turned off on the account page: {account_url}",
+    "plain": ""
+  },
+  "signature": "North admin · {admin_url}",
+  "messages": {
+    "test": {
+      "subject": "North: test email",
+      "body": "Hello {username},\n\nThis is a test message from the North admin. If you can read it, email works.\n\nSent at {at}."
+    },
+    "verify_email": {
+      "subject": "North: confirm your email address",
+      "body": "Hello {username},\n\nOpen this link to confirm that this address belongs to your North admin account:\n\n{url}\n\nThe link works once and expires in {hours} hours. Until you confirm, password reset and notifications do not use this address.\n\nIf you did not expect this message, ignore it."
+    },
+    "password_reset": {
+      "subject": "North: reset your password",
+      "body": "Hello {username},\n\nSomeone (from address {ip}) asked to reset the password of your North admin account. To choose a new password, open:\n\n{url}\n\nThe link works once and expires in {minutes} minutes. Your authenticator code is still required at sign-in.\n\nIf it was not you, ignore this message: your password has not changed."
+    },
+    "password_changed": {
+      "subject": "North: your password was changed",
+      "body": "Hello {username},\n\nThe password of your North admin account was changed at {at} (address {ip}). Every other session was signed out.\n\nIf it was not you, reset your password at {admin_url}/forgot and tell the other admins."
+    },
+    "totp_changed": {
+      "subject": "North: your authenticator app was changed",
+      "body": "Hello {username},\n\nA new authenticator app was set up for your North admin account at {at} (address {ip}). Codes from the previous app no longer work.\n\nIf it was not you, tell the other admins at once."
+    },
+    "email_changed": {
+      "subject": "North: your account email was changed",
+      "body": "Hello {username},\n\nThe email address of your North admin account was changed at {at} to {new_email}. This address will no longer receive password reset links.\n\nIf it was not you, tell the other admins at once."
+    },
+    "new_sign_in": {
+      "subject": "North: new sign-in to your account",
+      "body": "Hello {username},\n\nYour North admin account signed in at {at} from an address not seen in the last 90 days:\n\n  address: {ip}\n  browser: {agent}\n\nIf it was you, there is nothing to do. If not, change your password and tell the other admins."
+    },
+    "login_locked": {
+      "subject": "North: sign-in paused after failed attempts",
+      "body": "Hello {username},\n\nThere were {failures} failed sign-in attempts on your North admin account (last from address {ip}). Sign-in for this account is paused for {minutes} minutes.\n\nIf it was not you, your password is still safe as long as nobody knows it; consider changing it to a longer one."
+    },
+    "access_changed": {
+      "subject": "North: your account was changed by an admin",
+      "body": "Hello {username},\n\nThe admin {admin} changed your North admin account at {at}:\n\n{changes}\n\nYour sessions were signed out."
+    },
+    "job_failed": {
+      "subject": "North: job #{id} {status}",
+      "body": "Job #{id} ({title}) ended as “{status}” at {at}.\n\n{error}\n\nLog: {url}"
+    }
+  },
+  "changes": {
+    "role": "role: {old} → {new}",
+    "disabled_true": "account disabled",
+    "disabled_false": "account enabled",
+    "password_reset": "temporary password set (you choose a new one at the next sign-in)",
+    "totp_reset": "authenticator app removed (you set up a new one at the next sign-in)",
+    "email": "email address set to {email}"
+  },
+  "status": {
+    "failed": "failed",
+    "attention": "needs attention",
+    "cancelled": "cancelled"
+  }
+}

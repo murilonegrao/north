@@ -10,7 +10,7 @@ from sqlalchemy import func, select, text
 from north.api.admin.deps import Viewer
 from north.api.admin.jobs import recent_jobs, schedule_view
 from north.jobs import registry
-from north.repository.models import IngestionRun, Job, Schedule, SourceFile
+from north.repository.models import EmailOutbox, IngestionRun, Job, Schedule, SourceFile
 
 router = APIRouter()
 
@@ -28,6 +28,26 @@ def worker_status(db: Any) -> dict[str, Any]:
             "last_job_started_at": last_claim}
 
 
+def mail_status(db: Any) -> dict[str, Any]:
+    """The outbox seen from the web process (only the worker knows the SMTP settings): what
+    waits, what failed lately, the last error."""
+    def count(*where: Any) -> int:
+        return db.scalar(select(func.count()).select_from(EmailOutbox).where(*where)) or 0
+
+    day = func.now() - text("interval '1 day'")
+    last_problem = db.scalars(select(EmailOutbox).where(EmailOutbox.last_error.is_not(None))
+                              .order_by(EmailOutbox.id.desc()).limit(1)).first()
+    return {
+        "queued": count(EmailOutbox.status == "queued"),
+        "failed_24h": count(EmailOutbox.status.in_(("failed", "expired")),
+                            EmailOutbox.created_at > day),
+        "sent_24h": count(EmailOutbox.status == "sent", EmailOutbox.sent_at > day),
+        "last_sent_at": db.scalar(select(func.max(EmailOutbox.sent_at))),
+        "last_error": (None if last_problem is None or last_problem.status == "sent"
+                       else last_problem.last_error),
+    }
+
+
 @router.get("/overview")
 def overview(auth: Viewer) -> object:
     db = auth.db
@@ -36,6 +56,7 @@ def overview(auth: Viewer) -> object:
     return {
         "countries": registry.overview(db),
         "worker": worker_status(db),
+        "mail": mail_status(db),
         "jobs": recent_jobs(db, 8),
         "jobs_needing_attention": attention,
         "schedules": [schedule_view(r) for r in db.scalars(select(Schedule).order_by(Schedule.id))],

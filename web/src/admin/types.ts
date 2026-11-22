@@ -11,6 +11,10 @@ export interface AdminUser {
   must_change_password: boolean
   last_login_at: string | null
   created_at: string
+  email: string | null
+  email_verified: boolean
+  locale: 'en' | 'pt-BR'
+  notify_jobs: boolean
 }
 
 export interface SessionState {
@@ -88,6 +92,7 @@ export interface CountryOverview {
 export interface Overview {
   countries: Record<string, CountryOverview>
   worker: { connected: boolean; last_heartbeat_at: string | null; last_job_started_at: string | null }
+  mail: { queued: number; failed_24h: number; sent_24h: number; last_sent_at: string | null; last_error: string | null }
   jobs: Job[]
   jobs_needing_attention: number
   schedules: ScheduleRow[]

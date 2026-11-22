@@ -37,6 +37,15 @@ spec:
             # API keys for API sources (optional: a missing key skips that source).
             - {name: NORTH_API_DATA_GOV_KEY, valueFrom: {secretKeyRef: {name: north-api-keys, key: NORTH_API_DATA_GOV_KEY, optional: true}}}
             - {name: HUD_API_TOKEN, valueFrom: {secretKeyRef: {name: north-api-keys, key: HUD_API_TOKEN, optional: true}}}
+            # Email (record 0007): only the worker talks to the SMTP server. Without the Secret the
+            # messages wait in the queue and the admin overview says why.
+            - {name: NORTH_PUBLIC_URL, value: "https://north.harpia.info"}
+            - {name: NORTH_SMTP_HOST, value: smtp.hostinger.com}
+            - {name: NORTH_SMTP_PORT, value: "465"}
+            - {name: NORTH_SMTP_SECURITY, value: ssl}
+            - {name: NORTH_MAIL_FROM, value: "North <north@harpia.info>"}
+            - {name: NORTH_SMTP_USERNAME, valueFrom: {secretKeyRef: {name: north-smtp, key: NORTH_SMTP_USERNAME, optional: true}}}
+            - {name: NORTH_SMTP_PASSWORD, valueFrom: {secretKeyRef: {name: north-smtp, key: NORTH_SMTP_PASSWORD, optional: true}}}
           securityContext:
             allowPrivilegeEscalation: false
             readOnlyRootFilesystem: true
