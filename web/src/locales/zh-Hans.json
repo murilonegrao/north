@@ -11,7 +11,8 @@
     "home": "North 首页",
     "language": "语言",
     "main": "主导航",
-    "programs": "项目"
+    "programs": "项目",
+    "placement": "英语水平"
   },
   "theme": {
     "light": "浅色",
@@ -269,5 +270,50 @@
     "notes": {
       "institution_wide_average": "全校研究生平均学费，并非本项目的价格。"
     }
+  },
+  "placement": {
+    "pageTitle": "英语分级测试",
+    "pageDescription": "几分钟内估算你的英语水平（CEFR），并按官方对照表查看七种英语考试的对应分数段。",
+    "eyebrow": "英语分级 · 估算",
+    "title": "你的英语水平如何？",
+    "lead": "共 {count} 题，约 {minutes} 分钟。你将得到每项技能的 CEFR 等级，以及七种英语考试的对应分数段，均取自各考试机构的官方对照表。",
+    "factSkills": "本版本测试语法和词汇。阅读和听力即将推出；不测试写作和口语。",
+    "factEstimate": "结果是估算，不是官方成绩。",
+    "factPrivate": "你的答案和结果只保存在本浏览器中，不会发送给 North。",
+    "start": "开始测试",
+    "skill": {
+      "grammar": "语法",
+      "vocabulary": "词汇",
+      "reading": "阅读",
+      "listening": "听力"
+    },
+    "sectionOf": "第 {n} 部分，共 {total} 部分",
+    "questionOf": "{n} / {total}",
+    "progress": "进度",
+    "chooseOne": "选择一个答案",
+    "back": "上一题",
+    "next": "下一题",
+    "skip": "跳过",
+    "finish": "查看结果",
+    "resultEyebrow": "估算，非官方成绩",
+    "resultTitle": "估算等级：{level}",
+    "resultLabel": "测试了语法、词汇、阅读和听力。未测试写作和口语。",
+    "resultLabelPartial": "仅测试了语法和词汇。未测试阅读、听力、写作和口语。",
+    "bySkill": "各项技能",
+    "up": "较上次 {level} 提升",
+    "down": "较上次 {level} 下降",
+    "same": "与上次相同",
+    "belowA2": "低于 A2",
+    "ranges": "英语考试中的对应分数段",
+    "rangesNote": "取自各考试的官方 CEFR 对照表。给出的是分数段，而不是单一分数。没有该等级对照表的考试不列出。",
+    "test": "考试",
+    "range": "分数段",
+    "source": "官方对照表",
+    "checkedOn": "核对于 {date}",
+    "legacyScale": "{span}（旧 0–120 分制）",
+    "noRanges": "没有考试公布此等级的对照表。",
+    "retake": "再测一次",
+    "export": "导出我的结果（JSON）",
+    "review": "查看答错的 {count} 道题"
   }
 }

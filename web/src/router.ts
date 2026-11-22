@@ -24,6 +24,13 @@ export const router = createRouter({
       meta: { titleKey: 'programs.pageTitle', descriptionKey: 'programs.pageDescription' },
     },
     {
+      // English placement test (record 0008, FR-28): its own chunk, with the item bank inside.
+      path: `/:lang(${prefixes})/placement`,
+      name: 'placement',
+      component: () => import('./views/PlacementView.vue'),
+      meta: { titleKey: 'placement.pageTitle', descriptionKey: 'placement.pageDescription' },
+    },
+    {
       // Stable URL per program (NFR-15): the id is `<unitid>-<cip6 without dot>`.
       path: `/:lang(${prefixes})/programs/:id`,
       name: 'program',

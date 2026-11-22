@@ -1,0 +1,165 @@
+# North placement test: grammar items (record 0008/T21).
+# Original items, written for North. Five per band; ids are never reused.
+bank_version: "0.1"
+skill: grammar
+items:
+  - id: gr-a2-01
+    band: A2
+    prompt: She ___ to work by bus every day.
+    options: [go, goes, going, is go]
+    answer: 1
+    explanation: Present simple with he/she/it adds -s for routines.
+    author: north
+    version: 1
+  - id: gr-a2-02
+    band: A2
+    prompt: There ___ two banks on my street.
+    options: [are, is, be, has]
+    answer: 0
+    explanation: '"There are" goes with a plural noun.'
+    author: north
+    version: 1
+  - id: gr-a2-03
+    band: A2
+    prompt: I ___ my keys yesterday, so I couldn't get in.
+    options: [lose, have lose, lost, losing]
+    answer: 2
+    explanation: '"Yesterday" is a finished time: past simple.'
+    author: north
+    version: 1
+  - id: gr-a2-04
+    band: A2
+    prompt: We can't go to the park now. It ___ heavily.
+    options: [rains, rain, rained, is raining]
+    answer: 3
+    explanation: Present continuous for something happening now.
+    author: north
+    version: 1
+  - id: gr-a2-05
+    band: A2
+    prompt: My new flat is ___ than my old one.
+    options: [more big, bigger, biggest, the bigger]
+    answer: 1
+    explanation: Short adjectives form the comparative with -er.
+    author: north
+    version: 1
+  - id: gr-b1-01
+    band: B1
+    prompt: I ___ in this city since 2019.
+    options: [live, am living, have lived, lived]
+    answer: 2
+    explanation: '"Since" + a starting point takes the present perfect.'
+    author: north
+    version: 1
+  - id: gr-b1-02
+    band: B1
+    prompt: If it rains tomorrow, we ___ the picnic.
+    options: [cancel, will cancel, would cancel, cancelled]
+    answer: 1
+    explanation: 'First conditional: if + present, will + verb.'
+    author: north
+    version: 1
+  - id: gr-b1-03
+    band: B1
+    prompt: When I arrived at the station, the train ___.
+    options: [already left, has already left, had already left, already leaves]
+    answer: 2
+    explanation: Past perfect for an action finished before another past action.
+    author: north
+    version: 1
+  - id: gr-b1-04
+    band: B1
+    prompt: You ___ wear a suit to the interview, but it's a good idea.
+    options: [mustn't, don't have to, can't, shouldn't]
+    answer: 1
+    explanation: '"Don''t have to" means it is not necessary; "mustn''t" means it is not allowed.'
+    author: north
+    version: 1
+  - id: gr-b1-05
+    band: B1
+    prompt: The report ___ by the manager last week.
+    options: [wrote, was written, has written, is writing]
+    answer: 1
+    explanation: Past passive, because the report did not write itself.
+    author: north
+    version: 1
+  - id: gr-b2-01
+    band: B2
+    prompt: If I ___ about the strike, I would have taken a taxi.
+    options: [knew, had known, have known, would know]
+    answer: 1
+    explanation: 'Third conditional: if + past perfect, would have + past participle.'
+    author: north
+    version: 1
+  - id: gr-b2-02
+    band: B2
+    prompt: She's used to ___ early, so the 6 a.m. shift doesn't bother her.
+    options: [get up, getting up, got up, have got up]
+    answer: 1
+    explanation: '"Be used to" is followed by a noun or an -ing form.'
+    author: north
+    version: 1
+  - id: gr-b2-03
+    band: B2
+    prompt: By the time you read this, I ___ for Dublin.
+    options: [will leave, leave, will have left, am leaving]
+    answer: 2
+    explanation: Future perfect for an action complete before a future moment.
+    author: north
+    version: 1
+  - id: gr-b2-04
+    band: B2
+    prompt: He denied ___ the documents.
+    options: [to take, taking, take, that take]
+    answer: 1
+    explanation: '"Deny" is followed by an -ing form.'
+    author: north
+    version: 1
+  - id: gr-b2-05
+    band: B2
+    prompt: I wish I ___ more time to study last year.
+    options: [have had, had, had had, would have]
+    answer: 2
+    explanation: A wish about the past takes the past perfect.
+    author: north
+    version: 1
+  - id: gr-c1-01
+    band: C1
+    prompt: Not only ___ late, but he also forgot the slides.
+    options: [he arrived, did he arrive, he did arrive, arrived he]
+    answer: 1
+    explanation: After a negative adverbial at the start, the subject and auxiliary invert.
+    author: north
+    version: 1
+  - id: gr-c1-02
+    band: C1
+    prompt: Had we left earlier, we ___ the flight.
+    options: [would catch, would have caught, had caught, will have caught]
+    answer: 1
+    explanation: '"Had we left" is an inverted third conditional; the result is "would have caught".'
+    author: north
+    version: 1
+  - id: gr-c1-03
+    band: C1
+    prompt: It's high time the council ___ something about the traffic.
+    options: [does, did, has done, will do]
+    answer: 1
+    explanation: '"It''s high time" is followed by a past form with present meaning.'
+    author: north
+    version: 1
+  - id: gr-c1-04
+    band: C1
+    prompt: The proposal, ___ was rejected, would have cut costs by half.
+    options: [that, what, which, who]
+    answer: 2
+    explanation: A non-defining relative clause about a thing uses "which", never "that".
+    author: north
+    version: 1
+  - id: gr-c1-05
+    band: C1
+    prompt: Scarcely had the meeting started ___ the fire alarm went off.
+    options: [than, when, that, then]
+    answer: 1
+    explanation: '"Scarcely ... when" (like "hardly ... when") links two events in quick succession.'
+    author: north
+    version: 1

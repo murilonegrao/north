@@ -1,0 +1,133 @@
+# North placement test: vocabulary items (record 0008/T21).
+# Original items, written for North. Four per band; ids are never reused.
+bank_version: "0.1"
+skill: vocabulary
+items:
+  - id: vo-a2-01
+    band: A2
+    prompt: I need to ___ a doctor's appointment for Monday.
+    options: [do, make, take, give]
+    answer: 1
+    explanation: 'The collocation is "make an appointment".'
+    author: north
+    version: 1
+  - id: vo-a2-02
+    band: A2
+    prompt: The shop is ___ on Sundays, so we can't buy bread.
+    options: [closed, close, shut down, finish]
+    answer: 0
+    explanation: '"Closed" describes a shop that is not open; "shut down" means it stopped for good.'
+    author: north
+    version: 1
+  - id: vo-a2-03
+    band: A2
+    prompt: My brother's daughter is my ___.
+    options: [aunt, cousin, niece, nephew]
+    answer: 2
+    explanation: A brother's or sister's daughter is a niece; a son is a nephew.
+    author: north
+    version: 1
+  - id: vo-a2-04
+    band: A2
+    prompt: It's cold outside. Don't forget your ___.
+    options: [coat, sandals, sunglasses, swimsuit]
+    answer: 0
+    explanation: A coat is what you wear when it is cold.
+    author: north
+    version: 1
+  - id: vo-b1-01
+    band: B1
+    prompt: Could you ___ me some money until Friday?
+    options: [borrow, lend, owe, pay]
+    answer: 1
+    explanation: You lend something to someone; you borrow something from someone.
+    author: north
+    version: 1
+  - id: vo-b1-02
+    band: B1
+    prompt: The rent ___ electricity and water.
+    options: [contains, includes, involves, consists]
+    answer: 1
+    explanation: '"Include" means something is part of a price or a total.'
+    author: north
+    version: 1
+  - id: vo-b1-03
+    band: B1
+    prompt: I'm looking ___ to the course starting in March.
+    options: [up, after, forward, for]
+    answer: 2
+    explanation: '"Look forward to" means to be happy about something that will happen.'
+    author: north
+    version: 1
+  - id: vo-b1-04
+    band: B1
+    prompt: The train was ___ because of the storm, so we took a bus.
+    options: [cancelled, refused, removed, missed]
+    answer: 0
+    explanation: A train that does not run is cancelled.
+    author: north
+    version: 1
+  - id: vo-b2-01
+    band: B2
+    prompt: The company plans to ___ 200 new staff next year.
+    options: [recruit, enrol, apply, appoint to]
+    answer: 0
+    explanation: Companies recruit staff; students enrol on courses.
+    author: north
+    version: 1
+  - id: vo-b2-02
+    band: B2
+    prompt: Her argument was so ___ that nobody could disagree.
+    options: [persistent, pervasive, persuasive, permissive]
+    answer: 2
+    explanation: '"Persuasive" means able to make people agree.'
+    author: north
+    version: 1
+  - id: vo-b2-03
+    band: B2
+    prompt: We need to ___ the extra costs before signing the lease.
+    options: [take part in, take over, take off, take into account]
+    answer: 3
+    explanation: '"Take into account" means to consider something when deciding.'
+    author: north
+    version: 1
+  - id: vo-b2-04
+    band: B2
+    prompt: The landlord asked for a ___ of two months' rent, returned when we leave.
+    options: [fee, deposit, charge, refund]
+    answer: 1
+    explanation: A deposit is money held as security and returned later.
+    author: north
+    version: 1
+  - id: vo-c1-01
+    band: C1
+    prompt: The new policy has been met with ___ criticism from students.
+    options: [far-reached, widespread, broadly, extensively]
+    answer: 1
+    explanation: '"Widespread" is the adjective that collocates with criticism; the others are adverbs or do not exist.'
+    author: north
+    version: 1
+  - id: vo-c1-02
+    band: C1
+    prompt: His explanation was rather ___; I still don't know what he meant.
+    options: [vacant, vain, vague, vogue]
+    answer: 2
+    explanation: '"Vague" means unclear or not precise.'
+    author: north
+    version: 1
+  - id: vo-c1-03
+    band: C1
+    prompt: The two studies reached ___ conclusions, which is why the debate continues.
+    options: [conflicted, contrary to, contrasting with, conflicting]
+    answer: 3
+    explanation: '"Conflicting" means that the conclusions disagree; "conflicted" describes a person''s feelings.'
+    author: north
+    version: 1
+  - id: vo-c1-04
+    band: C1
+    prompt: She was ___ to accept the offer until she had read the contract.
+    options: [resistant, reluctant, repellent, refusing]
+    answer: 1
+    explanation: '"Reluctant to" + verb means unwilling to do something.'
+    author: north
+    version: 1

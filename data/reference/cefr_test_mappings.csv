@@ -1,0 +1,71 @@
+test,scale,section,cefr,min,max,note,source_url,checked_on
+ielts_academic,band_0_9,overall,B1,4,5,band 5 is on the B1/B2 border,https://ielts.org/organisations/ielts-for-organisations/compare-ielts/ielts-and-the-cefr,2026-11-22
+ielts_academic,band_0_9,overall,B2,5.5,6.5,band 6.5 is on the B2/C1 border,https://ielts.org/organisations/ielts-for-organisations/compare-ielts/ielts-and-the-cefr,2026-11-22
+ielts_academic,band_0_9,overall,C1,7,8,band 8 is on the C1/C2 border,https://ielts.org/organisations/ielts-for-organisations/compare-ielts/ielts-and-the-cefr,2026-11-22
+ielts_academic,band_0_9,overall,C2,8.5,9,,https://ielts.org/organisations/ielts-for-organisations/compare-ielts/ielts-and-the-cefr,2026-11-22
+toefl_ibt,ibt_1_6,overall,A1,1,1.5,,https://www.ets.org/toefl/institutions/ibt/score-scale-update.html,2026-11-22
+toefl_ibt,ibt_1_6,overall,A2,2,2.5,,https://www.ets.org/toefl/institutions/ibt/score-scale-update.html,2026-11-22
+toefl_ibt,ibt_1_6,overall,B1,3,3.5,,https://www.ets.org/toefl/institutions/ibt/score-scale-update.html,2026-11-22
+toefl_ibt,ibt_1_6,overall,B2,4,4.5,,https://www.ets.org/toefl/institutions/ibt/score-scale-update.html,2026-11-22
+toefl_ibt,ibt_1_6,overall,C1,5,5.5,,https://www.ets.org/toefl/institutions/ibt/score-scale-update.html,2026-11-22
+toefl_ibt,ibt_1_6,overall,C2,6,6,,https://www.ets.org/toefl/institutions/ibt/score-scale-update.html,2026-11-22
+toefl_ibt,ibt_1_6,reading,A1,1,1.5,,https://www.ets.org/toefl/institutions/ibt/score-scale-update.html,2026-11-22
+toefl_ibt,ibt_1_6,reading,A2,2,2.5,,https://www.ets.org/toefl/institutions/ibt/score-scale-update.html,2026-11-22
+toefl_ibt,ibt_1_6,reading,B1,3,3.5,,https://www.ets.org/toefl/institutions/ibt/score-scale-update.html,2026-11-22
+toefl_ibt,ibt_1_6,reading,B2,4,4.5,,https://www.ets.org/toefl/institutions/ibt/score-scale-update.html,2026-11-22
+toefl_ibt,ibt_1_6,reading,C1,5,5.5,,https://www.ets.org/toefl/institutions/ibt/score-scale-update.html,2026-11-22
+toefl_ibt,ibt_1_6,reading,C2,6,6,,https://www.ets.org/toefl/institutions/ibt/score-scale-update.html,2026-11-22
+toefl_ibt,ibt_1_6,listening,A1,1,1.5,,https://www.ets.org/toefl/institutions/ibt/score-scale-update.html,2026-11-22
+toefl_ibt,ibt_1_6,listening,A2,2,2.5,,https://www.ets.org/toefl/institutions/ibt/score-scale-update.html,2026-11-22
+toefl_ibt,ibt_1_6,listening,B1,3,3.5,,https://www.ets.org/toefl/institutions/ibt/score-scale-update.html,2026-11-22
+toefl_ibt,ibt_1_6,listening,B2,4,4.5,,https://www.ets.org/toefl/institutions/ibt/score-scale-update.html,2026-11-22
+toefl_ibt,ibt_1_6,listening,C1,5,5.5,,https://www.ets.org/toefl/institutions/ibt/score-scale-update.html,2026-11-22
+toefl_ibt,ibt_1_6,listening,C2,6,6,,https://www.ets.org/toefl/institutions/ibt/score-scale-update.html,2026-11-22
+toefl_ibt,ibt_0_120,overall,A1,0,23,ETS concordance from the 1-6 scale; shown until 2028-01-31,https://www.ets.org/toefl/institutions/ibt/score-scale-update.html,2026-11-22
+toefl_ibt,ibt_0_120,overall,A2,24,43,ETS concordance from the 1-6 scale; shown until 2028-01-31,https://www.ets.org/toefl/institutions/ibt/score-scale-update.html,2026-11-22
+toefl_ibt,ibt_0_120,overall,B1,44,71,ETS concordance from the 1-6 scale; shown until 2028-01-31,https://www.ets.org/toefl/institutions/ibt/score-scale-update.html,2026-11-22
+toefl_ibt,ibt_0_120,overall,B2,72,94,ETS concordance from the 1-6 scale; shown until 2028-01-31,https://www.ets.org/toefl/institutions/ibt/score-scale-update.html,2026-11-22
+toefl_ibt,ibt_0_120,overall,C1,95,113,ETS concordance from the 1-6 scale; shown until 2028-01-31,https://www.ets.org/toefl/institutions/ibt/score-scale-update.html,2026-11-22
+toefl_ibt,ibt_0_120,overall,C2,114,120,ETS concordance from the 1-6 scale; shown until 2028-01-31,https://www.ets.org/toefl/institutions/ibt/score-scale-update.html,2026-11-22
+toefl_ibt,ibt_0_120,reading,A2,3,5,ETS concordance from the 1-6 scale (section 0-30); shown until 2028-01-31,https://www.ets.org/toefl/institutions/ibt/score-scale-update.html,2026-11-22
+toefl_ibt,ibt_0_120,reading,B1,6,17,ETS concordance from the 1-6 scale (section 0-30); shown until 2028-01-31,https://www.ets.org/toefl/institutions/ibt/score-scale-update.html,2026-11-22
+toefl_ibt,ibt_0_120,reading,B2,18,23,ETS concordance from the 1-6 scale (section 0-30); shown until 2028-01-31,https://www.ets.org/toefl/institutions/ibt/score-scale-update.html,2026-11-22
+toefl_ibt,ibt_0_120,reading,C1,24,28,ETS concordance from the 1-6 scale (section 0-30); shown until 2028-01-31,https://www.ets.org/toefl/institutions/ibt/score-scale-update.html,2026-11-22
+toefl_ibt,ibt_0_120,listening,A2,4,8,ETS concordance from the 1-6 scale (section 0-30); shown until 2028-01-31,https://www.ets.org/toefl/institutions/ibt/score-scale-update.html,2026-11-22
+toefl_ibt,ibt_0_120,listening,B1,9,16,ETS concordance from the 1-6 scale (section 0-30); shown until 2028-01-31,https://www.ets.org/toefl/institutions/ibt/score-scale-update.html,2026-11-22
+toefl_ibt,ibt_0_120,listening,B2,17,21,ETS concordance from the 1-6 scale (section 0-30); shown until 2028-01-31,https://www.ets.org/toefl/institutions/ibt/score-scale-update.html,2026-11-22
+toefl_ibt,ibt_0_120,listening,C1,22,27,ETS concordance from the 1-6 scale (section 0-30); shown until 2028-01-31,https://www.ets.org/toefl/institutions/ibt/score-scale-update.html,2026-11-22
+cambridge,cambridge_scale,overall,A2,120,139,same scale for every skill and the overall,https://www.cambridgeenglish.org/exams-and-tests/cambridge-english-scale/institutions/,2026-11-22
+cambridge,cambridge_scale,overall,B1,140,159,same scale for every skill and the overall,https://www.cambridgeenglish.org/exams-and-tests/cambridge-english-scale/institutions/,2026-11-22
+cambridge,cambridge_scale,overall,B2,160,179,same scale for every skill and the overall,https://www.cambridgeenglish.org/exams-and-tests/cambridge-english-scale/institutions/,2026-11-22
+cambridge,cambridge_scale,overall,C1,180,199,same scale for every skill and the overall,https://www.cambridgeenglish.org/exams-and-tests/cambridge-english-scale/institutions/,2026-11-22
+cambridge,cambridge_scale,overall,C2,200,230,same scale for every skill and the overall,https://www.cambridgeenglish.org/exams-and-tests/cambridge-english-scale/institutions/,2026-11-22
+cambridge,cambridge_scale,reading,A2,120,139,,https://www.cambridgeenglish.org/exams-and-tests/cambridge-english-scale/institutions/,2026-11-22
+cambridge,cambridge_scale,reading,B1,140,159,,https://www.cambridgeenglish.org/exams-and-tests/cambridge-english-scale/institutions/,2026-11-22
+cambridge,cambridge_scale,reading,B2,160,179,,https://www.cambridgeenglish.org/exams-and-tests/cambridge-english-scale/institutions/,2026-11-22
+cambridge,cambridge_scale,reading,C1,180,199,,https://www.cambridgeenglish.org/exams-and-tests/cambridge-english-scale/institutions/,2026-11-22
+cambridge,cambridge_scale,listening,A2,120,139,,https://www.cambridgeenglish.org/exams-and-tests/cambridge-english-scale/institutions/,2026-11-22
+cambridge,cambridge_scale,listening,B1,140,159,,https://www.cambridgeenglish.org/exams-and-tests/cambridge-english-scale/institutions/,2026-11-22
+cambridge,cambridge_scale,listening,B2,160,179,,https://www.cambridgeenglish.org/exams-and-tests/cambridge-english-scale/institutions/,2026-11-22
+cambridge,cambridge_scale,listening,C1,180,199,,https://www.cambridgeenglish.org/exams-and-tests/cambridge-english-scale/institutions/,2026-11-22
+duolingo,det_10_160,overall,A2,10,55,A1 and A2 are not split,https://englishtest-static.duolingo.com/media/resources/DET_Scoring%20Guide%20for%20Teachers%20(2026).pdf,2026-11-22
+duolingo,det_10_160,overall,B1,60,95,,https://englishtest-static.duolingo.com/media/resources/DET_Scoring%20Guide%20for%20Teachers%20(2026).pdf,2026-11-22
+duolingo,det_10_160,overall,B2,100,125,,https://englishtest-static.duolingo.com/media/resources/DET_Scoring%20Guide%20for%20Teachers%20(2026).pdf,2026-11-22
+duolingo,det_10_160,overall,C1,130,150,,https://englishtest-static.duolingo.com/media/resources/DET_Scoring%20Guide%20for%20Teachers%20(2026).pdf,2026-11-22
+duolingo,det_10_160,overall,C2,155,160,,https://englishtest-static.duolingo.com/media/resources/DET_Scoring%20Guide%20for%20Teachers%20(2026).pdf,2026-11-22
+pte_academic,pte_10_90,overall,A2,30,42,,https://www.pearsonpte.com/content/dam/ELL/pte/pearsonpte/pdfs/Score-Guide-Institution-PTE-Academic-July-2025-web.pdf,2026-11-22
+pte_academic,pte_10_90,overall,B1,43,58,,https://www.pearsonpte.com/content/dam/ELL/pte/pearsonpte/pdfs/Score-Guide-Institution-PTE-Academic-July-2025-web.pdf,2026-11-22
+pte_academic,pte_10_90,overall,B2,59,75,,https://www.pearsonpte.com/content/dam/ELL/pte/pearsonpte/pdfs/Score-Guide-Institution-PTE-Academic-July-2025-web.pdf,2026-11-22
+pte_academic,pte_10_90,overall,C1,76,84,,https://www.pearsonpte.com/content/dam/ELL/pte/pearsonpte/pdfs/Score-Guide-Institution-PTE-Academic-July-2025-web.pdf,2026-11-22
+pte_academic,pte_10_90,overall,C2,85,90,,https://www.pearsonpte.com/content/dam/ELL/pte/pearsonpte/pdfs/Score-Guide-Institution-PTE-Academic-July-2025-web.pdf,2026-11-22
+languagecert,lc_global_0_100,overall,A1,10,19,,https://www.languagecert.org/-/media/feature/documents/lc-redesign/languagecert-academic-summary-guide.ashx,2026-11-22
+languagecert,lc_global_0_100,overall,A2,20,39,,https://www.languagecert.org/-/media/feature/documents/lc-redesign/languagecert-academic-summary-guide.ashx,2026-11-22
+languagecert,lc_global_0_100,overall,B1,40,59,,https://www.languagecert.org/-/media/feature/documents/lc-redesign/languagecert-academic-summary-guide.ashx,2026-11-22
+languagecert,lc_global_0_100,overall,B2,60,74,,https://www.languagecert.org/-/media/feature/documents/lc-redesign/languagecert-academic-summary-guide.ashx,2026-11-22
+languagecert,lc_global_0_100,overall,C1,75,89,,https://www.languagecert.org/-/media/feature/documents/lc-redesign/languagecert-academic-summary-guide.ashx,2026-11-22
+languagecert,lc_global_0_100,overall,C2,90,100,,https://www.languagecert.org/-/media/feature/documents/lc-redesign/languagecert-academic-summary-guide.ashx,2026-11-22
+trinity_ise,ise_level,overall,A2,,,ISE Foundation,https://www.trinitycollege.com/resource?id=7680,2026-11-22
+trinity_ise,ise_level,overall,B1,,,ISE I,https://www.trinitycollege.com/resource?id=7680,2026-11-22
+trinity_ise,ise_level,overall,B2,,,ISE II,https://www.trinitycollege.com/resource?id=7680,2026-11-22
+trinity_ise,ise_level,overall,C1,,,ISE III,https://www.trinitycollege.com/resource?id=7680,2026-11-22
+trinity_ise,ise_level,overall,C2,,,ISE IV,https://www.trinitycollege.com/resource?id=7680,2026-11-22

@@ -23,7 +23,10 @@ uv run pytest
 ```sh
 uv run --with jsonschema python -I schema/validate.py
 uv run --with jsonschema python -I schema/csv_to_json.py --self-test
+uv run --with jsonschema --with pyyaml python -I schema/validate_placement.py
 ```
+
+The last line checks the placement item bank (`data/placement/items/*.yaml`, record 0008/T21): schema, unique ids, one `bank_version`, at least 4 items per band.
 
 The validator checks the example and a set of documents that must be rejected (for example a confirmed value without a source). If you changed the schema, regenerate the pilot spreadsheet header: `uv run --with jsonschema python -I schema/csv_to_json.py --print-header > docs/methodology/pilot-template.csv`.
 

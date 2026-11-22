@@ -40,6 +40,7 @@ Use the `run-checks` skill, or run:
 cd backend && uv run ruff check . && uv run pytest
 cd web && npm run test -- --run && npm run build
 uv run --with jsonschema python -I schema/validate.py
+uv run --with jsonschema --with pyyaml python -I schema/validate_placement.py
 ```
 
 ## Project skills

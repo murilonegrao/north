@@ -11,7 +11,8 @@
     "home": "North, página de inicio",
     "language": "Idioma",
     "main": "Principal",
-    "programs": "Programas"
+    "programs": "Programas",
+    "placement": "Nivel de inglés"
   },
   "theme": {
     "light": "Claro",
@@ -269,5 +270,50 @@
     "notes": {
       "institution_wide_average": "Promedio de toda la institución para estudiantes de posgrado, no el precio de este programa."
     }
+  },
+  "placement": {
+    "pageTitle": "Prueba de nivel de inglés",
+    "pageDescription": "Estima tu nivel de inglés (MCER) en pocos minutos y consulta los rangos equivalentes de siete exámenes de inglés, según sus tablas oficiales.",
+    "eyebrow": "Nivel de inglés · estimación",
+    "title": "¿Cuál es tu nivel de inglés?",
+    "lead": "{count} preguntas, unos {minutes} minutos. Obtienes una banda MCER por destreza y los rangos de puntuación de siete exámenes de inglés, tomados de la tabla oficial de cada uno.",
+    "factSkills": "Esta versión evalúa gramática y vocabulario. Lectura y comprensión auditiva están en camino; la escritura y la expresión oral no se evalúan.",
+    "factEstimate": "El resultado es una estimación, no una puntuación oficial.",
+    "factPrivate": "Tus respuestas y tu resultado se quedan en este navegador. No se envía nada a North.",
+    "start": "Empezar la prueba",
+    "skill": {
+      "grammar": "Gramática",
+      "vocabulary": "Vocabulario",
+      "reading": "Lectura",
+      "listening": "Comprensión auditiva"
+    },
+    "sectionOf": "sección {n} de {total}",
+    "questionOf": "{n} / {total}",
+    "progress": "Progreso",
+    "chooseOne": "Elige una respuesta",
+    "back": "Atrás",
+    "next": "Siguiente",
+    "skip": "Saltar",
+    "finish": "Ver mi resultado",
+    "resultEyebrow": "Estimación, no puntuación oficial",
+    "resultTitle": "Nivel estimado: {level}",
+    "resultLabel": "Gramática, vocabulario, lectura y comprensión auditiva. No se evaluaron la escritura ni la expresión oral.",
+    "resultLabelPartial": "Solo gramática y vocabulario. No se evaluaron la lectura, la comprensión auditiva, la escritura ni la expresión oral.",
+    "bySkill": "Por destreza",
+    "up": "subió desde {level}",
+    "down": "bajó desde {level}",
+    "same": "igual que la última vez",
+    "belowA2": "por debajo de A2",
+    "ranges": "Rangos equivalentes en exámenes de inglés",
+    "rangesNote": "Según la tabla MCER oficial de cada examen. Un rango, nunca una puntuación única. Se omiten los exámenes sin tabla para este nivel.",
+    "test": "Examen",
+    "range": "Rango",
+    "source": "Tabla oficial",
+    "checkedOn": "revisada el {date}",
+    "legacyScale": "{span} (escala antigua 0–120)",
+    "noRanges": "Ningún examen publica una tabla para este nivel.",
+    "retake": "Hacerla de nuevo",
+    "export": "Exportar mis resultados (JSON)",
+    "review": "Revisar las {count} preguntas falladas"
   }
 }

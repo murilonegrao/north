@@ -10,6 +10,9 @@ COPY web/package.json web/package-lock.json web/.npmrc ./
 # No install scripts: dependencies run no code at install time.
 RUN npm ci --ignore-scripts
 COPY web ./
+# The placement test bundles its item bank and the CEFR test tables (record 0008/T21).
+COPY data/placement /data/placement
+COPY data/reference/cefr_test_mappings.csv /data/reference/cefr_test_mappings.csv
 RUN npm run build
 
 # API: FastAPI on uvicorn, serving /api and the web build with SPA fallback.

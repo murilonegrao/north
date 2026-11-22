@@ -8,7 +8,8 @@
     "home": "North, home page",
     "language": "Language",
     "main": "Main",
-    "programs": "Programs"
+    "programs": "Programs",
+    "placement": "English level"
   },
   "theme": {
     "light": "Light",
@@ -266,5 +267,50 @@
     "notes": {
       "institution_wide_average": "Institution-wide average for graduate students, not this program's price."
     }
+  },
+  "placement": {
+    "pageTitle": "English placement test",
+    "pageDescription": "Estimate your English level (CEFR) in a few minutes and see the matching ranges of seven English tests, from their official tables.",
+    "eyebrow": "English placement · estimate",
+    "title": "What is your English level?",
+    "lead": "{count} questions, about {minutes} minutes. You get a CEFR band per skill and the score ranges of seven English tests, taken from each test owner's official table.",
+    "factSkills": "This version tests grammar and vocabulary. Reading and listening are on the way; writing and speaking are not tested.",
+    "factEstimate": "The result is an estimate, not an official score.",
+    "factPrivate": "Your answers and your result stay in this browser. Nothing is sent to North.",
+    "start": "Start the test",
+    "skill": {
+      "grammar": "Grammar",
+      "vocabulary": "Vocabulary",
+      "reading": "Reading",
+      "listening": "Listening"
+    },
+    "sectionOf": "section {n} of {total}",
+    "questionOf": "{n} / {total}",
+    "progress": "Progress",
+    "chooseOne": "Choose one answer",
+    "back": "Back",
+    "next": "Next",
+    "skip": "Skip",
+    "finish": "See my result",
+    "resultEyebrow": "Estimate, not an official score",
+    "resultTitle": "Estimated level: {level}",
+    "resultLabel": "Grammar, vocabulary, reading and listening. Writing and speaking were not tested.",
+    "resultLabelPartial": "Grammar and vocabulary only. Reading, listening, writing and speaking were not tested.",
+    "bySkill": "By skill",
+    "up": "up from {level}",
+    "down": "down from {level}",
+    "same": "same as last time",
+    "belowA2": "below A2",
+    "ranges": "Matching ranges in English tests",
+    "rangesNote": "From each test owner's official CEFR table. A range, never a single score. Tests with no table for this level are left out.",
+    "test": "Test",
+    "range": "Range",
+    "source": "Official table",
+    "checkedOn": "checked {date}",
+    "legacyScale": "{span} (old 0–120 scale)",
+    "noRanges": "No test publishes a table for this level.",
+    "retake": "Take it again",
+    "export": "Export my results (JSON)",
+    "review": "Review the {count} questions you missed"
   }
 }

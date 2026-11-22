@@ -20,8 +20,8 @@ Speaking and writing (need human or LLM grading, later); adaptive testing; accou
 
 | Section | Items | Format | Notes |
 |---|---|---|---|
-| Grammar | 20 | multiple choice, 4 options | 4 per band A2→C1 (+ C2 bonus later) |
-| Vocabulary | 15 | multiple choice / gap fill | word frequency bands as the level guide |
+| Grammar | 20 | multiple choice, 4 options | 5 per band A2→C1 (+ C2 bonus later) |
+| Vocabulary | 16 | multiple choice / gap fill | 4 per band; word frequency bands as the level guide |
 | Reading | 3 texts × 4 items | multiple choice | B1, B2, C1 texts, written by us |
 | Listening | 3 clips × 4 items | multiple choice | **TTS** (the clip is generated from our own script; voice + speed stored with the item). Normal speed for B2+: listening at native speed is the usual bottleneck |
 

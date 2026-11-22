@@ -13,6 +13,8 @@ const homePath = computed(() => `/${prefix.value}/`)
 const programsPath = computed(() => `/${prefix.value}/programs`)
 const route = useRoute()
 const inPrograms = computed(() => route.path.startsWith(programsPath.value))
+const placementPath = computed(() => `/${prefix.value}/placement`)
+const inPlacement = computed(() => route.path.startsWith(placementPath.value))
 const themeLabel = computed(() => (theme.value === 'dark' ? t('theme.toLight') : t('theme.toDark')))
 // The admin area has its own layout (AdminShell): no public header, notice or footer.
 const isAdmin = computed(() => route.meta.admin === true)
@@ -30,6 +32,7 @@ const isAdmin = computed(() => route.meta.admin === true)
       </RouterLink>
       <nav class="site-nav" :aria-label="t('nav.main')">
         <RouterLink :to="programsPath" :class="['nav-link', { active: inPrograms }]" :aria-current="inPrograms ? 'page' : undefined">{{ t('nav.programs') }}</RouterLink>
+        <RouterLink :to="placementPath" :class="['nav-link', { active: inPlacement }]" :aria-current="inPlacement ? 'page' : undefined">{{ t('nav.placement') }}</RouterLink>
       </nav>
       <div class="header-tools">
         <LanguageSwitcher />

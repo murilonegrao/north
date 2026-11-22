@@ -11,7 +11,8 @@
     "home": "North, página inicial",
     "language": "Idioma",
     "main": "Principal",
-    "programs": "Programas"
+    "programs": "Programas",
+    "placement": "Nível de inglês"
   },
   "theme": {
     "light": "Claro",
@@ -269,5 +270,50 @@
     "notes": {
       "institution_wide_average": "Média da instituição inteira para estudantes de pós-graduação, não o preço deste programa."
     }
+  },
+  "placement": {
+    "pageTitle": "Teste de nivelamento de inglês",
+    "pageDescription": "Estime seu nível de inglês (CEFR) em poucos minutos e veja as faixas correspondentes de sete testes de inglês, pelas tabelas oficiais.",
+    "eyebrow": "Nivelamento de inglês · estimativa",
+    "title": "Qual é o seu nível de inglês?",
+    "lead": "{count} questões, cerca de {minutes} minutos. Você recebe uma faixa CEFR por habilidade e as faixas de nota de sete testes de inglês, tiradas da tabela oficial de cada um.",
+    "factSkills": "Esta versão testa gramática e vocabulário. Leitura e compreensão oral estão a caminho; escrita e fala não são testadas.",
+    "factEstimate": "O resultado é uma estimativa, não uma nota oficial.",
+    "factPrivate": "Suas respostas e seu resultado ficam neste navegador. Nada é enviado ao North.",
+    "start": "Começar o teste",
+    "skill": {
+      "grammar": "Gramática",
+      "vocabulary": "Vocabulário",
+      "reading": "Leitura",
+      "listening": "Compreensão oral"
+    },
+    "sectionOf": "seção {n} de {total}",
+    "questionOf": "{n} / {total}",
+    "progress": "Progresso",
+    "chooseOne": "Escolha uma resposta",
+    "back": "Voltar",
+    "next": "Próxima",
+    "skip": "Pular",
+    "finish": "Ver meu resultado",
+    "resultEyebrow": "Estimativa, não nota oficial",
+    "resultTitle": "Nível estimado: {level}",
+    "resultLabel": "Gramática, vocabulário, leitura e compreensão oral. Escrita e fala não foram testadas.",
+    "resultLabelPartial": "Só gramática e vocabulário. Leitura, compreensão oral, escrita e fala não foram testadas.",
+    "bySkill": "Por habilidade",
+    "up": "subiu de {level}",
+    "down": "caiu de {level}",
+    "same": "igual à última vez",
+    "belowA2": "abaixo de A2",
+    "ranges": "Faixas correspondentes nos testes de inglês",
+    "rangesNote": "Pela tabela CEFR oficial de cada teste. Uma faixa, nunca uma nota única. Testes sem tabela para este nível ficam de fora.",
+    "test": "Teste",
+    "range": "Faixa",
+    "source": "Tabela oficial",
+    "checkedOn": "conferida em {date}",
+    "legacyScale": "{span} (escala antiga 0–120)",
+    "noRanges": "Nenhum teste publica tabela para este nível.",
+    "retake": "Fazer de novo",
+    "export": "Exportar meus resultados (JSON)",
+    "review": "Revisar as {count} questões que você errou"
   }
 }

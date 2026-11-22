@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://north.harpia.info/schema/placement-item.schema.json",
+  "title": "North placement test: one skill file of the item bank",
+  "description": "Record 0008/T21. One YAML file per skill in data/placement/items/. Items are original (NFR-18): never copied from a test owner or from the CEFR descriptors (T24).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["bank_version", "skill", "items"],
+  "properties": {
+    "bank_version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+$", "description": "Same value in every file of the bank; stored with each result." },
+    "skill": { "$ref": "#/$defs/skill" },
+    "passages": {
+      "type": "array",
+      "description": "Reading texts and listening scripts that several items share.",
+      "items": { "$ref": "#/$defs/passage" }
+    },
+    "items": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/item" } }
+  },
+  "$defs": {
+    "skill": { "enum": ["grammar", "vocabulary", "reading", "listening"] },
+    "band": { "enum": ["A2", "B1", "B2", "C1"] },
+    "passage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "band", "title", "text"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-z]{2}-p[0-9]{2}$" },
+        "band": { "$ref": "#/$defs/band" },
+        "title": { "type": "string", "minLength": 1 },
+        "text": { "type": "string", "minLength": 1, "description": "The reading text, or the listening script (shown after the answer, NFR-19)." },
+        "audio_file": { "type": "string", "pattern": "^[a-z0-9-]+\\.(mp3|ogg)$", "description": "Listening only: pre-generated clip (T22)." },
+        "voice": { "type": "string" },
+        "speed": { "type": "number", "minimum": 0.5, "maximum": 1.5 }
+      }
+    },
+    "item": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "band", "prompt", "options", "answer", "explanation", "author", "version"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-z]{2}-(a2|b1|b2|c1)-[0-9]{2}$", "description": "Skill prefix (gr, vo, re, li), band and number; never reused." },
+        "band": { "$ref": "#/$defs/band" },
+        "passage": { "type": "string", "description": "Id of the passage the item is about (reading and listening)." },
+        "prompt": { "type": "string", "minLength": 1, "description": "Question text; a gap is written as ___." },
+        "options": { "type": "array", "minItems": 4, "maxItems": 4, "uniqueItems": true, "items": { "type": "string", "minLength": 1 } },
+        "answer": { "type": "integer", "minimum": 0, "maximum": 3, "description": "Index of the correct option." },
+        "explanation": { "type": "string", "minLength": 1, "description": "Shown after the test, in English." },
+        "author": { "type": "string", "description": "A role or project handle, never a person's name." },
+        "version": { "type": "integer", "minimum": 1 }
+      }
+    }
+  }
+}
