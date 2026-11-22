@@ -119,6 +119,29 @@ def negative_cases(base: dict):
     def unknown_us_immigration_key(d):
         d["immigration"]["h1b_lottery_odds"] = {"value": None, "status": "unknown"}
 
+    def course_without_facts(d):
+        d["kind"] = "language_course"
+        d.pop("classifications")
+
+    def degree_with_course_facts(d):
+        d["language_course"] = language_course()
+
+    def course_bad_band(d):
+        to_course(d)
+        d["language_course"]["cefr_entry"]["value"] = "B3"
+
+    def course_bad_exam(d):
+        to_course(d)
+        d["language_course"]["exam"]["value"] = "toeic"
+
+    def course_level_negative(d):
+        to_course(d)
+        d["language_course"]["cefr_exit"].update(value=False, status="confirmed_negative")
+
+    def course_start_date_unknown(d):
+        to_course(d)
+        d["language_course"]["start_dates"] = [{"value": None, "status": "unknown"}]
+
     def generic_country_non_vv(d):
         d["country"] = "CA"
         d["subdivision"] = "CA-ON"
@@ -150,7 +173,44 @@ def negative_cases(base: dict):
         ("two primary classifications", two_primary_classifications),
         ("unknown key in immigration_us", unknown_us_immigration_key),
         ("country without module, non-VerifiedValue value", generic_country_non_vv),
+        ("language course without course facts (0008/T13)", course_without_facts),
+        ("degree carrying course facts (0008/T13)", degree_with_course_facts),
+        ("CEFR band outside A0-C2", course_bad_band),
+        ("exam outside the normalized codes", course_bad_exam),
+        ("confirmed_negative on a CEFR level (R12)", course_level_negative),
+        ("start date with status unknown", course_start_date_unknown),
     ]
+
+
+def _list_vv(value, evidence):
+    return {"value": value, "status": "confirmed_official", "source_kind": "uploaded_file",
+            "source_url": "https://www.irishimmigration.ie/example-list-page",
+            "evidence": evidence, "verified_at": "2026-11-22"}
+
+
+def language_course() -> dict:
+    """Course facts as the Irish lists give them (record 0008/T13); fictitious values."""
+    return {
+        "cefr_entry": _list_vv("A2", 'ILEP 2026-09-22, 9999/0001: Entry Level "A2+"'),
+        "cefr_exit": {"value": None, "status": "unknown", "evidence": 'Exit Level "IELTS 6.5"'},
+        "exam": _list_vv("cambridge", 'Awarding Body "Cambridge ESOL"'),
+        "weeks": _list_vv(25, 'Duration "25 weeks"'),
+        "hours_per_week": _list_vv(15, 'Hours per week "15-20 hours"'),
+        "price": {"value": None, "status": "unknown"},
+        "start_dates": [],
+    }
+
+
+def to_course(d: dict) -> dict:
+    """The example turned into an Irish English course (fictitious)."""
+    d.update(kind="language_course", country="IE", subdivision="IE-D", degree="language_course")
+    d.pop("classifications", None)
+    d["immigration"] = {}
+    d["language_course"] = language_course()
+    d["intl_authorization"] = _list_vv({"scheme": "ie_ilep", "authorized": True},
+                                       "ILEP 2026-09-22: programme 9999/0001")
+    d["identifiers"] = [{"scheme": "ie_ilep_ref", "value": "9999/0001"}]
+    return d
 
 
 def positive_cases(base: dict):
@@ -174,6 +234,17 @@ def positive_cases(base: dict):
     d = copy.deepcopy(base)
     d["admissions"]["deadlines"] = []
     out.append(("no deadline recorded (empty list)", d))
+
+    out.append(("Irish English course with list facts (0008/T13)", to_course(copy.deepcopy(base))))
+
+    d = to_course(copy.deepcopy(base))
+    d["language_course"]["start_dates"] = [_list_vv("2027-01-11", "Start dates: 11 January")]
+    d["language_course"]["start_dates"][0].update(status="reported_by_program", source_kind="page")
+    out.append(("course with a start date reported by the school", d))
+
+    d = copy.deepcopy(base)
+    d["kind"] = "degree"
+    out.append(("explicit kind degree", d))
     return out
 
 

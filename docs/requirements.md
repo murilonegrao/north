@@ -2,7 +2,7 @@
 title: "Software Requirements Specification — North"
 type: requirements
 project: north
-version: 2.0
+version: 2.1
 status: baseline
 level: M
 language: en
@@ -14,7 +14,7 @@ updated: 2026-11-22
 
 *A map of study programs, from English courses to doctorates, for international students who bring their families*
 
-**Author:** Murilo · **Version:** 2.0 · **Date:** 2026-11-22 · **Rigor level:** M (own product, MVP)
+**Author:** Murilo · **Version:** 2.1 · **Date:** 2026-11-22 · **Rigor level:** M (own product, MVP)
 
 > [!note] Address and public repo
 > The planned address is `north.harpia.info`. The repository will be public, so this document contains no personal data: the family appears only as a **user profile** (number of dependents, whether the spouse can work), never with names. This SRS is written in English, like the rest of the repository.
@@ -32,6 +32,7 @@ updated: 2026-11-22
 | 1.5 | 2026-11-22 | Murilo | admin area, worker and job queue (record 0006): FR-25 becomes username + password + TOTP with roles; FR-26 uploads go through the admin and a worker |
 | 1.6 | 2026-11-22 | Murilo | email from the admin area (record 0007): new FR-27; FR-25 allows password reset by email with the second factor still required |
 | 2.0 | 2026-11-22 | Murilo | scope change after elicitation round 3 (record 0008): English placement test, Ireland (English courses and higher education at NFQ 6–10) and every US award level and field; new SO6–SO9, FR-28 to FR-35, NFR-17 to NFR-19, BR-18 to BR-21; FR-02, FR-03, FR-10, FR-11, FR-16, FR-20, FR-21, FR-26, NFR-02, C-09, BR-01, BR-04, BR-07, BR-08, BR-11 and BR-17 changed; new user class and persona update |
+| 2.1 | 2026-11-22 | Murilo | contacts from official lists (ILEP, TrustEd, DAPIP, IPEDS HD) kept privately for the admin (record 0009): NFR-10, FR-05 and FR-30 changed |
 
 ---
 
@@ -257,7 +258,7 @@ Interviews and surveys with other students are deferred until after the MVP. For
 | FR-02 | import from IPEDS, as the **primary discovery source** for the US, the institutions and programs of **every award level and every CIP** nationwide (record 0008/T9, T10), using the files `C<year>_A` (completions by UNITID × 6-digit CIP × award level, including `CNRALT`), `HD<year>` (institution, city, county, coordinates), `IC<year>_AY` (charges: undergraduate `TUITION3`/`FEE3` out of state, graduate `TUITION7`/`FEE7`, professional doctorates `OSPROF1..9`) and `IC<year>_PY` (charges of certificate-only institutions), stored as institution reference values, never as "verified". The award level becomes a classification (scheme `us_ipeds_awlevel`) mapped to the generic `level` (BR-01). A UNITID × CIP6 × level with 0 completions in the latest year is created as "to confirm" and not published (R3) | Must | UC05 |
 | FR-03 | import the DHS STEM list (uploaded PDF, FR-26) as a versioned rule (`eligibility_rules`) and evaluate each program's 6-digit primary CIP against it, only for bachelor's, master's and doctoral degrees; other levels get `confirmed_negative` with the reason "level not eligible" (BR-03, BR-17, record 0008/T16) | Must | UC05 |
 | FR-04 | import the SEVP certified school list from the uploaded PDF (FR-26) and match it against campuses: by `campuses.sevp_campus_code` when the link already exists; otherwise by normalized name + city + state, where an exact match is accepted automatically and anything else opens a reconciliation task. A confirmed match stores the SEVP campus code on the campus; the SEVP school code is never used as an identifier; an institution missing from a new list version opens a reconciliation task and is not marked "not certified" automatically (R5) | Must | UC05 |
-| FR-05 | import from the DAPIP export (FR-26) the **institutional** accreditation of each institution (accreditor, status, scheme `us_ed_recognized`), joined by `dapip`/OPEID/UNITID identifiers; programmatic accreditation is not used in the MVP; contact names, phones and emails are dropped at ingestion (R10, 0002/A15, 0002/A16, NFR-10) | Should | UC05 |
+| FR-05 | import from the DAPIP export (FR-26) the **institutional** accreditation of each institution (accreditor, status, scheme `us_ed_recognized`), joined by `dapip`/OPEID/UNITID identifiers; programmatic accreditation is not used in the MVP; administrator contacts go only to the private `institution_contacts` table (R10, 0002/A15, record 0009, NFR-10) | Should | UC05 |
 | FR-06 | import the HUD Fair Market Rent county file of the current fiscal year from an uploaded file (FR-26), and store one rent per locality (`us_county_fips`), fiscal year and bedroom count (0–4) in `rent_benchmarks`; campuses link to their county through `localities` (from IPEDS `COUNTYCD`). Raised from Could to Should because FR-21 needs it (R6, R7, R17) | Should | UC05 |
 | FR-07 | record every ingestion run (source, date, file version, source file, counts, errors) and allow re-running without duplicating records; `ingestion_runs.source_file_id` points to the uploaded file (FR-26) | Must | UC05 |
 | FR-26 | let the administrator upload official source files in the curation screen (DHS STEM list PDF, SEVP PDF, IPEDS files, Scorecard Field of Study file, DAPIP export, HUD FMR file; ILEP and TrustEd Ireland XLSX, QQI register export, CSO RIQ02 file). Each upload becomes a `source_files` row (source, file_version, sha256, uploaded_by, uploaded_at), unique on (source, sha256), so uploading the same file twice is idempotent. Ingestion runs on an uploaded file; automatic download is optional per source, never required (R4) | Must | UC05 |
@@ -275,7 +276,7 @@ Interviews and surveys with other students are deferred until after the MVP. For
 **Ireland ingestion** (record 0008/T3–T7)
 | ID | The system shall… | Priority | UC |
 |---|---|---|---|
-| FR-30 | import the ILEP XLSX (FR-26): English-language rows become programs of kind `language_course` with `cefr_entry`, `cefr_exit`, `exam` (normalized through `data/reference/ie_exam_names.csv`), `weeks` and `hours_per_week` parsed from the free text (raw text kept as evidence); higher-education rows become degree programs; each row gives `Program.intl_authorization` with scheme `ie_ilep` as `confirmed_official`; provider by `ie_provider_no`, city by text match on the address; contact name, email and phone columns are dropped at read time and never stored (NFR-10) | Must | UC05 |
+| FR-30 | import the ILEP XLSX (FR-26): English-language rows become programs of kind `language_course` with `cefr_entry`, `cefr_exit`, `exam` (normalized through `data/reference/ie_exam_names.csv`), `weeks` and `hours_per_week` parsed from the free text (raw text kept as evidence); higher-education rows become degree programs; each row gives `Program.intl_authorization` with scheme `ie_ilep` as `confirmed_official`; provider by `ie_provider_no`, city by text match on the address; contact name, email and phone go only to the private `institution_contacts` table (record 0009, NFR-10) | Must | UC05 |
 | FR-31 | import the TrustEd Ireland XLSX the same way (scheme `ie_trusted`, provider number without the `TE` prefix), and reconcile the move from ILEP: a programme that leaves ILEP links to a TrustEd row automatically when provider number and normalized title match exactly, otherwise a reconciliation task (`ie_list_move`) is opened; no programme becomes `confirmed_negative` automatically (BR-18); the announced ILEP end is a `migration_rules` row shown on affected programmes | Must | UC05 |
 | FR-32 | import every active programme at NFQ 6–10 from QQI's register (EU open-data copy) as a degree program (identifier scheme `ie_irq`) with its NFQ level (classification `ie_nfq`) and ISCED-F field; link it to ILEP/TrustEd rows by provider and exact title, the rest by reconciliation; a programme with no list row is `unknown` for Stamp 2 (BR-18) | Must | UC05 |
 | FR-33 | import the CSO RIQ02 rent table (RTB data) into `rent_benchmarks`, one value per location (`ie_cso_riq02`), quarter and bedroom count (1, 2, 3, 4+), with the county (`ie_county`) as fallback for campuses whose town has no value | Should | UC05 |
@@ -377,7 +378,7 @@ Interviews and surveys with other students are deferred until after the MVP. For
 | NFR-07 | Maintainability | the program schema is versioned (JSON Schema) and validated at the API, curation and extractor inputs | Must | tests |
 | NFR-08 | Maintainability | test coverage ≥ 80% on the filter, score and cost rules | Should | coverage report |
 | NFR-09 | Security | no secrets in the repository; keys (LLM, optional source APIs such as api.data.gov) only through environment variables; curation and admin endpoints authenticated | Must | secret scanning in CI |
-| NFR-10 | Privacy | no personal researcher data is stored on the server (Q03: the profile stays in the browser). DAPIP contact names, phones and emails are dropped at ingestion and never stored (0002/A16). Correspondence used as a source (e.g. a reply from an international office) is stored privately, never in the repository, the public API or the data dump; public fields never hold names or email addresses (R13, BR-15) | Must | review + ingestion test |
+| NFR-10 | Privacy | no personal researcher data is stored on the server (Q03: the profile stays in the browser). Contact names, titles, phones and emails found in official lists (ILEP and TrustEd Ireland, DAPIP, IPEDS HD) are stored privately in `institution_contacts`, readable only by the `admin` role through the admin API, each read audited, replaced by every new list, and never in the public API, exports, the data dump or the repository (record 0009). Correspondence used as a source (e.g. a reply from an international office) is stored privately, never in the repository, the public API or the data dump; public fields never hold names or email addresses (R13, BR-15) | Must | review + ingestion test |
 | NFR-11 | Transparency | every page shows the notice "this is not immigration advice; check the official source" | Must | UI review |
 | NFR-12 | Portability | the whole system starts with `docker compose up` in a clean environment | Should | CI |
 | NFR-13 | Cost | LLM extraction logs tokens and cost per page; there is a configurable cap per run | Should | logs |

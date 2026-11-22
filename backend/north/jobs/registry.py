@@ -18,7 +18,7 @@ from typing import TYPE_CHECKING, Any
 if TYPE_CHECKING:
     from north.jobs.context import JobContext
 
-PLUGINS = ("north.ingest.us.jobs",)
+PLUGINS = ("north.ingest.us.jobs", "north.ingest.ie.jobs")
 
 
 @dataclass(frozen=True)

@@ -17,7 +17,7 @@ interface Step {
 
 const steps = computed<Step[]>(() => [
   { key: 'english', available: true, to: `/${prefix.value}/placement` },
-  { key: 'course', available: false },
+  { key: 'course', available: true, to: `/${prefix.value}/english-courses` },
   { key: 'degree', available: true, to: `/${prefix.value}/programs` },
   { key: 'family', available: false },
 ])

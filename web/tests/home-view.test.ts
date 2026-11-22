@@ -21,10 +21,13 @@ describe('HomeView', () => {
     const wrapper = await mountHome()
     const steps = wrapper.findAll('.step')
     expect(steps.map((s) => s.get('h3').text())).toEqual(['Your English level', 'An English course in Ireland', 'Degree programs', 'Family and cost'])
-    expect(steps.map((s) => s.get('.pill').text())).toEqual(['Available', 'Coming soon', 'Available', 'Coming soon'])
+    expect(steps.map((s) => s.get('.pill').text())).toEqual(['Available', 'Available', 'Available', 'Coming soon'])
     expect(steps[0]!.get('a').attributes('href')).toBe('/en/placement')
+    // E2: the English course step is live and links to the course list.
+    expect(steps[1]!.get('a').attributes('href')).toBe('/en/english-courses')
+    expect(steps[1]!.get('a').text()).toBe('Browse courses')
     expect(steps[2]!.get('a').attributes('href')).toBe('/en/programs')
-    expect(steps[1]!.find('a').exists()).toBe(false)
+    expect(steps[3]!.find('a').exists()).toBe(false)
     expect(wrapper.text()).not.toContain('API status')
   })
 

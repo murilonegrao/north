@@ -65,7 +65,7 @@ async function fetchFacets() {
   facetsController = new AbortController()
   const signal = facetsController.signal
   try {
-    const data = await getFacets(filters.value.state, signal)
+    const data = await getFacets(filters.value.state, signal, { kind: 'degree' })
     if (!signal.aborted) facets.value = data
   } catch (error) {
     if (!signal.aborted) facets.value = null

@@ -9,7 +9,8 @@
     "language": "Language",
     "main": "Main",
     "programs": "Programs",
-    "placement": "English level"
+    "placement": "English level",
+    "courses": "English courses"
   },
   "theme": {
     "light": "Light",
@@ -34,7 +35,8 @@
       },
       "course": {
         "title": "An English course in Ireland",
-        "text": "Every course on the official Stamp 2 lists, by city, exam and level, with the risk of losing eligibility when the current list ends."
+        "text": "Every course on the official Stamp 2 lists, by city, exam and level, with the risk of losing eligibility when the current list ends.",
+        "cta": "Browse courses"
       },
       "degree": {
         "title": "Degree programs",
@@ -280,7 +282,9 @@
       "admissions_other_field_accepted": "Whether applicants from another undergraduate field are accepted",
       "funding": "Funding (assistantships, scholarships, tuition waivers)",
       "cost_program_tuition": "Tuition for this program",
-      "immigration_i20_issued_for_program": "Whether the school issues an I-20 (the F-1 visa document) for this program"
+      "immigration_i20_issued_for_program": "Whether the school issues an I-20 (the F-1 visa document) for this program",
+      "language_course_price": "Price of the course",
+      "language_course_start_dates": "Start dates"
     },
     "sourcesIntro": "The official files this page was built from.",
     "sourceFile": "{version}, uploaded {date}, {rows} rows",
@@ -293,7 +297,9 @@
       "sevp_csl": "SEVP certified school list",
       "dapip": "DAPIP accreditation database",
       "scorecard_fos": "College Scorecard, field of study",
-      "hud_fmr": "HUD Fair Market Rents"
+      "hud_fmr": "HUD Fair Market Rents",
+      "ie_ilep": "ILEP, Interim List of Eligible Programmes (Irish immigration service)",
+      "ie_trusted": "TrustEd Ireland list of eligible programmes (QQI)"
     },
     "notes": {
       "institution_wide_average": "Institution-wide average for graduate students, not this program's price."
@@ -343,5 +349,77 @@
     "retake": "Take it again",
     "export": "Export my results (JSON)",
     "review": "Review the {count} questions you missed"
+  },
+  "courses": {
+    "pageTitle": "English courses in Ireland · North",
+    "pageDescription": "Every English course on Ireland's official Stamp 2 lists (ILEP and TrustEd Ireland), by city, exam, level and hours a week, with the source of every value.",
+    "eyebrow": "Ireland · Stamp 2",
+    "title": "English courses in Ireland",
+    "intro": "Every English course on the official lists that give a student permission (Stamp 2): ILEP and TrustEd Ireland. Price and start dates are not on the lists yet.",
+    "stay": "Each course runs at least 25 weeks and gives up to 8 months of Stamp 2; at most three courses. Work: 20 hours a week in term, 40 in the holidays. Family members cannot come on Stamp 2.",
+    "count": "No courses | 1 course | {n} courses",
+    "loading": "Loading courses…",
+    "error": "The courses could not be loaded.",
+    "empty": "No course matches these filters.",
+    "filters": {
+      "heading": "Filter courses",
+      "toggle": "Filters ({n})",
+      "mine": "Up to my level",
+      "mineHint": "Uses your last placement result in this browser: {level}. Courses whose entry level is not written on the list are left out.",
+      "mineNone": "Take the placement test to filter by your level.",
+      "mineTest": "Take the test",
+      "city": "City",
+      "anyCity": "Any city",
+      "exam": "Exam",
+      "anyExam": "Any exam",
+      "level": "Entry level",
+      "anyLevel": "Any level",
+      "levelOption": "{band} or below",
+      "levelUnknown": "No course has an unknown entry level. | 1 course with an unknown entry level is included, marked as unknown. | {n} courses with an unknown entry level are included, marked as unknown.",
+      "hours": "Hours a week",
+      "anyHours": "Any",
+      "hoursOption": "{n} or more",
+      "clear": "Clear filters"
+    },
+    "fields": {
+      "exam": "Exam",
+      "cefr": "Level (CEFR)",
+      "cefr_entry": "Entry level (CEFR)",
+      "cefr_exit": "Exit level (CEFR)",
+      "weeks": "Length",
+      "hours": "Hours a week",
+      "hours_per_week": "Hours a week",
+      "price": "Price",
+      "startDates": "Start dates",
+      "authorization": "Stamp 2 list",
+      "provider": "School",
+      "county": "County"
+    },
+    "values": {
+      "unknown": "Unknown",
+      "cityUnknown": "City unknown",
+      "cefr": "{entry} → {exit}",
+      "weeks": "{n} weeks",
+      "hours": "{n} h",
+      "examOther": "Other exam",
+      "notFound": "Not found on the lists"
+    },
+    "notes": {
+      "ie_ilep_end": "ILEP ends after the second TrustEd round (end of 2026). Check that the course has moved to TrustEd Ireland before you pay."
+    },
+    "identifiers": {
+      "ie_provider_no": "Provider no.",
+      "ie_ilep_ref": "ILEP ref.",
+      "ie_trusted_ref": "TrustEd ref."
+    },
+    "detail": {
+      "back": "All English courses",
+      "pageTitle": "{title} · {provider} · North",
+      "notFound": "Course not found",
+      "notCollectedIntro": "The official lists do not carry these. They come from the school's own site and have not been collected yet.",
+      "sections": {
+        "lists": "From the official lists"
+      }
+    }
   }
 }

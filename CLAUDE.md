@@ -5,7 +5,7 @@ North maps US master's programs for international students who bring their famil
 ## Ground rules
 
 - **English only** in code, comments, docs, commit messages and file names. UI text goes through i18n (`web/src/locales/`).
-- **No personal data in the repo.** No names, emails, phone numbers or private correspondence, including contact fields found in official files (DAPIP lists administrators: drop them at ingestion). Email replies from international offices are stored privately; the public side only says "written reply from the international office, <date>" and may quote one sentence (record 0002/K9).
+- **No personal data in the repo.** No names, emails, phone numbers or private correspondence, including contact fields found in official files. Contacts from official lists (ILEP, TrustEd, DAPIP, IPEDS HD) are kept only in the private `institution_contacts` table, admin-only and audited, never in public fields, exports, logs or the repo; test fixtures use made-up contacts (record 0009). Email replies from international offices are stored privately; the public side only says "written reply from the international office, <date>" and may quote one sentence (record 0002/K9).
 - **Never read, print or commit `.env`.** Use `.env.example` for variable names.
 - **Unknown is never negative** (BR-02). Only `confirmed_negative` fails the filter by itself. Do not turn a missing value into `false` or `0`.
 - **Decision records win.** If `docs/requirements.md` or `docs/uml-model.md` disagree with `docs/decisions/`, the newest decision record is right. New decisions get a new record (skill `decision-record`).

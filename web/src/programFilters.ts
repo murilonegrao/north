@@ -97,6 +97,7 @@ export function parseFilters(query: LocationQuery): ProgramFilters {
 /** Parameters for `GET /api/programs`. */
 export function toApiQuery(f: ProgramFilters, pageSize: number): ProgramQuery {
   return {
+    kind: 'degree',
     state: f.state,
     cip_family: f.cip,
     stem: f.stem,

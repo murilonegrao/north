@@ -36,7 +36,7 @@ The file name changes with every update (`...updated-DD-Month-YYYY.xlsx` under `
 | Programme Type | program kind | `English Language` 1,066, `Higher education - Major award` 78, `Professional` 4, `Foundation` 3 |
 | Provider | matching / display | 77 providers |
 | Addresss (sic) | campus city / county | Institutional postal address. The county is derived from the text and the Eircode routing key. |
-| **Contact Email, Contact Telephone, Contact Name** | **dropped at ingestion** | Personal data (named staff). Filled in all 1,151 rows. Never stored, logged or shown. |
+| **Contact Email, Contact Telephone, Contact Name** | `institution_contacts` (private, record 0009) | Named staff. Filled in all 1,151 rows. Stored only in the private contacts table, latest file only; never served publicly, never in values, evidence or logs. Read in the admin area (admin role, audited). |
 | Programme Title | program name | Not unique per provider: 314 rows share provider + title with another row (variants by hours, level or exam). |
 | Awarding Body | awarding body | 97 distinct values, written freely (`IELT`, `IELTS`, `Cambridge`, `Cambridge ESOL`…) |
 | Award Title | award | |
@@ -82,3 +82,7 @@ ISD terms ("Copyright and re-use of public sector information"): content is © D
 - robots.txt: `Crawl-delay: 10`, nothing disallowed. `curl` with user agent `north-research-spike` got the pages, the media API and the XLSX (HTTP 200). **No blocking.**
 - Updates are irregular, each one a new dated file: 2025-06, 2026-02, 2026-07, 2026-09 (twice).
 - Suggested: check the page or the media API weekly, wait 10 s between requests, and keep admin upload (FR-26) as the fallback.
+
+## Ingestion (slice E2)
+
+`backend/north/ingest/ie/` reads the uploaded XLSX (admin upload, country Ireland, job `ie.accept_upload`; `ie.load` reloads the newest stored files). English rows become `language_course` programs; HE, foundation and professional rows are counted and skipped until slice E3. Free text is parsed conservatively (`ingest/ie/parse.py`): weeks and hours take the lowest number written, CEFR entry/exit the lowest/highest band written (an IELTS score is never converted), the exam comes from `Awarding Body` through `data/reference/ie_exam_names.csv` (a spelling not in the map stays unknown and is reported in the run errors), and the town is matched at the end of an address part (several towns = no city). A programme that leaves the list keeps its values and opens a reconciliation task (`ie_list_move`); a TrustEd row with the same provider number and normalized title is linked to the ILEP programme automatically.

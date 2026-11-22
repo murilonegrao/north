@@ -26,6 +26,7 @@ const links = computed(() =>
     { to: '/admin/upload', key: 'upload', exact: false, show: session.can('curator') },
     { to: '/admin/users', key: 'users', exact: false, show: session.can('admin') },
     { to: '/admin/audit', key: 'audit', exact: false, show: session.can('admin') },
+    { to: '/admin/providers', key: 'providers', exact: false, show: session.can('admin') },
     { to: '/admin/account', key: 'account', exact: false, show: true },
   ].filter((l) => l.show),
 )

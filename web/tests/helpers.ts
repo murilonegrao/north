@@ -3,6 +3,8 @@ import { createI18n } from 'vue-i18n'
 import { createMemoryHistory, createRouter } from 'vue-router'
 import { handleMockRequest } from '../mock/handlers'
 import en from '../src/locales/en.json'
+import EnglishCourseDetailView from '../src/views/EnglishCourseDetailView.vue'
+import EnglishCoursesView from '../src/views/EnglishCoursesView.vue'
 import ProgramDetailView from '../src/views/ProgramDetailView.vue'
 import ProgramListView from '../src/views/ProgramListView.vue'
 
@@ -18,6 +20,9 @@ export function makeRouter() {
       { path: '/:lang/', component: { template: '<div />' } },
       { path: '/:lang/programs', component: ProgramListView },
       { path: '/:lang/programs/:id', component: ProgramDetailView },
+      { path: '/:lang/english-courses', component: EnglishCoursesView },
+      { path: '/:lang/english-courses/:id', component: EnglishCourseDetailView },
+      { path: '/:lang/placement', component: { template: '<div />' } },
     ],
   })
 }

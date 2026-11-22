@@ -211,7 +211,8 @@ def test_viewer_cannot_run_jobs_or_manage_users(client: TestClient, session: Ses
     assert v.get("/api/admin/users").status_code == 403
     assert v.get("/api/admin/audit").status_code == 403
     kinds = {k["name"]: k["allowed"] for k in v.get("/api/admin/job-kinds").json()}
-    assert kinds == {"us.fetch": False, "us.sync": False, "us.recompute": False}
+    assert kinds == {"us.fetch": False, "us.sync": False, "us.recompute": False,
+                     "ie.load": False}
 
 
 # ------------------------------------------------------------------------------ jobs
@@ -322,3 +323,39 @@ def test_stale_running_job_is_reaped(session: Session) -> None:
     assert queue.reap_stale(session) == 1
     session.refresh(job)
     assert job.status == "failed"
+
+
+# ------------------------------------------------------------- private contacts (record 0009)
+
+
+def test_contacts_are_admin_only_and_every_read_is_audited(client: TestClient, session: Session,
+                                                           tmp_path: Path) -> None:
+    from north.ingest.ie.load import ingest_list
+    from tests.ie_lists import CONTACT_NAME, FAKE_EMAIL, FAKE_PHONE, ilep_v1, write_list
+
+    ingest_list(session, write_list(tmp_path / "ilep.xlsx", ilep_v1()), "ie_ilep")
+    a = onboard(client, session, "ana", "admin")
+    listed = a.get("/api/admin/institutions?country=IE").json()
+    assert {i["id"]: i["contacts"] for i in listed} == {"ie-0901": 1, "ie-0902": 1, "ie-0903": 1}
+    assert FAKE_EMAIL not in str(listed)  # the list never carries the contacts themselves
+    assert not session.scalars(select(AuditEntry).where(
+        AuditEntry.action == "institution_contacts_read")).all()
+
+    r = a.get("/api/admin/institutions/ie-0901/contacts")
+    assert r.status_code == 200, r.text
+    c = r.json()["contacts"]
+    assert [(x["name"], x["email"], x["phone"], x["source"]) for x in c] == [
+        (CONTACT_NAME, FAKE_EMAIL, FAKE_PHONE, "ie_ilep")]
+    entry = session.scalars(select(AuditEntry).where(
+        AuditEntry.action == "institution_contacts_read")).one()
+    assert entry.target == "ie-0901" and entry.actor == "ana" and entry.at is not None
+    assert FAKE_EMAIL not in str(entry.detail) and CONTACT_NAME not in str(entry.detail)
+    assert a.get("/api/admin/institutions/ie-9999/contacts").status_code == 404
+    assert a.get("/api/admin/institutions/IE%20X/contacts").status_code == 422
+
+    for name, role in (("cora", "curator"), ("vera", "viewer")):
+        u = onboard(client, session, name, role)
+        assert u.get("/api/admin/institutions/ie-0901/contacts").status_code == 403
+        assert u.get("/api/admin/institutions").status_code == 403
+    assert len(session.scalars(select(AuditEntry).where(
+        AuditEntry.action == "institution_contacts_read")).all()) == 1

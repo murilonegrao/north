@@ -4,8 +4,11 @@ Database tests run against PostgreSQL at ``NORTH_TEST_DATABASE_URL`` (the databa
 and migrated with Alembic) and are skipped when it is unset or unreachable.
 
 Files under ``tests/fixtures/`` are synthetic, shaped like the official files: every
-institution, code and value is invented, and contact columns hold ``PLACEHOLDER-CONTACT`` so
-tests can prove they never reach the database. The IPEDS dictionary workbook is generated here.
+institution, code and value is invented. Contact columns North keeps privately (record 0009:
+DAPIP AdminName/AdminEmail/AdminPhone, IPEDS CHFNM/CHFTITLE/GENTELE) hold made-up names,
+``example.com`` addresses and ``000`` numbers; columns it never reads (addresses, general phone,
+fax) hold ``PLACEHOLDER-CONTACT`` so tests can prove they never reach the database. The IPEDS
+dictionary workbook is generated here.
 """
 
 from __future__ import annotations

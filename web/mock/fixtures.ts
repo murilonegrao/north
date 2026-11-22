@@ -1,10 +1,14 @@
 // FICTITIOUS fixture data for `npm run dev:mock` and the tests. Every institution, city,
 // identifier and number here is invented; none of it describes a real program.
-// Shapes follow docs/api/programs-v0.md (contract v0.2) exactly.
+// Shapes follow docs/api/programs-v0.md (contract v0.4) exactly.
 import type {
   Accreditation,
+  CefrBand,
   CipFamily,
   Completions,
+  CourseDetail,
+  CourseSummary,
+  Exam,
   InstitutionControl,
   ProgramDetail,
   ProgramSummary,
@@ -115,6 +119,8 @@ function tuition(inst: FakeInstitution, withEvidence: boolean): TuitionValue {
 function summary(inst: FakeInstitution, cip: FakeCip, seed: number, detail = false): ProgramSummary {
   return {
     id: `${inst.unitid}-${cip.code.replace('.', '')}`,
+    kind: 'degree',
+    country: 'US',
     title: seed === 0 ? 'Master of Science in Computer Science' : cipTitle(cip.title),
     title_source: seed === 0 ? 'program_page' : 'cip_title',
     degree: "Master's",
@@ -127,6 +133,8 @@ function summary(inst: FakeInstitution, cip: FakeCip, seed: number, detail = fal
     graduate_tuition_nonresident: tuition(inst, detail),
     sevp_status: inst.sevp,
     accreditation_status: inst.accreditation,
+    language_course: null,
+    intl_authorization: null,
   }
 }
 
@@ -161,6 +169,7 @@ function detail(inst: FakeInstitution, cip: FakeCip, seed: number): ProgramDetai
   const { sevp_status: _sevp, accreditation_status: _acc, ...rest } = base
   return {
     ...rest,
+    identifiers: [],
     cip: { ...base.cip, isced_f: cip.isced },
     institution: {
       ...base.institution,
@@ -204,3 +213,103 @@ export const FIXTURE_DETAILS: Record<string, ProgramDetail> = Object.fromEntries
   }),
 )
 export const FIXTURE_SOURCES = SOURCES
+
+// ---- English courses in Ireland (contract v0.4), all FICTITIOUS ----
+
+const ILEP_PAGE = 'https://example.org/fictitious-ilep-page'
+const TRUSTED_PAGE = 'https://example.org/fictitious-trusted-page'
+const ILEP_END = {
+  code: 'ie.ilep_end',
+  params: { ends: 'after_second_trusted_round', scheduled: '2026-12' },
+  source_url: 'https://example.org/fictitious-immigration-page',
+  checked_on: '2026-11-22',
+}
+
+interface FakeCourse {
+  id: string
+  title: string
+  provider: string
+  providerNo: string
+  city: string | null
+  county: string | null
+  list: 'ie_ilep' | 'ie_trusted'
+  exam: Exam | null
+  entry: CefrBand | null
+  exit: CefrBand | null
+  weeks: number
+  hours: number
+}
+
+const COURSES: FakeCourse[] = [
+  { id: 'ie-ilep-9901-0001', title: 'General English', provider: 'Example English Academy', providerNo: '9901', city: 'Dublin', county: 'D', list: 'ie_ilep', exam: 'cambridge', entry: 'A1', exit: 'B2', weeks: 25, hours: 15 },
+  { id: 'ie-ilep-9901-0002', title: 'Intensive English and IELTS', provider: 'Example English Academy', providerNo: '9901', city: 'Dublin', county: 'D', list: 'ie_ilep', exam: 'ielts', entry: 'B1', exit: 'C1', weeks: 25, hours: 20 },
+  { id: 'ie-ilep-9902-0001', title: 'English for Everyday Life', provider: 'Sample Language Institute', providerNo: '9902', city: 'Cork', county: 'CO', list: 'ie_ilep', exam: 'tie', entry: 'A0', exit: 'B1', weeks: 26, hours: 15 },
+  { id: 'ie-ilep-9903-0001', title: 'Exam Preparation English', provider: 'Placeholder School of English', providerNo: '9903', city: 'Galway', county: 'G', list: 'ie_ilep', exam: 'trinity', entry: null, exit: null, weeks: 25, hours: 18.33 },
+  { id: 'ie-ilep-9904-0001', title: 'English Plus', provider: 'Demo Two Towns College', providerNo: '9904', city: null, county: null, list: 'ie_ilep', exam: null, entry: 'A2', exit: 'B2', weeks: 25, hours: 21 },
+  { id: 'ie-trusted-9950-0001', title: 'Academic English', provider: 'Example University Language Centre', providerNo: '9950', city: 'Limerick', county: 'LK', list: 'ie_trusted', exam: 'languagecert', entry: 'B1', exit: 'C2', weeks: 25, hours: 20 },
+]
+
+function listVV<T>(c: FakeCourse, value: T | null, raw: string, withEvidence: boolean): VerifiedValue<T> {
+  if (value === null) return { value: null, status: 'unknown', ...(withEvidence ? { evidence: `${raw} (fictitious row)` } : {}) }
+  return {
+    value,
+    status: 'confirmed_official',
+    source_kind: 'uploaded_file',
+    source_url: c.list === 'ie_ilep' ? ILEP_PAGE : TRUSTED_PAGE,
+    ...(withEvidence ? { evidence: `${raw} (fictitious row)` } : {}),
+    verified_at: VERIFIED_AT,
+  }
+}
+
+function course(c: FakeCourse, withEvidence = false): CourseSummary {
+  return {
+    id: c.id,
+    kind: 'language_course',
+    country: 'IE',
+    title: c.title,
+    title_source: 'program_page',
+    degree: 'language_course',
+    cip: null,
+    institution: { id: `ie-${c.providerNo}`, name: c.provider, control: null },
+    campus: { city: c.city, state: c.county },
+    stem_opt: { value: null, status: 'unknown' },
+    flags: [],
+    completions: { value: null, status: 'unknown' },
+    graduate_tuition_nonresident: { value: null, status: 'unknown', note_code: null },
+    sevp_status: 'unknown',
+    accreditation_status: 'unknown',
+    language_course: {
+      cefr_entry: listVV(c, c.entry, 'Entry Level', withEvidence),
+      cefr_exit: listVV(c, c.exit, 'Exit Level', withEvidence),
+      exam: listVV(c, c.exam, 'Awarding Body', withEvidence),
+      weeks: listVV(c, c.weeks, 'Duration', withEvidence),
+      hours_per_week: listVV(c, c.hours, 'Hours per week', withEvidence),
+      price: { value: null, status: 'unknown' },
+      start_dates: [],
+    },
+    intl_authorization: {
+      ...listVV(c, { scheme: c.list, authorized: true }, `programme ${c.id}`, withEvidence),
+      notes: c.list === 'ie_ilep' ? [ILEP_END] : [],
+    },
+  }
+}
+
+const COURSE_SOURCES: SourceFile[] = [
+  { source: 'ie_ilep', file_version: '2026-09-22', sha256: sha(7), uploaded_at: '2026-11-22T10:00:00Z', rows: 1151 },
+  { source: 'ie_trusted', file_version: '2026-08', sha256: sha(8), uploaded_at: '2026-11-22T10:01:00Z', rows: 6784 },
+]
+
+function courseDetail(c: FakeCourse): CourseDetail {
+  const base = course(c, true)
+  return {
+    ...base,
+    identifiers: [{ scheme: c.list === 'ie_ilep' ? 'ie_ilep_ref' : 'ie_trusted_ref', value: `${c.list === 'ie_trusted' ? 'TE' : ''}${c.providerNo}/0001` }],
+    institution: { ...base.institution, website: null, identifiers: { ie_provider_no: c.providerNo } },
+    campus: { ...base.campus, locality: c.county ? { country: 'IE', scheme: 'ie_county', code: `IE-${c.county}`, name: c.city ?? c.county } : null },
+    not_yet_collected: ['language_course.price', 'language_course.start_dates'],
+    sources: COURSE_SOURCES,
+  }
+}
+
+export const FIXTURE_COURSES: CourseSummary[] = COURSES.map((c) => course(c))
+export const FIXTURE_COURSE_DETAILS: Record<string, CourseDetail> = Object.fromEntries(COURSES.map((c) => [c.id, courseDetail(c)]))

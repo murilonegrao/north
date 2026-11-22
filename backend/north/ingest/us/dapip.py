@@ -4,9 +4,12 @@ Only institutional accreditation counts: ``AccreditationRecords.ProgramName ==
 "Institutional Accreditation"`` with no end date and status "Accredited". The join is by UNITID,
 then by the 8-digit OPEID, then by the parent's 6-digit OPEID (branch campuses of chains).
 
-Personal data: ``InstitutionCampus.csv`` names administrators (AdminName, AdminPhone,
-AdminEmail). Rows are projected to a whitelist of columns at read time, so those fields (and
-the address and phone columns) never reach memory beyond the CSV reader, the database or logs.
+Contacts (record 0009): ``InstitutionCampus.csv`` names administrators (AdminName,
+AdminPhone, AdminEmail). They are read in a separate projection and stored only in the private
+``institution_contacts`` table, per institution (an institution's own rows and its locations,
+by ``ParentDapipId``); this run replaces the DAPIP contacts of the institutions it covers. The
+address, general phone and fax columns are never read. Nothing of this reaches a value,
+evidence, a field change, a task or a log.
 """
 
 from __future__ import annotations
@@ -21,6 +24,7 @@ from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 from north.domain.verified import Status
+from north.ingest.contacts import Person, replace_contacts
 from north.ingest.us.common import RunContext, StepResult, read_csv_rows, run_step, subdivision_id
 from north.repository.models import Institution, InstitutionIdentifier
 
@@ -28,6 +32,7 @@ DOWNLOAD_PAGE = "https://ope.ed.gov/dapip/#/download-data-files"
 INSTITUTIONAL = "Institutional Accreditation"
 CAMPUS_FILE, RECORDS_FILE = "InstitutionCampus.csv", "AccreditationRecords.csv"
 CAMPUS_COLUMNS = ("DapipId", "OpeId", "IpedsUnitIds", "LocationType")
+CONTACT_COLUMNS = ("DapipId", "ParentDapipId", "AdminName", "AdminEmail", "AdminPhone")
 RECORD_COLUMNS = ("DapipId", "AgencyName", "ProgramName", "AccreditationStatus",
                   "AccreditationEndDate")
 # The seven former regional commissions, shown by their usual short names. "Regional" itself is
@@ -88,6 +93,12 @@ def ingest_dapip(session: Session, path: Path, state: str = "TX") -> StepResult:
             if re.fullmatch(r"\d{8}", ope):
                 by_opeid[ope].append(r["DapipId"])
                 by_ope6[ope[:6]].append(r["DapipId"])
+        # Administrators by the DAPIP id of their institution (a location counts for its parent).
+        admins: dict[str, list[tuple[str, str, str]]] = defaultdict(list)
+        for r in read(CAMPUS_FILE, campus_member, CONTACT_COLUMNS):
+            admins[r["ParentDapipId"] or r["DapipId"]].append(
+                (r["AdminName"], r["AdminEmail"], r["AdminPhone"]))
+        people: list[Person] = []
         current: dict[str, list[dict[str, str]]] = defaultdict(list)
         for r in read(RECORDS_FILE, records_member, RECORD_COLUMNS):
             ctx.counts["accreditation_rows"] += 1
@@ -114,6 +125,8 @@ def ingest_dapip(session: Session, path: Path, state: str = "TX") -> StepResult:
                 ctx.put(inst, "accreditation", ctx.vv(None, Status.UNKNOWN, evidence=""), path_)
                 continue
             ctx.counts[f"joined_by_{join.replace(' ', '_')}"] += 1
+            people += [Person(inst.id, name=n, email=e, phone=ph)
+                       for d in dict.fromkeys(dapip_ids) for n, e, ph in admins.get(d, [])]
             if join != "parent opeid" and len(set(dapip_ids)) == 1:
                 _dapip_identifier(ctx, inst, dapip_ids[0])
             recs = [x for d in dict.fromkeys(dapip_ids) for x in current.get(d, [])]
@@ -136,6 +149,8 @@ def ingest_dapip(session: Session, path: Path, state: str = "TX") -> StepResult:
                                   f"(joined by {join})")
             ctx.put(inst, "accreditation", new, path_)
             ctx.counts["accredited"] += 1
+        replace_contacts(session, source="dapip", source_file_id=ctx.source_file.id,
+                         people=people, institution_ids=[i.id for i in insts])
         session.flush()
 
     return run_step(session, source="dapip", files=files, file_version=version,

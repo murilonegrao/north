@@ -7,6 +7,11 @@ Names and columns follow UML §8 and decision record 0002. Deviations, all addit
 - ``field_changes.program_id`` is nullable: institution and campus values are logged with a
   namespaced ``field_path`` such as ``institution[228778].accreditation``.
 - ``source_files.uploaded_by`` has no foreign key yet (``accounts`` arrives with FR-25).
+
+Record 0008 (migration 0004): ``programs.kind``, ``programs.language_course``,
+``programs.intl_authorization`` (program-level authorization, T5), ``program_identifiers``
+(T6), and ``institutions.country_code`` with a nullable ``subdivision_id`` (an Irish provider
+whose listed sites are in more than one county has no single subdivision).
 """
 
 from __future__ import annotations
@@ -80,7 +85,9 @@ class Locality(Base):
 class Institution(Base):
     __tablename__ = "institutions"
     id: Mapped[str] = mapped_column(Text, primary_key=True)
-    subdivision_id: Mapped[str] = mapped_column(ForeignKey("subdivisions.id"), index=True)
+    country_code: Mapped[str] = mapped_column(ForeignKey("countries.code"), index=True)
+    # Null when the official file does not place the institution in one subdivision.
+    subdivision_id: Mapped[str | None] = mapped_column(ForeignKey("subdivisions.id"), index=True)
     name: Mapped[str] = mapped_column(Text)
     city: Mapped[str | None] = mapped_column(Text)
     control: Mapped[str | None] = mapped_column(Text)
@@ -90,7 +97,7 @@ class Institution(Base):
 
     identifiers: Mapped[list[InstitutionIdentifier]] = relationship(back_populates="institution")
     campuses: Mapped[list[Campus]] = relationship(back_populates="institution")
-    subdivision: Mapped[Subdivision] = relationship()
+    subdivision: Mapped[Subdivision | None] = relationship()
 
 
 class InstitutionIdentifier(Base):
@@ -103,6 +110,27 @@ class InstitutionIdentifier(Base):
     value: Mapped[str] = mapped_column(Text)
 
     institution: Mapped[Institution] = relationship(back_populates="identifiers")
+
+
+class InstitutionContact(Base):
+    """Contacts of an institution as an official file prints them (record 0009): ILEP,
+    TrustEd, DAPIP administrators, IPEDS HD chief administrator and general phone. Private:
+    never served by the public API, never in a VerifiedValue, evidence, field change or log.
+    A new run of a source replaces that source's rows for the institutions it covers."""
+
+    __tablename__ = "institution_contacts"
+    id: Mapped[int] = mapped_column(BigInteger, primary_key=True)
+    institution_id: Mapped[str] = mapped_column(ForeignKey("institutions.id"), index=True)
+    source: Mapped[str] = mapped_column(Text, index=True)  # ie_ilep, ie_trusted, dapip, ipeds_hd
+    source_file_id: Mapped[int] = mapped_column(ForeignKey("source_files.id"), index=True)
+    name: Mapped[str | None] = mapped_column(Text)
+    title: Mapped[str | None] = mapped_column(Text)  # role or job title
+    email: Mapped[str | None] = mapped_column(Text)
+    phone: Mapped[str | None] = mapped_column(Text)  # may be a general number with no name
+    seen_at: Mapped[dt.datetime] = _now()
+
+    def __repr__(self) -> str:  # never print the values (logs, tracebacks)
+        return f"InstitutionContact(id={self.id}, institution_id={self.institution_id!r})"
 
 
 class Campus(Base):
@@ -128,6 +156,12 @@ class Program(Base):
     campus_id: Mapped[int] = mapped_column(ForeignKey("campuses.id"), index=True)
     name: Mapped[str] = mapped_column(Text)
     degree: Mapped[str] = mapped_column(Text)
+    # Record 0008/T13: degree or language_course. A language course carries `language_course`.
+    kind: Mapped[str] = mapped_column(Text, server_default="degree", index=True)
+    language_course: Mapped[dict[str, Any] | None]
+    # Record 0008/T5: authorization held by the program itself (Irish lists); the US keeps it
+    # on the campus (SEVP).
+    intl_authorization: Mapped[dict[str, Any] | None]
     # Derived from modality and F-1 compatibility (0002/A11); null until those are known.
     in_strategy: Mapped[bool | None] = mapped_column(Boolean, index=True)
     flags: Mapped[list[Any]] = mapped_column(server_default=text("'[]'::jsonb"))
@@ -146,6 +180,22 @@ class Program(Base):
     classifications: Mapped[list[ProgramClassification]] = relationship(
         back_populates="program")
     eligibilities: Mapped[list[ProgramEligibility]] = relationship(back_populates="program")
+    identifiers: Mapped[list[ProgramIdentifier]] = relationship(back_populates="program")
+
+
+class ProgramIdentifier(Base):
+    """Identifiers of a program in an official list (record 0008/T6): ``ie_ilep_ref``
+    (``0018/0001``) and ``ie_trusted_ref`` (``TE0058/0012``). One value names one program."""
+
+    __tablename__ = "program_identifiers"
+    __table_args__ = (UniqueConstraint("scheme", "value",
+                                       name="uq_program_identifiers_scheme_value"),)
+    id: Mapped[int] = mapped_column(BigInteger, primary_key=True)
+    program_id: Mapped[str] = mapped_column(ForeignKey("programs.id"), index=True)
+    scheme: Mapped[str] = mapped_column(Text)
+    value: Mapped[str] = mapped_column(Text)
+
+    program: Mapped[Program] = relationship(back_populates="identifiers")
 
 
 class Classification(Base):

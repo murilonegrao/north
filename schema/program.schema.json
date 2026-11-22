@@ -8,7 +8,7 @@
   "additionalProperties": false,
   "required": [
     "schema_version", "id", "country", "subdivision", "institution", "campus", "name", "degree",
-    "classifications", "modality",
+    "modality",
     "immigration", "academic", "cost", "funding", "admissions", "career", "family"
   ],
   "properties": {
@@ -24,6 +24,24 @@
     "institution": { "$ref": "#/$defs/InstitutionRef" },
     "name": { "type": "string", "minLength": 1 },
     "degree": { "type": "string", "minLength": 1, "examples": ["MS", "MEng", "MSc", "MRes"] },
+    "kind": {
+      "enum": ["degree", "language_course"],
+      "default": "degree",
+      "description": "Record 0008/T13: a degree program or a language course. Absent means degree. A language course carries `language_course` and needs no classification (it has no CIP or ISCED-F field)."
+    },
+    "language_course": { "$ref": "#/$defs/LanguageCourse" },
+    "intl_authorization": {
+      "description": "Record 0008/T5: authorization held by the program itself (Irish lists: scheme ie_ilep or ie_trusted, confirmed_official from the uploaded list). The US keeps SEVP on campus.intl_authorization. Absence from a list is unknown, never confirmed_negative automatically (BR-18).",
+      "allOf": [
+        { "$ref": "#/$defs/VerifiedValue" },
+        { "properties": { "value": { "anyOf": [{ "type": "null" }, { "$ref": "#/$defs/Authorization" }] } } }
+      ]
+    },
+    "identifiers": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/ProgramIdentifier" },
+      "description": "Record 0008/T6: identifiers of the program in official lists (program_identifiers), e.g. ie_ilep_ref 0018/0001, ie_trusted_ref TE0058/0012. One value names one program."
+    },
     "campus": { "$ref": "#/$defs/Campus", "description": "Each program belongs to exactly one campus (R17)." },
     "official_url": { "anyOf": [{ "type": "null" }, { "$ref": "#/$defs/HttpUrl" }], "description": "Program home page." },
     "classifications": {
@@ -83,6 +101,12 @@
       "$comment": "Country without a module yet: accepts any snake_case key as long as each value is a VerifiedValue. Lets data be recorded before the module exists; the filter treats the program as undetermined.",
       "if": { "properties": { "country": { "not": { "enum": ["US"] } } }, "required": ["country"] },
       "then": { "properties": { "immigration": { "$ref": "#/$defs/immigration_generic" } } }
+    },
+    {
+      "$comment": "Record 0008/T13: a language course carries its course facts and needs no classification; a degree needs exactly one primary classification and carries no course facts.",
+      "if": { "properties": { "kind": { "const": "language_course" } }, "required": ["kind"] },
+      "then": { "required": ["language_course"] },
+      "else": { "required": ["classifications"], "not": { "required": ["language_course"] } }
     }
   ],
 
@@ -300,6 +324,42 @@
       }
     },
 
+    "CefrBand": {
+      "enum": ["A0", "A1", "A2", "B1", "B2", "C1", "C2"],
+      "description": "CEFR band of a course's entry or exit level. A0 is pre-A1, as the Irish lists write it."
+    },
+    "ExamCode": {
+      "enum": ["ielts", "cambridge", "trinity", "languagecert", "toefl", "pte", "duolingo", "tie", "other"],
+      "description": "Exam a course prepares for, normalized from the list's awarding body through data/reference/ie_exam_names.csv (raw text kept in evidence)."
+    },
+    "ProgramIdentifier": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["scheme", "value"],
+      "properties": {
+        "scheme": { "type": "string", "pattern": "^[a-z0-9_]+$", "examples": ["ie_ilep_ref", "ie_trusted_ref"] },
+        "value": { "type": "string", "minLength": 1 }
+      }
+    },
+    "LanguageCourse": {
+      "description": "Record 0008/T13: the facts of a language course. cefr_entry, cefr_exit, exam, weeks and hours_per_week come from the official lists (confirmed_official, uploaded_file); price and start_dates from the school's own site (FR-13). A value the list does not state plainly is unknown with the raw text in evidence.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["cefr_entry", "cefr_exit", "exam", "weeks", "hours_per_week", "price", "start_dates"],
+      "properties": {
+        "cefr_entry": { "allOf": [{ "$ref": "#/$defs/VerifiedValue" }, { "properties": { "value": { "anyOf": [{ "type": "null" }, { "$ref": "#/$defs/CefrBand" }] } } }] },
+        "cefr_exit": { "allOf": [{ "$ref": "#/$defs/VerifiedValue" }, { "properties": { "value": { "anyOf": [{ "type": "null" }, { "$ref": "#/$defs/CefrBand" }] } } }] },
+        "exam": { "allOf": [{ "$ref": "#/$defs/VerifiedValue" }, { "properties": { "value": { "anyOf": [{ "type": "null" }, { "$ref": "#/$defs/ExamCode" }] } } }] },
+        "weeks": { "$ref": "#/$defs/VV_integer" },
+        "hours_per_week": { "$ref": "#/$defs/VV_number" },
+        "price": { "$ref": "#/$defs/VV_money" },
+        "start_dates": {
+          "type": "array",
+          "description": "One VerifiedValue per start date; an empty list means none collected yet (shown as unknown).",
+          "items": { "allOf": [{ "$ref": "#/$defs/VerifiedValue" }, { "properties": { "value": { "$ref": "#/$defs/Date" }, "status": { "not": { "const": "unknown" } } } }] }
+        }
+      }
+    },
     "InstitutionIdentifier": {
       "type": "object",
       "additionalProperties": false,

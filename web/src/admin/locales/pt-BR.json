@@ -15,7 +15,8 @@
     "setup": "Proteja sua conta",
     "forgot": "Esqueci a senha",
     "reset": "Nova senha",
-    "verifyEmail": "Confirmar email"
+    "verifyEmail": "Confirmar email",
+    "providers": "Instituições"
   },
   "nav": {
     "main": "Admin",
@@ -27,7 +28,8 @@
     "account": "Conta",
     "logout": "Sair",
     "site": "Site público",
-    "language": "Idioma"
+    "language": "Idioma",
+    "providers": "Instituições"
   },
   "common": {
     "loading": "Carregando…",
@@ -160,7 +162,12 @@
     "done": "Enviado. O job #{id} está guardando o arquivo.",
     "tooBig": "Maior que {mb} MiB.",
     "failed": "Falha no envio: {detail}",
-    "follow": "Acompanhar o job"
+    "follow": "Acompanhar o job",
+    "country": "País",
+    "countries": {
+      "US": "Estados Unidos",
+      "IE": "Irlanda (carregado assim que reconhecido)"
+    }
   },
   "users": {
     "heading": "Usuários",
@@ -269,5 +276,19 @@
     "done": "{email} confirmado. Ele agora recebe links de redefinição de senha e avisos.",
     "invalid": "Este link é inválido, já foi usado ou expirou. Peça outro na página da conta.",
     "toAccount": "Ir para a conta"
+  },
+  "providers": {
+    "heading": "Instituições e contatos",
+    "help": "Contatos impressos nos arquivos oficiais (ILEP, TrustEd Ireland, DAPIP, IPEDS), guardados só do arquivo mais recente de cada fonte. Privados: nunca aparecem no site público. Cada vez que você abre os contatos de uma instituição, o log de auditoria registra.",
+    "countries": {
+      "IE": "Irlanda"
+    },
+    "none": "Nenhuma instituição carregada para este país.",
+    "name": "Instituição",
+    "identifiers": "Identificadores",
+    "programs": "Programas",
+    "contacts": "Contatos",
+    "show": "Mostrar contatos ({n})",
+    "hide": "Ocultar"
   }
 }

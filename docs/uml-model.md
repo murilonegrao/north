@@ -975,6 +975,7 @@ erDiagram
   campuses ||--o{ programs : "offers"
   programs ||--o{ program_identifiers : "identified by"
   accounts ||--o{ curation_slices : "created"
+  institutions ||--o{ institution_contacts : "private contacts"
   localities ||--o{ rent_benchmarks : "has"
   source_files ||--o{ rent_benchmarks : "source"
   programs ||--o{ program_classifications : "classified"
@@ -1205,6 +1206,17 @@ erDiagram
     text reason
     jsonb candidates
     bool resolved
+  }
+  institution_contacts {
+    bigint id PK
+    text institution_id FK
+    text source "ie_ilep, ie_trusted, dapip, ipeds_hd"
+    bigint source_file_id FK
+    text name "private, admin only, record 0009"
+    text title
+    text email
+    text phone
+    timestamptz seen_at
   }
   curation_slices {
     bigint id PK

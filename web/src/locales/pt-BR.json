@@ -12,7 +12,8 @@
     "language": "Idioma",
     "main": "Principal",
     "programs": "Programas",
-    "placement": "Nível de inglês"
+    "placement": "Nível de inglês",
+    "courses": "Cursos de inglês"
   },
   "theme": {
     "light": "Claro",
@@ -37,7 +38,8 @@
       },
       "course": {
         "title": "Curso de inglês na Irlanda",
-        "text": "Todos os cursos das listas oficiais do Stamp 2, por cidade, exame e nível, com o risco de perder a elegibilidade quando a lista atual acabar."
+        "text": "Todos os cursos das listas oficiais do Stamp 2, por cidade, exame e nível, com o risco de perder a elegibilidade quando a lista atual acabar.",
+        "cta": "Ver cursos"
       },
       "degree": {
         "title": "Programas de graduação e pós",
@@ -283,7 +285,9 @@
       "admissions_other_field_accepted": "Se aceitam candidatos com graduação em outra área",
       "funding": "Financiamento (assistantships, bolsas, isenção de anuidade)",
       "cost_program_tuition": "Anuidade deste programa",
-      "immigration_i20_issued_for_program": "Se a universidade emite o I-20 (o documento do visto F-1) para este programa"
+      "immigration_i20_issued_for_program": "Se a universidade emite o I-20 (o documento do visto F-1) para este programa",
+      "language_course_price": "Preço do curso",
+      "language_course_start_dates": "Datas de início"
     },
     "sourcesIntro": "Os arquivos oficiais usados para montar esta página.",
     "sourceFile": "{version}, carregado em {date}, {rows} linhas",
@@ -296,7 +300,9 @@
       "sevp_csl": "Lista de escolas certificadas pelo SEVP",
       "dapip": "Base de acreditação DAPIP",
       "scorecard_fos": "College Scorecard, por área de estudo",
-      "hud_fmr": "Aluguéis de mercado do HUD (FMR)"
+      "hud_fmr": "Aluguéis de mercado do HUD (FMR)",
+      "ie_ilep": "ILEP, lista provisória de programas elegíveis (serviço de imigração da Irlanda)",
+      "ie_trusted": "Lista de programas elegíveis do TrustEd Ireland (QQI)"
     },
     "notes": {
       "institution_wide_average": "Média da instituição inteira para estudantes de pós-graduação, não o preço deste programa."
@@ -346,5 +352,77 @@
     "retake": "Fazer de novo",
     "export": "Exportar meus resultados (JSON)",
     "review": "Revisar as {count} questões que você errou"
+  },
+  "courses": {
+    "pageTitle": "Cursos de inglês na Irlanda · North",
+    "pageDescription": "Todos os cursos de inglês das listas oficiais do Stamp 2 da Irlanda (ILEP e TrustEd Ireland), por cidade, exame, nível e horas por semana, com a fonte de cada dado.",
+    "eyebrow": "Irlanda · Stamp 2",
+    "title": "Cursos de inglês na Irlanda",
+    "intro": "Todos os cursos de inglês das listas oficiais que dão permissão de estudante (Stamp 2): ILEP e TrustEd Ireland. Preço e datas de início ainda não estão nas listas.",
+    "stay": "Cada curso tem pelo menos 25 semanas e dá até 8 meses de Stamp 2; no máximo três cursos. Trabalho: 20 horas por semana no período letivo, 40 nas férias. A família não pode vir com o Stamp 2.",
+    "count": "Nenhum curso | 1 curso | {n} cursos",
+    "loading": "Carregando cursos…",
+    "error": "Não foi possível carregar os cursos.",
+    "empty": "Nenhum curso corresponde a estes filtros.",
+    "filters": {
+      "heading": "Filtrar cursos",
+      "toggle": "Filtros ({n})",
+      "mine": "Até o meu nível",
+      "mineHint": "Usa o seu último resultado do teste de nível neste navegador: {level}. Cursos sem nível de entrada escrito na lista ficam de fora.",
+      "mineNone": "Faça o teste de nível para filtrar pelo seu nível.",
+      "mineTest": "Fazer o teste",
+      "city": "Cidade",
+      "anyCity": "Qualquer cidade",
+      "exam": "Exame",
+      "anyExam": "Qualquer exame",
+      "level": "Nível de entrada",
+      "anyLevel": "Qualquer nível",
+      "levelOption": "{band} ou abaixo",
+      "levelUnknown": "Nenhum curso tem nível de entrada desconhecido. | 1 curso com nível de entrada desconhecido aparece, marcado como desconhecido. | {n} cursos com nível de entrada desconhecido aparecem, marcados como desconhecidos.",
+      "hours": "Horas por semana",
+      "anyHours": "Qualquer",
+      "hoursOption": "{n} ou mais",
+      "clear": "Limpar filtros"
+    },
+    "fields": {
+      "exam": "Exame",
+      "cefr": "Nível (QECR)",
+      "cefr_entry": "Nível de entrada (QECR)",
+      "cefr_exit": "Nível de saída (QECR)",
+      "weeks": "Duração",
+      "hours": "Horas por semana",
+      "hours_per_week": "Horas por semana",
+      "price": "Preço",
+      "startDates": "Datas de início",
+      "authorization": "Lista do Stamp 2",
+      "provider": "Escola",
+      "county": "Condado"
+    },
+    "values": {
+      "unknown": "Desconhecido",
+      "cityUnknown": "Cidade desconhecida",
+      "cefr": "{entry} → {exit}",
+      "weeks": "{n} semanas",
+      "hours": "{n} h",
+      "examOther": "Outro exame",
+      "notFound": "Não encontrado nas listas"
+    },
+    "notes": {
+      "ie_ilep_end": "A ILEP termina após a segunda rodada do TrustEd (fim de 2026). Confira se o curso passou para o TrustEd Ireland antes de pagar."
+    },
+    "identifiers": {
+      "ie_provider_no": "Nº do provedor",
+      "ie_ilep_ref": "Ref. ILEP",
+      "ie_trusted_ref": "Ref. TrustEd"
+    },
+    "detail": {
+      "back": "Todos os cursos de inglês",
+      "pageTitle": "{title} · {provider} · North",
+      "notFound": "Curso não encontrado",
+      "notCollectedIntro": "As listas oficiais não trazem estes dados. Eles vêm do site da própria escola e ainda não foram coletados.",
+      "sections": {
+        "lists": "Das listas oficiais"
+      }
+    }
   }
 }

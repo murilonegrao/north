@@ -16,6 +16,7 @@ from north.repository.models import (
     Campus,
     FieldChange,
     Institution,
+    InstitutionContact,
     InstitutionIdentifier,
     Program,
     ProgramClassification,
@@ -23,7 +24,7 @@ from north.repository.models import (
     ReconciliationTask,
     SourceFile,
 )
-from tests.conftest import PLACEHOLDER, load_fixtures
+from tests.conftest import FIXTURES, PLACEHOLDER, load_fixtures
 
 
 def test_all_steps_succeed(loaded: dict) -> None:
@@ -118,11 +119,42 @@ def test_dapip_accreditation(session: Session, loaded: dict) -> None:
     assert "accreditation_review" in kinds
 
 
-def test_no_contact_data_anywhere(session: Session, loaded: dict) -> None:
+def test_contacts_land_only_in_the_private_table(session: Session, loaded: dict) -> None:
+    """Record 0009: DAPIP administrators and the IPEDS HD chief administrator and general phone
+    are kept privately; address, general phone and fax of DAPIP are never read."""
     for table in Base.metadata.sorted_tables:
         dump = session.execute(text(f"select coalesce(string_agg(t::text, ' '), '') "
                                     f"from {table.name} t")).scalar_one()
         assert PLACEHOLDER not in dump, table.name
+        if table.name != "institution_contacts":
+            for secret in ("Dapip Admin", "dapip.admin", "Chief Example", "0000000001"):
+                assert secret not in dump, table.name
+    rows = session.scalars(select(InstitutionContact).where(
+        InstitutionContact.institution_id == "900001")).all()
+    dapip = {(c.name, c.email, c.phone) for c in rows if c.source == "dapip"}
+    # The institution's own row and its additional location (ParentDapipId 100001).
+    assert ("Dapip Admin 1", "dapip.admin1@example.com", "+1 000 000 0001") in dapip
+    assert ("Dapip Admin 4", "dapip.admin4@example.com", "+1 000 000 0004") in dapip
+    hd = [(c.name, c.title, c.phone, c.email) for c in rows if c.source == "ipeds_hd"]
+    assert hd == [("Chief Example 1", "President", "0000000001", None)]
+
+
+def test_a_new_dapip_file_replaces_its_contacts(session: Session, loaded: dict,
+                                                tmp_path: Path) -> None:
+    from north.ingest.us import dapip
+
+    d = tmp_path / "dapip-2026-12-01"
+    shutil.copytree(FIXTURES / "dapip", d)
+    campus = d / "InstitutionCampus.csv"
+    campus.write_text(campus.read_text(encoding="utf-8").replace("Dapip Admin 1,", "New Admin,"),
+                      encoding="utf-8")
+    assert dapip.ingest_dapip(session, d, "TX").status == "succeeded"
+    names = set(session.scalars(select(InstitutionContact.name).where(
+        InstitutionContact.institution_id == "900001", InstitutionContact.source == "dapip")))
+    assert "New Admin" in names and "Dapip Admin 1" not in names
+    hd = session.scalars(select(InstitutionContact.name).where(
+        InstitutionContact.source == "ipeds_hd", InstitutionContact.institution_id == "900001"))
+    assert list(hd) == ["Chief Example 1"]  # other sources untouched
 
 
 def test_field_changes_have_ingest_authors(session: Session, loaded: dict) -> None:

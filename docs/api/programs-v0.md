@@ -1,8 +1,8 @@
 ---
 title: "API contract v0 — programs (official-data slice)"
-version: 0.1
+version: 0.4
 status: accepted
-date: 2026-11-21
+date: 2026-11-22
 ---
 
 # API contract v0 — programs
@@ -173,3 +173,27 @@ Fixes found while building the UI. They override the examples above where they d
   country, whatever `state` is), for the state picker.
 - `cities` is empty when `state` is absent: the same city name in two states is two places.
   The `city` filter still matches by name, so clients send it together with `state`.
+
+## Changes in v0.4 (2026-11-22): Ireland English courses (record 0008, slice E2)
+
+A program has a **kind**: `degree` (every US program) or `language_course` (the English courses
+of the Irish ILEP and TrustEd Ireland lists). Everything above still holds for degrees.
+
+1. **Program id** is now any lower-case slug of 2–6 dash-separated parts (`^[a-z0-9]{1,12}(-[a-z0-9]{1,12}){1,5}$`): US `228778-110701`, Ireland `ie-ilep-0018-0001` or `ie-trusted-0058-0012` (the list that first carried the programme; the id does not change when it moves).
+2. **Every list item and detail** gains:
+   - `kind` (`degree` | `language_course`) and `country` (ISO 3166-1, `US` | `IE`).
+   - `language_course`: `null` for a degree; for a course, `{ cefr_entry, cefr_exit, exam, weeks, hours_per_week, price, start_dates }`. Each is a VerifiedValue (`start_dates` a list of them, empty = none collected). `cefr_*` values are CEFR bands `A0`–`C2` (`A0` = pre-A1, as the lists write it); `exam` ∈ `ielts`, `cambridge`, `trinity`, `languagecert`, `toefl`, `pte`, `duolingo`, `tie`, `other`; `weeks` an integer (the minimum written); `hours_per_week` a number (the lowest number written). List values are `confirmed_official` with `source_kind: "uploaded_file"`; text the parser cannot read plainly is `unknown` and the detail keeps the raw text in `evidence`. `price` and `start_dates` are not on the lists: `unknown` / `[]`.
+   - `intl_authorization`: the authorization held by the program itself (record 0008/T5): `{ value: { scheme: "ie_ilep" | "ie_trusted", authorized: true }, status, source_kind, source_url, verified_at, evidence (detail only), notes: [...] }`, or `null` for a US degree (SEVP stays on the campus). `notes` lists migration rules attached to the scheme as `{ code, params, source_url, checked_on }`; ILEP courses carry `ie.ilep_end` ("ILEP ends after the second TrustEd round, scheduled for the end of 2026"). The UI translates `code`.
+   - List items omit `evidence` in `language_course` and `intl_authorization`, as for tuition.
+3. For a course, `cip` is `null`, `stem_opt`, `completions` and `graduate_tuition_nonresident` are `unknown` (tuition with `note_code: null`), `sevp_status` and `accreditation_status` are `unknown`. `campus.state` is the local subdivision code (an Irish county, e.g. `D`, `CO`) and may be `null` (a provider listed at sites in several counties); `campus.city` is `null` when the address names several towns or none North knows (never guessed).
+4. **Detail** gains `identifiers: [{ scheme, value }]` (`ie_ilep_ref`, `ie_trusted_ref`); the institution's `identifiers` carry `ie_provider_no` for Irish providers. `not_yet_collected` depends on the kind (courses: `language_course.price`, `language_course.start_dates`). `sources` lists `ie_ilep` and `ie_trusted` for Irish programs (new source ids).
+5. **New query parameters** on `GET /api/programs`:
+   - `country` — `US` or `IE` (default: the country of `state`, else `US`; unknown country = 422). `state` accepts 1–3 letters (Irish counties); with both, `state` is a subdivision of `country`.
+   - `kind` — `degree` or `language_course`.
+   - `exam` — repeatable, the codes above.
+   - `cefr_entry_max` — a band: courses whose entry level is at or below it. Courses with an unknown entry level are kept, so the card can show them as unknown (BR-02); the facet counts them.
+   - `hours_min` — number 0–80: `hours_per_week.value ≥ hours_min` (unknown excluded).
+   - `city` works as before (exact name).
+6. **`GET /api/facets`** takes `country` and `kind` as scope (like `state`) and returns, in addition: `country`, `kind_scope` (the `kind` asked, or null), `kind: { degree, language_course }`, `exam: { <code>…, unknown }`, `cefr_entry: { A0…C2, unknown }` (exact entry band; the filter is cumulative), `hours_per_week: { min, max, known, unknown }`. `cities` is filled without a `state` when the country's city names are unique (Ireland). `tuition.currency` is the country's (`EUR` for Ireland).
+
+Contacts printed in the official files (record 0009) are never served by this API; they are read only through the admin area.

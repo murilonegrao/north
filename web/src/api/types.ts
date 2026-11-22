@@ -1,4 +1,4 @@
-// Types for API contract v0.2 (docs/api/programs-v0.md, including "Changes in v0.1" and "in v0.2"). Field names follow the contract exactly.
+// Types for API contract v0.4 (docs/api/programs-v0.md, including the "Changes in v0.x" sections). Field names follow the contract exactly.
 
 export const VERIFICATION_STATUSES = [
   'confirmed_official',
@@ -82,8 +82,13 @@ export type NoteCode = 'institution_wide_average'
 
 export type TuitionValue = VerifiedValue<Money> & { note_code?: NoteCode | null }
 
+/** Record 0008/T13: a program is a degree or a language course (v0.4). */
+export type ProgramKind = 'degree' | 'language_course'
+
 export interface ProgramSummary {
   id: string
+  kind: 'degree'
+  country: string
   title: string
   title_source: 'cip_title' | 'program_page'
   degree: string
@@ -97,6 +102,9 @@ export interface ProgramSummary {
   graduate_tuition_nonresident: TuitionValue
   sevp_status: VerificationStatus
   accreditation_status: VerificationStatus
+  language_course: null
+  /** Program-level authorization (Irish lists); null for US degrees (SEVP is on the campus). */
+  intl_authorization: ProgramAuthorization | null
 }
 
 export interface ProgramList {
@@ -115,6 +123,76 @@ export interface Accreditation {
 export interface IntlAuthorization {
   scheme: string
   authorized: boolean
+}
+
+/** A migration rule shown next to a value (v0.4), e.g. `ie.ilep_end`. The UI translates `code`. */
+export interface RuleNote {
+  code: string
+  params: Record<string, unknown>
+  source_url: string
+  checked_on: string
+}
+
+export type ProgramAuthorization = VerifiedValue<IntlAuthorization> & { notes: RuleNote[] }
+
+/** CEFR bands of a course's entry and exit levels; A0 is pre-A1 (as the Irish lists write it). */
+export const CEFR_BANDS = ['A0', 'A1', 'A2', 'B1', 'B2', 'C1', 'C2'] as const
+export type CefrBand = (typeof CEFR_BANDS)[number]
+
+export const EXAMS = ['ielts', 'cambridge', 'trinity', 'languagecert', 'toefl', 'pte', 'duolingo', 'tie', 'other'] as const
+export type Exam = (typeof EXAMS)[number]
+
+/** Course facts (record 0008/T13), each a VerifiedValue; lists omit `evidence`. */
+export interface LanguageCourse {
+  cefr_entry: VerifiedValue<CefrBand>
+  cefr_exit: VerifiedValue<CefrBand>
+  exam: VerifiedValue<Exam>
+  weeks: VerifiedValue<number>
+  hours_per_week: VerifiedValue<number>
+  price: VerifiedValue<Money>
+  start_dates: VerifiedValue<string>[]
+}
+
+/** A language course in `GET /api/programs?kind=language_course` (v0.4). */
+export interface CourseSummary {
+  id: string
+  kind: 'language_course'
+  country: string
+  title: string
+  title_source: 'cip_title' | 'program_page'
+  degree: string
+  cip: null
+  institution: InstitutionSummary
+  /** `state` is the local subdivision code (an Irish county), null when the lists do not say. */
+  campus: { city: string | null; state: string | null }
+  stem_opt: StemOpt
+  flags: string[]
+  completions: Completions
+  graduate_tuition_nonresident: TuitionValue
+  sevp_status: VerificationStatus
+  accreditation_status: VerificationStatus
+  language_course: LanguageCourse
+  intl_authorization: ProgramAuthorization
+}
+
+export interface CourseList {
+  total: number
+  limit: number
+  offset: number
+  items: CourseSummary[]
+}
+
+export interface ProgramIdentifier {
+  scheme: string
+  value: string
+}
+
+export interface CourseDetail extends Omit<CourseSummary, 'institution' | 'campus'> {
+  identifiers: ProgramIdentifier[]
+  institution: InstitutionSummary & { website?: string | null; identifiers: Record<string, string> }
+  campus: { city: string | null; state: string | null; locality?: Locality | null }
+  not_yet_collected: string[]
+  sources: SourceFile[]
 }
 
 export interface InstitutionDetail extends InstitutionSummary {
@@ -147,6 +225,8 @@ export const SOURCE_IDS = [
   'dapip',
   'scorecard_fos',
   'hud_fmr',
+  'ie_ilep',
+  'ie_trusted',
 ] as const
 export type SourceId = (typeof SOURCE_IDS)[number]
 
@@ -161,6 +241,7 @@ export interface SourceFile {
 }
 
 export interface ProgramDetail extends Omit<ProgramSummary, 'institution' | 'campus' | 'sevp_status' | 'accreditation_status'> {
+  identifiers: ProgramIdentifier[]
   institution: InstitutionDetail
   campus: CampusDetail
   graduate_tuition_nonresident: TuitionValue
@@ -183,6 +264,8 @@ export type SortKey = (typeof SORT_KEYS)[number]
 export type SortOrder = 'asc' | 'desc'
 
 export interface ProgramQuery {
+  country?: string
+  kind?: ProgramKind
   state?: string
   cip_family?: CipFamily[]
   stem?: StemFilter
@@ -194,6 +277,10 @@ export interface ProgramQuery {
   sevp?: SevpFilter
   accredited?: AccreditedFilter
   has_graduates?: GraduatesFilter
+  /** Language courses (v0.4). */
+  exam?: Exam[]
+  cefr_entry_max?: CefrBand
+  hours_min?: number
   sort?: SortKey
   order?: SortOrder
   limit?: number
@@ -208,8 +295,10 @@ export interface StateCount {
 }
 
 export interface Facets {
-  /** null: the whole country (v0.3); cities are then empty. */
+  country: string
+  /** null: the whole country (v0.3); cities are then empty unless city names are unique (IE). */
   state: string | null
+  kind_scope: ProgramKind | null
   states: StateCount[]
   total: number
   cip_family: Partial<Record<CipFamily, number>>
@@ -220,4 +309,8 @@ export interface Facets {
   accredited: Partial<Record<AccreditedFilter, number>>
   has_graduates: Partial<Record<GraduatesFilter, number>>
   tuition: { min: number | null; max: number | null; known: number; unknown: number; currency: string }
+  kind: Partial<Record<ProgramKind, number>>
+  exam: Partial<Record<Exam | 'unknown', number>>
+  cefr_entry: Partial<Record<CefrBand | 'unknown', number>>
+  hours_per_week: { min: number | null; max: number | null; known: number; unknown: number }
 }

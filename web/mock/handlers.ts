@@ -1,7 +1,7 @@
-// A tiny in-memory implementation of API contract v0.2 over the fictitious fixtures.
+// A tiny in-memory implementation of API contract v0.4 over the fictitious fixtures.
 // Used by the Vite dev middleware (`npm run dev:mock`) and by the tests.
-import type { ProgramSummary } from '../src/api/types.ts'
-import { FIXTURE_DETAILS, FIXTURE_PROGRAMS, FIXTURE_SOURCES } from './fixtures.ts'
+import type { CourseSummary, ProgramSummary } from '../src/api/types.ts'
+import { FIXTURE_COURSE_DETAILS, FIXTURE_COURSES, FIXTURE_DETAILS, FIXTURE_PROGRAMS, FIXTURE_SOURCES } from './fixtures.ts'
 
 export interface MockResponse {
   status: number
@@ -15,6 +15,10 @@ const SEVP = ['confirmed', 'unknown'] as const
 const ACCREDITED = ['true', 'unknown'] as const
 const GRADUATES = ['true', 'false'] as const
 const SORTS = ['title', 'institution', 'city', 'tuition', 'graduates', 'nonresident_graduates', 'nonresident_share'] as const
+const KINDS = ['degree', 'language_course'] as const
+const EXAMS = ['ielts', 'cambridge', 'trinity', 'languagecert', 'toefl', 'pte', 'duolingo', 'tie', 'other'] as const
+const BANDS = ['A0', 'A1', 'A2', 'B1', 'B2', 'C1', 'C2'] as const
+const COUNTRIES = ['US', 'IE'] as const
 
 function invalid(loc: string, msg: string): MockResponse {
   return { status: 422, body: { detail: [{ loc: ['query', loc], msg, type: 'value_error' }] } }
@@ -98,6 +102,86 @@ function money(raw: string | null): number | undefined | null {
 
 const STATE_NAMES: Record<string, string> = { TX: 'Texas' }
 
+/** Zero counts of the course groups, for a degree-only scope (v0.4). */
+function emptyCourseFacets(degrees: number) {
+  return {
+    kind: { degree: degrees, language_course: 0 },
+    exam: Object.fromEntries([...EXAMS, 'unknown'].map((e) => [e, 0])),
+    cefr_entry: Object.fromEntries([...BANDS, 'unknown'].map((b) => [b, 0])),
+    hours_per_week: { min: null, max: null, known: 0, unknown: 0 },
+  }
+}
+
+const COUNTY_NAMES: Record<string, string> = { D: 'Dublin', CO: 'Cork', G: 'Galway', LK: 'Limerick' }
+const courseValue = <K extends keyof CourseSummary['language_course']>(c: CourseSummary, key: K) => {
+  const v = c.language_course[key] as { value: unknown; status: string }
+  return v.status === 'unknown' ? null : v.value
+}
+
+/** The same predicates as north/api/programs.py for language courses. */
+function courseFacets(state: string | null) {
+  const items = FIXTURE_COURSES.filter((c) => state === null || c.campus.state === state)
+  const count = (match: (c: CourseSummary) => boolean) => items.filter(match).length
+  const cities = new Map<string, number>()
+  for (const c of items) if (c.campus.city) cities.set(c.campus.city, (cities.get(c.campus.city) ?? 0) + 1)
+  const perCounty = new Map<string, number>()
+  for (const c of FIXTURE_COURSES) if (c.campus.state) perCounty.set(c.campus.state, (perCounty.get(c.campus.state) ?? 0) + 1)
+  const hours = items.map((c) => courseValue(c, 'hours_per_week') as number | null).filter((n): n is number => n !== null)
+  return {
+    country: 'IE',
+    state,
+    kind_scope: 'language_course',
+    total: items.length,
+    states: [...perCounty]
+      .map(([code, n]) => ({ state: code, name: COUNTY_NAMES[code] ?? code, count: n }))
+      .sort((a, b) => collator.compare(a.name, b.name)),
+    cip_family: {},
+    control: Object.fromEntries(CONTROLS.map((c) => [c, 0])),
+    cities: [...cities].map(([city, n]) => ({ city, count: n })).sort((a, b) => b.count - a.count || collator.compare(a.city, b.city)),
+    stem: { eligible: 0, not_eligible: 0, unknown: items.length },
+    sevp: { confirmed: 0, unknown: items.length },
+    accredited: { true: 0, unknown: items.length },
+    has_graduates: { true: 0, false: 0 },
+    tuition: { min: null, max: null, known: 0, unknown: items.length, currency: 'EUR' },
+    kind: { degree: 0, language_course: items.length },
+    exam: Object.fromEntries([...EXAMS, 'unknown'].map((e) => [e, count((c) => (courseValue(c, 'exam') ?? 'unknown') === e)])),
+    cefr_entry: Object.fromEntries([...BANDS, 'unknown'].map((b) => [b, count((c) => (courseValue(c, 'cefr_entry') ?? 'unknown') === b)])),
+    hours_per_week: {
+      min: hours.length ? Math.min(...hours) : null,
+      max: hours.length ? Math.max(...hours) : null,
+      known: hours.length,
+      unknown: items.length - hours.length,
+    },
+  }
+}
+
+function listCourses(p: URLSearchParams): MockResponse {
+  const state = p.get('state')?.toUpperCase() ?? null
+  const cities = p.getAll('city')
+  const exams = p.getAll('exam')
+  if (exams.some((e) => !has(EXAMS, e))) return invalid('exam', 'invalid exam')
+  const max = p.get('cefr_entry_max')
+  if (!has(BANDS, max)) return invalid('cefr_entry_max', 'invalid band')
+  const hoursRaw = p.get('hours_min')
+  const hoursMin = hoursRaw === null ? undefined : Number(hoursRaw)
+  if (hoursMin !== undefined && (!Number.isFinite(hoursMin) || hoursMin < 0 || hoursMin > 80)) return invalid('hours_min', 'must be 0..80')
+  const limit = Number(p.get('limit') ?? 50)
+  const offset = Number(p.get('offset') ?? 0)
+  const allowed = max ? BANDS.slice(0, BANDS.indexOf(max as (typeof BANDS)[number]) + 1) : null
+  const matches = FIXTURE_COURSES.filter((c) => {
+    if (state !== null && c.campus.state !== state) return false
+    if (cities.length && (c.campus.city === null || !cities.includes(c.campus.city))) return false
+    const exam = courseValue(c, 'exam') as string | null
+    if (exams.length && (exam === null || !exams.includes(exam))) return false
+    const entry = courseValue(c, 'cefr_entry') as (typeof BANDS)[number] | null
+    if (allowed && entry !== null && !allowed.includes(entry)) return false // unknown entry kept (BR-02)
+    const hours = courseValue(c, 'hours_per_week') as number | null
+    if (hoursMin !== undefined && (hours === null || hours < hoursMin)) return false
+    return true
+  }).sort((a, b) => collator.compare(a.title, b.title) || collator.compare(a.institution.name, b.institution.name))
+  return { status: 200, body: { total: matches.length, limit, offset, items: matches.slice(offset, offset + limit) } }
+}
+
 function facets(state: string | null) {
   const items = FIXTURE_PROGRAMS.filter((item) => state === null || item.campus.state === state)
   const perState = new Map<string, number>()
@@ -122,6 +206,9 @@ function facets(state: string | null) {
     sevp: countBy(SEVP, sevpMatches),
     accredited: countBy(ACCREDITED, accreditedMatches),
     has_graduates: countBy(GRADUATES, graduatesMatch),
+    country: 'US',
+    kind_scope: null,
+    ...emptyCourseFacets(items.length),
     tuition: {
       min: amounts.length ? Math.min(...amounts) : null,
       max: amounts.length ? Math.max(...amounts) : null,
@@ -144,11 +231,24 @@ export function handleMockRequest(rawUrl: string): MockResponse | null {
 
   if (path === '/api/facets') {
     const state = p.get('state')
-    if (state !== null && !/^[A-Za-z]{2}$/.test(state)) return invalid('state', 'invalid state')
+    if (state !== null && !/^[A-Za-z]{1,3}$/.test(state)) return invalid('state', 'invalid state')
+    const country = p.get('country')?.toUpperCase() ?? null
+    if (country !== null && !has(COUNTRIES, country)) return invalid('country', 'unknown country')
+    if (!has(KINDS, p.get('kind'))) return invalid('kind', 'invalid kind')
+    if (country === 'IE') return { status: 200, body: courseFacets(state ? state.toUpperCase() : null) }
     return { status: 200, body: facets(state ? state.toUpperCase() : null) }
   }
 
   if (path === '/api/programs') {
+    const country = p.get('country')?.toUpperCase() ?? null
+    if (country !== null && !has(COUNTRIES, country)) return invalid('country', 'unknown country')
+    const kind = p.get('kind')
+    if (!has(KINDS, kind)) return invalid('kind', 'invalid kind')
+    if (country === 'IE') {
+      if (kind === 'degree') return { status: 200, body: { total: 0, limit: Number(p.get('limit') ?? 50), offset: 0, items: [] } }
+      return listCourses(p)
+    }
+    if (kind === 'language_course') return { status: 200, body: { total: 0, limit: Number(p.get('limit') ?? 50), offset: 0, items: [] } }
     const state = p.get('state')?.toUpperCase() ?? null
     const families = p.getAll('cip_family')
     if (families.some((f) => !has(CIP_FAMILIES, f))) return invalid('cip_family', 'invalid CIP family')
@@ -209,7 +309,8 @@ export function handleMockRequest(rawUrl: string): MockResponse | null {
 
   const detail = path.match(/^\/api\/programs\/([^/]+)$/)
   if (detail) {
-    const program = FIXTURE_DETAILS[decodeURIComponent(detail[1]!)]
+    const id = decodeURIComponent(detail[1]!)
+    const program = FIXTURE_DETAILS[id] ?? FIXTURE_COURSE_DETAILS[id]
     return program ? { status: 200, body: program } : { status: 404, body: { detail: 'program not found' } }
   }
 

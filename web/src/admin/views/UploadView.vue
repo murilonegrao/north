@@ -10,6 +10,8 @@ const file = ref<File | null>(null)
 const pct = ref<number | null>(null)
 const error = ref('')
 const jobId = ref<number | null>(null)
+// Each country has its own upload job (US: placed for a later load; IE: placed and loaded).
+const country = ref<'US' | 'IE'>('US')
 
 function choose(event: Event) {
   const input = event.target as HTMLInputElement
@@ -27,7 +29,7 @@ async function send() {
   error.value = ''
   pct.value = 0
   try {
-    const job = await uploadFile(file.value, (p) => (pct.value = p))
+    const job = await uploadFile(file.value, (p) => (pct.value = p), country.value)
     jobId.value = Number(job.id)
   } catch (e) {
     error.value = t('admin.upload.failed', { detail: errorText(e) })
@@ -36,13 +38,19 @@ async function send() {
   }
 }
 
-const ACCEPTED = [
-  'HD2024.zip, C2024_A.zip, IC2024_AY.zip, C2024_A_Dict.zip (IPEDS)',
-  'certified-school-list-MM-DD-YY.pdf (SEVP)',
-  'stemList2024.pdf (DHS)',
-  'DAPIP zip (InstitutionCampus.csv + AccreditationRecords.csv)',
-  'FY27_FMRs.xlsx (HUD)',
-]
+const ACCEPTED: Record<'US' | 'IE', string[]> = {
+  US: [
+    'HD2024.zip, C2024_A.zip, IC2024_AY.zip, C2024_A_Dict.zip (IPEDS)',
+    'certified-school-list-MM-DD-YY.pdf (SEVP)',
+    'stemList2024.pdf (DHS)',
+    'DAPIP zip (InstitutionCampus.csv + AccreditationRecords.csv)',
+    'FY27_FMRs.xlsx (HUD)',
+  ],
+  IE: [
+    'Interim-List-of-Eligible-Programmes-updated-DD-Month-YYYY.xlsx (ILEP)',
+    'trusted-ireland-he-list-of-eligible-programmes.xlsx (TrustEd Ireland)',
+  ],
+}
 </script>
 
 <template>
@@ -51,9 +59,16 @@ const ACCEPTED = [
     <p class="muted">{{ t('admin.upload.help') }}</p>
     <h2>{{ t('admin.upload.accepted') }}</h2>
     <ul class="mono accepted">
-      <li v-for="a in ACCEPTED" :key="a">{{ a }}</li>
+      <li v-for="a in ACCEPTED[country]" :key="a">{{ a }}</li>
     </ul>
     <form class="stack form-card" @submit.prevent="send">
+      <div>
+        <label for="upload-country">{{ t('admin.upload.country') }}</label>
+        <select id="upload-country" v-model="country">
+          <option value="US">{{ t('admin.upload.countries.US') }}</option>
+          <option value="IE">{{ t('admin.upload.countries.IE') }}</option>
+        </select>
+      </div>
       <div>
         <label for="upload-file">{{ t('admin.upload.choose') }}</label>
         <input id="upload-file" type="file" accept=".zip,.pdf,.xlsx" @change="choose" />

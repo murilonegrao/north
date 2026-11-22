@@ -50,10 +50,10 @@ export const post = <T>(path: string, body?: unknown) => call<T>('POST', path, b
 export const patch = <T>(path: string, body: unknown) => call<T>('PATCH', path, body)
 
 /** Raw-body upload with progress (fetch has no upload progress). */
-export function uploadFile(file: File, onProgress: (pct: number) => void): Promise<Record<string, unknown>> {
+export function uploadFile(file: File, onProgress: (pct: number) => void, country = 'US'): Promise<Record<string, unknown>> {
   return new Promise((resolve, reject) => {
     const xhr = new XMLHttpRequest()
-    xhr.open('PUT', `${ADMIN_API}/uploads?filename=${encodeURIComponent(file.name)}`)
+    xhr.open('PUT', `${ADMIN_API}/uploads?filename=${encodeURIComponent(file.name)}&country=${encodeURIComponent(country)}`)
     xhr.setRequestHeader('X-CSRF-Token', session.csrf)
     xhr.setRequestHeader('Content-Type', 'application/octet-stream')
     xhr.upload.onprogress = (e) => {

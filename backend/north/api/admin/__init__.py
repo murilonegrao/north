@@ -2,8 +2,8 @@
 
 from fastapi import APIRouter
 
-from north.api.admin import audit, auth, jobs, overview, uploads, users
+from north.api.admin import audit, auth, institutions, jobs, overview, uploads, users
 
 router = APIRouter(prefix="/api/admin", include_in_schema=False)
-for module in (auth, overview, jobs, uploads, users, audit):
+for module in (auth, overview, jobs, uploads, users, audit, institutions):
     router.include_router(module.router)

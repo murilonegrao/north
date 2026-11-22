@@ -28,7 +28,7 @@ The U.S. Department of Education's database of institutions and programs accredi
 | AccreditationRecords.csv | 65,682 | DapipId, AgencyId, AgencyName, ProgramId, ProgramName, SequentialId, InitialDateFlag, AccreditationDate, AccreditationStatus, ReviewDate, DepartmentDescription, AccreditationEndDate, EndingActionId |
 | AccreditationActions.csv | (26 MB) | DapipId, AgencyId, AgencyName, ProgramId, ProgramName, SequentialId, ActionDescription, ActionDate, JustificationDescription, JustificationOther, EndDate |
 
-**Personal data:** InstitutionCampus.csv has administrator names, phones and e-mails (AdminName, AdminPhone, AdminEmail). North doesn't need them. Drop these columns at ingestion and never store or serve them.
+**Personal data:** InstitutionCampus.csv has administrator names, phones and e-mails (AdminName, AdminPhone, AdminEmail). Since record 0009 they are kept privately in `institution_contacts` (per institution; a location counts for its parent), replaced at each DAPIP run for the institutions it covers, never served publicly and read only by an admin (audited). Address, GeneralPhone and Fax are still never read.
 
 ## Join keys
 

@@ -12,7 +12,8 @@
     "language": "语言",
     "main": "主导航",
     "programs": "项目",
-    "placement": "英语水平"
+    "placement": "英语水平",
+    "courses": "英语课程"
   },
   "theme": {
     "light": "浅色",
@@ -37,7 +38,8 @@
       },
       "course": {
         "title": "爱尔兰英语课程",
-        "text": "官方 Stamp 2 名单上的所有课程，可按城市、考试和等级筛选，并提示现行名单结束后失去资格的风险。"
+        "text": "官方 Stamp 2 名单上的所有课程，可按城市、考试和等级筛选，并提示现行名单结束后失去资格的风险。",
+        "cta": "浏览课程"
       },
       "degree": {
         "title": "学位项目",
@@ -283,7 +285,9 @@
       "admissions_other_field_accepted": "是否接受其他本科专业的申请人",
       "funding": "资助（助教/助研职位、奖学金、学费减免）",
       "cost_program_tuition": "本项目的学费",
-      "immigration_i20_issued_for_program": "学校是否为本项目签发 I-20（F-1 签证文件）"
+      "immigration_i20_issued_for_program": "学校是否为本项目签发 I-20（F-1 签证文件）",
+      "language_course_price": "课程价格",
+      "language_course_start_dates": "开课日期"
     },
     "sourcesIntro": "构建本页面所用的官方文件。",
     "sourceFile": "{version}，上传于 {date}，共 {rows} 行",
@@ -296,7 +300,9 @@
       "sevp_csl": "SEVP 认证学校名单",
       "dapip": "DAPIP 认证数据库",
       "scorecard_fos": "College Scorecard 学科数据",
-      "hud_fmr": "HUD 公平市场租金"
+      "hud_fmr": "HUD 公平市场租金",
+      "ie_ilep": "ILEP 临时合格课程清单（爱尔兰移民局）",
+      "ie_trusted": "TrustEd Ireland 合格课程清单（QQI）"
     },
     "notes": {
       "institution_wide_average": "全校研究生平均学费，并非本项目的价格。"
@@ -346,5 +352,77 @@
     "retake": "再测一次",
     "export": "导出我的结果（JSON）",
     "review": "查看答错的 {count} 道题"
+  },
+  "courses": {
+    "pageTitle": "爱尔兰英语课程 · North",
+    "pageDescription": "爱尔兰 Stamp 2 官方清单（ILEP 和 TrustEd Ireland）上的所有英语课程，可按城市、考试、级别和每周课时筛选，每项数据都注明来源。",
+    "eyebrow": "爱尔兰 · Stamp 2",
+    "title": "爱尔兰英语课程",
+    "intro": "可获得学生居留许可（Stamp 2）的官方清单上的所有英语课程：ILEP 和 TrustEd Ireland。价格和开课日期暂未列入清单。",
+    "stay": "每门课程至少 25 周，最多可获得 8 个月的 Stamp 2；最多三门课程。打工：学期内每周 20 小时，假期每周 40 小时。持 Stamp 2 不能携带家属。",
+    "count": "没有课程 | 1 门课程 | {n} 门课程",
+    "loading": "正在加载课程…",
+    "error": "无法加载课程。",
+    "empty": "没有符合这些筛选条件的课程。",
+    "filters": {
+      "heading": "筛选课程",
+      "toggle": "筛选（{n}）",
+      "mine": "不超过我的级别",
+      "mineHint": "使用本浏览器中您最近一次的分级测试结果：{level}。清单上未写明入学级别的课程不会显示。",
+      "mineNone": "参加分级测试即可按您的级别筛选。",
+      "mineTest": "参加测试",
+      "city": "城市",
+      "anyCity": "任意城市",
+      "exam": "考试",
+      "anyExam": "任意考试",
+      "level": "入学级别",
+      "anyLevel": "任意级别",
+      "levelOption": "{band} 或以下",
+      "levelUnknown": "没有入学级别未知的课程。 | 包含 1 门入学级别未知的课程，已标注为未知。 | 包含 {n} 门入学级别未知的课程，已标注为未知。",
+      "hours": "每周课时",
+      "anyHours": "不限",
+      "hoursOption": "{n} 小时或以上",
+      "clear": "清除筛选"
+    },
+    "fields": {
+      "exam": "考试",
+      "cefr": "级别（CEFR）",
+      "cefr_entry": "入学级别（CEFR）",
+      "cefr_exit": "结业级别（CEFR）",
+      "weeks": "时长",
+      "hours": "每周课时",
+      "hours_per_week": "每周课时",
+      "price": "价格",
+      "startDates": "开课日期",
+      "authorization": "Stamp 2 清单",
+      "provider": "学校",
+      "county": "郡"
+    },
+    "values": {
+      "unknown": "未知",
+      "cityUnknown": "城市未知",
+      "cefr": "{entry} → {exit}",
+      "weeks": "{n} 周",
+      "hours": "{n} 小时",
+      "examOther": "其他考试",
+      "notFound": "未在清单中找到"
+    },
+    "notes": {
+      "ie_ilep_end": "ILEP 将在 TrustEd 第二轮审批后结束（2026 年底）。付款前请确认该课程已转入 TrustEd Ireland。"
+    },
+    "identifiers": {
+      "ie_provider_no": "机构编号",
+      "ie_ilep_ref": "ILEP 编号",
+      "ie_trusted_ref": "TrustEd 编号"
+    },
+    "detail": {
+      "back": "所有英语课程",
+      "pageTitle": "{title} · {provider} · North",
+      "notFound": "未找到课程",
+      "notCollectedIntro": "官方清单不包含这些信息。它们来自学校自己的网站，尚未收集。",
+      "sections": {
+        "lists": "来自官方清单"
+      }
+    }
   }
 }

@@ -12,7 +12,8 @@
     "setup": "Secure your account",
     "forgot": "Forgot password",
     "reset": "New password",
-    "verifyEmail": "Confirm email"
+    "verifyEmail": "Confirm email",
+    "providers": "Providers"
   },
   "nav": {
     "main": "Admin",
@@ -24,7 +25,8 @@
     "account": "Account",
     "logout": "Sign out",
     "site": "Public site",
-    "language": "Language"
+    "language": "Language",
+    "providers": "Providers"
   },
   "common": {
     "loading": "Loading…",
@@ -157,7 +159,12 @@
     "done": "Uploaded. Job #{id} is placing the file.",
     "tooBig": "Larger than {mb} MiB.",
     "failed": "Upload failed: {detail}",
-    "follow": "Follow the job"
+    "follow": "Follow the job",
+    "country": "Country",
+    "countries": {
+      "US": "United States",
+      "IE": "Ireland (loaded as soon as it is recognised)"
+    }
   },
   "users": {
     "heading": "Users",
@@ -266,5 +273,19 @@
     "done": "{email} is confirmed. It now receives password reset links and notices.",
     "invalid": "This link is invalid, was already used, or has expired. Ask for another on the account page.",
     "toAccount": "Go to the account"
+  },
+  "providers": {
+    "heading": "Providers and contacts",
+    "help": "Contacts printed in the official files (ILEP, TrustEd Ireland, DAPIP, IPEDS), kept only from the latest file of each source. Private: never shown on the public site. Each time you open an institution's contacts the audit log records it.",
+    "countries": {
+      "IE": "Ireland"
+    },
+    "none": "No institution loaded for this country.",
+    "name": "Institution",
+    "identifiers": "Identifiers",
+    "programs": "Programs",
+    "contacts": "Contacts",
+    "show": "Show contacts ({n})",
+    "hide": "Hide"
   }
 }

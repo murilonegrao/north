@@ -138,3 +138,28 @@ describe('email links', () => {
     expect(await adminGuard(route('admin-overview'))).toBe('/admin/login')
   })
 })
+
+describe('providers and contacts (record 0009)', () => {
+  it('loads an institution\'s contacts only on request', async () => {
+    const fetchMock = stubApi({
+      'GET /institutions?country=IE': () => [200, [
+        { id: 'ie-9901', name: 'Example English Academy', subdivision: 'IE-D', programs: 3, contacts: 1, identifiers: { ie_provider_no: '9901' } },
+      ]],
+      'GET /institutions/ie-9901/contacts': () => [200, { institution: { id: 'ie-9901', name: 'Example English Academy' }, contacts: [
+        { name: 'Alex Placeholder', title: null, email: 'alex.placeholder@example.com', phone: '+353 1 000 0000', source: 'ie_ilep', file_version: '2026-09-22', seen_at: '2026-11-22T10:00:00Z' },
+      ] }],
+    })
+    const { loadAdminMessages } = await import('../src/admin/i18n')
+    await loadAdminMessages()
+    const ProvidersView = (await import('../src/admin/views/ProvidersView.vue')).default
+    const wrapper = mount(ProvidersView, { global: { plugins: [i18n] } })
+    await flushPromises()
+    expect(wrapper.text()).toContain('Example English Academy')
+    expect(wrapper.text()).not.toContain('alex.placeholder@example.com')
+    expect(fetchMock).toHaveBeenCalledTimes(1)
+    await wrapper.get('[data-test="show-ie-9901"]').trigger('click')
+    await flushPromises()
+    expect(wrapper.get('[data-test="contacts-ie-9901"]').text()).toContain('alex.placeholder@example.com')
+    expect(fetchMock).toHaveBeenCalledTimes(2)
+  })
+})

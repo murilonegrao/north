@@ -50,8 +50,8 @@ def test_list_rejects_bad_parameters(no_db: TestClient, qs: str) -> None:
     assert no_db.get(f"/api/programs?{qs}").status_code == 422
 
 
-@pytest.mark.parametrize("pid", ["abc", "900001-11070", "900001_110701", "900001-110701x",
-                                 "900001-110701%00", "%00"])
+@pytest.mark.parametrize("pid", ["abc", "900001_110701", "900001-110701%00", "%00", "IE-ILEP-1",
+                                 "a-b-c-d-e-f-g", "x" * 13 + "-1", "-900001", "900001-"])
 def test_program_id_pattern(no_db: TestClient, pid: str) -> None:
     assert no_db.get(f"/api/programs/{pid}").status_code == 422
 

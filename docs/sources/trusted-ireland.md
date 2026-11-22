@@ -29,7 +29,7 @@ As in `ilep.md`. Differences:
 | Programme Ref: | `TE` + 4-digit provider number + `/` + 4-digit programme number. All 6,784 rows match. 5 references are duplicated (10 rows), e.g. `TE0133/0267` is used for two different MTU programmes. Unique in 6,779 of 6,784 rows. |
 | Provider code | 40 codes. `TE0063` covers "University of Galway" and "University of Galway English Language Centre"; `TE0101` covers SETU Carlow and Wexford campuses; TUS has 5 codes (`TE0376`–`TE0380`). So the code points to a provider entity, sometimes split by campus. Not a campus identifier. |
 | Provider | 38 names, often a campus (e.g. "Munster Technological University - Kerry Campus"). |
-| **Contact Email, Telephone, Name** | **Dropped at ingestion** (personal data). Filled in 6,784 / 6,783 / 6,784 rows. |
+| **Contact Email, Telephone, Name** | Kept privately in `institution_contacts` (record 0009), latest file only, admin-only and audited. Filled in 6,784 / 6,783 / 6,784 rows. |
 | Programme Type | 8 spellings, which normalise to: HE major award 6,658, English Language 54, HE non-major award 53, Foundation 19 |
 | NFQ Level | 9: 2,719; 8: 2,533; 10: 638; 7: 575; 6: 259; n/a 54; 5: 4. Two broken cells: one Excel date (`2026-09-08`, Pharmacy BSc/MPharm) and one empty. |
 | Duration | ECTS in 5,714 rows (240: 1,812; 90: 1,636; 60: 815; 180: 787; 120: 418), "Research" 197, none / "Not applicable" 748, weeks 54 (English) |

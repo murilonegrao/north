@@ -17,6 +17,7 @@ from sqlalchemy.orm import Session
 from north.domain.countries.us.cip import cip_family, normalize_cip
 from north.domain.countries.us.stem import program_flags
 from north.domain.verified import Status
+from north.ingest.contacts import Person, replace_contacts
 from north.ingest.us.common import (
     COUNTRY,
     RunContext,
@@ -53,10 +54,12 @@ DEGREE = "Master's"
 # students, not this program's price").
 NOTE_TUITION = "institution_wide_average"
 
-# Only these HD columns are read; the file also names the chief administrator (CHFNM), which
-# North never stores.
+# HD columns read for the institution. The chief administrator (CHFNM, CHFTITLE) and the general
+# phone (GENTELE) go only to the private institution_contacts table (record 0009), when the
+# uploaded file has those columns.
 HD_COLUMNS = ("UNITID", "INSTNM", "CITY", "STABBR", "CONTROL", "OPEID", "WEBADDR", "HLOFFER",
               "SECTOR", "CYACTIVE", "COUNTYCD", "COUNTYNM", "LATITUDE", "LONGITUD")
+CONTACT_COLUMNS = ("CHFNM", "CHFTITLE", "GENTELE")
 
 
 def find_file(directory: Path, pattern: str) -> Path:
@@ -183,6 +186,8 @@ def ingest_hd(session: Session, path: Path, state: str = "TX") -> StepResult:
 
     def work(ctx: RunContext) -> None:
         ensure_subdivision(session, state)
+        people: list[Person] = []
+        covered: list[str] = []
         for raw in read_csv_rows(path):
             ctx.counts["rows"] += 1
             r = _project(raw, HD_COLUMNS)
@@ -196,7 +201,8 @@ def ingest_hd(session: Session, path: Path, state: str = "TX") -> StepResult:
                 continue
             inst = session.get(Institution, unitid)
             if inst is None:
-                inst = Institution(id=unitid, subdivision_id=subdivision_id(state),
+                inst = Institution(id=unitid, country_code=COUNTRY,
+                                   subdivision_id=subdivision_id(state),
                                    name=r["INSTNM"], carnegie_classification={
                                        "value": None, "status": str(Status.UNKNOWN)})
                 session.add(inst)
@@ -210,6 +216,9 @@ def ingest_hd(session: Session, path: Path, state: str = "TX") -> StepResult:
             _set_website(ctx, inst, _website(r["WEBADDR"]), f"{p}.website")
             ctx.set_attr(inst, "subdivision_id", subdivision_id(state), f"{p}.subdivision_id")
             ctx.counts["institutions"] += 1
+            covered.append(unitid)
+            people.append(Person(unitid, name=raw.get("CHFNM", ""), title=raw.get("CHFTITLE", ""),
+                                 phone=raw.get("GENTELE", "")))
             _identifier(ctx, inst, "unitid", unitid)
             opeid = r["OPEID"].strip()
             if re.fullmatch(r"\d{8}", opeid):
@@ -233,6 +242,8 @@ def ingest_hd(session: Session, path: Path, state: str = "TX") -> StepResult:
                 campus.latitude = lat
             if campus.longitude is None or float(campus.longitude) != lon:
                 campus.longitude = lon
+        replace_contacts(session, source="ipeds_hd", source_file_id=ctx.source_file.id,
+                         people=people, institution_ids=covered)
         session.flush()
 
     return run_step(session, source="ipeds_hd", files=[path], file_version=version,

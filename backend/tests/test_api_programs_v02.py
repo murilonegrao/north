@@ -172,7 +172,9 @@ def test_pages_are_stable(client: TestClient) -> None:
 def test_facets(client: TestClient) -> None:
     f = client.get("/api/facets?state=TX").json()
     assert f == {
+        "country": "US",
         "state": "TX",
+        "kind_scope": None,
         "total": 6,
         "states": [{"state": "TX", "name": "Texas", "count": 6}],
         "cip_family": {"11": 3, "30.70": 1, "30.71": 1, "52.12": 1},
@@ -184,6 +186,11 @@ def test_facets(client: TestClient) -> None:
         "accredited": {"true": 4, "unknown": 2},
         "has_graduates": {"true": 5, "false": 1},
         "tuition": {"min": 12000, "max": 30000, "known": 4, "unknown": 2, "currency": "USD"},
+        "kind": {"degree": 6, "language_course": 0},
+        "exam": {e: 0 for e in ("ielts", "cambridge", "trinity", "languagecert", "toefl", "pte",
+                                "duolingo", "tie", "other", "unknown")},
+        "cefr_entry": {b: 0 for b in ("A0", "A1", "A2", "B1", "B2", "C1", "C2", "unknown")},
+        "hours_per_week": {"min": None, "max": None, "known": 0, "unknown": 0},
     }
 
 

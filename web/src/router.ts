@@ -31,6 +31,19 @@ export const router = createRouter({
       meta: { titleKey: 'placement.pageTitle', descriptionKey: 'placement.pageDescription' },
     },
     {
+      // English courses in Ireland (record 0008, slice E2): lazy chunk, list and detail.
+      path: `/:lang(${prefixes})/english-courses`,
+      name: 'english-courses',
+      component: () => import('./views/EnglishCoursesView.vue'),
+      meta: { titleKey: 'courses.pageTitle', descriptionKey: 'courses.pageDescription' },
+    },
+    {
+      path: `/:lang(${prefixes})/english-courses/:id`,
+      name: 'english-course',
+      component: () => import('./views/EnglishCourseDetailView.vue'),
+      meta: { titleKey: 'courses.pageTitle', descriptionKey: 'courses.pageDescription' },
+    },
+    {
       // Stable URL per program (NFR-15): the id is `<unitid>-<cip6 without dot>`.
       path: `/:lang(${prefixes})/programs/:id`,
       name: 'program',
@@ -53,6 +66,8 @@ export const router = createRouter({
         { path: 'jobs/:id(\\d+)', name: 'admin-job', component: () => import('./admin/views/JobView.vue'), meta: { titleKey: 'admin.title.job' } },
         { path: 'upload', name: 'admin-upload', component: () => import('./admin/views/UploadView.vue'), meta: { titleKey: 'admin.title.upload', minRole: 'curator' } },
         { path: 'users', name: 'admin-users', component: () => import('./admin/views/UsersView.vue'), meta: { titleKey: 'admin.title.users', minRole: 'admin' } },
+        // Private contacts of institutions (record 0009): admin only, each read audited.
+        { path: 'providers', name: 'admin-providers', component: () => import('./admin/views/ProvidersView.vue'), meta: { titleKey: 'admin.title.providers', minRole: 'admin' } },
         { path: 'audit', name: 'admin-audit', component: () => import('./admin/views/AuditView.vue'), meta: { titleKey: 'admin.title.audit', minRole: 'admin' } },
         { path: 'account', name: 'admin-account', component: () => import('./admin/views/AccountView.vue'), meta: { titleKey: 'admin.title.account' } },
         { path: ':rest(.*)*', redirect: '/admin' },

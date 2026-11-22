@@ -115,7 +115,7 @@ Annual. Each component comes out as a provisional version and is later revised (
 | https://nces.ed.gov/ipeds/datacenter/data/C2024_A_Dict.zip | `spikes/_raw/ipeds/C2024_A_Dict.zip` (CIP titles; the loader checks that `AWLEVEL` 7 is "Master's degree") |
 | https://nces.ed.gov/ipeds/datacenter/data/IC2023_AY.zip | `spikes/_raw/ipeds/IC2023_AY.zip` |
 
-The loader (`backend/north/ingest/us/ipeds.py`) picks the newest year of each file in the directory, so newer files can be dropped next to the old ones. It reads only the HD columns it needs; `CHFNM` (the chief administrator's name) is never read.
+The loader (`backend/north/ingest/us/ipeds.py`) picks the newest year of each file in the directory, so newer files can be dropped next to the old ones. It reads only the HD columns it needs. Since record 0009, `CHFNM` (chief administrator), `CHFTITLE` and `GENTELE` (general phone) go only to the private `institution_contacts` table when the file has them (admin-only, audited, replaced at each HD run). Institutional URLs other than `WEBADDR` (ADMINURL, FAIDURL, APPLURL) are not stored yet.
 
 ## Other award levels
 
