@@ -24,11 +24,16 @@ RUN uv sync --frozen --no-dev --no-install-project
 COPY backend/alembic.ini ./
 COPY backend/north ./north
 RUN uv sync --frozen --no-dev
+# Reference files the loaders read (CIP -> ISCED-F map, DHS STEM list parsed from the PDF);
+# the worker runs "Download and load" from the admin without any file copied by hand.
+COPY data/reference ./data/reference
 COPY --from=web /web/dist ./web/dist
 ENV PATH="/app/.venv/bin:$PATH"
-RUN useradd --uid 10001 --no-create-home --shell /usr/sbin/nologin north
+RUN useradd --uid 10001 --no-create-home --shell /usr/sbin/nologin north \
+ && mkdir -p /data/raw /data/incoming && chown -R north:north /data
 USER north
 EXPOSE 8000
 HEALTHCHECK --interval=30s --timeout=5s --retries=3 \
   CMD python -c "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/api/health', timeout=4)"
+# The worker uses this image too: python -m north.jobs.worker (docs/design/admin-and-sync.md).
 CMD ["uvicorn", "north.api.app:app", "--host", "0.0.0.0", "--port", "8000", "--no-access-log"]

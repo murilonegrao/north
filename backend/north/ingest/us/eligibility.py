@@ -61,14 +61,16 @@ def _strip(v: dict[str, Any]) -> dict[str, Any]:
 
 
 def recompute_stem_eligibilities(session: Session, *, author: str,
-                                 counts: Counter[str] | None = None) -> int:
-    """Recompute the eligibility of every US program under the current rule version."""
+                                 counts: Counter[str] | None = None,
+                                 subdivision_id: str | None = None) -> int:
+    """Recompute the eligibility of every US program (or those of one subdivision) under the
+    current rule version."""
     rule = current_rule(session)
     if rule is None:
         return 0
     stem = load_stem_rule(session, rule)
     today = dt.date.today().isoformat()
-    rows = session.execute(
+    stmt = (
         select(Program, Classification.code)
         .join(ProgramClassification, ProgramClassification.program_id == Program.id)
         .join(Classification, Classification.id == ProgramClassification.classification_id)
@@ -77,6 +79,9 @@ def recompute_stem_eligibilities(session: Session, *, author: str,
         .join(Subdivision, Subdivision.id == Institution.subdivision_id)
         .where(ProgramClassification.is_primary.is_(True),
                Classification.scheme == "cip2020", Subdivision.country_code == COUNTRY))
+    if subdivision_id is not None:
+        stmt = stmt.where(Subdivision.id == subdivision_id)
+    rows = session.execute(stmt)
     n = 0
     for prog, cip in rows:
         claimed = (prog.immigration.get("stem_opt_claimed_by_program") or {}).get("value")

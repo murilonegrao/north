@@ -1,0 +1,12 @@
+# Raw official files (immutable, every version kept) and the upload inbox.
+#   /data/raw       written by the worker only
+#   /data/incoming  written by the web pod (mounted alone through subPath), read by the worker
+# RWO is enough: k3s runs both pods on the same node (local-path).
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: north-raw
+spec:
+  accessModes: [ReadWriteOnce]
+  resources:
+    requests: {storage: 5Gi}

@@ -14,9 +14,13 @@ const programsPath = computed(() => `/${prefix.value}/programs`)
 const route = useRoute()
 const inPrograms = computed(() => route.path.startsWith(programsPath.value))
 const themeLabel = computed(() => (theme.value === 'dark' ? t('theme.toLight') : t('theme.toDark')))
+// The admin area has its own layout (AdminShell): no public header, notice or footer.
+const isAdmin = computed(() => route.meta.admin === true)
 </script>
 
 <template>
+  <RouterView v-if="isAdmin" />
+  <template v-else>
   <a class="skip-link" href="#main">{{ t('nav.skip') }}</a>
   <header class="site-header">
     <div class="container header-row">
@@ -51,6 +55,7 @@ const themeLabel = computed(() => (theme.value === 'dark' ? t('theme.toLight') :
       <span>{{ t('footer.license') }}</span>
     </div>
   </footer>
+  </template>
 </template>
 
 <style scoped>

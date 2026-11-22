@@ -1,0 +1,23 @@
+# Changes to the existing north Deployment (k3s-gitops/manifests/north/deployment.yaml).
+# Merge by hand, or list this file under "patches:" in the kustomization.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: north
+spec:
+  template:
+    spec:
+      securityContext:
+        fsGroup: 10001
+      containers:
+        - name: north
+          env:
+            # Uploads go only here; the worker moves them into /data/raw.
+            - {name: NORTH_INCOMING_DIR, value: /data/incoming}
+            # Cloudflare sets this header; login throttling and the audit log use it.
+            - {name: NORTH_CLIENT_IP_HEADER, value: cf-connecting-ip}
+          volumeMounts:
+            - {name: incoming, mountPath: /data/incoming, subPath: incoming}
+      volumes:
+        - name: incoming
+          persistentVolumeClaim: {claimName: north-raw}

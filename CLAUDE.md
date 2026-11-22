@@ -27,6 +27,7 @@ North maps US master's programs for international students who bring their famil
 
 - `backend/north/domain/` is pure Python: no imports from `api`, `repository`, `ingest` or `extract`, no I/O. Country-specific rules live in `domain/countries/<country>/` behind a common interface; the core never names a country. `backend/tests/test_architecture.py` enforces the import rule.
 - `backend/north/ingest/<country>/` reads **uploaded official files** (FR-26); government sites block scripts, so automatic download is optional.
+- Admin area (record 0006): `backend/north/auth/` (passwords, TOTP, sessions), `backend/north/jobs/` (Postgres queue, worker `python -m north.jobs.worker`, registry), `backend/north/api/admin/`, `web/src/admin/` (lazy chunk, en + pt-BR only). Country job kinds live in `ingest/<country>/jobs.py`.
 - The web app is Vue 3 + TypeScript. CSS uses logical properties (`margin-inline`, not `margin-left`) so right-to-left languages work.
 - Visual identity is **A Forja** (record 0003): one accent, ember `#D96C2C`; tokens in `web/src/styles/tokens.css`. Do not add colors; fix the hierarchy instead.
 

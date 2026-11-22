@@ -1,0 +1,219 @@
+{
+  "_meta": {
+    "machine_translated": true
+  },
+  "brand": "North admin",
+  "title": {
+    "overview": "Visão geral",
+    "jobs": "Jobs",
+    "job": "Job",
+    "upload": "Upload",
+    "users": "Usuários",
+    "audit": "Auditoria",
+    "account": "Conta",
+    "login": "Entrar",
+    "setup": "Proteja sua conta"
+  },
+  "nav": {
+    "main": "Admin",
+    "overview": "Visão geral",
+    "jobs": "Jobs",
+    "upload": "Upload",
+    "users": "Usuários",
+    "audit": "Auditoria",
+    "account": "Conta",
+    "logout": "Sair",
+    "site": "Site público",
+    "language": "Idioma"
+  },
+  "common": {
+    "loading": "Carregando…",
+    "error": "Algo deu errado. Tente de novo.",
+    "retry": "Tentar de novo",
+    "forbidden": "Seu papel não permite isso.",
+    "never": "nunca",
+    "none": "—",
+    "yes": "sim",
+    "no": "não"
+  },
+  "login": {
+    "heading": "Entrar",
+    "username": "Usuário",
+    "password": "Senha",
+    "submit": "Entrar",
+    "totpHeading": "Código do autenticador",
+    "totpHelp": "Digite o código de 6 dígitos do seu app autenticador.",
+    "code": "Código",
+    "verify": "Verificar",
+    "invalid": "Usuário ou senha incorretos.",
+    "invalidCode": "Código errado ou já usado.",
+    "throttled": "Tentativas demais. Espere 15 minutos e tente de novo.",
+    "restart": "Recomeçar"
+  },
+  "setup": {
+    "passwordHeading": "Escolha uma nova senha",
+    "passwordHelp": "Pelo menos 12 caracteres. Uma frase longa é mais fácil de lembrar e mais difícil de adivinhar.",
+    "current": "Senha atual",
+    "new": "Nova senha",
+    "confirm": "Nova senha de novo",
+    "mismatch": "As duas novas senhas são diferentes.",
+    "wrongCurrent": "A senha atual está errada.",
+    "save": "Salvar senha",
+    "saved": "Senha alterada. As outras sessões foram encerradas.",
+    "totpHeading": "Configure um app autenticador",
+    "totpHelp": "Leia o código com um app autenticador (Aegis, Bitwarden, 1Password, Google Authenticator…) e digite o código de 6 dígitos que ele mostrar.",
+    "secret": "Ou digite esta chave",
+    "start": "Mostrar o código",
+    "confirm2": "Confirmar",
+    "totpDone": "App autenticador configurado. As outras sessões foram encerradas."
+  },
+  "status": {
+    "queued": "na fila",
+    "running": "rodando",
+    "succeeded": "concluído",
+    "attention": "precisa de atenção",
+    "failed": "falhou",
+    "cancelled": "cancelado"
+  },
+  "overview": {
+    "heading": "Visão geral",
+    "worker": "Worker",
+    "workerUp": "conectado",
+    "workerDown": "desconectado",
+    "workerDownHelp": "Os jobs esperam na fila até o worker estar rodando.",
+    "lastHeartbeat": "último sinal {at}",
+    "attention": "{n} job(s) falharam ou precisam de atenção",
+    "country": "Dados: {country}",
+    "total": "Total",
+    "states": "estados",
+    "institutions": "Instituições",
+    "accredited": "Acreditadas",
+    "sevp": "Campi SEVP",
+    "programs": "Programas",
+    "stem": "STEM OPT",
+    "tuition": "Com anuidade",
+    "files": "Arquivos em uso",
+    "source": "Fonte",
+    "version": "Versão",
+    "scopes": "Estados",
+    "noData": "Nenhum dado carregado ainda. Rode “Baixar e carregar”.",
+    "schedules": "Agendamentos",
+    "recentJobs": "Jobs recentes",
+    "allJobs": "Todos os jobs",
+    "tasks": "Tarefas de reconciliação abertas"
+  },
+  "schedule": {
+    "every": "a cada {h} h",
+    "next": "próximo {at}",
+    "paused": "pausado",
+    "pause": "Pausar",
+    "resume": "Retomar",
+    "runNow": "Rodar agora"
+  },
+  "jobs": {
+    "heading": "Jobs",
+    "run": "Rodar um job",
+    "start": "Iniciar",
+    "started": "Job #{id} na fila.",
+    "alreadyActive": "O job #{id} deste tipo já está na fila ou rodando.",
+    "kind": "Job",
+    "status": "Estado",
+    "by": "Por",
+    "created": "Criado",
+    "duration": "Duração",
+    "scheduler": "agendamento",
+    "empty": "Nenhum job ainda.",
+    "cancel": "Cancelar",
+    "more": "Jobs mais antigos",
+    "filter": "Estado",
+    "all": "todos",
+    "notAllowed": "exige o papel {role}"
+  },
+  "job": {
+    "heading": "Job #{id}",
+    "log": "Log",
+    "result": "Resultado",
+    "error": "Erro",
+    "noLog": "Nenhuma saída ainda.",
+    "back": "Todos os jobs",
+    "cancelRequested": "Cancelamento pedido; ele para no próximo ponto de verificação.",
+    "params": "Parâmetros",
+    "follow": "Atualizando a cada 2 segundos",
+    "lines": "{n} linhas"
+  },
+  "upload": {
+    "heading": "Enviar um arquivo oficial",
+    "help": "Para fontes que bloqueiam download, ou um arquivo que você já tem. O servidor reconhece o arquivo pelo nome e pelo conteúdo e o guarda junto dos baixados; depois rode “Baixar e carregar” sem download.",
+    "accepted": "Arquivos aceitos",
+    "choose": "Escolher arquivo",
+    "send": "Enviar",
+    "sending": "Enviando… {pct}%",
+    "done": "Enviado. O job #{id} está guardando o arquivo.",
+    "tooBig": "Maior que {mb} MiB.",
+    "failed": "Falha no envio: {detail}",
+    "follow": "Acompanhar o job"
+  },
+  "users": {
+    "heading": "Usuários",
+    "create": "Novo usuário",
+    "username": "Usuário",
+    "role": "Papel",
+    "tempPassword": "Senha temporária",
+    "createBtn": "Criar",
+    "created": "Usuário {name} criado. Passe a senha temporária por um canal privado; o primeiro acesso pede uma nova senha e um app autenticador.",
+    "disable": "Desativar",
+    "enable": "Ativar",
+    "resetPassword": "Redefinir senha",
+    "resetTotp": "Redefinir autenticador",
+    "resetDone": "Feito. As sessões da pessoa foram encerradas.",
+    "newTemp": "Nova senha temporária para {name}",
+    "you": "você",
+    "totp": "autenticador",
+    "disabled": "desativado",
+    "lastLogin": "Último acesso",
+    "roles": {
+      "admin": "admin",
+      "curator": "curador",
+      "viewer": "leitor"
+    },
+    "roleHelp": "leitor só lê; curador também envia arquivos e roda jobs; admin também gerencia usuários e agendamentos e lê a auditoria."
+  },
+  "audit": {
+    "heading": "Auditoria",
+    "at": "Quando",
+    "actor": "Quem",
+    "action": "Ação",
+    "target": "Alvo",
+    "detail": "Detalhe",
+    "more": "Entradas mais antigas"
+  },
+  "account": {
+    "heading": "Conta",
+    "signedInAs": "Conectado como {name} ({role})",
+    "password": "Senha",
+    "totp": "App autenticador",
+    "replaceTotp": "Trocar o app autenticador"
+  },
+  "kinds": {
+    "us_fetch": {
+      "title": "Baixar os arquivos oficiais",
+      "description": "Baixa IPEDS, SEVP, a lista STEM do DHS e o DAPIP para o armazenamento bruto. Nada muda no banco."
+    },
+    "us_sync": {
+      "title": "Baixar e carregar",
+      "description": "Baixa (opcional) e carrega todas as fontes dos estados escolhidos. Arquivos já carregados para um estado são pulados."
+    },
+    "us_recompute": {
+      "title": "Recalcular a elegibilidade STEM OPT",
+      "description": "Recalcula us.stem_opt de todos os programas pela regra vigente."
+    },
+    "us_accept_upload": {
+      "title": "Aceitar um arquivo enviado",
+      "description": "Move um arquivo oficial enviado para o armazenamento bruto."
+    }
+  },
+  "params": {
+    "states": "Siglas USPS separadas por vírgula, ou ALL",
+    "fetch": "baixar antes"
+  }
+}

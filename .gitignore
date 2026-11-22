@@ -20,6 +20,9 @@ web/dist/
 .pytest_cache/
 .ruff_cache/
 
+# local scratch: runbooks, dev data (never committed)
+tmp/
+
 # local editor / agent files
 .claude/settings.local.json
 .DS_Store

@@ -1,0 +1,58 @@
+# The worker: claims jobs queued from the admin, runs the weekly schedule, downloads official
+# files. One replica, Recreate (never two workers during a deploy). SIGTERM cancels the running
+# job at its next checkpoint; the grace period gives it time to record that.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: north-worker
+spec:
+  replicas: 1
+  strategy: {type: Recreate}
+  selector:
+    matchLabels: {app: north-worker}
+  template:
+    metadata:
+      labels: {app: north-worker, north-egress: "true"}
+    spec:
+      terminationGracePeriodSeconds: 60
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 10001
+        runAsGroup: 10001
+        fsGroup: 10001
+        seccompProfile: {type: RuntimeDefault}
+      containers:
+        - name: worker
+          image: ghcr.io/murilonegrao/north
+          command: [python, -m, north.jobs.worker]
+          env:
+            - {name: DB_HOST, valueFrom: {secretKeyRef: {name: banco-app, key: endpoint}}}
+            - {name: DB_PORT, valueFrom: {secretKeyRef: {name: banco-app, key: port}}}
+            - {name: DB_USER, valueFrom: {secretKeyRef: {name: banco-app, key: username}}}
+            - {name: DB_PASS, valueFrom: {secretKeyRef: {name: banco-app, key: password}}}
+            - name: NORTH_DATABASE_URL
+              value: postgresql+psycopg://$(DB_USER):$(DB_PASS)@$(DB_HOST):$(DB_PORT)/north?sslmode=verify-full&sslrootcert=/run/secrets/ca-banco.crt
+            - {name: NORTH_RAW_DIR, value: /data/raw}
+            - {name: NORTH_INCOMING_DIR, value: /data/incoming}
+            # API keys for API sources (optional: a missing key skips that source).
+            - {name: NORTH_API_DATA_GOV_KEY, valueFrom: {secretKeyRef: {name: north-api-keys, key: NORTH_API_DATA_GOV_KEY, optional: true}}}
+            - {name: HUD_API_TOKEN, valueFrom: {secretKeyRef: {name: north-api-keys, key: HUD_API_TOKEN, optional: true}}}
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities: {drop: [ALL]}
+          resources:
+            requests: {cpu: 100m, memory: 256Mi}
+            # The SEVP PDF parse is the peak; the web pod is unaffected if this one is killed.
+            limits: {memory: 2Gi}
+          volumeMounts:
+            - {name: data, mountPath: /data}
+            - {name: tmp, mountPath: /tmp}
+            - {name: ca-banco, mountPath: /run/secrets/ca-banco.crt, subPath: ca-banco.crt, readOnly: true}
+      volumes:
+        - name: data
+          persistentVolumeClaim: {claimName: north-raw}
+        - name: tmp
+          emptyDir: {sizeLimit: 1Gi}
+        - name: ca-banco
+          configMap: {name: ca-banco}

@@ -12,6 +12,7 @@ Name-to-name matching is a US-specific exception and stays in this module.
 from __future__ import annotations
 
 import difflib
+import functools
 import re
 import unicodedata
 from collections import defaultdict
@@ -106,6 +107,15 @@ def candidates_for(names: set[str], city: str, sevp: Iterable[tuple[SevpCampus, 
             for score, same, c in scored[:limit]]
 
 
+@functools.lru_cache(maxsize=2)
+def _parse_pdf_once(path: str, size: int, mtime_ns: int) -> tuple[tuple[SevpCampus, ...],
+                                                                   str | None]:
+    """The PDF parse takes about two minutes; a national load uses it once per state, so it is
+    kept for the process, keyed by the file's path, size and modification time."""
+    rows, updated = parse_pdf(Path(path))
+    return tuple(rows), updated
+
+
 def ingest_sevp(session: Session, path: Path, state: str = "TX") -> StepResult:
     """``path`` is the official PDF, or the CSV derived from it by the spike parser."""
     state = state.upper()
@@ -114,7 +124,9 @@ def ingest_sevp(session: Session, path: Path, state: str = "TX") -> StepResult:
 
     def work(ctx: RunContext) -> None:
         if is_pdf:
-            rows, updated = parse_pdf(path)
+            st = path.stat()
+            rows, updated = _parse_pdf_once(str(path.resolve()), st.st_size, st.st_mtime_ns)
+            rows = list(rows)
             if updated and updated != ctx.source_file.file_version:
                 ctx.source_file.file_version = updated
         else:

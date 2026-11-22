@@ -370,7 +370,8 @@ def ingest_c_a(session: Session, path: Path, state: str = "TX",
             if total == 0:
                 ctx.counts["programs_zero_completions"] += 1
         session.flush()
-        n = recompute_stem_eligibilities(session, author=ctx.author, counts=ctx.counts)
+        n = recompute_stem_eligibilities(session, author=ctx.author, counts=ctx.counts,
+                                         subdivision_id=subdivision_id(state))
         ctx.counts["eligibilities_computed"] += n
 
     return run_step(session, source="ipeds_c_a", files=[path], file_version=version,

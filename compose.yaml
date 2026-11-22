@@ -15,11 +15,32 @@ services:
     environment:
       NORTH_DATABASE_URL: postgresql+psycopg://north_app:${NORTH_APP_DB_PASSWORD:-north-app-local}@db:5432/north
       NORTH_MIGRATION_DATABASE_URL: postgresql+psycopg://north_owner:${NORTH_OWNER_DB_PASSWORD:-north-owner-local}@db:5432/north
+      # Admin area over plain http on localhost: no Secure cookie, no second factor.
+      NORTH_COOKIE_SECURE: "false"
+      NORTH_ADMIN_REQUIRE_TOTP: ${NORTH_ADMIN_REQUIRE_TOTP:-false}
+      NORTH_INCOMING_DIR: /data/incoming
+    volumes:
+      - north-data:/data
     ports:
       - "127.0.0.1:${NORTH_HOST_PORT:-8000}:8000"
     depends_on:
       db:
         condition: service_healthy
+
+  # Runs the jobs the admin queues (downloads, loads, uploads) and the weekly schedule.
+  # First admin: docker compose exec app python -m north.auth.cli create-user --username <name>
+  worker:
+    build: .
+    command: ["python", "-m", "north.jobs.worker"]
+    environment:
+      NORTH_DATABASE_URL: postgresql+psycopg://north_app:${NORTH_APP_DB_PASSWORD:-north-app-local}@db:5432/north
+      NORTH_RAW_DIR: /data/raw
+      NORTH_INCOMING_DIR: /data/incoming
+    volumes:
+      - north-data:/data
+    depends_on:
+      app:
+        condition: service_started
 
   db:
     image: postgres:17.12
@@ -44,3 +65,4 @@ services:
 
 volumes:
   north-db:
+  north-data:

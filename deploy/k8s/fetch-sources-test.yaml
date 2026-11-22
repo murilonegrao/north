@@ -1,0 +1,246 @@
+# Test: can the cluster download every official source by itself? (record 0004; prepares the
+# definitive scheduled sync in docs/design/admin-and-sync.md)
+#
+# Runs once in namespace `north` with the app image, downloads into an emptyDir and prints one line
+# per source (HTTP code, bytes, sha256). Nothing is written to the database unless LOAD is "1".
+# Honest user-agent; no browser impersonation: a source that blocks us is reported as blocked.
+#
+#   kubectl -n north delete job north-fetch-sources-test --ignore-not-found
+#   kubectl apply -f fetch-sources-test.yaml
+#   kubectl -n north logs -f job/north-fetch-sources-test --pod-running-timeout=3m
+#
+# Optional keys (the test skips what is missing):
+#   kubectl -n north create secret generic north-api-keys \
+#     --from-literal=NORTH_API_DATA_GOV_KEY=... --from-literal=HUD_API_TOKEN=...
+#
+# With LOAD "1", after downloading it runs `load-all --state TX` as north_app with the files it got
+# (official data only: rebuildable, idempotent on source + sha256).
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: north-fetch-sources-test
+  namespace: north
+data:
+  fetch.py: |
+    import hashlib, json, os, re, subprocess, sys, time, urllib.error, urllib.request
+    from pathlib import Path
+
+    UA = "north-data-fetch/0.1 (+https://github.com/murilonegrao/north)"
+    WORK = Path("/work")
+    RAW = WORK / "raw"
+    RESULTS = []
+
+    def http(url, method="GET", data=None, headers=None, rng=None, timeout=180):
+        h = {"User-Agent": UA, **(headers or {})}
+        if rng:
+            h["Range"] = rng
+        req = urllib.request.Request(url, data=data, method=method, headers=h)
+        return urllib.request.urlopen(req, timeout=timeout)
+
+    def record(name, ok, code, size=None, sha=None, secs=None, note=""):
+        RESULTS.append(dict(name=name, ok=ok, code=code, bytes=size, sha256=sha, secs=secs, note=note))
+        mark = "OK  " if ok else "FAIL"
+        s = f"{mark} {name:<28} http={code!s:<5} bytes={size!s:<11} sha256={(sha or '-')[:16]:<16} {secs or '-'}s {note}"
+        print(s, flush=True)
+
+    def fetch(name, url, dest=None, method="GET", data=None, headers=None, probe=False, tries=3):
+        """Download url to dest (or probe the first KB). Retries on network errors and 5xx."""
+        last = None
+        for attempt in range(1, tries + 1):
+            t0 = time.time()
+            try:
+                with http(url, method, data, headers, rng="bytes=0-1023" if probe else None) as r:
+                    body = r.read()
+                    code = r.status
+                secs = round(time.time() - t0, 1)
+                # 202 or an empty body is a bot challenge (e.g. a WAF), not the file.
+                if code not in (200, 206) or not body:
+                    record(name, False, code, len(body), None, secs, "challenge or empty body: blocked")
+                    return None
+                if probe:
+                    record(name, True, code, len(body), None, secs, "reachable (probe)")
+                    return body
+                sha = hashlib.sha256(body).hexdigest()
+                if dest:
+                    dest.parent.mkdir(parents=True, exist_ok=True)
+                    dest.write_bytes(body)
+                record(name, True, code, len(body), sha, secs)
+                return body
+            except urllib.error.HTTPError as e:
+                last = (e.code, e.reason)
+                if e.code < 500:
+                    break
+            except Exception as e:  # network: reset, timeout, DNS, TLS
+                last = ("err", f"{type(e).__name__}: {e}"[:120])
+            time.sleep(5 * attempt)
+        record(name, False, last[0], note=str(last[1]))
+        return None
+
+    # IPEDS: the files the loader reads, plus a probe for the next release.
+    IPEDS = "https://nces.ed.gov/ipeds/datacenter/data/{}.zip"
+    for t in ["HD2024", "HD2024_Dict", "C2024_A", "C2024_A_Dict", "IC2023_AY", "IC2023_AY_Dict"]:
+        fetch(f"ipeds {t}", IPEDS.format(t), RAW / "ipeds" / f"{t}.zip")
+    # Next releases: 404 is the expected answer until NCES publishes them (not a failure).
+    for t in ["HD2025", "C2025_A", "IC2024_AY"]:
+        try:
+            with http(IPEDS.format(t), rng="bytes=0-1023") as r:
+                print(f"NEW  ipeds {t} is published (http {r.status})", flush=True)
+        except urllib.error.HTTPError as e:
+            print(f"INFO ipeds {t} not published yet (http {e.code})", flush=True)
+        except Exception as e:
+            print(f"INFO ipeds {t} probe error: {type(e).__name__}", flush=True)
+
+    # SEVP certified school list: find the current PDF link on the search page.
+    page = fetch("sevp search page", "https://studyinthestates.dhs.gov/school-search")
+    sevp_url = None
+    if page:
+        m = re.search(rb"[\w/:.\-]*certified-school-list-\d{1,2}-\d{1,2}-\d{2,4}\.pdf", page)
+        if m:
+            sevp_url = m.group(0).decode()
+            if sevp_url.startswith("/"):
+                sevp_url = "https://studyinthestates.dhs.gov" + sevp_url
+    sevp_url = sevp_url or "https://studyinthestates.dhs.gov/assets/certified-school-list-11-18-26.pdf"
+    sevp_pdf = RAW / "sevp" / sevp_url.rsplit("/", 1)[1]
+    print(f"     sevp url: {sevp_url}", flush=True)
+    fetch("sevp certified list", sevp_url, sevp_pdf)
+
+    # DHS STEM list (rare updates) and the Federal Register search that would announce a new one.
+    fetch("dhs stem pdf", "https://www.ice.gov/doclib/sevis/pdf/stemList2024.pdf", RAW / "dhs" / "stemList2024.pdf")
+    # The versioned CSV in data/reference/ was parsed from the PDF with this sha256.
+    DHS_SHA = "b8346f30cd6ab7702510f4837b339438323a96adfbd8133b6cb9d565e90b4336"
+    if RESULTS[-1]["ok"] and RESULTS[-1]["sha256"] != DHS_SHA:
+        print("NEW  dhs stem pdf changed: the reference CSV must be rebuilt", flush=True)
+    fr = fetch("federal register api",
+               "https://www.federalregister.gov/api/v1/documents.json?per_page=3&order=newest"
+               "&conditions[agencies][]=homeland-security-department"
+               "&conditions[term]=%22STEM+Designated+Degree+Program+List%22")
+    if fr:
+        try:
+            for d in json.loads(fr).get("results", []):
+                print(f"     FR {d.get('publication_date')} {d.get('title', '')[:90]}", flush=True)
+        except ValueError:
+            pass
+
+    # DAPIP accreditation (undocumented endpoint behind the site's download button).
+    fetch("dapip accreditation", "https://ope.ed.gov/dapip/api/downloadFiles/accreditationDataFiles",
+          RAW / "dapip" / "DAPIPData.zip", method="POST",
+          data=b'{"CSVChecked":true,"ExcelChecked":false}', headers={"Content-Type": "application/json"})
+
+    # College Scorecard: API (key) and bulk files (link found on the data page).
+    key = os.environ.get("NORTH_API_DATA_GOV_KEY", "")
+    if key:
+        body = fetch("scorecard api", "https://api.data.gov/ed/collegescorecard/v1/schools"
+                     "?school.state=TX&per_page=1&fields=id,school.name", headers={"X-Api-Key": key})
+        if body:
+            try:
+                print(f"     scorecard TX schools: {json.loads(body)['metadata']['total']}", flush=True)
+            except (ValueError, KeyError):
+                pass
+    else:
+        record("scorecard api", False, "skip", note="no NORTH_API_DATA_GOV_KEY in secret north-api-keys")
+    sc = fetch("scorecard data page", "https://collegescorecard.ed.gov/data/")
+    if sc:
+        for pat in [rb"https://[\w./\-]+Most-Recent-Cohorts-Field-of-Study_\d+\.zip",
+                    rb"https://[\w./\-]+Most-Recent-Cohorts-Institution_\d+\.zip"]:
+            m = re.search(pat, sc)
+            if m:
+                fetch("scorecard " + m.group(0).decode().rsplit("/", 1)[1][:32], m.group(0).decode(), probe=True)
+            else:
+                record("scorecard bulk link", False, "-", note="link not found on the data page")
+
+    # HUD Fair Market Rents: file and API (token).
+    fetch("hud fmr fy27 xlsx", "https://www.huduser.gov/portal/datasets/fmr/fmr2027/FY27_FMRs.xlsx",
+          RAW / "hud" / "FY27_FMRs.xlsx")
+    tok = os.environ.get("HUD_API_TOKEN", "")
+    if tok:
+        fetch("hud api statedata TX", "https://www.huduser.gov/hudapi/public/fmr/statedata/TX",
+              headers={"Authorization": f"Bearer {tok}"})
+    else:
+        record("hud api", False, "skip", note="no HUD_API_TOKEN in secret north-api-keys")
+
+    # Exchange rates (ECB) and Census places (localities).
+    fetch("ecb exchange rates", "https://data-api.ecb.europa.eu/service/data/EXR/D.USD+BRL.EUR.SP00.A"
+          "?lastNObservations=1&format=csvdata")
+    fetch("census gazetteer TX", "https://www2.census.gov/geo/docs/maps-data/data/gazetteer/"
+          "2024_Gazetteer/2024_gaz_place_48.txt", probe=True)
+
+    ok = sum(r["ok"] for r in RESULTS)
+    print(f"\nSUMMARY {ok}/{len(RESULTS)} ok", flush=True)
+    print("JSON " + json.dumps(RESULTS), flush=True)
+
+    if os.environ.get("LOAD") != "1":
+        sys.exit(0)
+
+    # Load: reference files come from the public repository (data/reference/).
+    ref = WORK / "reference"
+    base = "https://raw.githubusercontent.com/murilonegrao/north/main/data/reference/"
+    for f in ["dhs-stem-list-2024-07-22.csv", "dhs-stem-list-2024-07-22.meta.json", "cip-isced-f.csv"]:
+        fetch(f"ref {f}", base + f, ref / f)
+    need = [RAW / "ipeds" / "HD2024.zip", sevp_pdf, RAW / "dapip" / "DAPIPData.zip", ref / "cip-isced-f.csv"]
+    missing = [str(p) for p in need if not p.exists()]
+    if missing:
+        print("LOAD skipped, missing: " + ", ".join(missing), flush=True)
+        sys.exit(1)
+    cmd = [sys.executable, "-m", "north.ingest.us.cli", "load-all", "--state", "TX",
+           "--ipeds-dir", str(RAW / "ipeds"), "--dhs-csv", str(ref / "dhs-stem-list-2024-07-22.csv"),
+           "--sevp-pdf", str(sevp_pdf), "--dapip-dir", str(RAW / "dapip" / "DAPIPData.zip"),
+           "--isced-csv", str(ref / "cip-isced-f.csv")]
+    if (RAW / "dhs" / "stemList2024.pdf").exists():
+        cmd += ["--dhs-pdf", str(RAW / "dhs" / "stemList2024.pdf")]
+    print("LOAD " + " ".join(cmd), flush=True)
+    sys.exit(subprocess.call(cmd))
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: north-fetch-sources-test
+  namespace: north
+spec:
+  backoffLimit: 0
+  activeDeadlineSeconds: 1800
+  ttlSecondsAfterFinished: 86400
+  template:
+    spec:
+      restartPolicy: Never
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 10001
+        runAsGroup: 10001
+        seccompProfile: {type: RuntimeDefault}
+      containers:
+        - name: fetch
+          # Same tag as the Deployment (k3s-gitops/manifests/north/kustomization.yaml).
+          image: ghcr.io/murilonegrao/north:sha-6e0e71c
+          command: [python, /scripts/fetch.py]
+          env:
+            - {name: LOAD, value: "0"}
+            - {name: NORTH_API_DATA_GOV_KEY, valueFrom: {secretKeyRef: {name: north-api-keys, key: NORTH_API_DATA_GOV_KEY, optional: true}}}
+            - {name: HUD_API_TOKEN, valueFrom: {secretKeyRef: {name: north-api-keys, key: HUD_API_TOKEN, optional: true}}}
+            # Database (used only with LOAD "1"): the DML role, like the app.
+            - {name: DB_HOST, valueFrom: {secretKeyRef: {name: banco-app, key: endpoint}}}
+            - {name: DB_PORT, valueFrom: {secretKeyRef: {name: banco-app, key: port}}}
+            - {name: DB_USER, valueFrom: {secretKeyRef: {name: banco-app, key: username}}}
+            - {name: DB_PASS, valueFrom: {secretKeyRef: {name: banco-app, key: password}}}
+            - name: NORTH_DATABASE_URL
+              value: postgresql+psycopg://$(DB_USER):$(DB_PASS)@$(DB_HOST):$(DB_PORT)/north?sslmode=verify-full&sslrootcert=/run/secrets/ca-banco.crt
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities: {drop: [ALL]}
+          resources:
+            requests: {cpu: 100m, memory: 256Mi}
+            limits: {memory: 2Gi}
+          volumeMounts:
+            - {name: scripts, mountPath: /scripts, readOnly: true}
+            - {name: work, mountPath: /work}
+            - {name: tmp, mountPath: /tmp}
+            - {name: ca-banco, mountPath: /run/secrets/ca-banco.crt, subPath: ca-banco.crt, readOnly: true}
+      volumes:
+        - name: scripts
+          configMap: {name: north-fetch-sources-test}
+        - name: work
+          emptyDir: {sizeLimit: 2Gi}
+        - name: tmp
+          emptyDir: {}
+        - name: ca-banco
+          configMap: {name: ca-banco}

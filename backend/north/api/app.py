@@ -14,6 +14,7 @@ from fastapi.responses import FileResponse, HTMLResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 
 from north import __version__
+from north.api.admin import router as admin_router
 from north.api.programs import router as programs_router
 from north.repository.db import DatabaseNotConfigured
 from north.settings import get_settings
@@ -59,10 +60,34 @@ def content_security_policy(script_hashes: Iterable[str] = (), *, script_hosts: 
 app.state.csp = content_security_policy()
 
 
+UNSAFE_METHODS = {"POST", "PUT", "PATCH", "DELETE"}
+
+
+def cross_site(request: Request) -> bool:
+    """A state-changing admin request from another site (CSRF defence in depth, next to the
+    SameSite=Strict cookie and the CSRF token)."""
+    origin = request.headers.get("origin")
+    if origin:
+        host = request.headers.get("host", "")
+        return origin.split("://", 1)[-1].rstrip("/") != host
+    return request.headers.get("sec-fetch-site") == "cross-site"
+
+
 @app.middleware("http")
 async def _security_headers(request: Request,
                             call_next: Callable[[Request], Awaitable[Response]]) -> Response:
-    response = await call_next(request)
+    path = request.url.path
+    is_admin = path.startswith(("/api/admin", "/admin"))
+    if is_admin and request.method in UNSAFE_METHODS and cross_site(request):
+        response: Response = JSONResponse({"detail": "cross-site request refused"},
+                                          status_code=403)
+    else:
+        response = await call_next(request)
+    if is_admin:
+        # Never indexed, never cached (a shared cache must not keep admin data).
+        response.headers["X-Robots-Tag"] = "noindex, nofollow"
+        if path.startswith("/api/admin"):
+            response.headers["Cache-Control"] = "no-store"
     for name, value in SECURITY_HEADERS.items():
         response.headers.setdefault(name, value)
     # A route may set its own policy (the Swagger page does); the SPA policy is the default.
@@ -86,6 +111,7 @@ def api_docs() -> HTMLResponse:
 
 
 app.include_router(programs_router)
+app.include_router(admin_router)
 
 
 @app.exception_handler(DatabaseNotConfigured)

@@ -14,7 +14,7 @@ updated: 2026-11-21
 
 *A map of US master's programs for international students*
 
-**Author:** Murilo · **Version:** 1.4 · **Date:** 2026-11-21 · **Rigor level:** M (own product, MVP)
+**Author:** Murilo · **Version:** 1.5 · **Date:** 2026-11-22 · **Rigor level:** M (own product, MVP)
 
 > [!note] Address and public repo
 > The planned address is `north.harpia.info`. The repository will be public, so this document contains no personal data: the family appears only as a **user profile** (number of dependents, whether the spouse can work), never with names. This SRS is written in English, like the rest of the repository.
@@ -29,6 +29,7 @@ updated: 2026-11-21
 | 1.2 | 2026-11-21 | Murilo | English translation; IDs renamed (RF→FR, RNF→NFR, RN→BR, RP→C, OE→SO) and status enums translated; multilingual UI requirement (NFR-14 rewritten, Q06b, translation risk, glossary) |
 | 1.3 | 2026-11-21 | Murilo | decisions after the data spikes (record 0002): Q09/Q10 answered; R1–R18 in §3.4; CIPs add 30.71 and flag 52.12; IPEDS first (FR-02 Must), Scorecard as enrichment (FR-01 Should); official file upload (new FR-26); SEVP matching by name + city with reconciliation; DAPIP institutional accreditation; HUD FMR by county (FR-06 Should); score with neutral 50, range and certainty; target English score; guaranteed vs competitive funding; ECB exchange rates; BR-15 to BR-17; NFR-01 field names follow the UML |
 | 1.4 | 2026-11-21 | Murilo | UML 1.0 and open items approved; visual identity "A Forja" as C-10 (record 0003) |
+| 1.5 | 2026-11-22 | Murilo | admin area, worker and job queue (record 0006): FR-25 becomes username + password + TOTP with roles; FR-26 uploads go through the admin and a worker |
 
 ---
 
@@ -225,7 +226,7 @@ Interviews and surveys with other students are deferred until after the MVP. For
 | FR-09 | keep a per-field change history (previous value, new value, author, date, source) | Must | UC06 |
 | FR-10 | show a coverage dashboard for each state: how many programs, how many with each dimension verified, which items are pending | Must | UC09 |
 | FR-11 | mark a state as "complete" only when the BR-11 checklist is satisfied | Should | UC09 |
-| FR-25 | authenticate the curator/administrator (one account in the MVP) before any edit, ingestion or review; search stays open without login | Must | UC05–UC09 |
+| FR-25 | authenticate the curator/administrator before any edit, ingestion or review, with username, password (Argon2id) and a TOTP second factor; roles `viewer`, `curator`, `admin`; every admin action in an append-only audit log; search stays open without login (record 0006) | Must | UC05–UC09 |
 
 **Assisted extraction**
 | ID | The system shall… | Priority | UC |

@@ -20,6 +20,25 @@ class Settings(BaseSettings):
     # Directory of the Vue build. When unset, the usual locations are tried (see web_dist_dir).
     web_dist: Path | None = None
 
+    # ---- Admin area (docs/design/admin-and-sync.md, record 0006)
+    # Raw official files (worker only): fetched or accepted uploads, never overwritten.
+    raw_dir: Path | None = None
+    # Uploads land here first (the web process writes only here; the worker moves them).
+    incoming_dir: Path | None = None
+    # Largest upload accepted, in MiB (Cloudflare cuts request bodies at 100 MB).
+    upload_max_mib: int = 95
+    # Session cookie: Secure and the __Host- prefix. Turn off only for plain-http local runs.
+    cookie_secure: bool = True
+    # A second factor (TOTP) is required before any admin action. Off only for local runs.
+    admin_require_totp: bool = True
+    session_idle_minutes: int = 120
+    session_max_hours: int = 12
+    # Request header that carries the client address set by the edge proxy (for example
+    # cf-connecting-ip behind Cloudflare). Unset: the TCP peer address is used.
+    client_ip_header: str | None = None
+    # Shown as the issuer in authenticator apps.
+    totp_issuer: str = "North admin"
+
     def web_dist_dir(self) -> Path | None:
         """Return the first existing Vue build directory, or None if there is none."""
         if self.web_dist is not None:

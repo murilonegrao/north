@@ -1,0 +1,39 @@
+# Egress: today the namespace allows all egress. After this, only pods labelled
+# north-egress: "true" (the worker) reach the internet; the web pod reaches DNS and Postgres
+# only, which also closes SSRF from the public process.
+# POSTGRES_CIDR: the address of the Postgres server (see k3s-gitops/docs/bancos.md), as /32.
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata: {name: north-web-egress}
+spec:
+  podSelector: {matchLabels: {app: north}}
+  policyTypes: [Egress]
+  egress:
+    - to:
+        - namespaceSelector: {matchLabels: {kubernetes.io/metadata.name: kube-system}}
+          podSelector: {matchLabels: {k8s-app: kube-dns}}
+      ports: [{port: 53, protocol: UDP}, {port: 53, protocol: TCP}]
+    - to:
+        - ipBlock: {cidr: POSTGRES_CIDR}
+      ports: [{port: 5432}]
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata: {name: north-worker-egress}
+spec:
+  podSelector: {matchLabels: {north-egress: "true"}}
+  policyTypes: [Egress]
+  egress:
+    - to:
+        - namespaceSelector: {matchLabels: {kubernetes.io/metadata.name: kube-system}}
+          podSelector: {matchLabels: {k8s-app: kube-dns}}
+      ports: [{port: 53, protocol: UDP}, {port: 53, protocol: TCP}]
+    - to:
+        - ipBlock: {cidr: POSTGRES_CIDR}
+      ports: [{port: 5432}]
+    # Official sources over https; host names are checked in code (NetworkPolicy has no FQDN).
+    - to:
+        - ipBlock:
+            cidr: 0.0.0.0/0
+            except: [10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16, 169.254.0.0/16]
+      ports: [{port: 443}]

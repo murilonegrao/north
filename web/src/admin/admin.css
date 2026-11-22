@@ -1,0 +1,195 @@
+/* Shared admin styles. A Forja tokens only; logical properties only (RTL-ready). */
+.admin h1 {
+  margin-block: 0 1.25rem;
+  font-size: 1.5rem;
+}
+.admin h2 {
+  margin-block: 2rem 0.75rem;
+  font-size: 1.0625rem;
+}
+.admin .muted {
+  color: var(--text-muted);
+}
+.admin .mono {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+}
+.admin .row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 1rem;
+}
+.admin .stack > * + * {
+  margin-block-start: 0.75rem;
+}
+
+/* Forms */
+.admin form.stack,
+.admin .form-card {
+  max-inline-size: 28rem;
+}
+.admin label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+  margin-block-end: 0.25rem;
+}
+.admin input[type='text'],
+.admin input[type='password'],
+.admin input[type='file'],
+.admin select {
+  inline-size: 100%;
+  padding-block: 0.5rem;
+  padding-inline: 0.625rem;
+  background: var(--bg);
+  color: var(--text);
+  border: 1px solid var(--field-border);
+  border-radius: var(--radius);
+  font: inherit;
+}
+.admin input[type='checkbox'] {
+  accent-color: var(--accent);
+}
+.admin .check {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+}
+.admin .code-input {
+  font-family: var(--font-mono);
+  font-size: 1.25rem;
+  letter-spacing: 0.3em;
+  max-inline-size: 10rem;
+}
+
+/* Buttons: one primary (ember fill) per form, the rest outlined. */
+.admin .btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding-block: 0.4375rem;
+  padding-inline: 0.875rem;
+  border: 1px solid var(--field-border);
+  border-radius: var(--radius);
+  background: transparent;
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  text-decoration: none;
+  cursor: pointer;
+}
+.admin .btn:hover:not(:disabled) {
+  border-color: var(--accent);
+}
+.admin .btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+.admin .btn-primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--charcoal); /* 5.3:1 on ember in both themes */
+  font-weight: 500;
+}
+.admin .btn-small {
+  padding-block: 0.1875rem;
+  padding-inline: 0.5rem;
+  font-size: 0.75rem;
+}
+
+/* Messages */
+.admin .note,
+.admin .alert {
+  padding-block: 0.625rem;
+  padding-inline: 0.875rem;
+  border-radius: var(--radius);
+  background: var(--surface);
+  max-inline-size: var(--measure);
+}
+.admin .note {
+  border-inline-start: 2px solid var(--accent-dim);
+}
+.admin .alert {
+  border: 1px solid var(--text);
+  font-weight: 500;
+}
+
+/* Tables */
+.admin .table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+.admin table {
+  inline-size: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+.admin th,
+.admin td {
+  padding-block: 0.5rem;
+  padding-inline: 0.75rem;
+  text-align: start;
+  vertical-align: top;
+  border-block-end: 1px solid var(--border);
+}
+.admin th {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  background: var(--surface);
+}
+.admin tr:last-child td {
+  border-block-end: 0;
+}
+.admin td.num,
+.admin th.num {
+  text-align: end;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Stat tiles */
+.admin .tiles {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(9rem, 1fr));
+  gap: 0.75rem;
+}
+.admin .tile {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding-block: 0.75rem;
+  padding-inline: 1rem;
+}
+.admin .tile .value {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 1.375rem;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+.admin .tile .label {
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+}
+
+.admin pre.log {
+  max-block-size: 32rem;
+  overflow: auto;
+  margin: 0;
+  padding-block: 0.75rem;
+  padding-inline: 1rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font-size: 0.75rem;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  word-break: break-word;
+}

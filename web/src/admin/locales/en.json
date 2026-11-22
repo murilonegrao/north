@@ -1,0 +1,216 @@
+{
+  "brand": "North admin",
+  "title": {
+    "overview": "Overview",
+    "jobs": "Jobs",
+    "job": "Job",
+    "upload": "Upload",
+    "users": "Users",
+    "audit": "Audit log",
+    "account": "Account",
+    "login": "Sign in",
+    "setup": "Secure your account"
+  },
+  "nav": {
+    "main": "Admin",
+    "overview": "Overview",
+    "jobs": "Jobs",
+    "upload": "Upload",
+    "users": "Users",
+    "audit": "Audit",
+    "account": "Account",
+    "logout": "Sign out",
+    "site": "Public site",
+    "language": "Language"
+  },
+  "common": {
+    "loading": "Loading…",
+    "error": "Something went wrong. Try again.",
+    "retry": "Try again",
+    "forbidden": "Your role does not allow this.",
+    "never": "never",
+    "none": "—",
+    "yes": "yes",
+    "no": "no"
+  },
+  "login": {
+    "heading": "Sign in",
+    "username": "Username",
+    "password": "Password",
+    "submit": "Sign in",
+    "totpHeading": "Authenticator code",
+    "totpHelp": "Enter the 6-digit code from your authenticator app.",
+    "code": "Code",
+    "verify": "Verify",
+    "invalid": "Wrong username or password.",
+    "invalidCode": "Wrong or already used code.",
+    "throttled": "Too many attempts. Wait 15 minutes and try again.",
+    "restart": "Start again"
+  },
+  "setup": {
+    "passwordHeading": "Choose a new password",
+    "passwordHelp": "At least 12 characters. A long phrase is easiest to remember and hardest to guess.",
+    "current": "Current password",
+    "new": "New password",
+    "confirm": "New password again",
+    "mismatch": "The two new passwords differ.",
+    "wrongCurrent": "The current password is wrong.",
+    "save": "Save password",
+    "saved": "Password changed. Other sessions were signed out.",
+    "totpHeading": "Set up an authenticator app",
+    "totpHelp": "Scan the code with an authenticator app (Aegis, Bitwarden, 1Password, Google Authenticator…), then type the 6-digit code it shows.",
+    "secret": "Or type this key",
+    "start": "Show the code",
+    "confirm2": "Confirm",
+    "totpDone": "Authenticator app set up. Other sessions were signed out."
+  },
+  "status": {
+    "queued": "queued",
+    "running": "running",
+    "succeeded": "succeeded",
+    "attention": "needs attention",
+    "failed": "failed",
+    "cancelled": "cancelled"
+  },
+  "overview": {
+    "heading": "Overview",
+    "worker": "Worker",
+    "workerUp": "connected",
+    "workerDown": "not connected",
+    "workerDownHelp": "Jobs wait in the queue until the worker is running.",
+    "lastHeartbeat": "last heartbeat {at}",
+    "attention": "{n} job(s) failed or need attention",
+    "country": "Data: {country}",
+    "total": "Total",
+    "states": "states",
+    "institutions": "Institutions",
+    "accredited": "Accredited",
+    "sevp": "SEVP campuses",
+    "programs": "Programs",
+    "stem": "STEM OPT",
+    "tuition": "With tuition",
+    "files": "Files in use",
+    "source": "Source",
+    "version": "Version",
+    "scopes": "States",
+    "noData": "No data loaded yet. Run “Download and load”.",
+    "schedules": "Schedules",
+    "recentJobs": "Recent jobs",
+    "allJobs": "All jobs",
+    "tasks": "Open reconciliation tasks"
+  },
+  "schedule": {
+    "every": "every {h} h",
+    "next": "next {at}",
+    "paused": "paused",
+    "pause": "Pause",
+    "resume": "Resume",
+    "runNow": "Run now"
+  },
+  "jobs": {
+    "heading": "Jobs",
+    "run": "Run a job",
+    "start": "Start",
+    "started": "Job #{id} queued.",
+    "alreadyActive": "Job #{id} of this kind is already queued or running.",
+    "kind": "Job",
+    "status": "Status",
+    "by": "By",
+    "created": "Created",
+    "duration": "Duration",
+    "scheduler": "schedule",
+    "empty": "No jobs yet.",
+    "cancel": "Cancel",
+    "more": "Older jobs",
+    "filter": "Status",
+    "all": "all",
+    "notAllowed": "needs the {role} role"
+  },
+  "job": {
+    "heading": "Job #{id}",
+    "log": "Log",
+    "result": "Result",
+    "error": "Error",
+    "noLog": "No output yet.",
+    "back": "All jobs",
+    "cancelRequested": "Cancel requested; it stops at the next checkpoint.",
+    "params": "Parameters",
+    "follow": "Updating every 2 seconds",
+    "lines": "{n} lines"
+  },
+  "upload": {
+    "heading": "Upload an official file",
+    "help": "For sources that block downloads, or a file you already have. The server recognises the file by its name and content and stores it next to the downloaded ones; then run “Download and load” without download.",
+    "accepted": "Accepted files",
+    "choose": "Choose file",
+    "send": "Upload",
+    "sending": "Uploading… {pct}%",
+    "done": "Uploaded. Job #{id} is placing the file.",
+    "tooBig": "Larger than {mb} MiB.",
+    "failed": "Upload failed: {detail}",
+    "follow": "Follow the job"
+  },
+  "users": {
+    "heading": "Users",
+    "create": "New user",
+    "username": "Username",
+    "role": "Role",
+    "tempPassword": "Temporary password",
+    "createBtn": "Create",
+    "created": "User {name} created. Give them the temporary password through a private channel; the first sign-in asks for a new one and an authenticator app.",
+    "disable": "Disable",
+    "enable": "Enable",
+    "resetPassword": "Reset password",
+    "resetTotp": "Reset authenticator",
+    "resetDone": "Done. Their sessions were signed out.",
+    "newTemp": "New temporary password for {name}",
+    "you": "you",
+    "totp": "authenticator",
+    "disabled": "disabled",
+    "lastLogin": "Last sign-in",
+    "roles": {
+      "admin": "admin",
+      "curator": "curator",
+      "viewer": "viewer"
+    },
+    "roleHelp": "viewer reads; curator also uploads and runs jobs; admin also manages users, schedules and reads the audit log."
+  },
+  "audit": {
+    "heading": "Audit log",
+    "at": "When",
+    "actor": "Who",
+    "action": "Action",
+    "target": "Target",
+    "detail": "Detail",
+    "more": "Older entries"
+  },
+  "account": {
+    "heading": "Account",
+    "signedInAs": "Signed in as {name} ({role})",
+    "password": "Password",
+    "totp": "Authenticator app",
+    "replaceTotp": "Replace authenticator app"
+  },
+  "kinds": {
+    "us_fetch": {
+      "title": "Download official files",
+      "description": "Downloads IPEDS, SEVP, the DHS STEM list and DAPIP into the raw store. Nothing changes in the database."
+    },
+    "us_sync": {
+      "title": "Download and load",
+      "description": "Downloads (optional) and loads every source for the chosen states. Files already loaded for a state are skipped."
+    },
+    "us_recompute": {
+      "title": "Recompute STEM OPT eligibility",
+      "description": "Recomputes us.stem_opt for every program under the current rule."
+    },
+    "us_accept_upload": {
+      "title": "Accept an uploaded file",
+      "description": "Moves an uploaded official file into the raw store."
+    }
+  },
+  "params": {
+    "states": "USPS codes, comma-separated, or ALL",
+    "fetch": "download first"
+  }
+}

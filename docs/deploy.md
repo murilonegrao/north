@@ -30,6 +30,16 @@ How North goes to production on the k3s cluster, following the cluster's app pat
 4. Create the PVC `north-source-files`, copy the official files into it (layout in the Job file), run the Job once, and check the counts against a local load (132 Texas programs on the 2026-11 files).
 5. Later, the upload screen (FR-26) replaces the manual copy into the PVC.
 
+## Admin area and worker (record 0006)
+
+The admin (`/admin`) queues jobs; the worker Deployment runs them, downloads official files and
+runs the weekly schedule. Manifests to add to `k3s-gitops/manifests/north/` are in
+[`deploy/k8s/admin/`](../deploy/k8s/admin/): the `north-raw` PVC, the `north-worker` Deployment,
+a patch for the web Deployment (upload inbox, client IP header), egress policies and the shape of
+the `north-api-keys` Secret. The first admin account is created once with
+`python -m north.auth.cli create-user` inside the web pod; everything after that is done in the
+browser. With the worker in place, the one-off load Job below is no longer needed.
+
 ## Alternative for the first load
 
 Restoring a `pg_dump` of a local database also works, but it ships the state of one machine instead of rebuilding from the sources; prefer the Job.

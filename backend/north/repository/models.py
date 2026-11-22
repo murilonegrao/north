@@ -267,3 +267,116 @@ class FieldChange(Base):
     new_value: Mapped[Any] = mapped_column(JSONB, nullable=True)
     author: Mapped[str] = mapped_column(Text)
     at: Mapped[dt.datetime] = _now()
+
+
+# --------------------------------------------------------------------------- admin area
+# Record 0006 and docs/design/admin-and-sync.md: accounts with password and TOTP, server-side
+# sessions, login throttling, an append-only audit log, and the job queue the worker claims.
+
+
+class User(Base):
+    __tablename__ = "users"
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    # Stored lower-case; the unique index is on the stored value.
+    username: Mapped[str] = mapped_column(Text, unique=True)
+    password_hash: Mapped[str] = mapped_column(Text)
+    role: Mapped[str] = mapped_column(Text)  # admin, curator, viewer
+    totp_secret: Mapped[str | None] = mapped_column(Text)
+    totp_pending_secret: Mapped[str | None] = mapped_column(Text)
+    # Last accepted TOTP time step: a code is never accepted twice.
+    totp_last_step: Mapped[int | None] = mapped_column(BigInteger)
+    must_change_password: Mapped[bool] = mapped_column(Boolean, server_default=text("true"))
+    disabled: Mapped[bool] = mapped_column(Boolean, server_default=text("false"))
+    created_at: Mapped[dt.datetime] = _now()
+    password_changed_at: Mapped[dt.datetime] = _now()
+    last_login_at: Mapped[dt.datetime | None] = mapped_column(DateTime(timezone=True))
+
+
+class AdminSession(Base):
+    __tablename__ = "admin_sessions"
+    id: Mapped[int] = mapped_column(BigInteger, primary_key=True)
+    # sha256 of the cookie token: a database read does not give a usable session.
+    token_hash: Mapped[str] = mapped_column(Text, unique=True)
+    csrf_token: Mapped[str] = mapped_column(Text)
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"), index=True)
+    # False between the password and the TOTP code.
+    mfa_ok: Mapped[bool] = mapped_column(Boolean, server_default=text("false"))
+    created_at: Mapped[dt.datetime] = _now()
+    last_seen_at: Mapped[dt.datetime] = _now()
+    expires_at: Mapped[dt.datetime] = mapped_column(DateTime(timezone=True))
+    revoked_at: Mapped[dt.datetime | None] = mapped_column(DateTime(timezone=True))
+    ip: Mapped[str | None] = mapped_column(Text)
+    user_agent: Mapped[str | None] = mapped_column(Text)
+
+    user: Mapped[User] = relationship()
+
+
+class LoginAttempt(Base):
+    __tablename__ = "login_attempts"
+    __table_args__ = (Index("ix_login_attempts_username_at", "username", "at"),
+                      Index("ix_login_attempts_ip_at", "ip", "at"))
+    id: Mapped[int] = mapped_column(BigInteger, primary_key=True)
+    at: Mapped[dt.datetime] = _now()
+    ip: Mapped[str | None] = mapped_column(Text)
+    username: Mapped[str] = mapped_column(Text)
+    stage: Mapped[str] = mapped_column(Text)  # password, totp
+    ok: Mapped[bool] = mapped_column(Boolean)
+
+
+class AuditEntry(Base):
+    """Append-only (a trigger refuses UPDATE and DELETE): who did what, when."""
+
+    __tablename__ = "audit_log"
+    id: Mapped[int] = mapped_column(BigInteger, primary_key=True)
+    at: Mapped[dt.datetime] = _now()
+    actor_id: Mapped[int | None] = mapped_column(ForeignKey("users.id"), index=True)
+    actor: Mapped[str] = mapped_column(Text)  # username, "worker" or "scheduler"
+    action: Mapped[str] = mapped_column(Text)
+    target: Mapped[str | None] = mapped_column(Text)
+    detail: Mapped[dict[str, Any]] = mapped_column(server_default=text("'{}'::jsonb"))
+    ip: Mapped[str | None] = mapped_column(Text)
+
+
+class Job(Base):
+    """A unit of work for the worker, claimed with SELECT ... FOR UPDATE SKIP LOCKED."""
+
+    __tablename__ = "jobs"
+    __table_args__ = (Index("ix_jobs_status_run_after", "status", "run_after"),)
+    id: Mapped[int] = mapped_column(BigInteger, primary_key=True)
+    kind: Mapped[str] = mapped_column(Text, index=True)
+    params: Mapped[dict[str, Any]] = mapped_column(server_default=text("'{}'::jsonb"))
+    # queued, running, succeeded, attention, failed, cancelled
+    status: Mapped[str] = mapped_column(Text, server_default="queued")
+    requested_by: Mapped[int | None] = mapped_column(ForeignKey("users.id"))
+    schedule_id: Mapped[str | None] = mapped_column(Text)
+    created_at: Mapped[dt.datetime] = _now()
+    run_after: Mapped[dt.datetime] = _now()
+    started_at: Mapped[dt.datetime | None] = mapped_column(DateTime(timezone=True))
+    finished_at: Mapped[dt.datetime | None] = mapped_column(DateTime(timezone=True))
+    heartbeat_at: Mapped[dt.datetime | None] = mapped_column(DateTime(timezone=True))
+    worker: Mapped[str | None] = mapped_column(Text)
+    cancel_requested: Mapped[bool] = mapped_column(Boolean, server_default=text("false"))
+    result: Mapped[dict[str, Any]] = mapped_column(server_default=text("'{}'::jsonb"))
+    error: Mapped[str | None] = mapped_column(Text)
+    log_lines: Mapped[int] = mapped_column(Integer, server_default="0")
+
+
+class JobLog(Base):
+    __tablename__ = "job_logs"
+    id: Mapped[int] = mapped_column(BigInteger, primary_key=True)
+    job_id: Mapped[int] = mapped_column(ForeignKey("jobs.id", ondelete="CASCADE"), index=True)
+    at: Mapped[dt.datetime] = _now()
+    line: Mapped[str] = mapped_column(Text)
+
+
+class Schedule(Base):
+    """Recurring jobs. Declared in code (north.jobs.registry); the row keeps only state."""
+
+    __tablename__ = "schedules"
+    id: Mapped[str] = mapped_column(Text, primary_key=True)
+    kind: Mapped[str] = mapped_column(Text)
+    params: Mapped[dict[str, Any]] = mapped_column(server_default=text("'{}'::jsonb"))
+    every_hours: Mapped[int] = mapped_column(Integer)
+    paused: Mapped[bool] = mapped_column(Boolean, server_default=text("false"))
+    next_run_at: Mapped[dt.datetime] = mapped_column(DateTime(timezone=True))
+    last_job_id: Mapped[int | None] = mapped_column(BigInteger)
