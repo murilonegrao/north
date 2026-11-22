@@ -3,8 +3,8 @@
     "machine_translated": true
   },
   "meta": {
-    "title": "North: maestrías en EE. UU. para estudiantes internacionales",
-    "description": "Un mapa de los programas de maestría de EE. UU. para estudiantes internacionales, con una fuente para cada dato."
+    "title": "North: del inglés a un título en el extranjero, con fuentes oficiales",
+    "description": "Tu nivel de inglés, los cursos y programas a los que puedes postular y lo que necesita tu familia: cada valor con su fuente oficial, fecha y estado de verificación."
   },
   "nav": {
     "skip": "Saltar al contenido",
@@ -22,17 +22,48 @@
   },
   "disclaimer": "No es asesoría migratoria; consulte la fuente oficial.",
   "home": {
-    "eyebrow": "Pre-alfa",
-    "tagline": "Un mapa de los programas de maestría de EE. UU. para estudiantes internacionales",
-    "description": "North mapea, verifica y compara programas de maestría presenciales en EE. UU. desde el punto de vista de quien necesita una visa F-1 y viaja con dependientes. Cada dato lleva su fuente, su fecha y su estado de verificación, para que un dato desconocido nunca se confunda con un dato negativo.",
-    "browse": "Ver programas",
-    "browseHint": "Estados Unidos: computación, ciencia de datos, analítica y sistemas de información, a partir de archivos oficiales."
-  },
-  "status": {
-    "label": "Estado de la API",
-    "checking": "Comprobando…",
-    "ok": "En línea · versión {version}",
-    "down": "No disponible"
+    "tagline": "Del inglés a un título en el extranjero, con la fuente oficial de cada dato.",
+    "description": "Para estudiantes internacionales que piensan llevar a su familia. Cada valor tiene su fuente, fecha y estado de verificación, así que lo que nadie comprobó nunca aparece como un no.",
+    "pathTitle": "Tu camino",
+    "available": "Disponible",
+    "soon": "Próximamente",
+    "lastResult": "Tu último resultado: {level} · {date}",
+    "steps": {
+      "english": {
+        "title": "Tu nivel de inglés",
+        "text": "Una prueba corta con tu banda MCER estimada por destreza y los rangos equivalentes de siete exámenes de inglés, según sus tablas oficiales.",
+        "cta": "Hacer la prueba",
+        "again": "Hacerla de nuevo"
+      },
+      "course": {
+        "title": "Un curso de inglés en Irlanda",
+        "text": "Todos los cursos de las listas oficiales del Stamp 2, por ciudad, examen y nivel, con el riesgo de perder la elegibilidad cuando termine la lista actual."
+      },
+      "degree": {
+        "title": "Programas de grado y posgrado",
+        "text": "Programas en Estados Unidos a partir de archivos oficiales del gobierno, con verificación de visado, STEM y acreditación. Irlanda viene después.",
+        "cta": "Ver programas"
+      },
+      "family": {
+        "title": "Familia y costo",
+        "text": "Quién puede ir contigo en cada paso, si tu cónyuge puede trabajar y el costo real para tu familia."
+      }
+    },
+    "trustTitle": "Cómo funciona North",
+    "trust": {
+      "sources": {
+        "title": "Solo fuentes oficiales.",
+        "text": "Archivos del gobierno y el sitio de cada institución; los rankings y agregadores nunca se usan como fuente."
+      },
+      "unknown": {
+        "title": "Desconocido nunca es un no.",
+        "text": "Un valor que nadie confirmó aparece como desconocido, no como negativo."
+      },
+      "advice": {
+        "title": "No es asesoría migratoria.",
+        "text": "Las reglas cambian; consulta siempre la fuente oficial antes de decidir."
+      }
+    }
   },
   "footer": {
     "license": "Código AGPL-3.0 · Datos CC BY 4.0"

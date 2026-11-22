@@ -1,7 +1,7 @@
 {
   "meta": {
-    "title": "North: US master's programs for international students",
-    "description": "A map of US master's programs for international students, with a source for every data point."
+    "title": "North: from English to a degree abroad, with official sources",
+    "description": "Your English level, the courses and degree programs you can apply to, and what your family needs: every value with its official source, date and verification status."
   },
   "nav": {
     "skip": "Skip to content",
@@ -19,17 +19,48 @@
   },
   "disclaimer": "Not immigration advice; check the official source.",
   "home": {
-    "eyebrow": "Pre-alpha",
-    "tagline": "A map of US master's programs for international students",
-    "description": "North maps, verifies and compares on-campus master's programs in the US from the point of view of someone who needs an F-1 visa and brings dependents. Every data point carries its source, date and verification status, so unknown data is never confused with negative data.",
-    "browse": "Browse programs",
-    "browseHint": "United States: computing, data science, analytics and information systems, from official files."
-  },
-  "status": {
-    "label": "API status",
-    "checking": "Checking…",
-    "ok": "Online · version {version}",
-    "down": "Unavailable"
+    "tagline": "From English to a degree abroad, with the official source of every data point.",
+    "description": "For international students who plan to bring their families. Every value carries its source, date and verification status, so what nobody checked is never shown as a no.",
+    "pathTitle": "Your path",
+    "available": "Available",
+    "soon": "Coming soon",
+    "lastResult": "Your last result: {level} · {date}",
+    "steps": {
+      "english": {
+        "title": "Your English level",
+        "text": "A short test with your estimated CEFR band per skill and the matching ranges of seven English tests, from their official tables.",
+        "cta": "Take the test",
+        "again": "Take it again"
+      },
+      "course": {
+        "title": "An English course in Ireland",
+        "text": "Every course on the official Stamp 2 lists, by city, exam and level, with the risk of losing eligibility when the current list ends."
+      },
+      "degree": {
+        "title": "Degree programs",
+        "text": "Programs in the United States from official government files, with visa, STEM and accreditation checks. Ireland is next.",
+        "cta": "Browse programs"
+      },
+      "family": {
+        "title": "Family and cost",
+        "text": "Who can come with you in each step, whether your spouse can work, and the real cost for your family."
+      }
+    },
+    "trustTitle": "How North works",
+    "trust": {
+      "sources": {
+        "title": "Official sources only.",
+        "text": "Government files and each institution's own site; rankings and aggregators are never used as sources."
+      },
+      "unknown": {
+        "title": "Unknown is never a no.",
+        "text": "A value nobody has confirmed is shown as unknown, not as negative."
+      },
+      "advice": {
+        "title": "Not immigration advice.",
+        "text": "Rules change; always check the official source before you decide."
+      }
+    }
   },
   "footer": {
     "license": "Code AGPL-3.0 · Data CC BY 4.0"

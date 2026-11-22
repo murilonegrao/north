@@ -3,8 +3,8 @@
     "machine_translated": true
   },
   "meta": {
-    "title": "North: mestrados nos EUA para estudantes internacionais",
-    "description": "Um mapa dos programas de mestrado dos EUA para estudantes internacionais, com uma fonte para cada dado."
+    "title": "North: do inglês ao diploma no exterior, com fontes oficiais",
+    "description": "Seu nível de inglês, os cursos e programas a que você pode se candidatar e o que sua família precisa: cada valor com fonte oficial, data e status de verificação."
   },
   "nav": {
     "skip": "Pular para o conteúdo",
@@ -22,17 +22,48 @@
   },
   "disclaimer": "Isto não é assessoria imigratória; confira a fonte oficial.",
   "home": {
-    "eyebrow": "Pré-alfa",
-    "tagline": "Um mapa dos programas de mestrado dos EUA para estudantes internacionais",
-    "description": "O North mapeia, verifica e compara programas de mestrado presenciais nos EUA do ponto de vista de quem precisa de visto F-1 e leva dependentes. Cada dado traz fonte, data e status de verificação, para que um dado desconhecido nunca seja confundido com um dado negativo.",
-    "browse": "Ver programas",
-    "browseHint": "Estados Unidos: computação, ciência de dados, analytics e sistemas de informação, a partir de arquivos oficiais."
-  },
-  "status": {
-    "label": "Status da API",
-    "checking": "Verificando…",
-    "ok": "No ar · versão {version}",
-    "down": "Indisponível"
+    "tagline": "Do inglês ao diploma no exterior, com a fonte oficial de cada dado.",
+    "description": "Para estudantes internacionais que pretendem levar a família. Cada valor traz fonte, data e status de verificação, então o que ninguém conferiu nunca aparece como um não.",
+    "pathTitle": "Seu caminho",
+    "available": "Disponível",
+    "soon": "Em breve",
+    "lastResult": "Seu último resultado: {level} · {date}",
+    "steps": {
+      "english": {
+        "title": "Seu nível de inglês",
+        "text": "Um teste curto com sua faixa CEFR estimada por habilidade e as faixas correspondentes de sete testes de inglês, pelas tabelas oficiais.",
+        "cta": "Fazer o teste",
+        "again": "Fazer de novo"
+      },
+      "course": {
+        "title": "Curso de inglês na Irlanda",
+        "text": "Todos os cursos das listas oficiais do Stamp 2, por cidade, exame e nível, com o risco de perder a elegibilidade quando a lista atual acabar."
+      },
+      "degree": {
+        "title": "Programas de graduação e pós",
+        "text": "Programas nos Estados Unidos a partir de arquivos oficiais do governo, com checagem de visto, STEM e credenciamento. A Irlanda vem em seguida.",
+        "cta": "Ver programas"
+      },
+      "family": {
+        "title": "Família e custo",
+        "text": "Quem pode ir com você em cada passo, se o cônjuge pode trabalhar e o custo real para a sua família."
+      }
+    },
+    "trustTitle": "Como o North funciona",
+    "trust": {
+      "sources": {
+        "title": "Só fontes oficiais.",
+        "text": "Arquivos do governo e o site de cada instituição; rankings e agregadores nunca são usados como fonte."
+      },
+      "unknown": {
+        "title": "Desconhecido nunca é um não.",
+        "text": "Um valor que ninguém confirmou aparece como desconhecido, não como negativo."
+      },
+      "advice": {
+        "title": "Não é assessoria de imigração.",
+        "text": "As regras mudam; confira sempre a fonte oficial antes de decidir."
+      }
+    }
   },
   "footer": {
     "license": "Código AGPL-3.0 · Dados CC BY 4.0"
