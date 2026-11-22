@@ -18,6 +18,7 @@ from sqlalchemy.sql.elements import ColumnElement
 
 from north.api import schemas as s
 from north.domain.countries import (
+    DEFAULT_COUNTRY,
     CountryRules,
     country_of_subdivision,
     country_of_subdivision_id,
@@ -36,6 +37,7 @@ from north.repository.models import (
     ProgramClassification,
     ProgramEligibility,
     SourceFile,
+    Subdivision,
 )
 
 router = APIRouter(prefix="/api", tags=["programs"])
@@ -56,8 +58,15 @@ MAX_OFFSET = 100_000
 MAX_SOURCES = 500
 
 
-def _rules_for_state(state: str) -> CountryRules:
-    return rules_for(country_of_subdivision(state))
+def _rules_for_state(state: str | None) -> CountryRules:
+    return rules_for(country_of_subdivision(state) if state else DEFAULT_COUNTRY)
+
+
+def _in_scope(rules: CountryRules, state: str | None) -> ColumnElement[bool]:
+    """One state, or every subdivision of the country when no state is given."""
+    if state:
+        return Institution.subdivision_id == rules.subdivision_id(state)
+    return Institution.subdivision_id.startswith(f"{rules.code}-", autoescape=True)
 
 
 def _current_rule(db: Session, rules: CountryRules) -> EligibilityRule | None:
@@ -216,10 +225,13 @@ def _invalid(field: str, msg: str, value: Any) -> RequestValidationError:
                                     "msg": msg, "input": value}])
 
 
+STATE = Annotated[str | None, Query(pattern=r"^[A-Za-z]{2}$")]
+
+
 @router.get("/programs", response_model=s.ProgramList)
 def list_programs(
     db: DB,
-    state: Annotated[str, Query(pattern=r"^[A-Za-z]{2}$")] = "TX",
+    state: STATE = None,
     cip_family_: Annotated[list[Literal["11", "30.70", "30.71", "52.12"]] | None,
                            Query(alias="cip_family")] = None,
     stem: Literal["eligible", "not_eligible", "unknown"] | None = None,
@@ -242,7 +254,7 @@ def list_programs(
     rules = _rules_for_state(state)
     rule = _current_rule(db, rules)
     stmt, pe = _base(rule.id if rule else None)
-    stmt = stmt.where(Institution.subdivision_id == rules.subdivision_id(state))
+    stmt = stmt.where(_in_scope(rules, state))
     if cip_family_:
         stmt = stmt.where(or_(*[_family_pred(rules, f) for f in cip_family_]))
     if stem:
@@ -277,13 +289,15 @@ def list_programs(
 @router.get("/facets", response_model=s.Facets, tags=["programs"])
 def facets(
     db: DB,
-    state: Annotated[str, Query(pattern=r"^[A-Za-z]{2}$")] = "TX",
+    state: STATE = None,
 ) -> dict[str, Any]:
-    """Counts for the filter UI over every program of ``state`` (other filters ignored)."""
+    """Counts for the filter UI over every program of ``state``, or of the whole country
+    without one (other filters ignored). ``states`` always covers the whole country, so the
+    state picker can offer every state that has programs."""
     rules = _rules_for_state(state)
     rule = _current_rule(db, rules)
     stmt, pe = _base(rule.id if rule else None)
-    sub = stmt.where(Institution.subdivision_id == rules.subdivision_id(state))
+    sub = stmt.where(_in_scope(rules, state))
     count = func.count(Program.id)
     columns: dict[str, ColumnElement[Any]] = {"total": count}
     columns |= {f"cip_family:{f}": count.filter(_family_pred(rules, f))
@@ -300,14 +314,25 @@ def facets(
     row = db.execute(sub.with_only_columns(*[c.label(f"c{n}") for n, c in
                                              enumerate(columns.values())])).one()
     got = dict(zip(columns, row, strict=True))
-    out: dict[str, Any] = {"state": state.upper(), "total": got["total"]}
+    out: dict[str, Any] = {"state": state.upper() if state else None, "total": got["total"]}
     for group in ("cip_family", "control", "stem", "sevp", "accredited", "has_graduates"):
         out[group] = {k.split(":", 1)[1]: v for k, v in got.items()
                       if k.startswith(f"{group}:")}
+    # Cities only inside one state: across states the same name is different places.
     cities = db.execute(sub.with_only_columns(Campus.city, count.label("n"))
                         .where(Campus.city.is_not(None))
-                        .group_by(Campus.city).order_by(count.desc(), Campus.city)).all()
+                        .group_by(Campus.city).order_by(count.desc(), Campus.city)).all() \
+        if state else []
     out["cities"] = [{"city": c, "count": n} for c, n in cities]
+    country, _ = _base(rule.id if rule else None)
+    states = db.execute(country.where(_in_scope(rules, None))
+                        .join(Subdivision, Subdivision.id == Institution.subdivision_id)
+                        .with_only_columns(Institution.subdivision_id, Subdivision.name,
+                                           count.label("n"))
+                        .group_by(Institution.subdivision_id, Subdivision.name)
+                        .order_by(Subdivision.name)).all()
+    out["states"] = [{"state": CountryRules.local_subdivision(sid), "name": name, "count": n}
+                     for sid, name, n in states]
     lo, hi = got["tuition:min"], got["tuition:max"]
     out["tuition"] = {"min": _num(lo), "max": _num(hi), "known": got["tuition:known"],
                       "unknown": got["total"] - got["tuition:known"],

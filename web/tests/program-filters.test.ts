@@ -64,9 +64,10 @@ describe('filter state mapping', () => {
     expect(toUrlQuery(parseFilters({ min_tuition: '0' }))).toEqual({ min_tuition: '0' })
   })
 
-  it('clearing keeps the state and the sort, drops every filter', () => {
+  it('clearing keeps the sort and drops every filter, the state included (all states)', () => {
     const f = parseFilters({ state: 'TX', control: 'public', city: 'Austin', sevp: 'unknown', sort: 'tuition', order: 'desc', page: '3' })
-    expect(toUrlQuery(clearedFilters(f))).toEqual({ state: 'TX', sort: 'tuition', order: 'desc' })
+    expect(toUrlQuery(clearedFilters(f))).toEqual({ sort: 'tuition', order: 'desc' })
+    expect(activeFilterCount(f)).toBe(4)
   })
 
   it('formats money in the viewer\'s locale', () => {

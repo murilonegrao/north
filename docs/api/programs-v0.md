@@ -31,7 +31,7 @@ The first slice of Phase 5: programs discovered from official files only (IPEDS,
 
 ## `GET /api/programs`
 
-Query parameters (all optional): `state` (default `TX`), `cip_family` (`11`, `30.70`, `30.71`, `52.12`; repeatable), `stem` (`eligible`, `not_eligible`, `unknown`), `q` (text search over institution name, city and CIP title), `limit` (default 50, max 200), `offset` (default 0).
+Query parameters (all optional): `state` (USPS code; absent = every state, since v0.3), `cip_family` (`11`, `30.70`, `30.71`, `52.12`; repeatable), `stem` (`eligible`, `not_eligible`, `unknown`), `q` (text search over institution name, city and CIP title), `limit` (default 50, max 200), `offset` (default 0).
 
 ```json
 {
@@ -163,3 +163,13 @@ Fixes found while building the UI. They override the examples above where they d
 - Text sorts use the database collation (case-insensitive), not byte order.
 - With `sort=institution` the tie-break is the program id.
 - Facet counts use the same predicates as the list filters, so a facet count always equals the list total for that single filter.
+
+## Changes in v0.3 (2026-11-22): every state
+
+- `state` is optional on `GET /api/programs` and `GET /api/facets`. Absent, the list and the
+  counts cover every state of the country (the default was `TX` during the Texas pilot).
+- `GET /api/facets` returns `state: null` for the whole country, and a new
+  `states: [{state, name, count}]` (programs per state, ordered by name, always over the whole
+  country, whatever `state` is), for the state picker.
+- `cities` is empty when `state` is absent: the same city name in two states is two places.
+  The `city` filter still matches by name, so clients send it together with `state`.

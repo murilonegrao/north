@@ -25,7 +25,7 @@
     "tagline": "Um mapa dos programas de mestrado dos EUA para estudantes internacionais",
     "description": "O North mapeia, verifica e compara programas de mestrado presenciais nos EUA do ponto de vista de quem precisa de visto F-1 e leva dependentes. Cada dado traz fonte, data e status de verificação, para que um dado desconhecido nunca seja confundido com um dado negativo.",
     "browse": "Ver programas",
-    "browseHint": "Piloto no Texas: computação, ciência de dados, analytics e sistemas de informação, a partir de arquivos oficiais."
+    "browseHint": "Estados Unidos: computação, ciência de dados, analytics e sistemas de informação, a partir de arquivos oficiais."
   },
   "status": {
     "label": "Status da API",
@@ -100,7 +100,7 @@
   "programs": {
     "pageTitle": "Programas · North",
     "pageDescription": "Mestrados nos EUA em computação e dados para estudantes internacionais, com a fonte e o status de cada dado.",
-    "eyebrow": "Piloto no Texas",
+    "eyebrow": "Estados Unidos",
     "title": "Programas",
     "intro": "Programas de mestrado encontrados em arquivos oficiais dos EUA: IPEDS, a lista STEM do DHS, o SEVP e a base de acreditação. Cada rótulo de status diz o quanto temos certeza.",
     "filters": {
@@ -126,7 +126,9 @@
       "city": "Cidade",
       "citySearch": "Buscar uma cidade",
       "cityNone": "Nenhuma cidade corresponde.",
-      "clear": "Limpar filtros"
+      "clear": "Limpar filtros",
+      "state": "Estado",
+      "allStates": "Todos os estados"
     },
     "cipFamilies": {
       "f11": "Computação",

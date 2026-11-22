@@ -97,7 +97,9 @@ def candidates_for(names: set[str], city: str, sevp: Iterable[tuple[SevpCampus, 
     """Best SEVP suggestions for a campus (exact name in another city, or similar names)."""
     scored = []
     for c, c_names, c_city in sevp:
-        best = max((100.0 if a == b else _similarity(a, b)) for a in names for b in c_names)
+        # A name can normalize to nothing (a blank or punctuation-only cell in the PDF): no score.
+        best = max(((100.0 if a == b else _similarity(a, b)) for a in names for b in c_names),
+                   default=0.0)
         if best >= 80:
             scored.append((best, c_city == city, c))
     scored.sort(key=lambda t: (t[0], t[1]), reverse=True)

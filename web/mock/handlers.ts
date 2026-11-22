@@ -96,16 +96,23 @@ function money(raw: string | null): number | undefined | null {
   return raw.trim() !== '' && Number.isFinite(n) && n >= 0 && n <= 1_000_000 ? n : null
 }
 
-function facets(state: string) {
-  const items = FIXTURE_PROGRAMS.filter((item) => item.campus.state === state)
+const STATE_NAMES: Record<string, string> = { TX: 'Texas' }
+
+function facets(state: string | null) {
+  const items = FIXTURE_PROGRAMS.filter((item) => state === null || item.campus.state === state)
+  const perState = new Map<string, number>()
+  for (const item of FIXTURE_PROGRAMS) perState.set(item.campus.state, (perState.get(item.campus.state) ?? 0) + 1)
   const countBy = <T extends string>(values: readonly T[], match: (item: ProgramSummary, v: T) => boolean) =>
     Object.fromEntries(values.map((v) => [v, items.filter((item) => match(item, v)).length]))
   const cities = new Map<string, number>()
-  for (const item of items) if (item.campus.city) cities.set(item.campus.city, (cities.get(item.campus.city) ?? 0) + 1)
+  if (state !== null) for (const item of items) if (item.campus.city) cities.set(item.campus.city, (cities.get(item.campus.city) ?? 0) + 1)
   const amounts = items.map(tuitionOf).filter((n): n is number => n !== null)
   return {
     state,
     total: items.length,
+    states: [...perState]
+      .map(([code, count]) => ({ state: code, name: STATE_NAMES[code] ?? code, count }))
+      .sort((a, b) => collator.compare(a.name, b.name)),
     cip_family: countBy(CIP_FAMILIES, (item, f) => item.cip.family === f),
     control: countBy(CONTROLS, (item, c) => item.institution.control === c),
     cities: [...cities]
@@ -136,13 +143,13 @@ export function handleMockRequest(rawUrl: string): MockResponse | null {
   }
 
   if (path === '/api/facets') {
-    const state = p.get('state') ?? 'TX'
-    if (!/^[A-Za-z]{2}$/.test(state)) return invalid('state', 'invalid state')
-    return { status: 200, body: facets(state.toUpperCase()) }
+    const state = p.get('state')
+    if (state !== null && !/^[A-Za-z]{2}$/.test(state)) return invalid('state', 'invalid state')
+    return { status: 200, body: facets(state ? state.toUpperCase() : null) }
   }
 
   if (path === '/api/programs') {
-    const state = (p.get('state') ?? 'TX').toUpperCase()
+    const state = p.get('state')?.toUpperCase() ?? null
     const families = p.getAll('cip_family')
     if (families.some((f) => !has(CIP_FAMILIES, f))) return invalid('cip_family', 'invalid CIP family')
     const stem = p.get('stem')
@@ -175,7 +182,7 @@ export function handleMockRequest(rawUrl: string): MockResponse | null {
     const q = (p.get('q') ?? '').trim().toLowerCase()
 
     const matches = FIXTURE_PROGRAMS.filter((item) => {
-      if (item.campus.state !== state) return false
+      if (state !== null && item.campus.state !== state) return false
       if (families.length && !families.includes(item.cip.family)) return false
       // v0.1 §8: unknown = status unknown, whatever else is true; otherwise value.eligible decides.
       if (stem && stemOf(item) !== stem) return false

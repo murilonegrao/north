@@ -25,7 +25,7 @@
     "tagline": "Un mapa de los programas de maestría de EE. UU. para estudiantes internacionales",
     "description": "North mapea, verifica y compara programas de maestría presenciales en EE. UU. desde el punto de vista de quien necesita una visa F-1 y viaja con dependientes. Cada dato lleva su fuente, su fecha y su estado de verificación, para que un dato desconocido nunca se confunda con un dato negativo.",
     "browse": "Ver programas",
-    "browseHint": "Piloto en Texas: computación, ciencia de datos, analítica y sistemas de información, a partir de archivos oficiales."
+    "browseHint": "Estados Unidos: computación, ciencia de datos, analítica y sistemas de información, a partir de archivos oficiales."
   },
   "status": {
     "label": "Estado de la API",
@@ -100,7 +100,7 @@
   "programs": {
     "pageTitle": "Programas · North",
     "pageDescription": "Maestrías en EE. UU. en computación y datos para estudiantes internacionales, con la fuente y el estado de cada dato.",
-    "eyebrow": "Piloto en Texas",
+    "eyebrow": "Estados Unidos",
     "title": "Programas",
     "intro": "Programas de maestría encontrados en archivos oficiales de EE. UU.: IPEDS, la lista STEM del DHS, SEVP y la base de acreditación. Cada etiqueta de estado indica cuán seguros estamos.",
     "filters": {
@@ -126,7 +126,9 @@
       "city": "Ciudad",
       "citySearch": "Buscar una ciudad",
       "cityNone": "Ninguna ciudad coincide.",
-      "clear": "Quitar filtros"
+      "clear": "Quitar filtros",
+      "state": "Estado",
+      "allStates": "Todos los estados"
     },
     "cipFamilies": {
       "f11": "Computación",

@@ -22,7 +22,7 @@
     "tagline": "A map of US master's programs for international students",
     "description": "North maps, verifies and compares on-campus master's programs in the US from the point of view of someone who needs an F-1 visa and brings dependents. Every data point carries its source, date and verification status, so unknown data is never confused with negative data.",
     "browse": "Browse programs",
-    "browseHint": "Texas pilot: computing, data science, analytics and information systems, from official files."
+    "browseHint": "United States: computing, data science, analytics and information systems, from official files."
   },
   "status": {
     "label": "API status",
@@ -97,7 +97,7 @@
   "programs": {
     "pageTitle": "Programs · North",
     "pageDescription": "US master's programs in computing and data for international students, with the source and status of every value.",
-    "eyebrow": "Texas pilot",
+    "eyebrow": "United States",
     "title": "Programs",
     "intro": "Master's programs found in official US files: IPEDS, the DHS STEM list, SEVP and the accreditation database. Each status label says how sure we are.",
     "filters": {
@@ -123,7 +123,9 @@
       "city": "City",
       "citySearch": "Find a city",
       "cityNone": "No city matches.",
-      "clear": "Clear filters"
+      "clear": "Clear filters",
+      "state": "State",
+      "allStates": "All states"
     },
     "cipFamilies": {
       "f11": "Computing",

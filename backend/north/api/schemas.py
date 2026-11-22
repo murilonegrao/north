@@ -181,10 +181,18 @@ class TuitionFacet(BaseModel):
     currency: str
 
 
-class Facets(BaseModel):
-    """``GET /api/facets`` (v0.2 §3): counts over every program of ``state``."""
+class StateCount(BaseModel):
     state: str
+    name: str
+    count: int
+
+
+class Facets(BaseModel):
+    """``GET /api/facets`` (v0.2 §3): counts over every program of ``state``, or of the
+    whole country when ``state`` is null (v0.3). ``cities`` is empty without a state."""
+    state: str | None
     total: int
+    states: list[StateCount]
     cip_family: dict[str, int]
     control: dict[str, int]
     cities: list[CityCount]

@@ -281,3 +281,21 @@ def test_load_script_picks_newest_sevp_by_date_in_name(tmp_path: Path) -> None:
     out = subprocess.run(["bash", "-c", func + "newest_sevp"], env={"RAW": str(tmp_path)},
                          capture_output=True, text=True, check=True).stdout
     assert out == str(sevp / "certified-school-list-11-18-26.pdf")
+
+
+def test_sevp_candidates_skip_names_that_normalize_to_nothing() -> None:
+    """A real SEVP row ("Campus ,Inc.", Sacramento, list of 2026-11-18) has only stop words;
+    it broke the California load with max() of an empty sequence."""
+    from north.ingest.us import sevp
+    from north.ingest.us.sevp_pdf import SevpCampus
+
+    blank = SevpCampus(school_name="Campus ,Inc.", campus_name="Campus, Inc.", f_1="Y",
+                       m_1="N", city="SACRAMENTO", state="CA", campus_code="SFR214F61147000")
+    other = SevpCampus(school_name="Sample State University", campus_name="Main", f_1="Y",
+                       m_1="N", city="SACRAMENTO", state="CA", campus_code="SFR214F00000000")
+    assert sevp.sevp_names(blank) == set()
+    prepared = [(c, sevp.sevp_names(c), sevp.norm_city(c.city)) for c in (blank, other)]
+    found = sevp.candidates_for(sevp.ipeds_names("Sample State University"), "sacramento",
+                                prepared)
+    assert [c["sevp_campus_code"] for c in found] == ["SFR214F00000000"]
+    assert sevp.candidates_for(set(), "sacramento", prepared) == []

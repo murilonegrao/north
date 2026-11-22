@@ -170,10 +170,11 @@ def test_pages_are_stable(client: TestClient) -> None:
 
 
 def test_facets(client: TestClient) -> None:
-    f = client.get("/api/facets").json()
+    f = client.get("/api/facets?state=TX").json()
     assert f == {
         "state": "TX",
         "total": 6,
+        "states": [{"state": "TX", "name": "Texas", "count": 6}],
         "cip_family": {"11": 3, "30.70": 1, "30.71": 1, "52.12": 1},
         "control": {"public": 3, "private_nonprofit": 2, "private_for_profit": 1},
         "cities": [{"city": "Austin", "count": 3}, {"city": "Houston", "count": 2},
@@ -187,14 +188,40 @@ def test_facets(client: TestClient) -> None:
 
 
 def test_facets_match_filters(client: TestClient) -> None:
-    f = client.get("/api/facets").json()
+    f = client.get("/api/facets?state=TX").json()
     for group, param in (("control", "control"), ("sevp", "sevp"), ("accredited", "accredited"),
                          ("has_graduates", "has_graduates"), ("stem", "stem"),
                          ("cip_family", "cip_family")):
         for value, n in f[group].items():
-            assert client.get(f"/api/programs?{param}={value}").json()["total"] == n
+            assert client.get(f"/api/programs?state=TX&{param}={value}").json()["total"] == n
     for c in f["cities"]:
-        assert client.get("/api/programs", params={"city": c["city"]}).json()["total"] == c["count"]
+        assert client.get("/api/programs", params={"state": "TX", "city": c["city"]}
+                          ).json()["total"] == c["count"]
+
+
+def test_no_state_means_every_state(client: TestClient, session: Session) -> None:
+    """Without ``state`` the list and the facets cover the whole country (v0.3)."""
+    from sqlalchemy import update
+
+    from north.repository.models import Institution, Subdivision
+
+    session.add(Subdivision(id="US-OK", country_code="US", name="Oklahoma"))
+    session.flush()
+    session.execute(update(Institution).where(Institution.id == "900003")
+                    .values(subdivision_id="US-OK"))
+    session.commit()
+    assert ids(client, "") == ALL
+    assert ids(client, "state=TX") == ALL - {"900003-111003"}
+    assert ids(client, "state=ok") == {"900003-111003"}
+    f = client.get("/api/facets").json()
+    assert f["state"] is None and f["total"] == 6 and f["cities"] == []
+    assert f["states"] == [{"state": "OK", "name": "Oklahoma", "count": 1},
+                           {"state": "TX", "name": "Texas", "count": 5}]
+    tx = client.get("/api/facets?state=TX").json()
+    assert tx["total"] == 5 and tx["states"] == f["states"]
+    assert [c["city"] for c in tx["cities"]] == ["Austin", "Houston"]
+    item = client.get("/api/programs/900003-111003").json()
+    assert item["campus"]["state"] == "OK"
 
 
 def test_facets_other_state_and_filters_ignored(client: TestClient) -> None:

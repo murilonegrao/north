@@ -164,9 +164,9 @@ describe('program list v0.2', () => {
 
   it('shows facet counts next to the options', async () => {
     const fetchMock = stubFetchWithMock()
-    const { wrapper } = await mountAt('/en/programs')
+    const { wrapper } = await mountAt('/en/programs?state=TX')
     expect(fetchMock.mock.calls.some((c) => String(c[0]).startsWith('/api/facets'))).toBe(true)
-    const facets = handleMockRequest('/api/facets')!.body as Facets
+    const facets = handleMockRequest('/api/facets?state=TX')!.body as Facets
     const control = wrapper.find('[data-test="filter-control"]')
     const counts = control.findAll('[data-test="facet-count"]').map((n) => n.text())
     expect(counts).toEqual([facets.control.public, facets.control.private_nonprofit, facets.control.private_for_profit].map(String))
@@ -174,6 +174,21 @@ describe('program list v0.2', () => {
     expect(firstCity.text()).toContain(facets.cities[0]!.city)
     expect(firstCity.find('[data-test="facet-count"]').text()).toBe(String(facets.cities[0]!.count))
     expect(wrapper.find('[data-test="tuition-min"]').attributes('placeholder')).toBe(`$${facets.tuition.min!.toLocaleString('en')}`)
+  })
+
+  it('lists every state by default; picking one asks for it and offers its cities', async () => {
+    const fetchMock = stubFetchWithMock()
+    const { wrapper, router } = await mountAt('/en/programs')
+    const listCall = fetchMock.mock.calls.map((c) => String(c[0])).find((u) => u.startsWith('/api/programs'))
+    expect(listCall).not.toContain('state=')
+    expect(wrapper.find('.city-list').exists()).toBe(false)
+    const select = wrapper.find('#program-state')
+    const options = select.findAll('option').map((o) => o.attributes('value'))
+    expect(options).toEqual(['', 'TX'])
+    await select.setValue('TX')
+    await flushPromises()
+    expect(router.currentRoute.value.query.state).toBe('TX')
+    expect(wrapper.find('.city-list').exists()).toBe(true)
   })
 
   it('table view has sortable headers with aria-sort', async () => {

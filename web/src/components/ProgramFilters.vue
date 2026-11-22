@@ -65,6 +65,20 @@ function toggleControl(control: InstitutionControl, checked: boolean) {
   emit('change', { control: toggle(props.filters.control, INSTITUTION_CONTROLS, control, checked) })
 }
 
+// State: every state with programs, from the facets (they always cover the whole country). A
+// state named in the URL stays selectable even before the facets arrive. Cities belong to one
+// state, so changing the state clears them.
+const stateOptions = computed(() => {
+  const known: { state: string; name: string; count?: number }[] = props.facets?.states ?? []
+  const current = props.filters.state?.toUpperCase()
+  if (current && !known.some((s) => s.state === current)) return [{ state: current, name: current }, ...known]
+  return known
+})
+const stateTotal = computed(() => (props.facets?.states ?? []).reduce((n, s) => n + s.count, 0))
+function changeState(value: string) {
+  emit('change', { state: value || undefined, city: [] })
+}
+
 // Cities: a searchable checkbox list; selected cities stay on top.
 const cityQuery = ref('')
 const cityOptions = computed(() => {
@@ -132,6 +146,16 @@ const graduatesLegend = computed(() =>
         autocomplete="off"
         @input="onSearchInput"
       />
+    </div>
+
+    <div class="filter" data-test="filter-state">
+      <label for="program-state" class="filter-label">{{ t('programs.filters.state') }}</label>
+      <select id="program-state" :value="filters.state ?? ''" @change="changeState(($event.target as HTMLSelectElement).value)">
+        <option value="">{{ t('programs.filters.allStates') }}{{ facets ? ` (${num(stateTotal)})` : '' }}</option>
+        <option v-for="s in stateOptions" :key="s.state" :value="s.state">
+          {{ s.name }} ({{ s.state }}){{ s.count === undefined ? '' : ` · ${num(s.count)}` }}
+        </option>
+      </select>
     </div>
 
     <fieldset class="filter">
@@ -247,7 +271,7 @@ const graduatesLegend = computed(() =>
       </p>
     </fieldset>
 
-    <fieldset class="filter cities">
+    <fieldset v-if="filters.state" class="filter cities">
       <legend class="filter-label">{{ t('programs.filters.city') }}</legend>
       <label for="city-search" class="visually-hidden">{{ t('programs.filters.citySearch') }}</label>
       <input id="city-search" v-model="cityQuery" type="search" class="city-search" autocomplete="off" :placeholder="t('programs.filters.citySearch')" />
@@ -296,7 +320,8 @@ const graduatesLegend = computed(() =>
   color: var(--text-muted);
 }
 input[type='search'],
-input[type='number'] {
+input[type='number'],
+select {
   inline-size: 100%;
   font: inherit;
   color: var(--text);

@@ -143,6 +143,7 @@ export function toUrlQuery(f: ProgramFilters, extra: LocationQueryRaw = {}): Loc
 /** How many filter groups are active (shown as "Filters (n)"); sort and page are not filters. */
 export function activeFilterCount(f: ProgramFilters): number {
   return [
+    !!f.state,
     !!f.q,
     f.cip.length > 0,
     !!f.stem,
@@ -155,7 +156,7 @@ export function activeFilterCount(f: ProgramFilters): number {
   ].filter(Boolean).length
 }
 
-/** Same state and sort, no filters, page 1. */
+/** Same sort, no filters (every state), page 1. */
 export function clearedFilters(f: ProgramFilters): ProgramFilters {
-  return { state: f.state, q: '', cip: [], control: [], city: [], sort: f.sort, order: f.order, page: 1 }
+  return { q: '', cip: [], control: [], city: [], sort: f.sort, order: f.order, page: 1 }
 }

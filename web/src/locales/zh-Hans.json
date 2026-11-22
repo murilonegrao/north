@@ -25,7 +25,7 @@
     "tagline": "面向国际学生的美国硕士项目地图",
     "description": "North 从需要 F-1 签证并携带家属的申请者的角度，梳理、核实并比较美国的线下硕士项目。每一条数据都注明来源、日期和核实状态，因此“未知”永远不会被误当作“否”。",
     "browse": "浏览项目",
-    "browseHint": "得克萨斯州试点：计算机、数据科学、数据分析和信息系统，数据来自官方文件。"
+    "browseHint": "美国：计算机、数据科学、数据分析和信息系统，数据来自官方文件。"
   },
   "status": {
     "label": "API 状态",
@@ -100,7 +100,7 @@
   "programs": {
     "pageTitle": "项目 · North",
     "pageDescription": "面向国际学生的美国计算机与数据类硕士项目，每项数据都标明来源和状态。",
-    "eyebrow": "得克萨斯州试点",
+    "eyebrow": "美国",
     "title": "项目",
     "intro": "在美国官方文件中找到的硕士项目：IPEDS、DHS STEM 名单、SEVP 和认证数据库。每个状态标签都说明我们有多确定。",
     "filters": {
@@ -126,7 +126,9 @@
       "city": "城市",
       "citySearch": "查找城市",
       "cityNone": "没有匹配的城市。",
-      "clear": "清除筛选"
+      "clear": "清除筛选",
+      "state": "州",
+      "allStates": "所有州"
     },
     "cipFamilies": {
       "f11": "计算机",

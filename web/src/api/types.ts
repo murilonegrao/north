@@ -201,8 +201,16 @@ export interface ProgramQuery {
 }
 
 /** `GET /api/facets` (v0.2 §3): counts for the current state, other filters ignored. */
-export interface Facets {
+export interface StateCount {
   state: string
+  name: string
+  count: number
+}
+
+export interface Facets {
+  /** null: the whole country (v0.3); cities are then empty. */
+  state: string | null
+  states: StateCount[]
   total: number
   cip_family: Partial<Record<CipFamily, number>>
   control: Partial<Record<InstitutionControl, number>>
