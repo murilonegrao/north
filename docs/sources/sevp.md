@@ -96,3 +96,24 @@ Unknown. The file name carries the date (`certified-school-list-MM-DD-YY.pdf`), 
 ## Local sample
 
 Open https://studyinthestates.dhs.gov/school-search in a browser, click "Download Certified School List" and save the PDF unchanged as `spikes/_raw/sevp/certified-school-list-MM-DD-YY.pdf` (the date in the name becomes the file version unless the page header says otherwise). `scripts/load_local_sample.sh` takes the newest one. The production parser is `backend/north/ingest/us/sevp_pdf.py` (a port of the spike parser, with the same checks); the CLI also accepts the CSV derived by the spike (`sevp --file <csv>`). Matching: `backend/north/ingest/us/sevp.py` (source id `sevp_csl`): known campus code first, then an exact normalized name + city match (a match on the SEVP campus name beats one on the school name shared by all campuses), anything else becomes a reconciliation task.
+
+## Other award levels
+
+Spike S-8, run on 2026-11-22. Details: `spikes/s8_us_levels/RESULT.md`.
+
+**F vs M.**
+- The list flags F and M **per campus**, not per program: Y/N 11,880, Y/Y 1,365, N/Y 562.
+- At a Y/Y campus, the visa for a given program follows the student's primary intent (8 CFR 214.3(a)(2)(iii)). Academic study, language, liberal arts and professions are F. Vocational or technical training is M.
+- For associate's degrees and sub-baccalaureate certificates, the list alone cannot say whether a program leads to F-1 or M-1. That matters for families: M-2 dependents, no OPT, practical training only under 214.2(m)(14).
+
+**Language schools.**
+- There is no school-type column. SEVIS records "engaged in English language training" on Form I-17 (8 CFR 214.3(h)(3)(i)(P)), but the public PDF does not show it.
+- A name-keyword heuristic (english, language, ESL, ELS, intensive, linguistic, TOEFL) finds:
+  - 273 campuses / 176 school codes nationally;
+  - 11 campuses in TX, all F-only (`spikes/s8_us_levels/out/sevp_tx_language_name_hits.csv`).
+- Treat these as leads for curation. The heuristic misses university intensive English programs listed under the main campus name.
+
+**Rules for English language students (8 CFR 214.2, eCFR 2026-11-01):**
+- Language training is F-1 (214.3(a)(2)(i)(G)), and F-2 dependents may accompany (214.2(f)(3)).
+- Admission is capped at 24 months plus 30 days (214.2(f)(5)(i)(A)).
+- There is no practical training (214.2(f)(10)).

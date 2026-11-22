@@ -1,0 +1,8 @@
+credlev,creddesc,rows,institutions,earn1_value,earn1_PS,earn1_NA,earn1_suppressed_pct,earn1_value_pct
+1,Undergraduate Certificate or Diploma,184,91,20,156,8,84.8,10.9
+2,Associate's Degree,187,75,18,169,0,90.4,9.6
+3,Bachelor's Degree,192,80,81,105,6,54.7,42.2
+4,Post-baccalaureate Certificate,3,2,0,3,0,100.0,0.0
+5,Master's Degree,119,51,29,86,4,72.3,24.4
+6,Doctoral Degree,22,15,0,21,1,95.5,0.0
+8,Graduate/Professional Certificate,36,24,2,26,8,72.2,5.6

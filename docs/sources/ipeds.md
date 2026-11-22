@@ -116,3 +116,56 @@ Annual. Each component comes out as a provisional version and is later revised (
 | https://nces.ed.gov/ipeds/datacenter/data/IC2023_AY.zip | `spikes/_raw/ipeds/IC2023_AY.zip` |
 
 The loader (`backend/north/ingest/us/ipeds.py`) picks the newest year of each file in the directory, so newer files can be dropped next to the old ones. It reads only the HD columns it needs; `CHFNM` (the chief administrator's name) is never read.
+
+## Other award levels
+
+Spike S-8, run on 2026-11-22. Details: `spikes/s8_us_levels/RESULT.md`.
+
+**`AWLEVEL` codes present in C2024_A:**
+
+| Code | Level |
+|---|---|
+| 20 | certificate < 12 weeks |
+| 21 | certificate 12 weeks to < 1 year |
+| 2 | certificate 1 to < 2 years |
+| 3 | associate's |
+| 4 | certificate 2 to < 4 years |
+| 5 | bachelor's |
+| 6 | postbaccalaureate certificate |
+| 7 | master's |
+| 8 | post-master's certificate |
+| 17 | doctor's, research/scholarship |
+| 18 | doctor's, professional practice |
+| 19 | doctor's, other |
+
+The dictionary also lists 1 and the totals 12–15, but they have no data rows. Check codes against each year's dictionary.
+
+**Counts (UNITID × CIP6 × level):**
+- TX, all CIPs: 14,828 programs (11,807 with completions > 0) at 387 institutions.
+- TX, tech CIPs (11, 52.12, 30.70, 30.71): 846 programs (674 > 0) at 148 institutions.
+- National: 267,595 programs (200,947 > 0) at 5,869 institutions, 1,607 CIP6 codes.
+- On the DHS STEM list: 65,499 nationally and 3,780 in TX.
+
+**Nonresident share (`CNRALT`)** is high only at graduate level. TX, all CIPs:
+
+| Level | Nonresident share |
+|---|---|
+| master's | 25.5% |
+| research doctorate | 29.8% |
+| postbaccalaureate / post-master's certificates | 17.8% / 24.6% |
+| bachelor's | 2.5% |
+| associate's | 1.8% |
+| sub-baccalaureate certificates | ≤ 1.4% |
+| professional doctorate | 1.0% |
+
+**Tuition by level (IC_AY):**
+- Undergraduate: `TUITION1/2/3` + `FEE1/2/3`, and published first-time charges `CHG1/2/3AT3`/`AY3`. The nonresident value is `TUITION3` (TX: 189 of 202 IC_AY rows) or `CHG3AY3` (179).
+- Graduate: `TUITION5/6/7`. `TUITION7` has 103 of 202 TX rows.
+- Professional practice doctorates: `ISPROFn`/`OSPROFn` for 9 fields (chiropractic, dentistry, medicine, optometry, osteopathic, pharmacy, podiatry, veterinary, law). Others fall back to `TUITION7`.
+- Only 202 of 401 active TX institutions have an IC_AY row. Program and clock-hour reporters, typically certificate schools, report charges in IC<year>_PY. That file was not downloaded or checked.
+
+**ESL:**
+- CIP 32.0108 and 32.0109 are "not valid for IPEDS reporting" (CIP 2020); C2024_A has 0 rows in 32.xx.
+- For-credit ESL is 16.1701: 22 programs nationally, 2 in TX, both with 0 completions.
+- Stand-alone language schools are mostly absent from HD. A name search finds one, in FL.
+- IPEDS cannot list intensive English programs.

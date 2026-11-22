@@ -89,3 +89,39 @@ U.S. federal government data. Works of the U.S. government are generally not cov
 ## Update frequency
 
 Several releases a year. The changelog shows releases on 2026-10-15 (new FSA/Treasury data, IPEDS Winter 2025-26) and 2026-11-02 (IPEDS revisions). The file name carries the release date (`_MMDDYYYY`), which works as `file_version`.
+
+## Other award levels
+
+Spike S-8, run on 2026-11-22. Details: `spikes/s8_us_levels/RESULT.md`.
+
+**`CREDLEV` vs IPEDS `AWLEVEL`:**
+
+| CREDLEV | Scorecard label | IPEDS AWLEVEL |
+|---|---|---|
+| 1 | Undergraduate Certificate or Diploma | 20, 21, 2, 4 |
+| 2 | Associate's | 3 |
+| 3 | Bachelor's | 5 |
+| 4 | Post-baccalaureate Certificate | 6 |
+| 5 | Master's | 7 |
+| 6 | Doctoral | 17/19 |
+| 7 | First Professional Degree | 18 |
+| 8 | Graduate/Professional Certificate | 8 (6 is unclear) |
+
+The AWLEVEL column is our reading of the labels; the spike did not cross-check it row by row. The mapping is not 1:1. Keep `CREDLEV` as its own classification instead of forcing it onto AWLEVEL.
+
+**TX rows (all CIPs) and `EARN_MDN_1YR`** (% with a value / % `PS`):
+
+| CREDLEV | Level | TX rows | Value / PS |
+|---|---|---|---|
+| 1 | undergraduate certificate | 2,151 | 25.0 / 71.8 |
+| 2 | associate's | 2,456 | 19.1 / 79.6 |
+| 3 | bachelor's | 3,464 | 43.6 / 54.6 |
+| 4 | post-baccalaureate certificate | 63 | 1.6 / 98.4 |
+| 5 | master's | 2,319 | 30.5 / 66.9 |
+| 6 | doctoral | 729 | 11.0 / 87.0 |
+| 7 | first professional | 86 | 45.3 / 54.7 |
+| 8 | graduate certificate | 682 | 3.5 / 85.9 |
+
+National rates are similar: bachelor's 35.8% with a value, doctoral 10.3%, graduate certificate 3.8%.
+
+**Tuition.** The institution file's `TUITIONFEE_OUT` is undergraduate tuition and fees, so it is usable as a reference for associate's and bachelor's programs. It is still not usable for graduate programs.

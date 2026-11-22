@@ -2,13 +2,13 @@
 title: "UML Model — North"
 type: model
 project: north
-version: 1.0
+version: 1.1
 status: baseline
 language: en
 created: 2026-11-20
-updated: 2026-11-21
-base: requirements.md v1.3
-decisions: [decisions/0002-after-data-spikes.md]
+updated: 2026-11-22
+base: requirements.md v2.0
+decisions: [decisions/0002-after-data-spikes.md, decisions/0008-placement-ireland-all-levels.md]
 ---
 
 # UML Model — North
@@ -26,7 +26,15 @@ Reading order: use cases → domain → states → activities → sequences → 
 > - **Profile and evaluation:** English score or target (R14); budget is a whole-program total (K2); `Evaluation` gets `score_range`, `certainty`, breakdown (0002/A9, R16); filter outcome `pass_with_caveat` (K3); `CostEstimate.period_total_with_competitive_funding` (R15).
 > - Scope CIPs: 11.xx, 52.12xx (flagged), 30.70xx, 30.71xx (R1, R2). Pending items updated.
 
-> **Multiple countries (v0.2, C-09).** The model accepts any country without data migration: institution identifiers, program classification, authorization for foreign students, work eligibilities, localities and currency are generic, and visa rules live in one module per country. Only the `us` module is in the MVP scope. In the diagrams, "state" is the country's **subdivision** (the state in the US, the province in Canada).
+> **Version 1.1 (record 0008).** English placement, Ireland and every degree level:
+> - **Program:** `kind` (`degree`, `language_course`) and `level` (ISCED 2011 level + credential) (T12, T13); `language_course` fields (CEFR entry/exit, exam, weeks, hours, price, start dates); program-level `intl_authorization` for Irish lists (T5).
+> - **Ireland:** `IeRules` beside `UsRules`; `CountryRules.family()` (T2); schemes `ie_ilep`, `ie_trusted` (authorization), `ie_ilep_ref`, `ie_trusted_ref`, `ie_irq` (program identifiers, new `program_identifiers` table), `ie_provider_no` (institution), `ie_nfq` and `us_ipeds_awlevel` (classifications), `ie_cso_riq02`, `ie_county` (localities); `RentBenchmark.period` (T6, T7).
+> - **Curation slices** (T11): `CurationSlice` / `curation_slices`; coverage moves from subdivision to slice.
+> - **Profile:** `travelling_party` (T2) and `english.estimated` (T23); seven tests in `EnglishScore` (T17); `toefl_ibt_scale` on program minimums (T20).
+> - **Placement:** `PlacementItem` and `PlacementResult` (T21–T23); items live in YAML in the repo, results in the browser, so neither is a table.
+> - Use case UC12; reconciliation kind `ie_list_move`.
+
+> **Multiple countries (v0.2, C-09).** The model accepts any country without data migration: institution identifiers, program classification, authorization for foreign students, work eligibilities, localities and currency are generic, and visa rules live in one module per country. The `us` and `ie` modules are in scope (record 0008). In the diagrams, "state" is the country's **subdivision** (the state in the US, the province in Canada).
 
 | # | Diagram | Answers | Requirements |
 |---|---|---|---|
@@ -46,6 +54,7 @@ Reading order: use cases → domain → states → activities → sequences → 
 ```mermaid
 flowchart LR
   P(["Researcher<br/>no login"])
+  E(["English learner<br/>no login"])
   C(["Curator<br/>one account"])
   A(["Administrator"])
   S(["Scheduler<br/>CronJob"])
@@ -58,6 +67,7 @@ flowchart LR
     UC03(("UC03 Compare<br/>programs"))
     UC04(("UC04 Configure profile<br/>and simulate"))
     UC10(("UC10 Export CSV"))
+    UC12(("UC12 Take placement test<br/>and get the target score"))
     UC11(("UC11 Sign in"))
     UC06(("UC06 Curate<br/>program"))
     UC08(("UC08 Review<br/>extraction"))
@@ -67,6 +77,7 @@ flowchart LR
   end
 
   P --- UC01 & UC02 & UC03 & UC04 & UC10
+  E --- UC12 & UC01
   C --- UC06 & UC08 & UC09
   A --- UC05 & UC07
   S --- UC05
@@ -77,11 +88,13 @@ flowchart LR
   UC05 --- F
   UC07 --- L
   UC04 -. extend .-> UC01
+  UC12 -. extend .-> UC04
 ```
 
 - In the MVP, curator and administrator are **the same account** (Q02). The roles stay separate in the model so it does not need to change when more people join.
 - UC11 (login) is new in SRS 1.0, because of A1 (curation in the database). It covers FR-25. Record 0006 implements it as username + password + TOTP; the `accounts` entity below is the `users` table, with `admin_sessions`, `login_attempts`, `audit_log`, `jobs`, `job_logs` and `schedules` next to it. Record 0007 adds `users.email`, `users.email_verified_at`, `users.locale`, `users.notify_jobs`, and the tables `user_tokens` (single-use email links) and `email_outbox` (messages the worker sends).
 - The scheduler triggers UC05 without login only because it runs inside the cluster, with its own credential (see §7). It runs only sources that allow automatic download (today: ECB rates) and re-processes the latest uploaded files when rules change (K4).
+- UC12 (record 0008) runs fully in the browser: items and audio are static files, the result stays local and becomes the profile's estimated band (FR-28, FR-29, FR-35).
 - UC05 now starts with an upload: the administrator downloads each official file in a browser and uploads it in the curation screen (FR-26, R4). Every source except ECB rates enters this way.
 
 ---
@@ -117,7 +130,11 @@ classDiagram
     institutional: bool  «always true»
   }
   class InstitutionIdentifier {
-    scheme: str  «unitid, opeid, dapip, ror, ukprn, dli, cricos»
+    scheme: str  «unitid, opeid, dapip, ror, ie_provider_no»
+    value: str
+  }
+  class ProgramIdentifier {
+    scheme: str  «ie_ilep_ref, ie_trusted_ref, ie_irq»
     value: str
   }
   class Campus {
@@ -130,27 +147,33 @@ classDiagram
     intl_authorization: VerifiedValue~Authorization~
   }
   class Locality {
-    country: str  «US»
-    scheme: str  «us_county_fips»
+    country: str  «US, IE»
+    scheme: str  «us_county_fips, ie_cso_riq02, ie_county»
     code: str  «48453»
     name: str
   }
   class RentBenchmark {
     locality: Locality
-    source: str  «hud_fmr»
-    fiscal_year: int
-    bedrooms: int  «0 to 4»
+    source: str  «hud_fmr, cso_riq02»
+    period: str  «FY2027, 2025Q4»
+    bedrooms: int  «0 to 4; 4 = 4+ in Ireland»
     amount: Money  «monthly»
   }
   class Authorization {
-    scheme: str  «sevp, dli, cricos, uk_sponsor»
+    scheme: str  «sevp, ie_ilep, ie_trusted»
+    level: campus / program
     authorized: bool
+    valid_until: date or null  «ILEP end, T6»
   }
   class Program {
     id: slug
     name: str
+    kind: degree / language_course
+    level: VerifiedValue~Level~  «null for language courses»
     degree: str  «MS, MEng, MSc, MRes»
     modality: VerifiedValue~Modality~
+    intl_authorization: VerifiedValue~Authorization~ or null  «program level, ie»
+    language_course: LanguageCourse or null
     primary_classification: VerifiedValue~Classification~
     in_strategy: bool  «derived»
     flags: set~str~  «derived, no_stem_opt_extension»
@@ -161,6 +184,25 @@ classDiagram
     admissions: dict  «deadlines: list of VerifiedValue of Deadline»
     career: dict
     family: dict
+  }
+  class Level {
+    isced_level: 5 / 6 / 7 / 8
+    credential: certificate / associate / bachelor / postgraduate_certificate / master / doctorate_research / doctorate_professional
+  }
+  class LanguageCourse {
+    cefr_entry: VerifiedValue~CefrBand~
+    cefr_exit: VerifiedValue~CefrBand~
+    exam: VerifiedValue~str~  «ielts, cambridge, trinity, languagecert, toefl, pte, duolingo, tie, other»
+    weeks: VerifiedValue~int~
+    hours_per_week: VerifiedValue~decimal~
+    price: VerifiedValue~Money~
+    start_dates: list~VerifiedValue~  «each a date»
+  }
+  class CurationSlice {
+    name: str  «Texas tech master's, Dublin English courses»
+    country: str
+    filter: dict
+    created_by: Account
   }
   class Funding {
     available_to_masters: VerifiedValue~bool~
@@ -174,7 +216,7 @@ classDiagram
     date: date or null
   }
   class Classification {
-    scheme: str  «cip2020, isced_f_2013»
+    scheme: str  «cip2020, isced_f_2013, us_ipeds_awlevel, ie_nfq»
     code: str  «11.0701»
     title: str
   }
@@ -241,6 +283,7 @@ classDiagram
     flags(program) set~str~
     migration_risk(program) Risk
     household_income(profile) Money
+    family(program, profile) CriterionResult
     bands() ScoreBands
   }
   class UsRules {
@@ -248,6 +291,13 @@ classDiagram
     F-1 modality
     us.stem_opt
     F-2 cannot work
+    ESL: F-1, 24 months, no OPT
+  }
+  class IeRules {
+    programme on ILEP or TrustEd
+    Stamp 2: no dependants
+    NFQ 10 research: Stamp 2A, spouse cannot work
+    EUR 10,000 a year
   }
   class FieldChange {
     field_path: str  «admissions.english.toefl_ibt_min»
@@ -264,7 +314,7 @@ classDiagram
     affects: list~field_path~
   }
   class SourceFile {
-    source: str  «ipeds_c_a, dhs_stem, sevp, dapip, scorecard_fos, hud_fmr»
+    source: str  «ipeds_c_a, dhs_stem, sevp, dapip, scorecard_fos, hud_fmr, ie_ilep, ie_trusted, ie_irq, cso_riq02»
     file_version: str  «C2024_A, 2024-07-22»
     sha256: str
     uploaded_by: Account
@@ -278,7 +328,7 @@ classDiagram
     errors: list
   }
   class ReconciliationTask {
-    reason: str  «SEVP without exact match, value conflict»
+    reason: str  «SEVP without exact match, ie_list_move, value conflict»
     candidates: list
     resolved: bool
   }
@@ -310,15 +360,32 @@ classDiagram
     english: EnglishInput
     dependents: int
     spouse_can_work: bool
+    travelling_party: dict  «language_course alone, degree with_family; T2»
     undergrad_area: str
   }
   class EnglishInput {
     score: EnglishScore or null  «real score»
     target: EnglishScore or null  «R14, when there is no score»
+    estimated: PlacementResult or null  «T23»
   }
   class EnglishScore {
-    test: toefl_ibt / ielts_academic / duolingo / pte_academic
+    test: toefl_ibt / ielts_academic / cambridge / duolingo / pte_academic / languagecert / trinity_ise
+    scale: str or null  «ibt_0_120, ibt_1_6»
     overall: decimal
+  }
+  class PlacementResult {
+    <<browser>>
+    bands: dict  «grammar, vocabulary, reading, listening»
+    overall: CefrBand
+    taken_at: datetime
+    bank_version: str
+  }
+  class PlacementItem {
+    <<file>>
+    id: str
+    skill: grammar / vocabulary / reading / listening
+    band: A2 / B1 / B2 / C1
+    audio_file: str or null
   }
   class Weights {
     post_study_work: 20  «STEM OPT in the US»
@@ -375,6 +442,14 @@ classDiagram
   Campus "*" --> "1" Locality
   Campus ..> Authorization
   Campus "1" --> "*" Program
+  Program "1" *-- "*" ProgramIdentifier
+  Program ..> Level
+  Program ..> LanguageCourse : kind = language_course
+  Program ..> Authorization : program level, ie
+  CurationSlice ..> Program : selects
+  IeRules ..|> CountryRules
+  EnglishInput ..> PlacementResult
+  PlacementResult ..> PlacementItem
   Locality "1" --> "*" RentBenchmark
   RentBenchmark "*" --> "0..1" SourceFile
   Program *-- Funding
@@ -420,6 +495,10 @@ Decisions this diagram fixes:
   - `confirmed_official` and `reported_by_program` need `source_kind`, `source_url` and `verified_at`; `confirmed_negative` needs the same (0002/A4); `extracted_unverified` needs `source_url` and `evidence`; `unknown` has no value.
   - **`source_kind`** (R13) ∈ `page`, `official_list`, `correspondence`, `uploaded_file`. For `correspondence` (a written reply, e.g. from the international office), `source_url` may be null but `verified_at` is required. The message is stored privately, never in the repository or the public API; the public view shows "written reply from the international office, <date>". No names or email addresses are ever stored in public fields.
   - **Polarity** (R12): for yes/no fields a confirmed "no" is always `confirmed_negative` with value `false`, never `confirmed_official` + `false`. Numeric and text fields never use `confirmed_negative`; "test not accepted" is a yes/no field (`<test>_accepted = false`), not a number. An `Authorization` with `authorized = false` and an accreditation of `false` count as yes/no.
+- **Kinds and levels** (record 0008/T12, T13). A program is a `degree` or a `language_course`. Degrees have a `Level` (ISCED 2011 level + credential) derived from the source classification (`us_ipeds_awlevel`, `ie_nfq`) through `ClassificationMap`; language courses have no level and carry `LanguageCourse` instead. Both use the same `VerifiedValue` envelope, history, curation and search.
+- **Authorization level** (T5). The US authorizes the campus (`sevp`); Ireland authorizes the programme (`ie_ilep`, `ie_trusted`), so `Program.intl_authorization` is used by the `ie` module. Absence from the Irish lists is `unknown` until the provider is fully reconciled (BR-18).
+- **Family per country** (T2). `CountryRules.family()` decides the family criterion with the profile's `travelling_party`: always pass in the US (F-2), fail on Stamp 2 in Ireland when the family travels, `pass_with_caveat` for NFQ 10 research.
+- **Curation slices** (T11). Coverage and completeness are computed per `CurationSlice`, not per subdivision; programs outside every slice are "official data only".
 - **Location** (R17). A program belongs to one `Campus`; the campus belongs to one `Institution` and sits in one `Locality` (US: county, scheme `us_county_fips`). The HUD rent is stored once per county in `RentBenchmark`, not on each program (R6, K5). The locality country is explicit so other countries can use their own schemes.
 - **Nothing in the core is American.** Everything US-specific became data or a module:
   - UNITID, OPEID and the DAPIP id are `InstitutionIdentifier` rows with a `scheme` (0002/A15), next to `ror` (a global identifier) and other countries' schemes. The SEVP campus code is **not** an identifier: it is `Campus.sevp_campus_code` (R5, K7). The 12-character SEVP school code is not unique and is not stored as an identifier.
@@ -894,6 +973,8 @@ erDiagram
   institutions ||--o{ campuses : "has"
   localities ||--o{ campuses : "locates"
   campuses ||--o{ programs : "offers"
+  programs ||--o{ program_identifiers : "identified by"
+  accounts ||--o{ curation_slices : "created"
   localities ||--o{ rent_benchmarks : "has"
   source_files ||--o{ rent_benchmarks : "source"
   programs ||--o{ program_classifications : "classified"
@@ -931,7 +1012,7 @@ erDiagram
   localities {
     bigint id PK
     text country_code FK
-    text scheme UK "us_county_fips"
+    text scheme UK "us_county_fips, ie_cso_riq02, ie_county"
     text code UK "48453, unique per country and scheme"
     text name "Travis County"
   }
@@ -947,7 +1028,13 @@ erDiagram
   institution_identifiers {
     bigint id PK
     text institution_id FK
-    text scheme UK "unitid, opeid, dapip, ror, ukprn, dli, cricos"
+    text scheme UK "unitid, opeid, dapip, ror, ie_provider_no"
+    text value UK "unique per scheme and value"
+  }
+  program_identifiers {
+    bigint id PK
+    text program_id FK
+    text scheme UK "ie_ilep_ref, ie_trusted_ref, ie_irq"
     text value UK "unique per scheme and value"
   }
   campuses {
@@ -964,8 +1051,8 @@ erDiagram
   rent_benchmarks {
     bigint id PK
     bigint locality_id FK
-    text source "hud_fmr"
-    int fiscal_year
+    text source "hud_fmr, cso_riq02"
+    text period "FY2027, 2025Q4"
     int bedrooms "0 to 4"
     numeric amount "monthly"
     text currency
@@ -975,7 +1062,11 @@ erDiagram
     text id PK "slug"
     bigint campus_id FK
     text name
+    text kind "degree, language_course"
+    jsonb level "VerifiedValue: isced_level, credential"
     text degree
+    jsonb intl_authorization "VerifiedValue, program level (ie), T5"
+    jsonb language_course "cefr_entry, cefr_exit, exam, weeks, hours_per_week, price, start_dates"
     bool in_strategy "derived, 0002/A11, never edited"
     jsonb flags "derived, no_stem_opt_extension"
     jsonb immigration "keys from the country module"
@@ -990,7 +1081,7 @@ erDiagram
   }
   classifications {
     int id PK
-    text scheme UK "cip2020, isced_f_2013"
+    text scheme UK "cip2020, isced_f_2013, us_ipeds_awlevel, ie_nfq"
     text code UK "11.0701"
     text title
   }
@@ -1064,7 +1155,7 @@ erDiagram
   }
   source_files {
     bigint id PK
-    text source UK "sevp, dhs_stem, ipeds_hd, ipeds_c_a, ipeds_ic_ay, scorecard_fos, dapip, hud_fmr"
+    text source UK "sevp, dhs_stem, ipeds_hd, ipeds_c_a, ipeds_ic_ay, ipeds_ic_py, scorecard_fos, dapip, hud_fmr, ie_ilep, ie_trusted, ie_irq, cso_riq02"
     text sha256 UK "unique per source and sha256"
     text file_version "C2024_A, 2026-11-18"
     text original_name
@@ -1110,10 +1201,18 @@ erDiagram
   reconciliation_tasks {
     bigint id PK
     bigint run_id FK
-    text kind "sevp_match, sevp_missing, value_conflict"
+    text kind "sevp_match, sevp_missing, ie_list_move, value_conflict"
     text reason
     jsonb candidates
     bool resolved
+  }
+  curation_slices {
+    bigint id PK
+    text name UK
+    text country_code FK
+    jsonb filter "same keys as the listing filters"
+    int created_by FK
+    timestamptz created_at
   }
 ```
 
@@ -1125,6 +1224,7 @@ erDiagram
 - **Classifications:** unique constraint on `classifications(scheme, code)`. Each program has a primary code in the country's scheme (`is_primary`, US: 6-digit CIP from IPEDS) whose status and source are in `program_classifications.verified` (0002/A7). Through the map it also has an ISCED-F code. `classification_maps.origin` is `derived_official` (Statistics Canada pairs) or `proposed` (needs author review); `partial` marks a CIP class that is only part of the ISCED-F class (R9). The field filter uses ISCED-F when a search mixes countries and the local code when it covers a single country.
 - **Eligibilities:** one row per rule version in `eligibility_rules`, with `params` (US STEM: `{"whole_series": ["14", "26", "27", "40"]}`, 0002/A14) and the uploaded list in `source_file_id`. `program_eligibilities.result` is a full `VerifiedValue` (0002/A8); `claim_mismatch` flags a program that claims STEM when its CIP disagrees. When a new version arrives (for example, a new DHS STEM list), that country's `program_eligibilities` are recomputed and the changes go to the history.
 - **Money:** every value inside `cost` and `funding` is `{amount, currency}`, in addition to the `VerifiedValue`. Conversion is never stored in the program: it happens at evaluation time. `fx_rates` stores ECB EUR/xxx rates as published (`source = ecb`, unique on `(source, base, quote, on_date)`); cross rates go through EUR, using the latest rate on or before the requested date (R8). The converted value is returned with the rate date.
+- **Round 3** (record 0008): `programs.kind` and `programs.level` are indexed for the listing (NFR-02 over about 280,000 programs). `program_identifiers` has a unique constraint on `(scheme, value)`; Irish ingestion matches ILEP and TrustEd rows by these refs and by `institution_identifiers.ie_provider_no`. ILEP contact names, emails and phones are dropped at read time and stored nowhere. `rent_benchmarks.period` replaces `fiscal_year` (HUD `FY2027`, CSO `2025Q4`); unique on `(locality_id, source, period, bedrooms)`. `subdivisions.coverage_status` is superseded by per-slice coverage computed from `curation_slices`.
 - `field_changes` stores the full `VerifiedValue`, before and after. This is FR-09 and serves as the audit trail.
 - **Uploads and idempotency** (R4, NFR-03): unique constraint on `source_files(source, sha256)`; the bytes are on the upload volume at `storage_path` (§6). Each IPEDS file records its own year in `file_version` (K6). `ingestion_runs.source_file_id` points to the file; a partial unique index on `ingestion_runs(source_file_id) WHERE status = 'succeeded'` stops the same file from being ingested twice, while a failed run can be repeated.
 - **Personal data** (NFR-10, 0002/A16): DAPIP contact names, phones and emails are never stored in any table. Correspondence used as a source (R13) is stored outside the public tables; `VerifiedValue.evidence` never holds names or email addresses.
@@ -1148,3 +1248,8 @@ Still open (from record 0002):
 5. Profile fields still missing: GPA and GRE; a parameter for non-housing family expenses.
 6. Confirm the column names of the HUD county file on the first download (K5).
 7. Check the proposed OPT fee rule (Federal Register 2026-20660) in `migration_rules` (0002/A16).
+
+Open from record 0008:
+8. Review the source code → ISCED level map (`us_ipeds_awlevel`, `ie_nfq`), as with R9.
+9. Confirm the effective date of the fixed 4-year F-1 admission (8 CFR 214.2(f)(5)(i)) before adding it to `migration_rules` (T15).
+10. QQI and SEVP replies (TrustEd terms, NFQ codes, English-training flag) (T8).

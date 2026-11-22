@@ -1,0 +1,10 @@
+awlevel,label,programs,with_completions_gt0,with_completions_0,completions_unknown,institutions,completions,nonresident,nonresident_pct
+2,Certificates of at least 1 but less than 2 years,94,70,24,0,52,1249,24,1.9
+3,Associate's degree,189,152,37,0,70,3183,124,3.9
+4,Certificates of at least 2 but less than 4 years,1,0,1,0,1,0,0,
+5,Bachelor's degree,200,170,30,0,81,9650,595,6.2
+6,Postbaccalaureate certificate,38,19,19,0,23,572,362,63.3
+7,Master's degree,132,112,20,0,51,11082,8511,76.8
+17,Doctor's degree - research/scholarship,21,18,3,0,15,204,153,75.0
+20,Certificates of less than 12 weeks,4,0,4,0,3,0,0,
+21,Certificates of at least 12 weeks but less than 1 year,167,133,34,0,74,4573,107,2.3

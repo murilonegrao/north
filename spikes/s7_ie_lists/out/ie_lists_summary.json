@@ -1,0 +1,1905 @@
+{
+ "files": {
+  "ilep": {
+   "url": "https://www.irishimmigration.ie/wp-content/uploads/2026/09/Interim-List-of-Eligible-Programmes-updated-22-September-2026.xlsx",
+   "page": "https://www.irishimmigration.ie/coming-to-study-in-ireland/what-are-my-study-options/a-third-level-course-or-a-language-course/",
+   "file": "Interim-List-of-Eligible-Programmes-updated-22-September-2026.xlsx",
+   "bytes": 133232,
+   "sha256": "b6f4be81df990a4a8e6adae6aab993924666770865fafdc904ec75dc2ea9eda2"
+  },
+  "trusted": {
+   "url": "https://www.trustedireland.ie/sites/default/files/2026-02/trusted-ireland-he-list-of-eligible-programmes.xlsx",
+   "page": "https://www.trustedireland.ie/check-eligible-courses-for-study-visas",
+   "file": "trusted-ireland-he-list-of-eligible-programmes.xlsx",
+   "bytes": 530654,
+   "sha256": "70db0c12053042b23a82f26d77a95ec8a411c22a60bc2544fc66b1145288f6b1"
+  }
+ },
+ "ilep": {
+  "title": "ILEP - Approved higher education, professional, foundation and English language programmes - with effect from 11 February 2026",
+  "rows": 1151,
+  "header": [
+   "Programme Reference No",
+   "Programme Type",
+   "Provider",
+   "Addresss",
+   "Contact Email",
+   "Contact Telephone",
+   "Contact Name",
+   "Programme Title",
+   "Awarding Body",
+   "Award Title",
+   "Duration (ECTS /Weeks per year)",
+   "Hours per week",
+   "NFQ Level",
+   "Entry Level",
+   "Exit Level"
+  ],
+  "fill_rate": {
+   "Programme Reference No": 1151,
+   "Programme Type": 1151,
+   "Provider": 1151,
+   "Addresss": 1151,
+   "Contact Email": 1151,
+   "Contact Telephone": 1151,
+   "Contact Name": 1151,
+   "Programme Title": 1151,
+   "Awarding Body": 1151,
+   "Award Title": 1151,
+   "Duration (ECTS /Weeks per year)": 1151,
+   "Hours per week": 1151,
+   "NFQ Level": 1151,
+   "Entry Level": 1151,
+   "Exit Level": 1151
+  },
+  "programme_type_raw": [
+   [
+    "English Language",
+    1066
+   ],
+   [
+    "Higher education - Major award",
+    78
+   ],
+   [
+    "Professional",
+    4
+   ],
+   [
+    "Foundation",
+    3
+   ]
+  ],
+  "programme_type": [
+   [
+    "English Language",
+    1066
+   ],
+   [
+    "Higher education - Major award",
+    78
+   ],
+   [
+    "Professional",
+    4
+   ],
+   [
+    "Foundation",
+    3
+   ]
+  ],
+  "nfq_level": [
+   [
+    "n/a",
+    1070
+   ],
+   [
+    "8",
+    34
+   ],
+   [
+    "9",
+    31
+   ],
+   [
+    "7",
+    9
+   ],
+   [
+    "10",
+    4
+   ],
+   [
+    "6",
+    2
+   ],
+   [
+    "5",
+    1
+   ]
+  ],
+  "nfq_by_type": {
+   "English Language": [
+    [
+     "n/a",
+     1066
+    ]
+   ],
+   "Foundation": [
+    [
+     "6",
+     1
+    ],
+    [
+     "5",
+     1
+    ],
+    [
+     "8",
+     1
+    ]
+   ],
+   "Higher education - Major award": [
+    [
+     "8",
+     33
+    ],
+    [
+     "9",
+     31
+    ],
+    [
+     "7",
+     9
+    ],
+    [
+     "10",
+     4
+    ],
+    [
+     "6",
+     1
+    ]
+   ],
+   "Professional": [
+    [
+     "n/a",
+     4
+    ]
+   ]
+  },
+  "award_kind": [
+   [
+    "english_language",
+    1066
+   ],
+   [
+    "master",
+    24
+   ],
+   [
+    "bachelor_honours",
+    15
+   ],
+   [
+    "postgraduate_diploma",
+    12
+   ],
+   [
+    "bachelor_ordinary",
+    9
+   ],
+   [
+    "certificate_diploma_other",
+    7
+   ],
+   [
+    "unclassified",
+    6
+   ],
+   [
+    "professional",
+    4
+   ],
+   [
+    "doctorate",
+    4
+   ],
+   [
+    "foundation",
+    3
+   ],
+   [
+    "higher_certificate",
+    1
+   ]
+  ],
+  "award_kind_by_nfq": {
+   "10": [
+    [
+     "doctorate",
+     4
+    ]
+   ],
+   "5": [
+    [
+     "foundation",
+     1
+    ]
+   ],
+   "6": [
+    [
+     "foundation",
+     1
+    ],
+    [
+     "higher_certificate",
+     1
+    ]
+   ],
+   "7": [
+    [
+     "certificate_diploma_other",
+     7
+    ],
+    [
+     "bachelor_ordinary",
+     2
+    ]
+   ],
+   "8": [
+    [
+     "bachelor_honours",
+     15
+    ],
+    [
+     "postgraduate_diploma",
+     9
+    ],
+    [
+     "bachelor_ordinary",
+     7
+    ],
+    [
+     "unclassified",
+     2
+    ],
+    [
+     "foundation",
+     1
+    ]
+   ],
+   "9": [
+    [
+     "master",
+     24
+    ],
+    [
+     "unclassified",
+     4
+    ],
+    [
+     "postgraduate_diploma",
+     3
+    ]
+   ],
+   "n/a": [
+    [
+     "english_language",
+     1066
+    ],
+    [
+     "professional",
+     4
+    ]
+   ]
+  },
+  "awarding_body_top20": [
+   [
+    "CELA",
+    184
+   ],
+   [
+    "ACELS",
+    164
+   ],
+   [
+    "Trinity College London",
+    139
+   ],
+   [
+    "LanguageCert",
+    55
+   ],
+   [
+    "Cambridge ESOL",
+    44
+   ],
+   [
+    "IELT",
+    38
+   ],
+   [
+    "St Patrick's Pontifical University",
+    37
+   ],
+   [
+    "British Council / CELA / IDP Australia",
+    33
+   ],
+   [
+    "QQI",
+    31
+   ],
+   [
+    "Cambridge",
+    28
+   ],
+   [
+    "IELTS",
+    18
+   ],
+   [
+    "Oxford University Press",
+    18
+   ],
+   [
+    "TIE",
+    16
+   ],
+   [
+    "ACELS/QQI",
+    16
+   ],
+   [
+    "British Council / CELA",
+    15
+   ],
+   [
+    "British Council/CELA/IDP",
+    15
+   ],
+   [
+    "British Council / CELA / IDP",
+    14
+   ],
+   [
+    "Language Cert",
+    14
+   ],
+   [
+    "Cambridge English",
+    12
+   ],
+   [
+    "Cambridge ELA",
+    12
+   ]
+  ],
+  "awarding_body_distinct": 97,
+  "duration_unit": [
+   [
+    "weeks",
+    1069
+   ],
+   [
+    "ects",
+    77
+   ],
+   [
+    "research",
+    4
+   ],
+   [
+    "none",
+    1
+   ]
+  ],
+  "duration_ects": [
+   [
+    180.0,
+    17
+   ],
+   [
+    60.0,
+    17
+   ],
+   [
+    90.0,
+    16
+   ],
+   [
+    120.0,
+    16
+   ],
+   [
+    240.0,
+    9
+   ],
+   [
+    70.0,
+    1
+   ],
+   [
+    25.0,
+    1
+   ]
+  ],
+  "providers": 77,
+  "providers_by_type": {
+   "English Language": 64,
+   "Foundation": 2,
+   "Higher education - Major award": 12,
+   "Professional": 4
+  },
+  "rows_per_provider_top15": [
+   [
+    "City College Dublin Faculty of Language ( formerly City Language School )",
+    69
+   ],
+   [
+    "ATC Language Schools",
+    43
+   ],
+   [
+    "ELI Schools - Dublin and Drogheda",
+    41
+   ],
+   [
+    "International House Dublin",
+    39
+   ],
+   [
+    "St Patrick's Pontifical University",
+    37
+   ],
+   [
+    "Emerald Cultural Institute",
+    37
+   ],
+   [
+    "Twin English Centre Dublin",
+    32
+   ],
+   [
+    "Centre of English Studies",
+    31
+   ],
+   [
+    "ISI Dublin",
+    31
+   ],
+   [
+    "English Path Dublin",
+    29
+   ],
+   [
+    "Cork English College",
+    28
+   ],
+   [
+    "Centre of English Studies Cork T/A: ACET Ireland",
+    27
+   ],
+   [
+    "Dublin College of Advanced Studies - DCAS",
+    25
+   ],
+   [
+    "The Linguaviva Centre",
+    25
+   ],
+   [
+    "Dorset College",
+    24
+   ]
+  ],
+  "county_rows": [
+   [
+    "Dublin",
+    855
+   ],
+   [
+    "Cork",
+    138
+   ],
+   [
+    "Kildare",
+    49
+   ],
+   [
+    "Limerick",
+    39
+   ],
+   [
+    "Galway",
+    27
+   ],
+   [
+    "Kerry",
+    26
+   ],
+   [
+    "Carlow",
+    7
+   ],
+   [
+    "Wexford",
+    6
+   ],
+   [
+    "Sligo",
+    3
+   ],
+   [
+    "Donegal",
+    1
+   ]
+  ],
+  "county_providers": [
+   [
+    "Dublin",
+    53
+   ],
+   [
+    "Cork",
+    9
+   ],
+   [
+    "Limerick",
+    3
+   ],
+   [
+    "Kildare",
+    3
+   ],
+   [
+    "Kerry",
+    3
+   ],
+   [
+    "Galway",
+    2
+   ],
+   [
+    "Carlow",
+    1
+   ],
+   [
+    "Sligo",
+    1
+   ],
+   [
+    "Donegal",
+    1
+   ],
+   [
+    "Wexford",
+    1
+   ]
+  ],
+  "dublin": {
+   "English Language": {
+    "rows": 832,
+    "rows_total": 1066,
+    "providers": 44,
+    "providers_total": 64
+   },
+   "Foundation": {
+    "rows": 1,
+    "rows_total": 3,
+    "providers": 1,
+    "providers_total": 2
+   },
+   "Higher education - Major award": {
+    "rows": 20,
+    "rows_total": 78,
+    "providers": 9,
+    "providers_total": 12
+   },
+   "Professional": {
+    "rows": 2,
+    "rows_total": 4,
+    "providers": 2,
+    "providers_total": 4
+   }
+  },
+  "ref_pattern": [
+   [
+    "9999/9999",
+    1141
+   ],
+   [
+    "9999/999",
+    10
+   ]
+  ],
+  "ref_duplicates": {
+   "distinct_duplicated": 1,
+   "rows_involved": 2,
+   "examples": [
+    "0372/0005"
+   ]
+  },
+  "provider_codes": 76,
+  "codes_with_several_names": {},
+  "names_with_several_codes": {},
+  "english": {
+   "rows": 1066,
+   "providers": 64,
+   "weeks": [
+    [
+     25.0,
+     1029
+    ],
+    [
+     26.0,
+     25
+    ],
+    [
+     28.0,
+     8
+    ],
+    [
+     27.0,
+     3
+    ]
+   ],
+   "duration_unit": [
+    [
+     "weeks",
+     1065
+    ],
+    [
+     "ects",
+     1
+    ]
+   ],
+   "hours_per_week_top": [
+    [
+     "15 hours",
+     578
+    ],
+    [
+     "20 hours",
+     181
+    ],
+    [
+     "15",
+     81
+    ],
+    [
+     "20",
+     22
+    ],
+    [
+     "18 33 hours",
+     15
+    ],
+    [
+     "20 26 hours",
+     14
+    ],
+    [
+     "22 5 hours",
+     13
+    ],
+    [
+     "26 hours",
+     12
+    ]
+   ],
+   "entry_level_top": [
+    [
+     "B1",
+     210
+    ],
+    [
+     "B2",
+     208
+    ],
+    [
+     "A2",
+     151
+    ],
+    [
+     "A1",
+     127
+    ],
+    [
+     "C1",
+     78
+    ],
+    [
+     "A2+",
+     21
+    ],
+    [
+     "A0",
+     19
+    ],
+    [
+     "B2+",
+     12
+    ]
+   ],
+   "awarding_body_top": [
+    [
+     "CELA",
+     184
+    ],
+    [
+     "ACELS",
+     164
+    ],
+    [
+     "Trinity College London",
+     139
+    ],
+    [
+     "LanguageCert",
+     55
+    ],
+    [
+     "Cambridge ESOL",
+     44
+    ],
+    [
+     "IELT",
+     38
+    ],
+    [
+     "British Council / CELA / IDP Australia",
+     33
+    ],
+    [
+     "Cambridge",
+     28
+    ],
+    [
+     "IELTS",
+     18
+    ],
+    [
+     "Oxford University Press",
+     18
+    ]
+   ]
+  }
+ },
+ "trusted": {
+  "title": "TrustEd Ireland Authorised Providers: List of Eligible Programmes (Higher Education, Foundation and Quality Assured English Language Programmes) August 2026",
+  "rows": 6784,
+  "header": [
+   "Programme Ref:",
+   "Programme Type",
+   "Provider",
+   "Addresss",
+   "Contact Email",
+   "Contact Telephone",
+   "Contact Name",
+   "Programme Title",
+   "Awarding Body",
+   "Award Title",
+   "Duration (ECTS /Weeks per year)",
+   "Hours per week",
+   "NFQ Level",
+   "Entry Level",
+   "Exit Level"
+  ],
+  "fill_rate": {
+   "Programme Ref:": 6784,
+   "Programme Type": 6784,
+   "Provider": 6784,
+   "Addresss": 6784,
+   "Contact Email": 6784,
+   "Contact Telephone": 6783,
+   "Contact Name": 6784,
+   "Programme Title": 6784,
+   "Awarding Body": 6784,
+   "Award Title": 6784,
+   "Duration (ECTS /Weeks per year)": 6718,
+   "Hours per week": 6732,
+   "NFQ Level": 6783,
+   "Entry Level": 6732,
+   "Exit Level": 6730
+  },
+  "programme_type_raw": [
+   [
+    "Higher education - Major award",
+    6640
+   ],
+   [
+    "English Language",
+    54
+   ],
+   [
+    "Higher education - Non-major award",
+    51
+   ],
+   [
+    "Foundation",
+    19
+   ],
+   [
+    "Higher Education Major Awards",
+    12
+   ],
+   [
+    "Higher education - Major Award",
+    6
+   ],
+   [
+    "Higher education - Non-Major award",
+    1
+   ],
+   [
+    "Higher education - Non major award",
+    1
+   ]
+  ],
+  "programme_type": [
+   [
+    "Higher education - Major award",
+    6658
+   ],
+   [
+    "English Language",
+    54
+   ],
+   [
+    "Higher education - Non-major award",
+    53
+   ],
+   [
+    "Foundation",
+    19
+   ]
+  ],
+  "nfq_level": [
+   [
+    "9",
+    2719
+   ],
+   [
+    "8",
+    2533
+   ],
+   [
+    "10",
+    638
+   ],
+   [
+    "7",
+    575
+   ],
+   [
+    "6",
+    259
+   ],
+   [
+    "n/a",
+    54
+   ],
+   [
+    "5",
+    4
+   ],
+   [
+    "other:2026-09-08 00:00:00",
+    1
+   ],
+   [
+    "other:(empty)",
+    1
+   ]
+  ],
+  "nfq_by_type": {
+   "English Language": [
+    [
+     "n/a",
+     54
+    ]
+   ],
+   "Foundation": [
+    [
+     "6",
+     10
+    ],
+    [
+     "5",
+     4
+    ],
+    [
+     "8",
+     3
+    ],
+    [
+     "7",
+     2
+    ]
+   ],
+   "Higher education - Major award": [
+    [
+     "9",
+     2714
+    ],
+    [
+     "8",
+     2521
+    ],
+    [
+     "10",
+     638
+    ],
+    [
+     "7",
+     551
+    ],
+    [
+     "6",
+     232
+    ],
+    [
+     "other:2026-09-08 00:00:00",
+     1
+    ],
+    [
+     "other:(empty)",
+     1
+    ]
+   ],
+   "Higher education - Non-major award": [
+    [
+     "7",
+     22
+    ],
+    [
+     "6",
+     17
+    ],
+    [
+     "8",
+     9
+    ],
+    [
+     "9",
+     5
+    ]
+   ]
+  },
+  "award_kind": [
+   [
+    "master",
+    2333
+   ],
+   [
+    "bachelor_ordinary",
+    1638
+   ],
+   [
+    "bachelor_honours",
+    1245
+   ],
+   [
+    "doctorate",
+    626
+   ],
+   [
+    "postgraduate_diploma",
+    515
+   ],
+   [
+    "higher_certificate",
+    227
+   ],
+   [
+    "unclassified",
+    65
+   ],
+   [
+    "certificate_diploma_other",
+    61
+   ],
+   [
+    "english_language",
+    54
+   ],
+   [
+    "foundation",
+    19
+   ],
+   [
+    "postgraduate_certificate",
+    1
+   ]
+  ],
+  "award_kind_by_nfq": {
+   "10": [
+    [
+     "doctorate",
+     623
+    ],
+    [
+     "master",
+     12
+    ],
+    [
+     "unclassified",
+     3
+    ]
+   ],
+   "5": [
+    [
+     "foundation",
+     4
+    ]
+   ],
+   "6": [
+    [
+     "higher_certificate",
+     226
+    ],
+    [
+     "certificate_diploma_other",
+     22
+    ],
+    [
+     "foundation",
+     10
+    ],
+    [
+     "bachelor_honours",
+     1
+    ]
+   ],
+   "7": [
+    [
+     "bachelor_ordinary",
+     543
+    ],
+    [
+     "certificate_diploma_other",
+     28
+    ],
+    [
+     "foundation",
+     2
+    ],
+    [
+     "bachelor_honours",
+     2
+    ]
+   ],
+   "8": [
+    [
+     "bachelor_honours",
+     1240
+    ],
+    [
+     "bachelor_ordinary",
+     1093
+    ],
+    [
+     "postgraduate_diploma",
+     161
+    ],
+    [
+     "unclassified",
+     28
+    ],
+    [
+     "certificate_diploma_other",
+     4
+    ],
+    [
+     "master",
+     3
+    ],
+    [
+     "foundation",
+     3
+    ],
+    [
+     "higher_certificate",
+     1
+    ]
+   ],
+   "9": [
+    [
+     "master",
+     2317
+    ],
+    [
+     "postgraduate_diploma",
+     354
+    ],
+    [
+     "unclassified",
+     34
+    ],
+    [
+     "certificate_diploma_other",
+     7
+    ],
+    [
+     "doctorate",
+     3
+    ],
+    [
+     "bachelor_honours",
+     2
+    ],
+    [
+     "postgraduate_certificate",
+     1
+    ],
+    [
+     "bachelor_ordinary",
+     1
+    ]
+   ],
+   "n/a": [
+    [
+     "english_language",
+     54
+    ]
+   ],
+   "other:(empty)": [
+    [
+     "bachelor_ordinary",
+     1
+    ]
+   ],
+   "other:2026-09-08 00:00:00": [
+    [
+     "master",
+     1
+    ]
+   ]
+  },
+  "awarding_body_top20": [
+   [
+    "The University of Dublin",
+    1647
+   ],
+   [
+    "NUI",
+    623
+   ],
+   [
+    "Munster Technological University",
+    452
+   ],
+   [
+    "ATU",
+    434
+   ],
+   [
+    "University of Galway",
+    426
+   ],
+   [
+    "Technological University of the Shannon: Midlands Midwest",
+    425
+   ],
+   [
+    "South East Technological University",
+    421
+   ],
+   [
+    "University of Limerick",
+    413
+   ],
+   [
+    "Maynooth University",
+    390
+   ],
+   [
+    "UCC",
+    388
+   ],
+   [
+    "TU Dublin",
+    353
+   ],
+   [
+    "QQI",
+    286
+   ],
+   [
+    "DCU",
+    252
+   ],
+   [
+    "Dundalk Institute of Technology",
+    101
+   ],
+   [
+    "IADT",
+    62
+   ],
+   [
+    "LanguageCert",
+    26
+   ],
+   [
+    "National University of Ireland Maynooth",
+    21
+   ],
+   [
+    "RCSI, NUI",
+    20
+   ],
+   [
+    "Cambridge Assessment English",
+    13
+   ],
+   [
+    "Trinity College Dublin",
+    12
+   ]
+  ],
+  "awarding_body_distinct": 32,
+  "duration_unit": [
+   [
+    "ects",
+    5714
+   ],
+   [
+    "none",
+    748
+   ],
+   [
+    "research",
+    197
+   ],
+   [
+    "other",
+    71
+   ],
+   [
+    "weeks",
+    54
+   ]
+  ],
+  "duration_ects": [
+   [
+    240.0,
+    1812
+   ],
+   [
+    90.0,
+    1636
+   ],
+   [
+    60.0,
+    815
+   ],
+   [
+    180.0,
+    787
+   ],
+   [
+    120.0,
+    418
+   ],
+   [
+    270.0,
+    74
+   ],
+   [
+    360.0,
+    68
+   ],
+   [
+    300.0,
+    29
+   ],
+   [
+    450.0,
+    12
+   ],
+   [
+    330.0,
+    10
+   ]
+  ],
+  "providers": 38,
+  "providers_by_type": {
+   "English Language": 3,
+   "Foundation": 14,
+   "Higher education - Major award": 35,
+   "Higher education - Non-major award": 12
+  },
+  "rows_per_provider_top15": [
+   [
+    "Trinity College Dublin, the University of Dublin",
+    1655
+   ],
+   [
+    "University College Dublin",
+    564
+   ],
+   [
+    "University of Galway",
+    425
+   ],
+   [
+    "Technological University of the Shannon: Midlands Midwest",
+    425
+   ],
+   [
+    "Maynooth University",
+    411
+   ],
+   [
+    "University College Cork - UCC",
+    388
+   ],
+   [
+    "TU Dublin",
+    353
+   ],
+   [
+    "University of Limerick",
+    351
+   ],
+   [
+    "Dublin City University",
+    253
+   ],
+   [
+    "Munster Technological University - Kerry Campus",
+    250
+   ],
+   [
+    "Munster Technological University - Cork Campus",
+    203
+   ],
+   [
+    "South East Technological University - Waterford Campus",
+    199
+   ],
+   [
+    "South East Technological University - Carlow Campus",
+    198
+   ],
+   [
+    "Atlantic Technological University - Galway-Mayo",
+    163
+   ],
+   [
+    "Atlantic Technological University Sligo",
+    134
+   ]
+  ],
+  "county_rows": [
+   [
+    "Dublin",
+    3495
+   ],
+   [
+    "Cork",
+    848
+   ],
+   [
+    "Limerick",
+    642
+   ],
+   [
+    "Galway",
+    430
+   ],
+   [
+    "Kildare",
+    411
+   ],
+   [
+    "Kerry",
+    252
+   ],
+   [
+    "Kilkenny",
+    199
+   ],
+   [
+    "Westmeath",
+    185
+   ],
+   [
+    "Sligo",
+    147
+   ],
+   [
+    "Donegal",
+    117
+   ],
+   [
+    "Tipperary",
+    33
+   ],
+   [
+    "Wexford",
+    23
+   ],
+   [
+    "unknown",
+    2
+   ]
+  ],
+  "county_providers": [
+   [
+    "Dublin",
+    18
+   ],
+   [
+    "Cork",
+    5
+   ],
+   [
+    "Limerick",
+    5
+   ],
+   [
+    "Galway",
+    3
+   ],
+   [
+    "Sligo",
+    2
+   ],
+   [
+    "Kerry",
+    1
+   ],
+   [
+    "Donegal",
+    1
+   ],
+   [
+    "Kildare",
+    1
+   ],
+   [
+    "Kilkenny",
+    1
+   ],
+   [
+    "Wexford",
+    1
+   ]
+  ],
+  "dublin": {
+   "English Language": {
+    "rows": 0,
+    "rows_total": 54,
+    "providers": 0,
+    "providers_total": 3
+   },
+   "Foundation": {
+    "rows": 7,
+    "rows_total": 19,
+    "providers": 5,
+    "providers_total": 14
+   },
+   "Higher education - Major award": {
+    "rows": 3457,
+    "rows_total": 6658,
+    "providers": 19,
+    "providers_total": 35
+   },
+   "Higher education - Non-major award": {
+    "rows": 31,
+    "rows_total": 53,
+    "providers": 7,
+    "providers_total": 12
+   }
+  },
+  "ref_pattern": [
+   [
+    "TE9999/9999",
+    6784
+   ]
+  ],
+  "ref_duplicates": {
+   "distinct_duplicated": 5,
+   "rows_involved": 10,
+   "examples": [
+    "TE0106/0214",
+    "TE0106/0315",
+    "TE0106/0316",
+    "TE0106/0317",
+    "TE0133/0267"
+   ]
+  },
+  "provider_codes": 40,
+  "codes_with_several_names": {
+   "TE0063": [
+    "University of Galway",
+    "University of Galway English Language Centre"
+   ],
+   "TE0101": [
+    "South East Technological University - Carlow Campus",
+    "South East Technological University - Wexford Campus"
+   ]
+  },
+  "names_with_several_codes": {
+   "Technological University of the Shannon: Midlands Midwest": [
+    "TE0376",
+    "TE0377",
+    "TE0378",
+    "TE0379",
+    "TE0380"
+   ]
+  },
+  "english": {
+   "rows": 54,
+   "providers": 3,
+   "weeks": [
+    [
+     25.0,
+     54
+    ]
+   ],
+   "duration_unit": [
+    [
+     "weeks",
+     54
+    ]
+   ],
+   "hours_per_week_top": [
+    [
+     "20 hours",
+     24
+    ],
+    [
+     "16 hours",
+     24
+    ],
+    [
+     "20 25 hours",
+     4
+    ],
+    [
+     "18 hours",
+     1
+    ],
+    [
+     "22 hours",
+     1
+    ]
+   ],
+   "entry_level_top": [
+    [
+     "CEFR B1 Minimum",
+     6
+    ],
+    [
+     "CEFR B2 Minimum",
+     6
+    ],
+    [
+     "CEFR C1 Minimum",
+     6
+    ],
+    [
+     "CEFR B1-B2",
+     5
+    ],
+    [
+     "CEFR B2-C1",
+     5
+    ],
+    [
+     "CEFR A1 Minimum",
+     4
+    ],
+    [
+     "CEFR A2 Minimum",
+     4
+    ],
+    [
+     "CEFR B1-C1",
+     3
+    ]
+   ],
+   "awarding_body_top": [
+    [
+     "LanguageCert",
+     26
+    ],
+    [
+     "Cambridge Assessment English",
+     13
+    ],
+    [
+     "British Council, IDP: IELTS Australia and Cambridge Assessment English",
+     4
+    ],
+    [
+     "British Council, IDP, Cambridge English Language Assessment",
+     3
+    ],
+    [
+     "University of Limerick",
+     2
+    ],
+    [
+     "British Council: IDP: IELTS Australia and Cambridge Assessment Englsih",
+     2
+    ],
+    [
+     "CELA",
+     2
+    ],
+    [
+     "Cambridge English Langauge Assessment (CELA)",
+     1
+    ],
+    [
+     "Britsh Council",
+     1
+    ]
+   ]
+  }
+ },
+ "overlap": {
+  "provider_plus_title_keys": {
+   "ilep": 917,
+   "trusted": 6323,
+   "both": 0,
+   "examples": []
+  },
+  "providers": {
+   "ilep": 77,
+   "trusted": 38,
+   "both": 6,
+   "names": [
+    "dorset college",
+    "dublin business school",
+    "galway business school",
+    "griffith college cork",
+    "griffith college dublin",
+    "griffith college limerick"
+   ]
+  },
+  "provider_type_in_each": {
+   "dorset college": {
+    "ilep": [
+     "English Language"
+    ],
+    "trusted": [
+     "Higher education - Major award"
+    ]
+   },
+   "dublin business school": {
+    "ilep": [
+     "Professional"
+    ],
+    "trusted": [
+     "Higher education - Major award",
+     "Higher education - Non-major award"
+    ]
+   },
+   "galway business school": {
+    "ilep": [
+     "English Language"
+    ],
+    "trusted": [
+     "Higher education - Major award"
+    ]
+   },
+   "griffith college cork": {
+    "ilep": [
+     "English Language",
+     "Professional"
+    ],
+    "trusted": [
+     "Foundation",
+     "Higher education - Major award"
+    ]
+   },
+   "griffith college dublin": {
+    "ilep": [
+     "English Language",
+     "Professional"
+    ],
+    "trusted": [
+     "Foundation",
+     "Higher education - Major award",
+     "Higher education - Non-major award"
+    ]
+   },
+   "griffith college limerick": {
+    "ilep": [
+     "English Language",
+     "Professional"
+    ],
+    "trusted": [
+     "Higher education - Major award"
+    ]
+   }
+  },
+  "codes_of_shared_providers": {
+   "dorset college": {
+    "ilep": [
+     "0058"
+    ],
+    "trusted": [
+     "TE0058"
+    ]
+   },
+   "dublin business school": {
+    "ilep": [
+     "0041"
+    ],
+    "trusted": [
+     "TE0041"
+    ]
+   },
+   "galway business school": {
+    "ilep": [
+     "0345"
+    ],
+    "trusted": [
+     "TE0345"
+    ]
+   },
+   "griffith college cork": {
+    "ilep": [
+     "0027"
+    ],
+    "trusted": [
+     "TE0027"
+    ]
+   },
+   "griffith college dublin": {
+    "ilep": [
+     "0040"
+    ],
+    "trusted": [
+     "TE0040"
+    ]
+   },
+   "griffith college limerick": {
+    "ilep": [
+     "0050"
+    ],
+    "trusted": [
+     "TE0050"
+    ]
+   }
+  }
+ },
+ "trusted_pages": {
+  "english": {
+   "count": 5,
+   "names": [
+    "Bridge Mills Galway Language Centre",
+    "Emerald Cultural Institute",
+    "International House Dublin",
+    "Liffey College",
+    "Patrick's English Academy"
+   ],
+   "in_xlsx": [],
+   "not_in_xlsx_by_name": [
+    "Bridge Mills Galway Language Centre",
+    "Emerald Cultural Institute",
+    "International House Dublin",
+    "Liffey College",
+    "Patrick's English Academy"
+   ]
+  },
+  "higher_education": {
+   "count": 28,
+   "names": [
+    "Atlantic Technological University",
+    "CCT College Dublin",
+    "Dorset College",
+    "Dublin Business School",
+    "Dublin City University",
+    "Dún Laoghaire Institute of Art, Design and Technology",
+    "Dundalk Institute of Technology",
+    "Galway Business School",
+    "Griffith College",
+    "Holmes Institute Dublin",
+    "ICD Business School",
+    "Independent College",
+    "Institute of Banking",
+    "Mary Immaculate College Limerick",
+    "Maynooth University",
+    "Munster Technological University",
+    "National College of Art and Design",
+    "National College of Ireland",
+    "RCSI University of Medicine and Health Sciences",
+    "Royal Irish Academy of Music",
+    "South East Technological University",
+    "Technological University Dublin",
+    "Technological University of Shannon",
+    "Trinity College Dublin, University of Dublin",
+    "University College Cork",
+    "University College Dublin",
+    "University of Galway",
+    "University of Limerick"
+   ],
+   "in_xlsx": [
+    "CCT College Dublin",
+    "Dorset College",
+    "Dublin Business School",
+    "Dublin City University",
+    "Dundalk Institute of Technology",
+    "Galway Business School",
+    "Holmes Institute Dublin",
+    "ICD Business School",
+    "Independent College",
+    "Maynooth University",
+    "National College of Art and Design",
+    "National College of Ireland",
+    "Royal Irish Academy of Music",
+    "Trinity College Dublin, University of Dublin",
+    "University College Dublin",
+    "University of Galway",
+    "University of Limerick"
+   ],
+   "not_in_xlsx_by_name": [
+    "Atlantic Technological University",
+    "Dún Laoghaire Institute of Art, Design and Technology",
+    "Griffith College",
+    "Institute of Banking",
+    "Mary Immaculate College Limerick",
+    "Munster Technological University",
+    "RCSI University of Medicine and Health Sciences",
+    "South East Technological University",
+    "Technological University Dublin",
+    "Technological University of Shannon",
+    "University College Cork"
+   ]
+  }
+ },
+ "trusted_xlsx_providers": [
+  "ATU St Angelas, Sligo",
+  "Atlantic Technological University - Galway-Mayo",
+  "Atlantic Technological University Donegal",
+  "Atlantic Technological University Sligo",
+  "CCT College Dublin",
+  "Dorset College",
+  "Dublin Business School",
+  "Dublin City University",
+  "Dundalk Institute of Technology",
+  "Galway Business School",
+  "Griffith College Cork",
+  "Griffith College Dublin",
+  "Griffith College Limerick",
+  "Holmes Institute Dublin",
+  "ICD Business School",
+  "Independent College",
+  "Institute of Art Design and Technology, Dun Laoghaire",
+  "Mary Immaculate College",
+  "Maynooth University",
+  "Munster Technological University - Cork Campus",
+  "Munster Technological University - Kerry Campus",
+  "National College of Art & Design",
+  "National College of Ireland",
+  "RCSI",
+  "Royal Irish Academy of Music",
+  "South East Technological University - Carlow Campus",
+  "South East Technological University - Waterford Campus",
+  "South East Technological University - Wexford Campus",
+  "TU Dublin",
+  "Technological University of the Shannon: Midlands Midwest",
+  "Trinity College Dublin, the University of Dublin",
+  "UCC Language Centre",
+  "University College Cork - UCC",
+  "University College Dublin",
+  "University of Galway",
+  "University of Galway English Language Centre",
+  "University of Limerick",
+  "University of Limerick Language Centre"
+ ],
+ "trusted_xlsx_english_providers": [
+  "Mary Immaculate College",
+  "UCC Language Centre",
+  "University of Limerick Language Centre"
+ ]
+}

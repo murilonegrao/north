@@ -1,0 +1,958 @@
+{
+  "awlevel_dictionary_C2024_A": {
+    "15": "Degrees/certificates total",
+    "12": "Degrees total",
+    "3": "Associate's degree",
+    "5": "Bachelor's degree",
+    "7": "Master's degree",
+    "17": "Doctor's degree - research/scholarship",
+    "18": "Doctor's degree - professional practice",
+    "19": "Doctor's degree - other",
+    "13": "Certificates below the baccalaureate total",
+    "1": "Certificates of less than 1 year",
+    "20": "Certificates of less than 12 weeks",
+    "21": "Certificates of at least 12 weeks but less than 1 year",
+    "2": "Certificates of at least 1 but less than 2 years",
+    "4": "Certificates of at least 2 but less than 4 years",
+    "14": "Certificates above the baccalaureate total",
+    "6": "Postbaccalaureate certificate",
+    "8": "Post-master's certificate"
+  },
+  "files": {
+    "completions": "C2024_a.csv",
+    "directory": "HD2024.csv",
+    "ic_ay": "ic2023_ay.csv"
+  },
+  "completions_rows_total": 307707,
+  "awlevel_values_in_data": {
+    "17": 13469,
+    "18": 3171,
+    "19": 372,
+    "2": 29688,
+    "20": 4543,
+    "21": 35358,
+    "3": 48741,
+    "4": 2445,
+    "5": 104090,
+    "6": 14936,
+    "7": 45516,
+    "8": 5378
+  },
+  "levels_tx_tech": [
+    {
+      "awlevel": "2",
+      "label": "Certificates of at least 1 but less than 2 years",
+      "programs": 94,
+      "with_completions_gt0": 70,
+      "with_completions_0": 24,
+      "completions_unknown": 0,
+      "institutions": 52,
+      "completions": 1249,
+      "nonresident": 24,
+      "nonresident_pct": 1.9
+    },
+    {
+      "awlevel": "3",
+      "label": "Associate's degree",
+      "programs": 189,
+      "with_completions_gt0": 152,
+      "with_completions_0": 37,
+      "completions_unknown": 0,
+      "institutions": 70,
+      "completions": 3183,
+      "nonresident": 124,
+      "nonresident_pct": 3.9
+    },
+    {
+      "awlevel": "4",
+      "label": "Certificates of at least 2 but less than 4 years",
+      "programs": 1,
+      "with_completions_gt0": 0,
+      "with_completions_0": 1,
+      "completions_unknown": 0,
+      "institutions": 1,
+      "completions": 0,
+      "nonresident": 0,
+      "nonresident_pct": NaN
+    },
+    {
+      "awlevel": "5",
+      "label": "Bachelor's degree",
+      "programs": 200,
+      "with_completions_gt0": 170,
+      "with_completions_0": 30,
+      "completions_unknown": 0,
+      "institutions": 81,
+      "completions": 9650,
+      "nonresident": 595,
+      "nonresident_pct": 6.2
+    },
+    {
+      "awlevel": "6",
+      "label": "Postbaccalaureate certificate",
+      "programs": 38,
+      "with_completions_gt0": 19,
+      "with_completions_0": 19,
+      "completions_unknown": 0,
+      "institutions": 23,
+      "completions": 572,
+      "nonresident": 362,
+      "nonresident_pct": 63.3
+    },
+    {
+      "awlevel": "7",
+      "label": "Master's degree",
+      "programs": 132,
+      "with_completions_gt0": 112,
+      "with_completions_0": 20,
+      "completions_unknown": 0,
+      "institutions": 51,
+      "completions": 11082,
+      "nonresident": 8511,
+      "nonresident_pct": 76.8
+    },
+    {
+      "awlevel": "17",
+      "label": "Doctor's degree - research/scholarship",
+      "programs": 21,
+      "with_completions_gt0": 18,
+      "with_completions_0": 3,
+      "completions_unknown": 0,
+      "institutions": 15,
+      "completions": 204,
+      "nonresident": 153,
+      "nonresident_pct": 75.0
+    },
+    {
+      "awlevel": "20",
+      "label": "Certificates of less than 12 weeks",
+      "programs": 4,
+      "with_completions_gt0": 0,
+      "with_completions_0": 4,
+      "completions_unknown": 0,
+      "institutions": 3,
+      "completions": 0,
+      "nonresident": 0,
+      "nonresident_pct": NaN
+    },
+    {
+      "awlevel": "21",
+      "label": "Certificates of at least 12 weeks but less than 1 year",
+      "programs": 167,
+      "with_completions_gt0": 133,
+      "with_completions_0": 34,
+      "completions_unknown": 0,
+      "institutions": 74,
+      "completions": 4573,
+      "nonresident": 107,
+      "nonresident_pct": 2.3
+    }
+  ],
+  "levels_tx_all": [
+    {
+      "awlevel": "2",
+      "label": "Certificates of at least 1 but less than 2 years",
+      "programs": 1490,
+      "with_completions_gt0": 1151,
+      "with_completions_0": 339,
+      "completions_unknown": 0,
+      "institutions": 265,
+      "completions": 39497,
+      "nonresident": 330,
+      "nonresident_pct": 0.8
+    },
+    {
+      "awlevel": "3",
+      "label": "Associate's degree",
+      "programs": 2911,
+      "with_completions_gt0": 2264,
+      "with_completions_0": 647,
+      "completions_unknown": 0,
+      "institutions": 159,
+      "completions": 97647,
+      "nonresident": 1796,
+      "nonresident_pct": 1.8
+    },
+    {
+      "awlevel": "4",
+      "label": "Certificates of at least 2 but less than 4 years",
+      "programs": 27,
+      "with_completions_gt0": 13,
+      "with_completions_0": 14,
+      "completions_unknown": 0,
+      "institutions": 19,
+      "completions": 651,
+      "nonresident": 1,
+      "nonresident_pct": 0.2
+    },
+    {
+      "awlevel": "5",
+      "label": "Bachelor's degree",
+      "programs": 4067,
+      "with_completions_gt0": 3472,
+      "with_completions_0": 595,
+      "completions_unknown": 0,
+      "institutions": 137,
+      "completions": 146522,
+      "nonresident": 3595,
+      "nonresident_pct": 2.5
+    },
+    {
+      "awlevel": "6",
+      "label": "Postbaccalaureate certificate",
+      "programs": 687,
+      "with_completions_gt0": 320,
+      "with_completions_0": 367,
+      "completions_unknown": 0,
+      "institutions": 50,
+      "completions": 4363,
+      "nonresident": 776,
+      "nonresident_pct": 17.8
+    },
+    {
+      "awlevel": "7",
+      "label": "Master's degree",
+      "programs": 2690,
+      "with_completions_gt0": 2247,
+      "with_completions_0": 443,
+      "completions_unknown": 0,
+      "institutions": 106,
+      "completions": 62662,
+      "nonresident": 15968,
+      "nonresident_pct": 25.5
+    },
+    {
+      "awlevel": "8",
+      "label": "Post-master's certificate",
+      "programs": 120,
+      "with_completions_gt0": 66,
+      "with_completions_0": 54,
+      "completions_unknown": 0,
+      "institutions": 31,
+      "completions": 594,
+      "nonresident": 146,
+      "nonresident_pct": 24.6
+    },
+    {
+      "awlevel": "17",
+      "label": "Doctor's degree - research/scholarship",
+      "programs": 806,
+      "with_completions_gt0": 706,
+      "with_completions_0": 100,
+      "completions_unknown": 0,
+      "institutions": 62,
+      "completions": 6457,
+      "nonresident": 1922,
+      "nonresident_pct": 29.8
+    },
+    {
+      "awlevel": "18",
+      "label": "Doctor's degree - professional practice",
+      "programs": 100,
+      "with_completions_gt0": 88,
+      "with_completions_0": 12,
+      "completions_unknown": 0,
+      "institutions": 45,
+      "completions": 7571,
+      "nonresident": 75,
+      "nonresident_pct": 1.0
+    },
+    {
+      "awlevel": "19",
+      "label": "Doctor's degree - other",
+      "programs": 7,
+      "with_completions_gt0": 5,
+      "with_completions_0": 2,
+      "completions_unknown": 0,
+      "institutions": 7,
+      "completions": 131,
+      "nonresident": 31,
+      "nonresident_pct": 23.7
+    },
+    {
+      "awlevel": "20",
+      "label": "Certificates of less than 12 weeks",
+      "programs": 80,
+      "with_completions_gt0": 39,
+      "with_completions_0": 41,
+      "completions_unknown": 0,
+      "institutions": 42,
+      "completions": 2287,
+      "nonresident": 5,
+      "nonresident_pct": 0.2
+    },
+    {
+      "awlevel": "21",
+      "label": "Certificates of at least 12 weeks but less than 1 year",
+      "programs": 1843,
+      "with_completions_gt0": 1436,
+      "with_completions_0": 407,
+      "completions_unknown": 0,
+      "institutions": 231,
+      "completions": 46098,
+      "nonresident": 647,
+      "nonresident_pct": 1.4
+    }
+  ],
+  "levels_us_tech": [
+    {
+      "awlevel": "2",
+      "label": "Certificates of at least 1 but less than 2 years",
+      "programs": 1706,
+      "with_completions_gt0": 931,
+      "with_completions_0": 775,
+      "completions_unknown": 0,
+      "institutions": 855,
+      "completions": 14462,
+      "nonresident": 149,
+      "nonresident_pct": 1.0
+    },
+    {
+      "awlevel": "3",
+      "label": "Associate's degree",
+      "programs": 3382,
+      "with_completions_gt0": 2574,
+      "with_completions_0": 808,
+      "completions_unknown": 0,
+      "institutions": 1266,
+      "completions": 41620,
+      "nonresident": 1195,
+      "nonresident_pct": 2.9
+    },
+    {
+      "awlevel": "4",
+      "label": "Certificates of at least 2 but less than 4 years",
+      "programs": 161,
+      "with_completions_gt0": 99,
+      "with_completions_0": 62,
+      "completions_unknown": 0,
+      "institutions": 73,
+      "completions": 1003,
+      "nonresident": 31,
+      "nonresident_pct": 3.1
+    },
+    {
+      "awlevel": "5",
+      "label": "Bachelor's degree",
+      "programs": 3876,
+      "with_completions_gt0": 3120,
+      "with_completions_0": 756,
+      "completions_unknown": 0,
+      "institutions": 1519,
+      "completions": 139173,
+      "nonresident": 12004,
+      "nonresident_pct": 8.6
+    },
+    {
+      "awlevel": "6",
+      "label": "Postbaccalaureate certificate",
+      "programs": 865,
+      "with_completions_gt0": 473,
+      "with_completions_0": 392,
+      "completions_unknown": 0,
+      "institutions": 409,
+      "completions": 6545,
+      "nonresident": 1783,
+      "nonresident_pct": 27.2
+    },
+    {
+      "awlevel": "7",
+      "label": "Master's degree",
+      "programs": 1930,
+      "with_completions_gt0": 1547,
+      "with_completions_0": 383,
+      "completions_unknown": 0,
+      "institutions": 774,
+      "completions": 106326,
+      "nonresident": 67363,
+      "nonresident_pct": 63.4
+    },
+    {
+      "awlevel": "8",
+      "label": "Post-master's certificate",
+      "programs": 98,
+      "with_completions_gt0": 42,
+      "with_completions_0": 56,
+      "completions_unknown": 0,
+      "institutions": 61,
+      "completions": 249,
+      "nonresident": 120,
+      "nonresident_pct": 48.2
+    },
+    {
+      "awlevel": "17",
+      "label": "Doctor's degree - research/scholarship",
+      "programs": 350,
+      "with_completions_gt0": 291,
+      "with_completions_0": 59,
+      "completions_unknown": 0,
+      "institutions": 222,
+      "completions": 3236,
+      "nonresident": 1866,
+      "nonresident_pct": 57.7
+    },
+    {
+      "awlevel": "18",
+      "label": "Doctor's degree - professional practice",
+      "programs": 4,
+      "with_completions_gt0": 4,
+      "with_completions_0": 0,
+      "completions_unknown": 0,
+      "institutions": 4,
+      "completions": 84,
+      "nonresident": 1,
+      "nonresident_pct": 1.2
+    },
+    {
+      "awlevel": "20",
+      "label": "Certificates of less than 12 weeks",
+      "programs": 227,
+      "with_completions_gt0": 127,
+      "with_completions_0": 100,
+      "completions_unknown": 0,
+      "institutions": 144,
+      "completions": 4216,
+      "nonresident": 22,
+      "nonresident_pct": 0.5
+    },
+    {
+      "awlevel": "21",
+      "label": "Certificates of at least 12 weeks but less than 1 year",
+      "programs": 2968,
+      "with_completions_gt0": 2109,
+      "with_completions_0": 859,
+      "completions_unknown": 0,
+      "institutions": 1126,
+      "completions": 48001,
+      "nonresident": 1185,
+      "nonresident_pct": 2.5
+    }
+  ],
+  "levels_us_all": [
+    {
+      "awlevel": "2",
+      "label": "Certificates of at least 1 but less than 2 years",
+      "programs": 26064,
+      "with_completions_gt0": 17366,
+      "with_completions_0": 8698,
+      "completions_unknown": 0,
+      "institutions": 3624,
+      "completions": 502875,
+      "nonresident": 4636,
+      "nonresident_pct": 0.9
+    },
+    {
+      "awlevel": "3",
+      "label": "Associate's degree",
+      "programs": 45907,
+      "with_completions_gt0": 35219,
+      "with_completions_0": 10688,
+      "completions_unknown": 0,
+      "institutions": 2570,
+      "completions": 999800,
+      "nonresident": 17970,
+      "nonresident_pct": 1.8
+    },
+    {
+      "awlevel": "4",
+      "label": "Certificates of at least 2 but less than 4 years",
+      "programs": 1795,
+      "with_completions_gt0": 1025,
+      "with_completions_0": 770,
+      "completions_unknown": 0,
+      "institutions": 650,
+      "completions": 22054,
+      "nonresident": 304,
+      "nonresident_pct": 1.4
+    },
+    {
+      "awlevel": "5",
+      "label": "Bachelor's degree",
+      "programs": 81872,
+      "with_completions_gt0": 65974,
+      "with_completions_0": 15898,
+      "completions_unknown": 0,
+      "institutions": 2440,
+      "completions": 2065076,
+      "nonresident": 88026,
+      "nonresident_pct": 4.3
+    },
+    {
+      "awlevel": "6",
+      "label": "Postbaccalaureate certificate",
+      "programs": 13740,
+      "with_completions_gt0": 7374,
+      "with_completions_0": 6366,
+      "completions_unknown": 0,
+      "institutions": 1196,
+      "completions": 74516,
+      "nonresident": 7807,
+      "nonresident_pct": 10.5
+    },
+    {
+      "awlevel": "7",
+      "label": "Master's degree",
+      "programs": 42946,
+      "with_completions_gt0": 34121,
+      "with_completions_0": 8825,
+      "completions_unknown": 0,
+      "institutions": 2003,
+      "completions": 951541,
+      "nonresident": 195731,
+      "nonresident_pct": 20.6
+    },
+    {
+      "awlevel": "8",
+      "label": "Post-master's certificate",
+      "programs": 4582,
+      "with_completions_gt0": 2209,
+      "with_completions_0": 2373,
+      "completions_unknown": 0,
+      "institutions": 796,
+      "completions": 24570,
+      "nonresident": 1681,
+      "nonresident_pct": 6.8
+    },
+    {
+      "awlevel": "17",
+      "label": "Doctor's degree - research/scholarship",
+      "programs": 12515,
+      "with_completions_gt0": 10159,
+      "with_completions_0": 2356,
+      "completions_unknown": 0,
+      "institutions": 856,
+      "completions": 85423,
+      "nonresident": 21953,
+      "nonresident_pct": 25.7
+    },
+    {
+      "awlevel": "18",
+      "label": "Doctor's degree - professional practice",
+      "programs": 2298,
+      "with_completions_gt0": 1943,
+      "with_completions_0": 355,
+      "completions_unknown": 0,
+      "institutions": 854,
+      "completions": 127858,
+      "nonresident": 3206,
+      "nonresident_pct": 2.5
+    },
+    {
+      "awlevel": "19",
+      "label": "Doctor's degree - other",
+      "programs": 234,
+      "with_completions_gt0": 161,
+      "with_completions_0": 73,
+      "completions_unknown": 0,
+      "institutions": 136,
+      "completions": 2751,
+      "nonresident": 174,
+      "nonresident_pct": 6.3
+    },
+    {
+      "awlevel": "20",
+      "label": "Certificates of less than 12 weeks",
+      "programs": 3524,
+      "with_completions_gt0": 2348,
+      "with_completions_0": 1176,
+      "completions_unknown": 0,
+      "institutions": 1019,
+      "completions": 115703,
+      "nonresident": 944,
+      "nonresident_pct": 0.8
+    },
+    {
+      "awlevel": "21",
+      "label": "Certificates of at least 12 weeks but less than 1 year",
+      "programs": 32118,
+      "with_completions_gt0": 23048,
+      "with_completions_0": 9070,
+      "completions_unknown": 0,
+      "institutions": 3240,
+      "completions": 582044,
+      "nonresident": 8095,
+      "nonresident_pct": 1.4
+    }
+  ],
+  "totals": {
+    "tx_tech": {
+      "programs": 846,
+      "with_completions_gt0": 674,
+      "institutions": 148
+    },
+    "tx_all": {
+      "programs": 14828,
+      "with_completions_gt0": 11807,
+      "institutions": 387
+    },
+    "us_tech": {
+      "programs": 15567,
+      "with_completions_gt0": 11317,
+      "institutions": 2676
+    },
+    "us_all": {
+      "programs": 267595,
+      "with_completions_gt0": 200947,
+      "institutions": 5869
+    }
+  },
+  "us_distinct_cip6_reported": 1607,
+  "us_institutions_reporting": 5869,
+  "unitid_without_state": 0,
+  "dhs_stem_programs": {
+    "stem_list_codes": 466,
+    "us": 65499,
+    "tx": 3780,
+    "us_awlevel18": 50
+  },
+  "esl_cip_rows": {
+    "us_by_cip_level": [
+      {
+        "CIPCODE": "16.1701",
+        "AWLEVEL": "2",
+        "programs": 7
+      },
+      {
+        "CIPCODE": "16.1701",
+        "AWLEVEL": "20",
+        "programs": 1
+      },
+      {
+        "CIPCODE": "16.1701",
+        "AWLEVEL": "21",
+        "programs": 7
+      },
+      {
+        "CIPCODE": "16.1701",
+        "AWLEVEL": "4",
+        "programs": 2
+      },
+      {
+        "CIPCODE": "16.1701",
+        "AWLEVEL": "6",
+        "programs": 2
+      },
+      {
+        "CIPCODE": "16.1701",
+        "AWLEVEL": "7",
+        "programs": 3
+      }
+    ],
+    "us_completions": 230,
+    "us_nonresident": 81,
+    "tx_programs": 2
+  },
+  "ic_ay_tx_fill": {
+    "CHG3AY3": {
+      "tx_rows": 202,
+      "with_value": 179
+    },
+    "TUITION3": {
+      "tx_rows": 202,
+      "with_value": 189
+    },
+    "TUITION7": {
+      "tx_rows": 202,
+      "with_value": 103
+    },
+    "OSPROF3": {
+      "tx_rows": 202,
+      "with_value": 13
+    },
+    "OSPROF6": {
+      "tx_rows": 202,
+      "with_value": 9
+    },
+    "OSPROF9": {
+      "tx_rows": 202,
+      "with_value": 10
+    }
+  },
+  "scorecard_tx_all": [
+    {
+      "credlev": "1",
+      "creddesc": "Undergraduate Certificate or Diploma",
+      "rows": 2151,
+      "institutions": 305,
+      "earn1_value": 538,
+      "earn1_PS": 1544,
+      "earn1_NA": 69,
+      "earn1_suppressed_pct": 71.8,
+      "earn1_value_pct": 25.0
+    },
+    {
+      "credlev": "2",
+      "creddesc": "Associate's Degree",
+      "rows": 2456,
+      "institutions": 159,
+      "earn1_value": 468,
+      "earn1_PS": 1956,
+      "earn1_NA": 32,
+      "earn1_suppressed_pct": 79.6,
+      "earn1_value_pct": 19.1
+    },
+    {
+      "credlev": "3",
+      "creddesc": "Bachelor's Degree",
+      "rows": 3464,
+      "institutions": 137,
+      "earn1_value": 1512,
+      "earn1_PS": 1891,
+      "earn1_NA": 61,
+      "earn1_suppressed_pct": 54.6,
+      "earn1_value_pct": 43.6
+    },
+    {
+      "credlev": "4",
+      "creddesc": "Post-baccalaureate Certificate",
+      "rows": 63,
+      "institutions": 22,
+      "earn1_value": 1,
+      "earn1_PS": 62,
+      "earn1_NA": 0,
+      "earn1_suppressed_pct": 98.4,
+      "earn1_value_pct": 1.6
+    },
+    {
+      "credlev": "5",
+      "creddesc": "Master's Degree",
+      "rows": 2319,
+      "institutions": 105,
+      "earn1_value": 708,
+      "earn1_PS": 1551,
+      "earn1_NA": 60,
+      "earn1_suppressed_pct": 66.9,
+      "earn1_value_pct": 30.5
+    },
+    {
+      "credlev": "6",
+      "creddesc": "Doctoral Degree",
+      "rows": 729,
+      "institutions": 66,
+      "earn1_value": 80,
+      "earn1_PS": 634,
+      "earn1_NA": 15,
+      "earn1_suppressed_pct": 87.0,
+      "earn1_value_pct": 11.0
+    },
+    {
+      "credlev": "7",
+      "creddesc": "First Professional Degree",
+      "rows": 86,
+      "institutions": 43,
+      "earn1_value": 39,
+      "earn1_PS": 47,
+      "earn1_NA": 0,
+      "earn1_suppressed_pct": 54.7,
+      "earn1_value_pct": 45.3
+    },
+    {
+      "credlev": "8",
+      "creddesc": "Graduate/Professional Certificate",
+      "rows": 682,
+      "institutions": 59,
+      "earn1_value": 24,
+      "earn1_PS": 586,
+      "earn1_NA": 72,
+      "earn1_suppressed_pct": 85.9,
+      "earn1_value_pct": 3.5
+    }
+  ],
+  "scorecard_tx_tech": [
+    {
+      "credlev": "1",
+      "creddesc": "Undergraduate Certificate or Diploma",
+      "rows": 184,
+      "institutions": 91,
+      "earn1_value": 20,
+      "earn1_PS": 156,
+      "earn1_NA": 8,
+      "earn1_suppressed_pct": 84.8,
+      "earn1_value_pct": 10.9
+    },
+    {
+      "credlev": "2",
+      "creddesc": "Associate's Degree",
+      "rows": 187,
+      "institutions": 75,
+      "earn1_value": 18,
+      "earn1_PS": 169,
+      "earn1_NA": 0,
+      "earn1_suppressed_pct": 90.4,
+      "earn1_value_pct": 9.6
+    },
+    {
+      "credlev": "3",
+      "creddesc": "Bachelor's Degree",
+      "rows": 192,
+      "institutions": 80,
+      "earn1_value": 81,
+      "earn1_PS": 105,
+      "earn1_NA": 6,
+      "earn1_suppressed_pct": 54.7,
+      "earn1_value_pct": 42.2
+    },
+    {
+      "credlev": "4",
+      "creddesc": "Post-baccalaureate Certificate",
+      "rows": 3,
+      "institutions": 2,
+      "earn1_value": 0,
+      "earn1_PS": 3,
+      "earn1_NA": 0,
+      "earn1_suppressed_pct": 100.0,
+      "earn1_value_pct": 0.0
+    },
+    {
+      "credlev": "5",
+      "creddesc": "Master's Degree",
+      "rows": 119,
+      "institutions": 51,
+      "earn1_value": 29,
+      "earn1_PS": 86,
+      "earn1_NA": 4,
+      "earn1_suppressed_pct": 72.3,
+      "earn1_value_pct": 24.4
+    },
+    {
+      "credlev": "6",
+      "creddesc": "Doctoral Degree",
+      "rows": 22,
+      "institutions": 15,
+      "earn1_value": 0,
+      "earn1_PS": 21,
+      "earn1_NA": 1,
+      "earn1_suppressed_pct": 95.5,
+      "earn1_value_pct": 0.0
+    },
+    {
+      "credlev": "8",
+      "creddesc": "Graduate/Professional Certificate",
+      "rows": 36,
+      "institutions": 24,
+      "earn1_value": 2,
+      "earn1_PS": 26,
+      "earn1_NA": 8,
+      "earn1_suppressed_pct": 72.2,
+      "earn1_value_pct": 5.6
+    }
+  ],
+  "scorecard_us_all": [
+    {
+      "credlev": "1",
+      "creddesc": "Undergraduate Certificate or Diploma",
+      "rows": 42739,
+      "institutions": 4650,
+      "earn1_value": 6873,
+      "earn1_PS": 34361,
+      "earn1_NA": 1505,
+      "earn1_suppressed_pct": 80.4,
+      "earn1_value_pct": 16.1
+    },
+    {
+      "credlev": "2",
+      "creddesc": "Associate's Degree",
+      "rows": 40471,
+      "institutions": 2711,
+      "earn1_value": 6878,
+      "earn1_PS": 32825,
+      "earn1_NA": 768,
+      "earn1_suppressed_pct": 81.1,
+      "earn1_value_pct": 17.0
+    },
+    {
+      "credlev": "3",
+      "creddesc": "Bachelor's Degree",
+      "rows": 70944,
+      "institutions": 2511,
+      "earn1_value": 25421,
+      "earn1_PS": 44597,
+      "earn1_NA": 926,
+      "earn1_suppressed_pct": 62.9,
+      "earn1_value_pct": 35.8
+    },
+    {
+      "credlev": "4",
+      "creddesc": "Post-baccalaureate Certificate",
+      "rows": 1864,
+      "institutions": 453,
+      "earn1_value": 132,
+      "earn1_PS": 1732,
+      "earn1_NA": 0,
+      "earn1_suppressed_pct": 92.9,
+      "earn1_value_pct": 7.1
+    },
+    {
+      "credlev": "5",
+      "creddesc": "Master's Degree",
+      "rows": 38199,
+      "institutions": 2053,
+      "earn1_value": 10957,
+      "earn1_PS": 26594,
+      "earn1_NA": 648,
+      "earn1_suppressed_pct": 69.6,
+      "earn1_value_pct": 28.7
+    },
+    {
+      "credlev": "6",
+      "creddesc": "Doctoral Degree",
+      "rows": 12494,
+      "institutions": 1122,
+      "earn1_value": 1288,
+      "earn1_PS": 10993,
+      "earn1_NA": 213,
+      "earn1_suppressed_pct": 88.0,
+      "earn1_value_pct": 10.3
+    },
+    {
+      "credlev": "7",
+      "creddesc": "First Professional Degree",
+      "rows": 2364,
+      "institutions": 910,
+      "earn1_value": 761,
+      "earn1_PS": 1508,
+      "earn1_NA": 95,
+      "earn1_suppressed_pct": 63.8,
+      "earn1_value_pct": 32.2
+    },
+    {
+      "credlev": "8",
+      "creddesc": "Graduate/Professional Certificate",
+      "rows": 14512,
+      "institutions": 1426,
+      "earn1_value": 552,
+      "earn1_PS": 13009,
+      "earn1_NA": 951,
+      "earn1_suppressed_pct": 89.6,
+      "earn1_value_pct": 3.8
+    }
+  ],
+  "scorecard_rows_total": 223587,
+  "sevp": {
+    "campuses": 13807,
+    "f_m_split": {
+      "Y/N": 11880,
+      "Y/Y": 1365,
+      "N/Y": 562
+    },
+    "name_keyword_campuses_us": 273,
+    "name_keyword_school_codes_us": 176,
+    "name_keyword_f_m_us": {
+      "Y/N": 270,
+      "Y/Y": 2,
+      "N/Y": 1
+    },
+    "tx_campuses": 842,
+    "name_keyword_campuses_tx": 11,
+    "name_keyword_f_m_tx": {
+      "Y/N": 11
+    }
+  },
+  "ipeds_hd_language_name_hits": [
+    {
+      "UNITID": "441414",
+      "INSTNM": "M-DCPS The English Center",
+      "STABBR": "FL"
+    }
+  ]
+}

@@ -2,12 +2,12 @@
 title: "Execution Plan — North"
 type: execution-plan
 project: north
-version: 4
+version: 5
 status: approved
 language: en
 created: 2026-11-20
-updated: 2026-11-21
-base: [requirements.md v1.3, uml-model.md (being closed as 1.0), decisions/0002-after-data-spikes.md]
+updated: 2026-11-22
+base: [requirements.md v2.0, uml-model.md 1.1, decisions/0002-after-data-spikes.md, decisions/0008-placement-ireland-all-levels.md]
 ---
 
 # Execution Plan — North
@@ -16,6 +16,9 @@ This plan turns SRS 1.3 into deliverables that fit **one part-time developer** (
 
 > [!note] Version 4
 > Applies decision record 0002 (`docs/decisions/0002-after-data-spikes.md`, R1–R18 and A1–A16) and SRS 1.3: CIPs include 30.71 (52.12 kept, flagged); IPEDS first, official files by upload (FR-26), SEVP reconciliation, localities and rent benchmarks; refreshed next steps. Version 3 was the English translation of version 2.
+
+> [!note] Version 5 (record 0008)
+> The scope grew to the English placement test, Ireland and every US level and field. The work is cut into four slices, E1–E4, in the order the author chose (0008/T1), after the admin area already built. Each slice ends with something usable; curation stays on demand by slice (T11), so "everything ingested" never means "everything verified".
 
 ## Decisions that shape the plan (SRS §3.4)
 
@@ -183,6 +186,17 @@ FR-12 to FR-15, NFR-04, NFR-13, UML §3.2 and §5.4.
 
 More states, other CIPs, wave-2 UI languages and beyond (NFR-14), periodic re-verification of immigration rules and, if a contributor or a concrete need appears, a second country.
 
+## Round-3 slices (record 0008)
+
+| Slice | Requirements | Content | Done when |
+|---|---|---|---|
+| **E1 English placement v0** (2–3 weeks) | FR-28, FR-29, FR-35, NFR-17–19, BR-19, BR-20 | item bank YAML + schema (`data/placement/items/`, `schema/placement-item.schema.json`); about 65 original items; listening scripts and pre-generated audio; scoring in `domain/placement/` (pure); `data/reference/cefr_test_mappings.csv` from `docs/sources/cefr-test-mappings.md`; test and result screens in every wave-1 language; result in the browser with export and retake | the sponsor takes it end to end; the band of 5 people with a recent official score within one half-band (SO6; may close after release) |
+| **E2 Ireland English courses** (2 weeks) | FR-30, FR-31, FR-33, FR-34, FR-16, BR-18, BR-21 | `ie` country module (`domain/countries/ie`: authorization on the programme, family rule, money and stay rules); `ingest/ie/` for ILEP, TrustEd and CSO RIQ02 with contact columns dropped; `kind = language_course`; exam-name map; `program_identifiers`; `curation_slices` with "Dublin English courses"; English-course search filtered by the placement band | the Dublin slice lists every ILEP/TrustEd English course with exam, levels, hours and the ILEP-end notice; price and start dates curated for the courses the sponsor shortlists |
+| **E3 Ireland higher education** (2 weeks) | FR-32, FR-21, BR-04, BR-08 | QQI register ingestion (NFQ 6–10, ISCED-F), linking to the immigration lists with reconciliation; `travelling_party` in the profile; Irish family criterion and cost | Irish HE search with Stamp 2 status per programme and the family criterion explained |
+| **E4 US every level and field** (2–3 weeks) | FR-02, FR-03, FR-10, FR-11, NFR-02, BR-01, BR-11, BR-17 | national IPEDS ingestion at every award level (incl. `IC<year>_PY`); generic `level`; STEM rule by level; "official data only" label; indexes and a load test over about 280,000 programs; the existing 132 Texas tech master's become the first slice | listing p95 < 500 ms over the full table; the Texas slice coverage unchanged |
+
+Letters for the author (0008/T8): QQI (TrustEd terms, NFQ codes) and SEVP (English-training flag); drafts kept privately, outside the repository.
+
 ---
 
 ## Schedule
@@ -213,7 +227,7 @@ k3s-gitops  ··step 4··step 5··Postgres backup··   (F5 prerequisites)
 
 ## Immediate next steps
 
-1. Author review of the open items from record 0002: the 7 proposed CIP → ISCED-F rows (R9) and the immigration risk criteria in `docs/methodology/score-proposal.md` §4 (A10).
-2. Start the manual pilot (Phase 4) with `docs/methodology/pilot-candidates.csv`, following `docs/methodology/pilot-guide.md`; check by hand the Texas institutions with no SEVP match.
-3. Close `uml-model.md` as 1.0 with the record 0002 names; then start Phase 3 (code structure and first deployment).
-4. In `k3s-gitops`: continue with step 4.1 (Sealed Secrets) and queue the Postgres backup before Phase 5.
+1. Send the QQI and SEVP emails (0008/T8); review the source code → ISCED level map when it is proposed (0008/T12).
+2. Validate the SRS 2.0 baseline (round-3 changes) and close it in §9.1.
+3. Start E1: item bank schema, scoring module and the CEFR mapping file; write the first items.
+4. Still open from earlier: the manual pilot of site fields (Phase 4) and LLM-assisted extraction (Phase 8) continue on the Texas slice; k3s steps 4–5 and the Postgres backup before curated data goes live.

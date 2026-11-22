@@ -1,0 +1,789 @@
+{
+ "files": 46,
+ "learning_opportunities": 25705,
+ "lo_status": [
+  [
+   "released",
+   15072
+  ],
+  [
+   "Not published anymore",
+   10633
+  ]
+ ],
+ "lo_predicates": [
+  [
+   "22-rdf-syntax-ns#type",
+   25705
+  ],
+  [
+   "adms#identifier",
+   25705
+  ],
+  [
+   "defaultLanguage",
+   25705
+  ],
+  [
+   "homepage",
+   25705
+  ],
+  [
+   "learningAchievementSpecification",
+   25705
+  ],
+  [
+   "location",
+   25705
+  ],
+  [
+   "modified",
+   25705
+  ],
+  [
+   "providedBy",
+   25705
+  ],
+  [
+   "publisher",
+   25705
+  ],
+  [
+   "status",
+   25705
+  ],
+  [
+   "title",
+   25705
+  ]
+ ],
+ "lo_modified_year": [
+  [
+   "2026",
+   25705
+  ]
+ ],
+ "lo_homepage_urls_top": [
+  [
+   "https://europa.eu/europass",
+   25705
+  ]
+ ],
+ "lo_identifier_examples": [
+  "GD05 - [25179]",
+  "BH49 - [28181]",
+  "PG13250 - [420]",
+  "PG22907 - [3036]",
+  "DT7014 - [11941]",
+  "GDSES - [14485]",
+  "PG21632 - [2270]",
+  "PG21975 - [2725]"
+ ],
+ "lo_identifier_datatype": [
+  [
+   "https://qqi.ie",
+   25705
+  ]
+ ],
+ "lo_with_location_address": 0,
+ "qualification_nodes": 19831,
+ "qualifications_with_nqf": 19831,
+ "qual_predicates": [
+  [
+   "awardingOpportunity",
+   19831
+  ],
+  [
+   "adms#identifier",
+   19831
+  ],
+  [
+   "EQFLevel",
+   19831
+  ],
+  [
+   "language",
+   19831
+  ],
+  [
+   "NQFLevel",
+   19831
+  ],
+  [
+   "ISCEDFCode",
+   19831
+  ],
+  [
+   "publisher",
+   19831
+  ],
+  [
+   "22-rdf-syntax-ns#type",
+   19831
+  ],
+  [
+   "title",
+   19831
+  ],
+  [
+   "learningOutcome",
+   19831
+  ],
+  [
+   "modified",
+   19831
+  ],
+  [
+   "status",
+   19831
+  ]
+ ],
+ "nqf_level": [
+  [
+   "c_c6ada0f4",
+   8536
+  ],
+  [
+   "c_218a7e54",
+   5396
+  ],
+  [
+   "c_38f52397",
+   2595
+  ],
+  [
+   "c_670e54c7",
+   2220
+  ],
+  [
+   "c_ac9adabb",
+   843
+  ],
+  [
+   "c_4053e803",
+   163
+  ],
+  [
+   "c_57c9e957",
+   35
+  ],
+  [
+   "c_4c88e501",
+   31
+  ],
+  [
+   "c_53e465cb",
+   6
+  ],
+  [
+   "c_060f2f91",
+   6
+  ]
+ ],
+ "nqf_uri_examples": [
+  "http://data.europa.eu/snb/qdr/c_060f2f91",
+  "http://data.europa.eu/snb/qdr/c_218a7e54",
+  "http://data.europa.eu/snb/qdr/c_38f52397",
+  "http://data.europa.eu/snb/qdr/c_4053e803",
+  "http://data.europa.eu/snb/qdr/c_4c88e501",
+  "http://data.europa.eu/snb/qdr/c_53e465cb",
+  "http://data.europa.eu/snb/qdr/c_57c9e957",
+  "http://data.europa.eu/snb/qdr/c_670e54c7",
+  "http://data.europa.eu/snb/qdr/c_ac9adabb",
+  "http://data.europa.eu/snb/qdr/c_c6ada0f4"
+ ],
+ "eqf_level_all_quals": [
+  [
+   "7",
+   8536
+  ],
+  [
+   "6",
+   7991
+  ],
+  [
+   "5",
+   2220
+  ],
+  [
+   "8",
+   843
+  ],
+  [
+   "4",
+   163
+  ],
+  [
+   "3",
+   35
+  ],
+  [
+   "2",
+   31
+  ],
+  [
+   "1",
+   12
+  ]
+ ],
+ "isced_f_all_quals": [
+  [
+   "0413",
+   1306
+  ],
+  [
+   "0913",
+   953
+  ],
+  [
+   "0410",
+   822
+  ],
+  [
+   "0613",
+   790
+  ],
+  [
+   "0610",
+   573
+  ],
+  [
+   "0732",
+   563
+  ],
+  [
+   "0211",
+   500
+  ],
+  [
+   "0421",
+   452
+  ],
+  [
+   "0714",
+   442
+  ],
+  [
+   "0923",
+   420
+  ],
+  [
+   "0414",
+   417
+  ],
+  [
+   "0710",
+   390
+  ],
+  [
+   "0313",
+   372
+  ],
+  [
+   "0910",
+   367
+  ],
+  [
+   "0912",
+   353
+  ]
+ ],
+ "isced_f_digits": [
+  [
+   4,
+   19681
+  ],
+  [
+   3,
+   150
+  ]
+ ],
+ "awarding_body_top": [
+  [
+   "Atlantic Technological University",
+   2356
+  ],
+  [
+   "South East Technological University",
+   2148
+  ],
+  [
+   "Technological University Dublin",
+   2099
+  ],
+  [
+   "Trinity College Dublin, University of Dublin",
+   1516
+  ],
+  [
+   "University College Cork",
+   1477
+  ],
+  [
+   "Munster Technological University",
+   1438
+  ],
+  [
+   "Technological University of the Shannon",
+   1240
+  ],
+  [
+   "University of Limerick",
+   1020
+  ],
+  [
+   "University of Galway",
+   1006
+  ],
+  [
+   "Dublin City University",
+   927
+  ],
+  [
+   "Maynooth University",
+   753
+  ],
+  [
+   "Dundalk Institute of Technology",
+   602
+  ],
+  [
+   "Griffith College",
+   445
+  ],
+  [
+   "RCSI University of Medicine and Health Sciences",
+   340
+  ],
+  [
+   "National College of Ireland",
+   319
+  ],
+  [
+   "Dublin Business School",
+   300
+  ],
+  [
+   "Dun Laoghaire Institute of Art, Design and Technology",
+   264
+  ],
+  [
+   "Institute of Public Administration",
+   176
+  ],
+  [
+   "Mary Immaculate College Limerick",
+   150
+  ],
+  [
+   "University College Dublin",
+   132
+  ],
+  [
+   "Irish College of Humanities and Applied Sciences Limited",
+   106
+  ],
+  [
+   "Cavan & Monaghan Education and Training Board",
+   64
+  ],
+  [
+   "CCT College Dublin",
+   64
+  ],
+  [
+   "Cork Education and Training Board",
+   47
+  ],
+  [
+   "IICP Education and Training Limited",
+   46
+  ]
+ ],
+ "released": 15072,
+ "released_eqf": [
+  [
+   "7",
+   4881
+  ],
+  [
+   "6",
+   4109
+  ],
+  [
+   "5",
+   2218
+  ],
+  [
+   "4",
+   2205
+  ],
+  [
+   "3",
+   521
+  ],
+  [
+   "8",
+   497
+  ],
+  [
+   "2",
+   377
+  ],
+  [
+   "1",
+   264
+  ]
+ ],
+ "released_nqf_concept": [
+  [
+   "c_c6ada0f4",
+   4881
+  ],
+  [
+   "c_218a7e54",
+   2799
+  ],
+  [
+   "c_670e54c7",
+   2218
+  ],
+  [
+   "c_4053e803",
+   2205
+  ],
+  [
+   "c_38f52397",
+   1310
+  ],
+  [
+   "c_57c9e957",
+   521
+  ],
+  [
+   "c_ac9adabb",
+   497
+  ],
+  [
+   "c_4c88e501",
+   377
+  ],
+  [
+   "c_060f2f91",
+   132
+  ],
+  [
+   "c_53e465cb",
+   132
+  ]
+ ],
+ "nqf_concept_title_words": {
+  "c_060f2f91 (EQF 1)": [
+   [
+    "certificate",
+    5
+   ]
+  ],
+  "c_218a7e54 (EQF 6)": [
+   [
+    "bachelor",
+    3311
+   ],
+   [
+    "honours",
+    2320
+   ],
+   [
+    "certificate",
+    753
+   ],
+   [
+    "higher diploma",
+    372
+   ],
+   [
+    "special purpose",
+    16
+   ],
+   [
+    "master",
+    6
+   ]
+  ],
+  "c_38f52397 (EQF 6)": [
+   [
+    "bachelor",
+    1339
+   ],
+   [
+    "certificate",
+    784
+   ],
+   [
+    "minor",
+    21
+   ],
+   [
+    "special purpose",
+    4
+   ],
+   [
+    "postgraduate",
+    4
+   ],
+   [
+    "higher certificate",
+    1
+   ]
+  ],
+  "c_4053e803 (EQF 4)": [
+   [
+    "certificate",
+    77
+   ]
+  ],
+  "c_4c88e501 (EQF 2)": [
+   [
+    "certificate",
+    26
+   ]
+  ],
+  "c_53e465cb (EQF 1)": [
+   [
+    "certificate",
+    4
+   ]
+  ],
+  "c_57c9e957 (EQF 3)": [
+   [
+    "certificate",
+    14
+   ]
+  ],
+  "c_670e54c7 (EQF 5)": [
+   [
+    "certificate",
+    1879
+   ],
+   [
+    "higher certificate",
+    672
+   ],
+   [
+    "advanced certificate",
+    75
+   ],
+   [
+    "minor",
+    20
+   ],
+   [
+    "special purpose",
+    19
+   ],
+   [
+    "master",
+    2
+   ]
+  ],
+  "c_ac9adabb (EQF 8)": [
+   [
+    "doctor",
+    688
+   ]
+  ],
+  "c_c6ada0f4 (EQF 7)": [
+   [
+    "master",
+    3795
+   ],
+   [
+    "postgraduate",
+    1651
+   ],
+   [
+    "certificate",
+    1522
+   ],
+   [
+    "special purpose",
+    30
+   ],
+   [
+    "bachelor",
+    4
+   ],
+   [
+    "minor",
+    2
+   ]
+  ]
+ },
+ "released_eqf_6_8": 9487,
+ "released_isced_broad": [
+  [
+   "04",
+   2804
+  ],
+  [
+   "09",
+   2257
+  ],
+  [
+   "02",
+   2118
+  ],
+  [
+   "07",
+   1934
+  ],
+  [
+   "06",
+   1103
+  ],
+  [
+   "10",
+   1077
+  ],
+  [
+   "01",
+   987
+  ],
+  [
+   "05",
+   934
+  ],
+  [
+   "03",
+   821
+  ],
+  [
+   "00",
+   608
+  ],
+  [
+   "08",
+   423
+  ],
+  [
+   "99",
+   6
+  ]
+ ],
+ "released_providers": 210,
+ "released_providers_top25": [
+  [
+   "Atlantic Technological University",
+   1178
+  ],
+  [
+   "South East Technological University",
+   1074
+  ],
+  [
+   "Technological University Dublin",
+   969
+  ],
+  [
+   "Trinity College Dublin, University of Dublin",
+   758
+  ],
+  [
+   "University College Cork",
+   748
+  ],
+  [
+   "Munster Technological University",
+   719
+  ],
+  [
+   "University College Dublin",
+   695
+  ],
+  [
+   "Technological University of the Shannon",
+   609
+  ],
+  [
+   "University of Limerick",
+   599
+  ],
+  [
+   "University of Galway",
+   503
+  ],
+  [
+   "Dublin City University",
+   469
+  ],
+  [
+   "Maynooth University",
+   376
+  ],
+  [
+   "Cavan & Monaghan Education and Training Board",
+   359
+  ],
+  [
+   "Dundalk Institute of Technology",
+   301
+  ],
+  [
+   "Cork Education and Training Board",
+   277
+  ],
+  [
+   "Waterford & Wexford Education and Training Board",
+   262
+  ],
+  [
+   "City of Dublin Education and Training Board",
+   258
+  ],
+  [
+   "Mayo, Sligo and Leitrim Education and Training Board",
+   253
+  ],
+  [
+   "Dublin & Dun Laoghaire Education and Training Board",
+   250
+  ],
+  [
+   "LCETB Administrative Centre",
+   239
+  ],
+  [
+   "Griffith College",
+   224
+  ],
+  [
+   "Louth & Meath Education and Training Board",
+   217
+  ],
+  [
+   "Tipperary Education and Training Board",
+   212
+  ],
+  [
+   "Galway & Roscommon Education and Training Board",
+   206
+  ],
+  [
+   "Kilkenny & Carlow Education and Training Board",
+   203
+  ]
+ ],
+ "released_with_isced": 15072,
+ "title_match_ilep_he": {
+  "rows": 78,
+  "title_found_in_qdr": 15
+ },
+ "title_match_trusted_he": {
+  "rows": 6711,
+  "title_found_in_qdr": 2464
+ },
+ "english_in_qdr_by_title": {
+  "ie_rows": 1120,
+  "found": 0
+ }
+}
